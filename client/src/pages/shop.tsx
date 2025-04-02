@@ -329,21 +329,27 @@ const Shop = () => {
               <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                 <div className="text-white">
                   <span className="inline-block px-4 py-1 bg-white text-primary text-sm font-bold rounded-full mb-4">FEATURED PRODUCT</span>
-                  <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Premium Garden Starter Kit</h2>
+                  <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Herb Garden Kit</h2>
                   <p className="mb-6 text-white/90">
-                    Everything you need to start your garden journey. Perfect for beginners and experienced gardeners alike.
+                    Complete starter kit with seeds, soil, and containers for growing your own culinary herbs at home. Includes basil, parsley, and mint.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Link href="/product/garden-starter-kit">
+                    <Link href="/product/herb-garden-kit">
                       <button className="bg-white text-primary hover:bg-gray-100 py-3 px-6 rounded-md transition duration-300 font-semibold flex items-center">
                         Shop Now <ChevronRight className="ml-2 h-4 w-4" />
                       </button>
                     </Link>
                     <button 
                       onClick={() => {
-                        const product = products?.find(p => p.slug === 'garden-starter-kit');
+                        const product = products?.find(p => p.slug === 'herb-garden-kit');
                         if (product) {
                           handleAddToCart(product);
+                        } else {
+                          toast({
+                            title: "Product not found",
+                            description: "This product is not available right now",
+                            variant: "destructive"
+                          });
                         }
                       }}
                       className="bg-transparent hover:bg-white/10 border-2 border-white text-white py-3 px-6 rounded-md transition duration-300 font-semibold"
@@ -355,8 +361,8 @@ const Shop = () => {
               </div>
               <div className="md:w-1/2">
                 <img 
-                  src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80" 
-                  alt="Garden Starter Kit" 
+                  src="https://images.unsplash.com/photo-1484507175567-a114f764f78b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                  alt="Herb Garden Kit" 
                   className="w-full h-full object-cover"
                 />
               </div>

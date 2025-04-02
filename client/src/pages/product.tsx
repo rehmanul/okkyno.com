@@ -70,17 +70,26 @@ const ProductPage = () => {
 
   if (error || !product) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
-        <div className="max-w-lg mx-auto">
-          <div className="text-primary text-4xl mb-4">
-            <i className="fas fa-exclamation-circle"></i>
+      <div className="min-h-[60vh] w-full flex flex-col items-center justify-center text-center px-4 py-16">
+        <div className="text-primary mb-6">
+          <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+            <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
           </div>
-          <h1 className="font-montserrat font-bold text-2xl mb-4">Product Not Found</h1>
-          <p className="text-gray-700 mb-6">The product you're looking for doesn't exist or may have been removed.</p>
-          <Link href="/shop">
-            <Button className="bg-primary hover:bg-primary/90 text-white">Back to Shop</Button>
-          </Link>
         </div>
+        
+        <h1 className="text-3xl md:text-4xl font-montserrat font-bold mb-4">Product Not Found</h1>
+        
+        <p className="text-gray-600 max-w-md mx-auto mb-8">
+          The product you're looking for doesn't exist or may have been removed.
+        </p>
+        
+        <Link href="/shop">
+          <button className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition duration-300">
+            Back to Shop
+          </button>
+        </Link>
       </div>
     );
   }
