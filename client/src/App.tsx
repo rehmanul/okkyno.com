@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
+import { CartProvider } from "@/contexts/CartContext";
 import NotFound from "@/pages/not-found";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
@@ -13,6 +14,8 @@ import Blog from "@/pages/blog";
 import Product from "@/pages/product";
 import Article from "@/pages/article";
 import Category from "@/pages/category";
+import Cart from "@/pages/cart";
+import Checkout from "@/pages/checkout";
 
 function Router() {
   return (
@@ -28,6 +31,8 @@ function Router() {
           <Route path="/product/:slug" component={Product} />
           <Route path="/article/:slug" component={Article} />
           <Route path="/category/:slug" component={Category} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={Checkout} />
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -39,8 +44,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
-      <Toaster />
+      <CartProvider>
+        <Router />
+        <Toaster />
+      </CartProvider>
     </QueryClientProvider>
   );
 }

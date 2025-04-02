@@ -3,6 +3,8 @@ import { Link } from "wouter";
 import { Product, Category } from "@shared/schema";
 import { useEffect, useState } from "react";
 import Newsletter from "@/components/home/newsletter";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 const Shop = () => {
   useEffect(() => {
@@ -10,6 +12,7 @@ const Shop = () => {
   }, []);
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const { addToCart } = useCart();
 
   const { data: products, isLoading: isLoadingProducts } = useQuery<Product[]>({
     queryKey: ['/api/products'],
@@ -22,6 +25,14 @@ const Shop = () => {
   const filteredProducts = selectedCategory
     ? products?.filter(product => product.categoryId === selectedCategory)
     : products;
+    
+  const handleAddToCart = (product: Product) => {
+    addToCart(product, 1);
+    toast({
+      title: "Added to cart",
+      description: `${product.name} added to your cart`,
+    });
+  };
 
   return (
     <>
@@ -137,7 +148,10 @@ const Shop = () => {
                         <p className="text-sm text-gray-600 mb-3">{product.shortDescription}</p>
                         <div className="flex justify-between items-center">
                           <span className="font-bold text-lg">${product.price.toFixed(2)}</span>
-                          <button className="bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-md">
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            className="bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-md"
+                          >
                             Add to Cart
                           </button>
                         </div>

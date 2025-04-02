@@ -25,7 +25,7 @@ export const products = pgTable("products", {
   shortDescription: text("short_description"),
   price: doublePrecision("price").notNull(),
   salePrice: doublePrecision("sale_price"),
-  imageUrl: text("image_url"),
+  imageUrl: text("image_url").notNull().default(''),
   isBestSeller: boolean("is_best_seller").default(false),
   isNew: boolean("is_new").default(false),
   categoryId: integer("category_id").references(() => categories.id).notNull(),
@@ -42,7 +42,7 @@ export const articles = pgTable("articles", {
   slug: text("slug").notNull().unique(),
   content: text("content").notNull(),
   excerpt: text("excerpt"),
-  imageUrl: text("image_url"),
+  imageUrl: text("image_url").notNull().default(''),
   datePublished: timestamp("date_published").notNull(),
   categoryId: integer("category_id").references(() => categories.id).notNull(),
 });

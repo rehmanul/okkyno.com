@@ -4,6 +4,7 @@ import { Product } from "@shared/schema";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductPage = () => {
   const { slug } = useParams();
@@ -31,10 +32,16 @@ const ProductPage = () => {
     }
   };
 
+  const { addToCart: addToCartContext } = useCart();
+  
   const addToCart = () => {
+    if (!product) return;
+    
+    addToCartContext(product, quantity);
+    
     toast({
       title: "Added to cart",
-      description: `${quantity} x ${product?.name} added to your cart`,
+      description: `${quantity} x ${product.name} added to your cart`,
     });
   };
 
