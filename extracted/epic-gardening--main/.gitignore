@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# Build files
+dist/
+.netlify/
+
+# Environment files
+.env
+.env.local
+
+# Editor directories
+.idea/
+.vscode/
+
+# System Files
+.DS_Store
+Thumbs.db

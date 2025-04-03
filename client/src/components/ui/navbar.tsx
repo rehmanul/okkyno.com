@@ -60,25 +60,25 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
           <div className="dropdown relative group">
-            <Link href="/category/vegetables" className="font-montserrat font-semibold hover:text-primary flex items-center">
-              Plants <i className="fas fa-chevron-down ml-1 text-xs"></i>
+            <Link href="/shop" className="font-montserrat font-semibold hover:text-primary flex items-center">
+              Shop <i className="fas fa-chevron-down ml-1 text-xs"></i>
             </Link>
             <div className="dropdown-menu absolute bg-white shadow-lg p-4 mt-2 w-48 rounded-md z-50 hidden group-hover:block">
               <Link href="/category/vegetables" className="block py-2 hover:text-primary">Vegetables</Link>
-              <Link href="/category/herbs" className="block py-2 hover:text-primary">Herbs</Link>
               <Link href="/category/flowers" className="block py-2 hover:text-primary">Flowers</Link>
-              <Link href="/category/indoor-plants" className="block py-2 hover:text-primary">Indoor Plants</Link>
+              <Link href="/category/seeds" className="block py-2 hover:text-primary">Seeds</Link>
+              <Link href="/category/seed-starting" className="block py-2 hover:text-primary">Seed Starting</Link>
             </div>
           </div>
           <div className="dropdown relative group">
-            <Link href="/category/hand-tools" className="font-montserrat font-semibold hover:text-primary flex items-center">
-              Tools <i className="fas fa-chevron-down ml-1 text-xs"></i>
+            <Link href="/category/raised-beds" className="font-montserrat font-semibold hover:text-primary flex items-center">
+              Raised Beds <i className="fas fa-chevron-down ml-1 text-xs"></i>
             </Link>
             <div className="dropdown-menu absolute bg-white shadow-lg p-4 mt-2 w-48 rounded-md z-50 hidden group-hover:block">
-              <Link href="/category/hand-tools" className="block py-2 hover:text-primary">Hand Tools</Link>
-              <Link href="/category/power-tools" className="block py-2 hover:text-primary">Power Tools</Link>
-              <Link href="/category/watering" className="block py-2 hover:text-primary">Watering</Link>
-              <Link href="/category/storage" className="block py-2 hover:text-primary">Storage</Link>
+              <Link href="/category/raised-beds" className="block py-2 hover:text-primary">All Raised Beds</Link>
+              <Link href="/category/container-gardening" className="block py-2 hover:text-primary">Container Gardening</Link>
+              <Link href="/product/round-short-metal-raised-bed" className="block py-2 hover:text-primary">Round Beds</Link>
+              <Link href="/product/medium-tall-metal-raised-bed" className="block py-2 hover:text-primary">Tall Beds</Link>
             </div>
           </div>
           <div className="dropdown relative group">
@@ -86,10 +86,10 @@ const Navbar = () => {
               Guides <i className="fas fa-chevron-down ml-1 text-xs"></i>
             </Link>
             <div className="dropdown-menu absolute bg-white shadow-lg p-4 mt-2 w-48 rounded-md z-50 hidden group-hover:block">
-              <Link href="/article/vegetable-garden-basics-for-beginners" className="block py-2 hover:text-primary">Beginner's Guide</Link>
-              <Link href="/blog" className="block py-2 hover:text-primary">Seasonal Planting</Link>
-              <Link href="/blog" className="block py-2 hover:text-primary">Pest Control</Link>
-              <Link href="/blog" className="block py-2 hover:text-primary">Composting</Link>
+              <Link href="/article/growing-yellow-bush-beans" className="block py-2 hover:text-primary">Growing Beans</Link>
+              <Link href="/article/growing-beautiful-nasturtiums" className="block py-2 hover:text-primary">Growing Nasturtiums</Link>
+              <Link href="/article/raised-bed-gardening-benefits-practices" className="block py-2 hover:text-primary">Raised Bed Guide</Link>
+              <Link href="/blog" className="block py-2 hover:text-primary">View All Articles</Link>
             </div>
           </div>
           <Link href="/blog" className="font-montserrat font-semibold hover:text-primary">Blog</Link>

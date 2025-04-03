@@ -1,0 +1,22 @@
+[build]
+  publish = "."  # Explicit root directory
+  command = "echo 'No build required'"
+
+# Remove all plugin configurations
+[functions]
+  directory = "unused"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+[context.production.environment]
+  NODE_VERSION = "18"

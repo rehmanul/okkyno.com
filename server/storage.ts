@@ -249,43 +249,43 @@ export class MemStorage implements IStorage {
   
   // Initialize with sample data
   private initializeSampleData() {
-    // Sample categories
+    // Sample categories with authentic Epic Gardening images
     const categories: InsertCategory[] = [
       {
         name: "Vegetables",
         slug: "vegetables",
         description: "All types of vegetable plants for your garden",
-        imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-      },
-      {
-        name: "Herbs",
-        slug: "herbs",
-        description: "Culinary and medicinal herbs for your garden",
-        imageUrl: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
       },
       {
         name: "Flowers",
         slug: "flowers",
         description: "Beautiful flowering plants to brighten your garden",
-        imageUrl: "https://images.unsplash.com/photo-1618572196882-a79c9e1723ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
       },
       {
-        name: "Indoor Plants",
-        slug: "indoor-plants",
-        description: "Plants that thrive indoors",
-        imageUrl: "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        name: "Container Gardening",
+        slug: "container-gardening",
+        description: "Everything you need for gardening in containers and raised beds",
+        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
       },
       {
-        name: "Hand Tools",
-        slug: "hand-tools",
-        description: "Essential hand tools for gardening",
-        imageUrl: "https://images.unsplash.com/photo-1585664811087-47f65abbad64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        name: "Seeds",
+        slug: "seeds",
+        description: "High-quality seeds for your garden",
+        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
       },
       {
-        name: "Power Tools",
-        slug: "power-tools",
-        description: "Power tools to make gardening easier",
-        imageUrl: "https://images.unsplash.com/photo-1620372587831-566bc5adf72a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        name: "Raised Beds",
+        slug: "raised-beds",
+        description: "Beautiful raised beds for your garden",
+        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
+      },
+      {
+        name: "Seed Starting",
+        slug: "seed-starting",
+        description: "Everything you need to start your seeds right",
+        imageUrl: "/images/products/16-celltray2_400x400.svg",
       },
     ];
     
@@ -294,121 +294,121 @@ export class MemStorage implements IStorage {
       this.createCategory(category);
     });
     
-    // Sample products
+    // Sample products with authentic Epic Gardening images
     const products: InsertProduct[] = [
       {
-        name: "Garden Pruning Shears",
-        slug: "garden-pruning-shears",
-        description: "Professional stainless steel garden pruners with ergonomic handles for clean cuts and comfortable use.",
-        shortDescription: "Professional stainless steel garden pruners for clean cuts",
-        price: 24.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Pruning-Shears.jpg",
+        name: "Round Short Metal Raised Garden Bed",
+        slug: "round-short-metal-raised-bed",
+        description: "This beautiful round raised garden bed is perfect for growing vegetables, flowers, or herbs. Made from durable galvanized steel with a Light Clay finish.",
+        shortDescription: "Durable galvanized steel raised bed with Light Clay finish",
+        price: 99.99,
+        imageUrl: "/images/products/10328_Large_short_LightClay.svg",
         isBestSeller: true,
         categoryId: 5,
       },
       {
-        name: "Garden Trowel Set",
-        slug: "garden-trowel-set",
-        description: "3-piece ergonomic gardening tools with comfort grip handles.",
-        shortDescription: "3-piece ergonomic gardening tools with comfort grip",
-        price: 32.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Garden-Tool-Set.jpg",
-        categoryId: 5,
-      },
-      {
-        name: "Herb Garden Kit",
-        slug: "herb-garden-kit",
-        description: "Complete starter kit with seeds, soil, and containers for growing your own herbs.",
-        shortDescription: "Complete starter kit with seeds, soil, and containers",
-        price: 39.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Herb-Growing-Kit.jpg",
-        isNew: true,
+        name: "Zinnia Persian Carpet Seeds",
+        slug: "zinnia-persian-carpet-seeds",
+        description: "Beautiful bi-color zinnia mix with gold, mahogany, and burgundy blooms. Easy to grow and perfect for cut flowers.",
+        shortDescription: "Stunning bi-color zinnia mix for dramatic garden display",
+        price: 4.99,
+        imageUrl: "/images/products/1193i_Zinnia-Persian-Carpet_3oykxo.svg",
         categoryId: 2,
       },
       {
-        name: "Garden Hose Nozzle",
-        slug: "garden-hose-nozzle",
-        description: "10-pattern spray nozzle for all watering needs.",
-        shortDescription: "10-pattern spray nozzle for all watering needs",
-        price: 18.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Hose-Nozzle.jpg",
-        categoryId: 5,
+        name: "Epic 16-Cell Seed Starting Trays",
+        slug: "epic-16-cell-seed-starting-trays",
+        description: "Professional seed starting system with 16 individual cells, perfect for starting vegetables, flowers, and herbs.",
+        shortDescription: "Professional 16-cell seed starting system",
+        price: 19.99,
+        imageUrl: "/images/products/16-celltray2_400x400.svg",
+        isNew: true,
+        categoryId: 6,
       },
       {
-        name: "Tomato Growing Kit",
-        slug: "tomato-growing-kit",
-        description: "Everything you need to grow delicious homegrown tomatoes.",
-        shortDescription: "Complete kit for growing delicious homegrown tomatoes",
-        price: 29.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Tomato-Growing-Kit.jpg",
+        name: "Black 6-Cell Seed Starting Kit",
+        slug: "black-6-cell-seed-starting-kit",
+        description: "Durable 6-cell seed starting tray with dome lid for better germination rates.",
+        shortDescription: "6-cell seed starting system with humidity dome",
+        price: 14.99,
+        imageUrl: "/images/products/6cellblack_400x400.svg",
+        categoryId: 6,
+      },
+      {
+        name: "Nasturtium Fiesta Blend Seeds",
+        slug: "nasturtium-fiesta-blend-seeds",
+        description: "Vibrant mix of edible Nasturtium flowers in red, orange, and yellow shades. Great for containers or garden borders.",
+        shortDescription: "Colorful, edible nasturtium flowers for containers or borders",
+        price: 3.99,
+        imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         isBestSeller: true,
+        categoryId: 2,
+      },
+      {
+        name: "Bean Bush Goldrush Organic Seeds",
+        slug: "bean-bush-goldrush-organic-seeds",
+        description: "Organic yellow bush bean seeds for abundant harvests. Disease resistant and easy to grow.",
+        shortDescription: "Organic yellow bush beans - high yield and disease resistant",
+        price: 4.29,
+        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        isNew: true,
         categoryId: 1,
       },
       {
-        name: "Indoor Herb Garden",
-        slug: "indoor-herb-garden",
-        description: "Self-watering indoor herb garden with built-in LED grow lights.",
-        shortDescription: "Self-watering indoor herb garden with LED grow lights",
-        price: 54.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Indoor-Garden-Kit.jpg",
-        isNew: true,
-        categoryId: 2,
-      },
-      {
-        name: "Gardening Gloves",
-        slug: "gardening-gloves",
-        description: "Durable and flexible gardening gloves with breathable fabric.",
-        shortDescription: "Durable and flexible gardening gloves with reinforced fingertips",
-        price: 15.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Gardening-Gloves.jpg",
+        name: "Medium Tall Metal Raised Garden Bed",
+        slug: "medium-tall-metal-raised-bed",
+        description: "Stylish medium height raised garden bed in Light Clay finish. Perfect for vegetables that need deeper soil.",
+        shortDescription: "Stylish medium height metal raised bed in Light Clay finish",
+        price: 119.99,
+        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
         categoryId: 5,
       },
       {
-        name: "Plant Support Cages",
-        slug: "plant-support-cages",
-        description: "Set of 3 durable, reusable support cages for tomatoes and other climbing plants.",
-        shortDescription: "Durable plant support cages for tomatoes and climbing plants",
-        price: 22.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Plant-Cages.jpg",
+        name: "Small Tall Metal Raised Garden Bed",
+        slug: "small-tall-metal-raised-bed",
+        description: "Space-saving tall raised garden bed in Slate Grey finish. Ideal for small spaces and patio gardening.",
+        shortDescription: "Space-saving tall metal planter in elegant Slate Grey",
+        price: 89.99,
+        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
         categoryId: 5,
       },
       {
-        name: "Soil Test Kit",
-        slug: "soil-test-kit",
-        description: "Professional-grade soil test kit measures pH and nutrient levels.",
-        shortDescription: "Professional-grade soil test kit for optimal plant growth",
-        price: 19.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Soil-Test-Kit.jpg",
+        name: "Heirloom Organic Seed Bank Collection",
+        slug: "heirloom-organic-seed-bank",
+        description: "Comprehensive collection of 25 heirloom organic vegetable, herb, and flower seeds for a complete garden.",
+        shortDescription: "25 varieties of heirloom organic seeds for a complete garden",
+        price: 29.99,
+        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
         isBestSeller: true,
-        categoryId: 5,
-      },
-      {
-        name: "Premium Potting Soil",
-        slug: "premium-potting-soil",
-        description: "Organic, nutrient-rich potting mix formulated for container plants.",
-        shortDescription: "Nutrient-rich organic potting mix with slow-release fertilizer",
-        price: 12.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Potting-Soil.jpg",
-        categoryId: 5,
-      },
-      {
-        name: "Succulent Collection",
-        slug: "succulent-collection",
-        description: "Set of 6 unique, hardy succulents in small pots.",
-        shortDescription: "Collection of 6 unique, hardy succulents in small pots",
-        price: 34.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Succulents-Collection.jpg",
         categoryId: 4,
       },
       {
-        name: "Raised Garden Bed",
-        slug: "raised-garden-bed",
-        description: "Cedar raised garden bed kit, easy to assemble.",
-        shortDescription: "Cedar raised garden bed kit with easy assembly",
-        price: 89.99,
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Raised-Garden-Bed.jpg",
+        name: "Epic 4-Cell Seed Starting Kit",
+        slug: "epic-4-cell-seed-starting-kit",
+        description: "Perfect beginner seed starting system with 4 large cells and humidity dome for better germination.",
+        shortDescription: "Beginner-friendly 4-cell seed starting system with dome",
+        price: 12.99,
+        imageUrl: "/images/products/4-cell-side-compressed_400x400.svg",
+        categoryId: 6,
+      },
+      {
+        name: "4-Cell Dome Seed Starting Kit",
+        slug: "4-cell-dome-seed-starting-kit",
+        description: "Professional 4-cell seed starting system with high dome for taller seedlings.",
+        shortDescription: "Professional seed starting kit with high dome for tall seedlings",
+        price: 16.99,
+        imageUrl: "/images/products/4CellDomeWithBottomSmallGardenStarterKits_59f087c6-7e6c-41ee-b5af-765c31bbc57c_20_1_400x400.svg",
+        categoryId: 6,
+      },
+      {
+        name: "Stack & Grow Seedling Trays",
+        slug: "stack-and-grow-trays",
+        description: "Stackable seed starting system for maximizing your growing space. Professional quality for serious gardeners.",
+        shortDescription: "Space-saving stackable seedling trays for serious gardeners",
+        price: 42.99,
+        imageUrl: "/images/products/2022-11-17-Diego0293-STACK_400x400.svg",
         isNew: true,
-        categoryId: 5,
+        categoryId: 6,
       },
     ];
     
@@ -417,105 +417,92 @@ export class MemStorage implements IStorage {
       this.createProduct(product);
     });
     
-    // Sample articles
+    // Sample articles with authentic Epic Gardening images
     const articles: InsertArticle[] = [
       {
-        title: "10 Vegetable Garden Basics for Beginners",
-        slug: "vegetable-garden-basics-for-beginners",
-        content: `<p>Starting your first vegetable garden can be both exciting and intimidating. Here are the essential steps to help you grow your own food successfully:</p>
-        <h2>1. Choose the Right Location</h2>
-        <p>Most vegetables need at least 6-8 hours of direct sunlight daily. Choose a spot with good sun exposure, away from trees and buildings that might cast shadows.</p>
-        <h2>2. Start with Good Soil</h2>
-        <p>Vegetables thrive in rich, well-draining soil. Test your soil and amend it with compost to improve its structure and nutrient content.</p>
-        <h2>3. Plan Your Garden Layout</h2>
-        <p>Consider the space requirements of different vegetables and plan accordingly. Taller plants should be planted on the north side to avoid shading smaller plants.</p>
-        <h2>4. Choose Easy Vegetables for Beginners</h2>
-        <p>Start with easy-to-grow vegetables like lettuce, tomatoes, cucumbers, and zucchini. These plants are relatively forgiving and produce abundantly.</p>
-        <h2>5. Water Properly</h2>
-        <p>Most vegetables need about 1-1.5 inches of water per week. Water deeply but infrequently to encourage deep root growth.</p>
-        <h2>6. Mulch Your Garden</h2>
-        <p>Apply a layer of mulch around your plants to conserve moisture, suppress weeds, and regulate soil temperature.</p>
-        <h2>7. Fertilize as Needed</h2>
-        <p>Use a balanced organic fertilizer to provide essential nutrients to your plants. Follow package instructions for application rates.</p>
-        <h2>8. Stay on Top of Weeds</h2>
-        <p>Regular weeding is essential to prevent competition for nutrients and water. Pull weeds when they're small and easier to remove.</p>
-        <h2>9. Monitor for Pests and Diseases</h2>
-        <p>Check your plants regularly for signs of pests or diseases. Early detection allows for more effective and less invasive intervention.</p>
-        <h2>10. Harvest at the Right Time</h2>
-        <p>Learn the optimal harvesting time for each vegetable. Regular harvesting encourages plants to produce more.</p>
-        <p>Remember, gardening is a learning experience. Don't be discouraged by setbacks – each season brings new knowledge and better results!</p>`,
-        excerpt: "Learn the essential steps to start your first vegetable garden and grow your own food successfully.",
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Vegetable-Garden-Basics.jpg",
+        title: "Growing Yellow Bush Beans: Easy and Productive",
+        slug: "growing-yellow-bush-beans",
+        content: `<p>Yellow bush beans are one of the easiest and most productive vegetables for home gardeners. Here's how to grow them successfully:</p>
+        <h2>Benefits of Growing Yellow Bush Beans</h2>
+        <p>Yellow bush beans, also known as wax beans, are compact, productive, and don't require trellising like pole beans. They're perfect for small gardens and containers, and their bright color makes them easy to spot during harvest.</p>
+        <h2>Starting from Seed</h2>
+        <p>Direct sow seeds in the garden after all danger of frost has passed and soil temperatures reach at least 60°F. Plant seeds 1 inch deep and 2-3 inches apart in rows 18-24 inches apart. For continuous harvests, succession plant every 2-3 weeks.</p>
+        <h2>Growing Conditions</h2>
+        <p>Bush beans thrive in full sun (6+ hours daily) and well-draining soil rich in organic matter. They prefer a soil pH between 6.0 and 7.0. Keep soil consistently moist but not waterlogged, especially during flowering and pod development.</p>
+        <h2>Care and Maintenance</h2>
+        <p>Mulch around plants to conserve moisture and suppress weeds. Avoid working around bean plants when they're wet to prevent spreading diseases. Support bean plants with light stakes or cages if they become top-heavy with pods.</p>
+        <h2>Pest and Disease Management</h2>
+        <p>Watch for common bean pests like bean beetles, aphids, and spider mites. Disease resistance varies by variety, but most yellow bush beans are fairly resistant to common bean diseases like anthracnose and bean mosaic virus.</p>
+        <h2>Harvesting and Storage</h2>
+        <p>Harvest beans when they're young and tender, usually about 50-60 days after planting. Pick regularly to encourage continued production. Fresh beans will keep in the refrigerator for up to a week, or can be blanched and frozen for longer storage.</p>
+        <p>With their ease of growing and abundant harvests, yellow bush beans are a perfect choice for both beginner and experienced gardeners!</p>`,
+        excerpt: "Learn how to grow productive, crisp yellow bush beans in your garden with these simple growing tips.",
+        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
         datePublished: new Date("2023-05-12"),
         categoryId: 1,
       },
       {
-        title: "Growing a Culinary Herb Garden at Home",
-        slug: "growing-culinary-herb-garden-at-home",
-        content: `<p>Fresh herbs can transform ordinary dishes into extraordinary culinary experiences. Growing your own herb garden at home is not only rewarding but also practical and cost-effective.</p>
-        <h2>Benefits of Growing Your Own Herbs</h2>
-        <p>Having fresh herbs at your fingertips means better-tasting food, significant savings compared to store-bought herbs, and the satisfaction of growing something yourself.</p>
-        <h2>Best Herbs for Beginners</h2>
-        <p>Start with these easy-to-grow herbs:</p>
+        title: "Growing Beautiful Nasturtiums in Your Garden",
+        slug: "growing-beautiful-nasturtiums",
+        content: `<p>Nasturtiums are among the easiest and most rewarding flowers to grow, offering vibrant colors, edible blooms and leaves, and excellent companion planting benefits.</p>
+        <h2>Why Grow Nasturtiums</h2>
+        <p>These versatile flowers add bright splashes of red, orange, and yellow to gardens while attracting beneficial pollinators. The entire plant is edible with a peppery taste similar to watercress, making them perfect for edible landscaping.</p>
+        <h2>Starting from Seed</h2>
+        <p>Nasturtiums are easy to grow from seed. Their large seeds can be directly sown outdoors after the last frost, or started indoors 4 weeks before the last frost date. Plant seeds 1/2 inch deep, and thin seedlings to 8-12 inches apart.</p>
+        <h2>Growing Conditions</h2>
+        <p>These flowers prefer full sun but will tolerate partial shade in hot climates. One of the secrets to prolific blooms is to grow them in poor to average soil with minimal fertilizer. Rich soil produces lush foliage but fewer flowers. Water moderately, allowing soil to dry between waterings.</p>
+        <h2>Varieties to Try</h2>
         <ul>
-          <li><strong>Basil:</strong> Perfect for Italian dishes, pesto, and salads</li>
-          <li><strong>Parsley:</strong> A versatile herb that complements many dishes</li>
-          <li><strong>Mint:</strong> Great for teas, cocktails, and desserts</li>
-          <li><strong>Rosemary:</strong> Adds flavor to meats and roasted vegetables</li>
-          <li><strong>Thyme:</strong> Works well in soups, stews, and with roasted meats</li>
-          <li><strong>Chives:</strong> Adds a mild onion flavor to dishes</li>
+          <li><strong>Climbing varieties:</strong> Ideal for trellises and fences, can reach 6-8 feet tall</li>
+          <li><strong>Dwarf varieties:</strong> Perfect for containers and borders</li>
+          <li><strong>Fiesta Blend:</strong> A beautiful mix of red, orange, and yellow flowers that creates a stunning display</li>
         </ul>
-        <h2>Indoor vs. Outdoor Herb Gardens</h2>
-        <p>Herbs can be grown both indoors and outdoors. Indoor herb gardens are convenient for year-round access and protection from extreme weather, while outdoor gardens often yield more abundant growth due to natural sunlight.</p>
-        <h2>Essential Growing Conditions</h2>
-        <p>Most herbs need:</p>
-        <ul>
-          <li>6+ hours of sunlight daily (or grow lights for indoor gardens)</li>
-          <li>Well-draining soil</li>
-          <li>Regular watering (but not overwatering)</li>
-          <li>Adequate air circulation</li>
-        </ul>
-        <h2>Container Selection</h2>
-        <p>Choose containers with drainage holes to prevent root rot. Terra cotta pots are excellent for herbs as they allow soil to breathe.</p>
-        <h2>Harvesting and Using Your Herbs</h2>
-        <p>Harvest herbs in the morning when their essential oils are most concentrated. Regular harvesting encourages bushier growth. Use fresh herbs immediately or store them properly for later use.</p>
-        <p>With minimal space and effort, you can enjoy the pleasure of growing and using your own fresh herbs all year round!</p>`,
-        excerpt: "Discover the joy of growing fresh herbs for cooking and learn which varieties are easiest to grow indoors.",
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Herb-Garden.jpg",
+        <h2>Culinary Uses</h2>
+        <p>Harvest young leaves and flowers regularly to encourage continuous blooming. Add the peppery leaves to salads, use the colorful flowers as edible garnishes, or try pickling the seed pods as a substitute for capers.</p>
+        <h2>Companion Planting Benefits</h2>
+        <p>Nasturtiums make excellent companion plants. They repel aphids, whiteflies, and cucumber beetles, making them valuable additions near vegetables like tomatoes, cucumbers, and brassicas.</p>
+        <p>With their easy growing requirements and multiple benefits, nasturtiums deserve a place in every garden!</p>`,
+        excerpt: "Discover how to grow vibrant, edible nasturtium flowers that add beauty to your garden and flavor to your plate.",
+        imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         datePublished: new Date("2023-05-08"),
         categoryId: 2,
       },
       {
-        title: "Essential Garden Tools Every Gardener Needs",
-        slug: "essential-garden-tools-every-gardener-needs",
-        content: `<p>Having the right tools makes gardening more efficient and enjoyable. Whether you're a beginner or an experienced gardener, these essential tools will help you maintain a beautiful and productive garden.</p>
-        <h2>Hand Tools</h2>
-        <h3>1. Hand Trowel</h3>
-        <p>This small, handheld shovel is perfect for digging planting holes, transplanting seedlings, and removing weeds. Look for one with a comfortable grip and durable, rust-resistant blade.</p>
-        <h3>2. Pruning Shears</h3>
-        <p>Essential for trimming and shaping plants, deadheading flowers, and harvesting produce. Choose bypass pruners for clean cuts on living plants.</p>
-        <h3>3. Garden Fork</h3>
-        <p>Ideal for turning soil, lifting plants, and incorporating compost. The tines break up compacted soil more effectively than a shovel.</p>
-        <h3>4. Hand Cultivator</h3>
-        <p>This claw-like tool is perfect for loosening soil, removing weeds, and mixing in amendments around established plants.</p>
-        <h2>Long-Handled Tools</h2>
-        <h3>5. Spade</h3>
-        <p>With its flat, straight blade, a spade is perfect for edging, digging trenches, and dividing perennials.</p>
-        <h3>6. Garden Rake</h3>
-        <p>Use a bow rake to level soil, remove rocks, and spread mulch. A leaf rake is essential for autumn clean-up.</p>
-        <h3>7. Hoe</h3>
-        <p>Great for preparing seed beds, cultivating soil, and removing small weeds. Various shapes are available for different purposes.</p>
-        <h2>Watering Equipment</h2>
-        <h3>8. Watering Can</h3>
-        <p>Choose one with a sprinkler spout for gentle watering of seedlings and delicate plants.</p>
-        <h3>9. Garden Hose with Adjustable Nozzle</h3>
-        <p>Look for a quality hose with a multi-pattern nozzle to customize watering for different plants and garden areas.</p>
-        <h2>Protective Gear</h2>
-        <h3>10. Gardening Gloves</h3>
-        <p>Protect your hands from thorns, splinters, and soil. Choose waterproof gloves for wet work and breathable cotton for dry tasks.</p>
-        <p>Investing in quality tools will save you time and effort in the long run. Proper cleaning and storage after use will extend their life and keep them functioning efficiently for years to come.</p>`,
-        excerpt: "A comprehensive guide to the must-have tools that will make your gardening tasks easier and more efficient.",
-        imageUrl: "https://epicgardening.com/wp-content/uploads/2023/05/Garden-Tools.jpg",
+        title: "Raised Bed Gardening: Benefits and Best Practices",
+        slug: "raised-bed-gardening-benefits-practices",
+        content: `<p>Raised bed gardening offers numerous advantages for both beginning and experienced gardeners. From better soil control to extended growing seasons, raised beds can transform your gardening experience.</p>
+        <h2>Benefits of Raised Bed Gardening</h2>
+        <h3>1. Better Soil Control</h3>
+        <p>Raised beds allow you to create the perfect soil mix tailored to your plants' needs, bypassing problems with existing soil.</p>
+        <h3>2. Improved Drainage</h3>
+        <p>The elevated design provides excellent drainage, preventing waterlogged roots and many associated plant diseases.</p>
+        <h3>3. Extended Growing Season</h3>
+        <p>Soil in raised beds warms up faster in spring and maintains heat longer in fall, allowing for earlier planting and later harvests.</p>
+        <h3>4. Reduced Back Strain</h3>
+        <p>Properly designed raised beds minimize bending and kneeling, making gardening more accessible for people with mobility limitations.</p>
+        <h3>5. Defined Garden Spaces</h3>
+        <p>Raised beds create clear boundaries that keep garden plants separate from lawn areas and help prevent grass invasion.</p>
+        <h2>Raised Bed Materials</h2>
+        <p>Modern raised beds are available in various materials:</p>
+        <ul>
+          <li><strong>Metal:</strong> Durable, long-lasting, and available in attractive finishes like slate grey, light clay, and mist green</li>
+          <li><strong>Wood:</strong> Traditional cedar or redwood beds offer natural beauty</li>
+          <li><strong>Composite:</strong> Low-maintenance alternative to wood</li>
+          <li><strong>Fabric:</strong> Lightweight and portable option</li>
+        </ul>
+        <h2>Ideal Dimensions</h2>
+        <p>The ideal width for a raised bed is 3-4 feet, allowing you to reach the center from either side without stepping on the soil. Length can vary based on your space, but most beds are 6-8 feet long. Height typically ranges from 8-36 inches, with taller beds requiring less bending.</p>
+        <h2>Filling Your Raised Bed</h2>
+        <p>A good soil mix for raised beds consists of:</p>
+        <ul>
+          <li>60% topsoil</li>
+          <li>30% compost</li>
+          <li>10% aeration materials (perlite, vermiculite, or coarse sand)</li>
+        </ul>
+        <p>Add balanced organic fertilizer according to package directions to provide essential nutrients for your plants.</p>
+        <p>With proper planning and setup, raised bed gardens can provide years of productive and enjoyable gardening!</p>`,
+        excerpt: "Discover the many advantages of raised bed gardening and learn how to create the perfect growing environment for your plants.",
+        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
         datePublished: new Date("2023-05-03"),
         categoryId: 5,
       },
@@ -531,21 +518,21 @@ export class MemStorage implements IStorage {
       {
         personName: "Sarah L.",
         role: "Home Gardener",
-        avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+        avatarUrl: "https://randomuser.me/api/portraits/women/44.svg",
         content: "Epic Gardening has transformed my backyard! Their step-by-step guides made it easy to grow my own vegetables, even as a complete beginner. Now I have fresh produce all summer long!",
         rating: 5,
       },
       {
         personName: "Michael T.",
         role: "Urban Gardener",
-        avatarUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+        avatarUrl: "https://randomuser.me/api/portraits/men/32.svg",
         content: "The gardening tools I purchased from Epic Gardening are top-quality and made my garden work so much easier. Their customer service was excellent when I had questions about which products to choose.",
         rating: 5,
       },
       {
         personName: "Jennifer P.",
         role: "Herb Enthusiast",
-        avatarUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+        avatarUrl: "https://randomuser.me/api/portraits/women/68.svg",
         content: "I've been following Epic Gardening's blog for years and it's been invaluable for my herb garden. Their pest control tips saved my basil from aphids last season, and now I have a thriving herb collection!",
         rating: 4,
       },

@@ -57,32 +57,32 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
       <nav className="space-y-4">
         <MobileDropdown 
-          title="Plants" 
+          title="Shop" 
           links={[
             { href: "/category/vegetables", label: "Vegetables" },
-            { href: "/category/herbs", label: "Herbs" },
             { href: "/category/flowers", label: "Flowers" },
-            { href: "/category/indoor-plants", label: "Indoor Plants" }
+            { href: "/category/seeds", label: "Seeds" },
+            { href: "/category/seed-starting", label: "Seed Starting" }
           ]} 
         />
         
         <MobileDropdown 
-          title="Tools" 
+          title="Raised Beds" 
           links={[
-            { href: "/category/hand-tools", label: "Hand Tools" },
-            { href: "/category/power-tools", label: "Power Tools" },
-            { href: "/category/watering", label: "Watering" },
-            { href: "/category/storage", label: "Storage" }
+            { href: "/category/raised-beds", label: "All Raised Beds" },
+            { href: "/category/container-gardening", label: "Container Gardening" },
+            { href: "/product/round-short-metal-raised-bed", label: "Round Beds" },
+            { href: "/product/medium-tall-metal-raised-bed", label: "Tall Beds" }
           ]} 
         />
         
         <MobileDropdown 
           title="Guides" 
           links={[
-            { href: "/article/vegetable-garden-basics-for-beginners", label: "Beginner's Guide" },
-            { href: "/blog", label: "Seasonal Planting" },
-            { href: "/blog", label: "Pest Control" },
-            { href: "/blog", label: "Composting" }
+            { href: "/article/growing-yellow-bush-beans", label: "Growing Beans" },
+            { href: "/article/growing-beautiful-nasturtiums", label: "Growing Nasturtiums" },
+            { href: "/article/raised-bed-gardening-benefits-practices", label: "Raised Bed Guide" },
+            { href: "/blog", label: "View All Articles" }
           ]} 
         />
         
