@@ -270,6 +270,36 @@ export class MemStorage implements IStorage {
         imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
       },
       {
+        name: "Herbs",
+        slug: "herbs",
+        description: "Flavorful and aromatic herb plants for culinary and medicinal use",
+        imageUrl: "/images/categories/herbs_category.svg",
+      },
+      {
+        name: "Tools",
+        slug: "tools",
+        description: "Quality gardening tools for all your gardening needs",
+        imageUrl: "/images/categories/tools_category.svg",
+      },
+      {
+        name: "Fertilizers",
+        slug: "fertilizers",
+        description: "Organic fertilizers and soil amendments for healthy plants",
+        imageUrl: "/images/categories/fertilizers_category.svg",
+      },
+      {
+        name: "Pest Control",
+        slug: "pest-control",
+        description: "Natural and organic solutions for garden pests and diseases",
+        imageUrl: "/images/categories/pest_control_category.svg",
+      },
+      {
+        name: "Grow Lights",
+        slug: "grow-lights",
+        description: "LED grow lights for indoor gardening and seed starting",
+        imageUrl: "/images/categories/grow_lights_category.svg",
+      },
+      {
         name: "Seeds",
         slug: "seeds",
         description: "High-quality seeds for your garden",
@@ -410,6 +440,109 @@ export class MemStorage implements IStorage {
         isNew: true,
         categoryId: 6,
       },
+      {
+        name: "Premium Garden Gloves",
+        slug: "premium-garden-gloves",
+        description: "Durable and comfortable garden gloves with reinforced fingertips. Perfect for all gardening tasks.",
+        shortDescription: "Durable garden gloves with reinforced fingertips",
+        price: 14.99,
+        imageUrl: "/images/products/garden_gloves.svg",
+        categoryId: 5,
+      },
+      {
+        name: "Ergonomic Hand Trowel",
+        slug: "ergonomic-hand-trowel",
+        description: "Ergonomically designed hand trowel with comfortable grip and stainless steel construction.",
+        shortDescription: "Ergonomic hand trowel with comfortable grip",
+        price: 12.99,
+        imageUrl: "/images/products/hand_trowel.svg",
+        isBestSeller: true,
+        categoryId: 5,
+      },
+      {
+        name: "Galvanized Steel Watering Can",
+        slug: "galvanized-steel-watering-can",
+        description: "Classic 2-gallon watering can with removable rose. Perfectly balanced for easy watering.",
+        shortDescription: "Classic 2-gallon watering can with removable rose",
+        price: 34.99,
+        imageUrl: "/images/products/watering_can.svg",
+        categoryId: 5,
+      },
+      {
+        name: "Heirloom Tomato Seed Collection",
+        slug: "heirloom-tomato-seed-collection",
+        description: "Collection of 6 heirloom tomato varieties, from cherry to beefsteak. Non-GMO and open-pollinated.",
+        shortDescription: "Collection of 6 delicious heirloom tomato varieties",
+        price: 18.99,
+        imageUrl: "/images/products/tomato_seeds.svg",
+        isNew: true,
+        categoryId: 4,
+      },
+      {
+        name: "5-Blade Herb Scissors",
+        slug: "herb-scissors",
+        description: "Multi-blade herb scissors for quick and easy herb harvesting and chopping. Includes cleaning comb.",
+        shortDescription: "Multi-blade scissors for easy herb harvesting",
+        price: 16.99,
+        imageUrl: "/images/products/herb_scissors.svg",
+        categoryId: 5,
+      },
+      {
+        name: "Weather-Resistant Plant Labels",
+        slug: "weather-resistant-plant-labels",
+        description: "Set of 50 weather-resistant plant labels with marking pen. Perfect for identifying plants in your garden.",
+        shortDescription: "50 durable plant labels with marking pen",
+        price: 9.99,
+        imageUrl: "/images/products/plant_labels.svg",
+        categoryId: 5,
+      },
+      {
+        name: "Tiered Strawberry Planter",
+        slug: "tiered-strawberry-planter",
+        description: "3-tier strawberry planter that maximizes growing space. Perfect for patios and small gardens.",
+        shortDescription: "Space-saving 3-tier planter for strawberries",
+        price: 29.99,
+        imageUrl: "/images/products/strawberry_planter.svg",
+        categoryId: 3,
+      },
+      {
+        name: "Drip Irrigation Starter Kit",
+        slug: "drip-irrigation-kit",
+        description: "Complete drip irrigation kit for up to 25 plants. Includes timer, tubing, emitters, and connectors.",
+        shortDescription: "Complete water-saving irrigation system for 25 plants",
+        price: 49.99,
+        imageUrl: "/images/products/drip_irrigation.svg",
+        isBestSeller: true,
+        categoryId: 5,
+      },
+      {
+        name: "Bypass Pruning Shears",
+        slug: "bypass-pruning-shears",
+        description: "Professional-grade bypass pruning shears with titanium-coated blades and ergonomic handles.",
+        shortDescription: "Professional pruning shears with titanium-coated blades",
+        price: 24.99,
+        imageUrl: "/images/products/pruning_shears.svg",
+        categoryId: 5,
+      },
+      {
+        name: "Compact Compost Bin",
+        slug: "compact-compost-bin",
+        description: "Space-saving 5-gallon compost bin with aeration system and activated charcoal filter to control odors.",
+        shortDescription: "Space-saving compost bin with odor control",
+        price: 39.99,
+        imageUrl: "/images/products/compost_bin.svg",
+        categoryId: 6,
+      },
+      {
+        name: "5-Tier Vertical Planter",
+        slug: "vertical-planter",
+        description: "Space-saving vertical planter with 5 tiers, perfect for growing herbs, strawberries, or flowers on patios and balconies.",
+        shortDescription: "5-tier vertical planter for herbs and small plants",
+        price: 59.99,
+        imageUrl: "/images/products/vertical_planter.svg",
+        isNew: true,
+        categoryId: 3,
+      },
     ];
     
     // Create products
@@ -508,8 +641,328 @@ export class MemStorage implements IStorage {
       },
     ];
     
+    // Add new gardening articles
+    const newArticles: InsertArticle[] = [
+      {
+        title: "Spring Gardening Tips for a Bountiful Season",
+        slug: "spring-gardening-tips-bountiful-season",
+        content: `<p>Spring is the perfect time to prepare your garden for a season of abundant growth. Here are essential tips to get your garden off to a great start.</p>
+        <h2>Early Spring Garden Preparation</h2>
+        <p>As soon as soil can be worked, clear out winter debris, add compost, and test your soil pH. Most vegetables and flowers prefer a slightly acidic to neutral pH (6.0-7.0). Adjust soil pH if necessary using lime to raise pH or sulfur to lower it.</p>
+        <h2>Smart Seed Starting</h2>
+        <p>Get a jump on the growing season by starting seeds indoors 6-8 weeks before your last frost date. Use a quality seed starting mix and provide consistent moisture and bright light. Harden off seedlings before transplanting by gradually exposing them to outdoor conditions over 7-10 days.</p>
+        <h2>Strategic Planting Schedule</h2>
+        <p>Follow a strategic planting schedule based on your local frost dates:</p>
+        <ul>
+          <li><strong>4-6 weeks before last frost:</strong> Plant cold-tolerant vegetables like peas, spinach, and radishes</li>
+          <li><strong>2-4 weeks before last frost:</strong> Plant potatoes, carrots, beets, and onions</li>
+          <li><strong>After last frost:</strong> Plant warm-season crops like tomatoes, peppers, and cucumbers</li>
+        </ul>
+        <h2>Water Management</h2>
+        <p>Set up an efficient watering system early in the season. Drip irrigation or soaker hoses deliver water directly to plant roots while minimizing evaporation and fungal issues. Apply a 2-3 inch layer of mulch to conserve moisture and suppress weeds.</p>
+        <h2>Pest Prevention</h2>
+        <p>Take preventative measures against pests with these organic approaches:</p>
+        <ul>
+          <li>Install physical barriers like row covers for vulnerable young plants</li>
+          <li>Plant companion flowers like marigolds and nasturtiums to repel certain pests</li>
+          <li>Introduce beneficial insects like ladybugs and lacewings</li>
+          <li>Implement crop rotation to disrupt pest life cycles</li>
+        </ul>
+        <h2>Early Season Maintenance</h2>
+        <p>Stay ahead of garden maintenance by setting aside 15-30 minutes several times a week to pull young weeds, inspect plants for problems, and provide support for growing vines and stems before they need it.</p>
+        <p>With these spring gardening tips, you'll create the foundation for a productive and beautiful garden throughout the growing season!</p>`,
+        excerpt: "Set your garden up for success with these essential spring gardening tasks and tips for a productive growing season.",
+        imageUrl: "/images/articles/spring_gardening_tips.svg",
+        datePublished: new Date("2023-03-10"),
+        categoryId: 1,
+      },
+      {
+        title: "Composting Basics: Turn Kitchen Scraps into Garden Gold",
+        slug: "composting-basics-kitchen-scraps-garden-gold",
+        content: `<p>Composting is one of the most rewarding practices for any gardener. This simple process turns kitchen scraps and yard waste into nutrient-rich humus that will nourish your garden and reduce landfill waste.</p>
+        <h2>Why Compost?</h2>
+        <p>Homemade compost improves soil structure, adds essential nutrients, increases beneficial soil organisms, helps retain moisture, suppresses plant diseases, and reduces your environmental footprint by diverting organic matter from landfills.</p>
+        <h2>Choosing Your Composting Method</h2>
+        <h3>Traditional Pile or Bin</h3>
+        <p>The simplest method is a basic pile or bin in a corner of your yard. This works well for those with ample outdoor space and mostly yard waste. For a more contained approach, use a purchased or DIY compost bin.</p>
+        <h3>Tumbler Composting</h3>
+        <p>Compost tumblers are fully enclosed containers that can be rotated, speeding up decomposition through increased aeration. They're ideal for small spaces and help deter pests.</p>
+        <h3>Vermicomposting</h3>
+        <p>For indoor composting, vermicomposting uses red wiggler worms to break down kitchen scraps quickly in a small container. It's perfect for apartments and produces extremely rich compost.</p>
+        <h2>What to Compost</h2>
+        <p><strong>Browns (Carbon-Rich Materials):</strong></p>
+        <ul>
+          <li>Dry leaves</li>
+          <li>Straw or hay</li>
+          <li>Shredded paper and cardboard</li>
+          <li>Wood chips or sawdust</li>
+          <li>Dried plant material</li>
+        </ul>
+        <p><strong>Greens (Nitrogen-Rich Materials):</strong></p>
+        <ul>
+          <li>Fruit and vegetable scraps</li>
+          <li>Coffee grounds and filters</li>
+          <li>Grass clippings</li>
+          <li>Plant trimmings</li>
+          <li>Eggshells</li>
+        </ul>
+        <h2>What to Avoid Composting</h2>
+        <ul>
+          <li>Meat, fish, and dairy products</li>
+          <li>Oils and fats</li>
+          <li>Diseased plants</li>
+          <li>Pet waste</li>
+          <li>Treated wood products</li>
+        </ul>
+        <h2>Building Your Compost Pile</h2>
+        <p>For effective composting, maintain a ratio of approximately 3 parts browns to 1 part greens. Layer materials, adding browns first, then greens, and a thin layer of soil or finished compost to introduce microorganisms.</p>
+        <h2>Maintaining Your Compost</h2>
+        <p>Keep your compost pile as moist as a wrung-out sponge. Turn it regularly with a pitchfork or compost aerator tool to provide oxygen for microorganisms. In a well-maintained pile, you'll have finished compost in 2-6 months.</p>
+        <h2>Using Your Compost</h2>
+        <p>Finished compost looks like dark, crumbly soil with an earthy smell. Use it to topdress garden beds, mix into potting soil, use as a seed starting medium, or make compost tea for liquid fertilizer.</p>
+        <p>With these basics, you'll be well on your way to creating your own garden gold while reducing waste!</p>`,
+        excerpt: "Learn the fundamentals of composting to transform household waste into valuable garden fertilizer.",
+        imageUrl: "/images/articles/composting_basics.svg",
+        datePublished: new Date("2023-03-15"),
+        categoryId: 6,
+      },
+      {
+        title: "Identifying and Managing Common Garden Pests Naturally",
+        slug: "identifying-managing-garden-pests-naturally",
+        content: `<p>Every gardener faces pest challenges, but with vigilance and the right techniques, you can manage these unwelcome visitors while maintaining an eco-friendly garden.</p>
+        <h2>Common Garden Pests and Natural Solutions</h2>
+        <h3>Aphids</h3>
+        <p><strong>Identification:</strong> Tiny pear-shaped insects in clusters on stems and leaf undersides, often green but can be black, brown, red, or yellow.</p>
+        <p><strong>Natural Control:</strong></p>
+        <ul>
+          <li>Spray plants with strong stream of water to dislodge aphids</li>
+          <li>Introduce or attract ladybugs and lacewings</li>
+          <li>Apply insecticidal soap or neem oil solution</li>
+          <li>Plant aphid-repelling companions like garlic, chives, and nasturtiums</li>
+        </ul>
+        <h3>Tomato Hornworms</h3>
+        <p><strong>Identification:</strong> Large green caterpillars with white diagonal stripes and a horn-like projection, can grow up to 4 inches long.</p>
+        <p><strong>Natural Control:</strong></p>
+        <ul>
+          <li>Handpick and relocate or dispose</li>
+          <li>Watch for hornworms with small white cocoons (parasitic wasp eggs) and leave these intact</li>
+          <li>Apply Bacillus thuringiensis (Bt), a natural bacteria</li>
+          <li>Plant dill and marigolds as companions</li>
+        </ul>
+        <h3>Cucumber Beetles</h3>
+        <p><strong>Identification:</strong> Yellow-green beetles with black spots or stripes that attack cucumber family plants.</p>
+        <p><strong>Natural Control:</strong></p>
+        <ul>
+          <li>Use yellow sticky traps</li>
+          <li>Cover young plants with row covers (remove when flowering for pollination)</li>
+          <li>Apply kaolin clay</li>
+          <li>Plant radishes and nasturtiums as trap crops</li>
+        </ul>
+        <h3>Cabbage Worms</h3>
+        <p><strong>Identification:</strong> Velvety green caterpillars that feed on cabbage family plants, leaving holes in leaves.</p>
+        <p><strong>Natural Control:</strong></p>
+        <ul>
+          <li>Inspect plants regularly and remove by hand</li>
+          <li>Use lightweight row covers</li>
+          <li>Apply Bt spray</li>
+          <li>Plant thyme and rosemary nearby</li>
+        </ul>
+        <h3>Spider Mites</h3>
+        <p><strong>Identification:</strong> Tiny spider-like pests that create fine webbing on plants; leaves appear stippled or bronzed.</p>
+        <p><strong>Natural Control:</strong></p>
+        <ul>
+          <li>Increase humidity around plants with regular misting</li>
+          <li>Spray plants forcefully with water</li>
+          <li>Apply neem oil or insecticidal soap</li>
+          <li>Introduce predatory mites</li>
+        </ul>
+        <h2>Prevention is Key</h2>
+        <ul>
+          <li><strong>Build healthy soil</strong> to grow strong plants that can resist pests</li>
+          <li><strong>Practice crop rotation</strong> to disrupt pest life cycles</li>
+          <li><strong>Encourage beneficial insects</strong> by planting diverse flowers</li>
+          <li><strong>Keep plants well-watered and properly spaced</strong> for good air circulation</li>
+          <li><strong>Clean up garden debris</strong> in fall to eliminate overwintering sites</li>
+        </ul>
+        <h2>Creating an Integrated Pest Management Plan</h2>
+        <p>Develop a multi-faceted approach:</p>
+        <ol>
+          <li>Monitor regularly for early detection</li>
+          <li>Identify pests correctly before taking action</li>
+          <li>Set thresholds for when intervention is necessary</li>
+          <li>Use least-toxic methods first, moving to stronger options only if needed</li>
+          <li>Record what works for future reference</li>
+        </ol>
+        <p>With patience and consistent application of these natural methods, you can keep pest damage to a minimum while maintaining a healthy ecosystem in your garden.</p>`,
+        excerpt: "Learn to identify common garden pests and control them using natural, environmentally friendly methods.",
+        imageUrl: "/images/articles/garden_pests.svg",
+        datePublished: new Date("2023-04-22"),
+        categoryId: 7,
+      },
+      {
+        title: "The Complete Guide to Watering Your Garden Efficiently",
+        slug: "complete-guide-watering-garden-efficiently",
+        content: `<p>Water is a precious resource and the lifeblood of your garden. Learning to water efficiently saves time, money, and resources while growing healthier plants.</p>
+        <h2>Understanding Plant Water Needs</h2>
+        <p>Different plants have different water requirements. Generally:</p>
+        <ul>
+          <li><strong>Vegetables:</strong> Consistent moisture, especially during fruit development</li>
+          <li><strong>Established Trees and Shrubs:</strong> Deep, infrequent watering</li>
+          <li><strong>Perennial Flowers:</strong> Medium moisture, allowing soil to slightly dry between waterings</li>
+          <li><strong>Succulents and Xeriscape Plants:</strong> Minimal water, with soil drying completely between waterings</li>
+        </ul>
+        <h2>Signs of Improper Watering</h2>
+        <h3>Underwatering Signs:</h3>
+        <ul>
+          <li>Wilting that doesn't recover in evening</li>
+          <li>Curling or yellowing leaves</li>
+          <li>Dry, crumbly soil</li>
+          <li>Slowed or stopped growth</li>
+        </ul>
+        <h3>Overwatering Signs:</h3>
+        <ul>
+          <li>Yellowing leaves throughout plant</li>
+          <li>Soft, limp stems</li>
+          <li>Mold on soil surface</li>
+          <li>Root rot (dark, soft roots)</li>
+        </ul>
+        <h2>When to Water</h2>
+        <p>Timing matters almost as much as quantity:</p>
+        <ul>
+          <li><strong>Early morning</strong> (5-9am) is ideal – less evaporation, lower wind, and plants have moisture during heat of day</li>
+          <li><strong>Avoid midday watering</strong> – much water is lost to evaporation</li>
+          <li><strong>Evening watering is acceptable</strong> but can increase fungal disease risk if foliage stays wet overnight</li>
+        </ul>
+        <p>The finger test is reliable: insert your finger 2 inches into the soil – if it feels dry, it's time to water.</p>
+        <h2>Efficient Watering Methods</h2>
+        <h3>Drip Irrigation</h3>
+        <p>The most efficient system, delivering water directly to plant roots with minimal evaporation. Benefits include:</p>
+        <ul>
+          <li>Water savings of 30-50% compared to sprinklers</li>
+          <li>Reduced weed growth and fungal diseases</li>
+          <li>Ability to automate with timers</li>
+        </ul>
+        <h3>Soaker Hoses</h3>
+        <p>Porous hoses that "sweat" water along their length, ideal for rows of vegetables or perennial beds.</p>
+        <h3>Hand Watering</h3>
+        <p>While time-consuming, allows precise control and observation of your plants. Use a watering wand with breaker nozzle to deliver gentle shower.</p>
+        <h3>Sprinklers</h3>
+        <p>Less efficient but useful for lawns and large areas. Run early morning to minimize evaporation.</p>
+        <h2>How to Water Correctly</h2>
+        <p>Proper technique maximizes benefits:</p>
+        <ul>
+          <li><strong>Water deeply and infrequently</strong> to encourage deep root growth</li>
+          <li><strong>Focus on the root zone</strong>, not leaves</li>
+          <li><strong>Water until moisture reaches root depth</strong> – 6-8 inches for most vegetables and perennials</li>
+          <li><strong>Apply water slowly</strong> to prevent runoff and allow absorption</li>
+        </ul>
+        <h2>Water-Saving Strategies</h2>
+        <ul>
+          <li><strong>Mulch extensively</strong> – 2-3 inches of organic mulch reduces evaporation by 70%</li>
+          <li><strong>Group plants by water needs</strong> (hydrozoning)</li>
+          <li><strong>Collect rainwater</strong> in barrels or cisterns</li>
+          <li><strong>Install smart irrigation controllers</strong> with soil moisture sensors or weather-based adjustments</li>
+          <li><strong>Fix leaks promptly</strong> – even small drips waste gallons</li>
+        </ul>
+        <p>By tailoring your watering approach to your plants' specific needs and using efficient techniques, you'll grow healthier plants while conserving one of our most valuable resources.</p>`,
+        excerpt: "Master the art of garden watering with techniques that conserve water while keeping your plants thriving.",
+        imageUrl: "/images/articles/watering_guide.svg",
+        datePublished: new Date("2023-06-05"),
+        categoryId: 1,
+      },
+      {
+        title: "Soil Improvement Strategies for a Thriving Garden",
+        slug: "soil-improvement-strategies-thriving-garden",
+        content: `<p>The foundation of any successful garden is healthy soil. Whether you're dealing with clay, sand, or something in between, these soil improvement strategies will transform your garden's productivity.</p>
+        <h2>Understanding Your Soil</h2>
+        <p>Before making improvements, get to know what you're working with:</p>
+        <h3>Soil Testing</h3>
+        <p>Conduct a soil test through your local extension office or with a home kit to determine:</p>
+        <ul>
+          <li>pH level (ideal range for most plants: 6.0-7.0)</li>
+          <li>Nutrient levels (nitrogen, phosphorus, potassium)</li>
+          <li>Organic matter content</li>
+          <li>Potential contaminants</li>
+        </ul>
+        <h3>Soil Texture Assessment</h3>
+        <p>Perform a simple jar test: fill a clear jar 1/3 with soil, add water, shake vigorously, and let settle for 24 hours. Sand settles first, then silt, then clay on top, showing your soil's composition.</p>
+        <h2>Building Organic Matter: The Key to Better Soil</h2>
+        <p>Increasing organic matter improves soil structure, water retention, drainage, and nutrient availability in all soil types.</p>
+        <h3>Compost: Garden Gold</h3>
+        <p>Add 2-4 inches of compost annually by:</p>
+        <ul>
+          <li>Top-dressing existing beds in spring and fall</li>
+          <li>Working it into new beds before planting</li>
+          <li>Making compost tea for liquid fertilizer</li>
+        </ul>
+        <h3>Mulch: Protection and Improvement</h3>
+        <p>Apply 2-3 inches of organic mulch such as:</p>
+        <ul>
+          <li>Shredded leaves or leaf mold</li>
+          <li>Straw (not hay, which contains seeds)</li>
+          <li>Wood chips (for paths and perennial beds)</li>
+          <li>Pine needles (excellent for acid-loving plants)</li>
+        </ul>
+        <h3>Cover Crops: Living Soil Improvers</h3>
+        <p>Plant these "green manures" in off-seasons or fallow areas:</p>
+        <ul>
+          <li><strong>Legumes</strong> (clover, vetch, peas) fix nitrogen</li>
+          <li><strong>Grasses</strong> (winter rye, oats) add organic matter and prevent erosion</li>
+          <li><strong>Buckwheat</strong> suppresses weeds and attracts beneficial insects</li>
+        </ul>
+        <h2>Addressing Specific Soil Challenges</h2>
+        <h3>Improving Clay Soil</h3>
+        <p>Clay soil is nutrient-rich but drains poorly. Improve by:</p>
+        <ul>
+          <li>Adding coarse organic matter like leaf mold and aged wood chips</li>
+          <li>Incorporating expanded shale or perlite</li>
+          <li>Building raised beds above problem areas</li>
+          <li>Never working clay soil when wet</li>
+        </ul>
+        <h3>Enhancing Sandy Soil</h3>
+        <p>Sandy soil drains quickly but loses nutrients. Enhance by:</p>
+        <ul>
+          <li>Adding compost, leaf mold, and coco coir</li>
+          <li>Using cover crops frequently</li>
+          <li>Applying clay-rich soil amendments</li>
+          <li>Mulching heavily to retain moisture</li>
+        </ul>
+        <h3>Balancing Soil pH</h3>
+        <ul>
+          <li><strong>To raise pH</strong> (make more alkaline): add garden lime or wood ash</li>
+          <li><strong>To lower pH</strong> (make more acidic): add elemental sulfur, pine needles, or peat moss</li>
+        </ul>
+        <h2>No-Till Gardening: Protecting Soil Structure</h2>
+        <p>Minimize soil disturbance to preserve beneficial organisms and soil structure:</p>
+        <ul>
+          <li>Use broadforks to aerate without inverting soil layers</li>
+          <li>Top-dress with compost instead of digging it in</li>
+          <li>Use sheet mulching to establish new beds without tilling</li>
+          <li>Plant into holes rather than turning entire beds</li>
+        </ul>
+        <h2>Feeding the Soil Web</h2>
+        <p>Healthy soil is alive with billions of organisms that support plant health:</p>
+        <ul>
+          <li>Apply compost tea to introduce beneficial microorganisms</li>
+          <li>Limit synthetic fertilizers that can harm soil life</li>
+          <li>Grow diverse plant species to support diverse soil biology</li>
+          <li>Minimize pesticides that kill beneficial soil insects</li>
+        </ul>
+        <p>Remember, building great soil is a long-term process. Each season of thoughtful care creates a more vibrant, productive garden that requires less input and provides greater rewards.</p>`,
+        excerpt: "Discover proven techniques to enhance your soil quality for healthier plants and better harvests.",
+        imageUrl: "/images/articles/soil_improvement.svg",
+        datePublished: new Date("2023-02-18"),
+        categoryId: 6,
+      }
+    ];
+    
     // Create articles
     articles.forEach(article => {
+      this.createArticle(article);
+    });
+    
+    // Add new articles
+    newArticles.forEach(article => {
       this.createArticle(article);
     });
     

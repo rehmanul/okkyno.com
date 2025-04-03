@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-fj91bn8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F57C00" />
+      <stop offset="100%" stop-color="#d75e00" />
+    </linearGradient>
+    <pattern id="pattern-7eghtmz" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <rect width="30" height="30" fill="url(#grad-fj91bn8)" />
+      <circle cx="15" cy="15" r="2" fill="#ff9a1e" fill-opacity="0.3" />
+    </pattern>
+    <filter id="shadow" x="-2" y="-2" width="104%" height="104%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#pattern-7eghtmz)" />
+  <rect width="400" height="100" y="300" fill="#d75e00" opacity="0.2" />
+  <text x="200" y="185" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Garden Pests</text>
+    <text x="200" y="215" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Identification</text>
+</svg>
