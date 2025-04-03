@@ -333,6 +333,35 @@ export class MemStorage implements IStorage {
         imageUrl: "/images/categories/tools_category.svg",
         parentId: null,
       },
+      // Subcategories for Tools
+      {
+        name: "Hand Tools",
+        slug: "hand-tools",
+        description: "Essential hand tools for precise gardening work",
+        imageUrl: "/images/products/garden_pruner.svg",
+        parentId: 6, // Assuming Tools is category ID 6
+      } as InsertCategory,
+      {
+        name: "Pruning Tools",
+        slug: "pruning-tools",
+        description: "Specialized tools for pruning and shaping plants",
+        imageUrl: "/images/products/hedge-shears.svg",
+        parentId: 6,
+      } as InsertCategory,
+      {
+        name: "Power Tools",
+        slug: "power-tools",
+        description: "Electric and gas-powered tools for bigger gardening tasks",
+        imageUrl: "/images/products/electric-garden-tiller.svg",
+        parentId: 6,
+      } as InsertCategory,
+      {
+        name: "Watering Tools",
+        slug: "watering-tools",
+        description: "Tools and equipment for efficient plant watering",
+        imageUrl: "/images/products/watering-can.svg",
+        parentId: 6,
+      } as InsertCategory,
       {
         name: "Composting",
         slug: "composting",
@@ -1244,6 +1273,137 @@ export class MemStorage implements IStorage {
         price: 19.99,
         imageUrl: "/images/products/bird-feeder.svg",
         categoryId: 13
+      },
+      
+      // Garden Tools - Hand Tools
+      {
+        name: "Garden Hand Pruner",
+        slug: "garden-hand-pruner",
+        description: "High-quality garden pruners with ergonomic handles and precision cutting blades. Perfect for trimming small branches and stems.",
+        shortDescription: "Precision pruners for clean cuts on small branches",
+        price: 24.99,
+        imageUrl: "/images/products/garden_pruner.svg",
+        isBestSeller: true,
+        categoryId: 15 // Hand Tools subcategory
+      },
+      {
+        name: "Garden Cultivator",
+        slug: "garden-cultivator",
+        description: "Three-pronged hand cultivator with comfortable ergonomic handle. Perfect for breaking up soil and removing weeds between plants.",
+        shortDescription: "Three-pronged tool for aerating soil and removing weeds",
+        price: 19.99,
+        imageUrl: "/images/products/garden-cultivator.svg",
+        categoryId: 15 // Hand Tools subcategory
+      },
+      {
+        name: "Garden Digging Spade",
+        slug: "garden-digging-spade",
+        description: "Heavy-duty garden spade with sharpened edge for cleaner cuts through soil and roots. Ergonomic handle reduces strain during use.",
+        shortDescription: "Heavy-duty digging spade with comfortable grip",
+        price: 34.99,
+        imageUrl: "/images/products/garden-spade.svg",
+        categoryId: 15 // Hand Tools subcategory
+      },
+      {
+        name: "Garden Fork",
+        slug: "garden-fork",
+        description: "Four-tine garden fork perfect for turning soil and compost. The strong tines easily penetrate compacted soil.",
+        shortDescription: "Four-tine fork for turning soil and compost",
+        price: 32.99,
+        imageUrl: "/images/products/garden-fork.svg",
+        categoryId: 15 // Hand Tools subcategory
+      },
+      
+      // Garden Tools - Pruning Tools
+      {
+        name: "Bypass Loppers",
+        slug: "bypass-loppers",
+        description: "Long-handled bypass loppers for cutting branches up to 1.5 inches. The compound action mechanism increases cutting power with less effort.",
+        shortDescription: "Long-handled cutters for branches up to 1.5 inches",
+        price: 39.99,
+        imageUrl: "/images/products/bypass-loppers.svg",
+        isBestSeller: true,
+        categoryId: 16 // Pruning Tools subcategory
+      },
+      {
+        name: "Hedge Shears",
+        slug: "hedge-shears",
+        description: "Professional hedge shears with shock-absorbing bumpers and precision-ground wavy blades for clean cuts on leafy growth.",
+        shortDescription: "Professional shears for trimming hedges and shrubs",
+        price: 36.99,
+        imageUrl: "/images/products/hedge-shears.svg",
+        categoryId: 16 // Pruning Tools subcategory
+      },
+      {
+        name: "Folding Hand Saw",
+        slug: "folding-hand-saw",
+        description: "Compact folding saw with triple-cut razor teeth for efficient cutting of larger branches. Safety lock keeps the blade secure when folded.",
+        shortDescription: "Portable folding saw for efficient branch cutting",
+        price: 21.99,
+        imageUrl: "/images/products/folding-hand-saw.svg",
+        isNew: true,
+        categoryId: 16 // Pruning Tools subcategory
+      },
+      
+      // Garden Tools - Power Tools
+      {
+        name: "Mini Electric Tiller",
+        slug: "mini-electric-tiller",
+        description: "Compact electric tiller perfect for small gardens and raised beds. The 6.5-amp motor powers through soil with four durable steel tines.",
+        shortDescription: "Compact electric tiller for small garden spaces",
+        price: 129.99,
+        imageUrl: "/images/products/electric-garden-tiller.svg",
+        isBestSeller: true,
+        categoryId: 17 // Power Tools subcategory
+      },
+      {
+        name: "Cordless Hedge Trimmer",
+        slug: "cordless-hedge-trimmer",
+        description: "Powerful 20V lithium-ion hedge trimmer with 22-inch dual-action blades. The lightweight design reduces fatigue during extended use.",
+        shortDescription: "Cordless 22-inch trimmer for hedge maintenance",
+        price: 89.99,
+        imageUrl: "/images/products/cordless-hedge-trimmer.svg",
+        categoryId: 17 // Power Tools subcategory
+      },
+      {
+        name: "Electric Leaf Blower",
+        slug: "electric-leaf-blower",
+        description: "Versatile electric leaf blower with variable speed control. Effectively clears leaves and debris from your garden paths and lawn.",
+        shortDescription: "Versatile blower for clearing garden debris",
+        price: 69.99,
+        imageUrl: "/images/products/electric-leaf-blower.svg",
+        isNew: true,
+        categoryId: 17 // Power Tools subcategory
+      },
+      
+      // Garden Tools - Watering Tools
+      {
+        name: "Soaker Hose Kit",
+        slug: "soaker-hose-kit",
+        description: "Water-efficient soaker hose kit that delivers water directly to plant roots. Includes 50 feet of hose and all necessary fittings.",
+        shortDescription: "Water-saving hose for efficient root watering",
+        price: 29.99,
+        imageUrl: "/images/products/soaker-hose.svg",
+        categoryId: 18 // Watering Tools subcategory
+      },
+      {
+        name: "Garden Watering Can",
+        slug: "garden-watering-can",
+        description: "Ergonomic 2-gallon watering can with removable rose spout for gentle watering of delicate seedlings and plants.",
+        shortDescription: "Ergonomic can for precise plant watering",
+        price: 24.99,
+        imageUrl: "/images/products/watering-can.svg",
+        isNew: true,
+        categoryId: 18 // Watering Tools subcategory
+      },
+      {
+        name: "Rain Barrel",
+        slug: "rain-barrel",
+        description: "50-gallon rain barrel with spigot and overflow valve. Collect rainwater from your downspouts for garden irrigation and conservation.",
+        shortDescription: "50-gallon barrel for rainwater collection and use",
+        price: 119.99,
+        imageUrl: "/images/products/rain-barrel.svg",
+        categoryId: 18 // Watering Tools subcategory
       }
     ];
     
