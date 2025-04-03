@@ -1,5 +1,6 @@
 {pkgs}: {
   deps = [
+    pkgs.curl
     pkgs.zip
     pkgs.jq
     pkgs.imagemagick

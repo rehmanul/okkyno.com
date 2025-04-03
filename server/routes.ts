@@ -2,6 +2,8 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertSubscriberSchema } from "@shared/schema";
+import path from "path";
+import fs from "fs";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes - prefix all routes with /api
@@ -103,6 +105,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     const results = await storage.search(query);
     res.json(results);
+  });
+
+  // Direct download for the project ZIP file
+  app.get("/download/epic-gardening-project", (req, res) => {
+    const filePath = path.resolve("./epic_gardening_project.zip");
+    
+    if (fs.existsSync(filePath)) {
+      res.setHeader("Content-Type", "application/zip");
+      res.setHeader("Content-Disposition", "attachment; filename=epic_gardening_project.zip");
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } else {
+      res.status(404).send("ZIP file not found");
+    }
   });
 
   const httpServer = createServer(app);
