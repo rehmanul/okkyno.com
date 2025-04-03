@@ -1,11 +1,22 @@
 import {
-  users, categories, products, articles, testimonials, subscribers,
-  type User, type InsertUser,
-  type Category, type InsertCategory,
-  type Product, type InsertProduct,
-  type Article, type InsertArticle,
-  type Testimonial, type InsertTestimonial,
-  type Subscriber, type InsertSubscriber
+  users,
+  categories,
+  products,
+  articles,
+  testimonials,
+  subscribers,
+  type User,
+  type InsertUser,
+  type Category,
+  type InsertCategory,
+  type Product,
+  type InsertProduct,
+  type Article,
+  type InsertArticle,
+  type Testimonial,
+  type InsertTestimonial,
+  type Subscriber,
+  type InsertSubscriber,
 } from "@shared/schema";
 
 export interface IStorage {
@@ -13,34 +24,34 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Category methods
   getCategories(): Promise<Category[]>;
   getCategory(id: number): Promise<Category | undefined>;
   getCategoryBySlug(slug: string): Promise<Category | undefined>;
   createCategory(category: InsertCategory): Promise<Category>;
-  
+
   // Product methods
   getProducts(): Promise<Product[]>;
   getProduct(id: number): Promise<Product | undefined>;
   getProductBySlug(slug: string): Promise<Product | undefined>;
   getProductsByCategory(categoryId: number): Promise<Product[]>;
   createProduct(product: InsertProduct): Promise<Product>;
-  
+
   // Article methods
   getArticles(): Promise<Article[]>;
   getArticle(id: number): Promise<Article | undefined>;
   getArticleBySlug(slug: string): Promise<Article | undefined>;
   getArticlesByCategory(categoryId: number): Promise<Article[]>;
   createArticle(article: InsertArticle): Promise<Article>;
-  
+
   // Testimonial methods
   getTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
-  
+
   // Subscriber methods
   createSubscriber(subscriber: InsertSubscriber): Promise<Subscriber>;
-  
+
   // Search method
   search(query: string): Promise<{
     products: Product[];
@@ -56,7 +67,7 @@ export class MemStorage implements IStorage {
   private articles: Map<number, Article>;
   private testimonials: Map<number, Testimonial>;
   private subscribers: Map<number, Subscriber>;
-  
+
   private currentUserId: number;
   private currentCategoryId: number;
   private currentProductId: number;
@@ -71,14 +82,14 @@ export class MemStorage implements IStorage {
     this.articles = new Map();
     this.testimonials = new Map();
     this.subscribers = new Map();
-    
+
     this.currentUserId = 1;
     this.currentCategoryId = 1;
     this.currentProductId = 1;
     this.currentArticleId = 1;
     this.currentTestimonialId = 1;
     this.currentSubscriberId = 1;
-    
+
     // Initialize with sample data
     this.initializeSampleData();
   }
@@ -100,62 +111,62 @@ export class MemStorage implements IStorage {
     this.users.set(id, user);
     return user;
   }
-  
+
   // Category methods
   async getCategories(): Promise<Category[]> {
     return Array.from(this.categories.values());
   }
-  
+
   async getCategory(id: number): Promise<Category | undefined> {
     return this.categories.get(id);
   }
-  
+
   async getCategoryBySlug(slug: string): Promise<Category | undefined> {
     return Array.from(this.categories.values()).find(
       (category) => category.slug === slug,
     );
   }
-  
+
   async createCategory(insertCategory: InsertCategory): Promise<Category> {
     const id = this.currentCategoryId++;
     // Ensure all required fields have values
-    const category: Category = { 
+    const category: Category = {
       id,
       name: insertCategory.name,
       slug: insertCategory.slug,
       description: insertCategory.description || null,
       imageUrl: insertCategory.imageUrl || null,
-      parentId: insertCategory.parentId || null
+      parentId: insertCategory.parentId || null,
     };
     this.categories.set(id, category);
     return category;
   }
-  
+
   // Product methods
   async getProducts(): Promise<Product[]> {
     return Array.from(this.products.values());
   }
-  
+
   async getProduct(id: number): Promise<Product | undefined> {
     return this.products.get(id);
   }
-  
+
   async getProductBySlug(slug: string): Promise<Product | undefined> {
     return Array.from(this.products.values()).find(
       (product) => product.slug === slug,
     );
   }
-  
+
   async getProductsByCategory(categoryId: number): Promise<Product[]> {
     return Array.from(this.products.values()).filter(
       (product) => product.categoryId === categoryId,
     );
   }
-  
+
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.currentProductId++;
     // Ensure all required fields have values
-    const product: Product = { 
+    const product: Product = {
       id,
       name: insertProduct.name,
       slug: insertProduct.slug,
@@ -163,95 +174,99 @@ export class MemStorage implements IStorage {
       shortDescription: insertProduct.shortDescription || null,
       price: insertProduct.price,
       salePrice: insertProduct.salePrice || null,
-      imageUrl: insertProduct.imageUrl || '',
+      imageUrl: insertProduct.imageUrl || "",
       isBestSeller: insertProduct.isBestSeller || null,
       isNew: insertProduct.isNew || null,
-      categoryId: insertProduct.categoryId
+      categoryId: insertProduct.categoryId,
     };
     this.products.set(id, product);
     return product;
   }
-  
+
   // Article methods
   async getArticles(): Promise<Article[]> {
     return Array.from(this.articles.values());
   }
-  
+
   async getArticle(id: number): Promise<Article | undefined> {
     return this.articles.get(id);
   }
-  
+
   async getArticleBySlug(slug: string): Promise<Article | undefined> {
     return Array.from(this.articles.values()).find(
       (article) => article.slug === slug,
     );
   }
-  
+
   async getArticlesByCategory(categoryId: number): Promise<Article[]> {
     return Array.from(this.articles.values()).filter(
       (article) => article.categoryId === categoryId,
     );
   }
-  
+
   async createArticle(insertArticle: InsertArticle): Promise<Article> {
     const id = this.currentArticleId++;
     // Ensure all required fields have values
-    const article: Article = { 
+    const article: Article = {
       id,
       slug: insertArticle.slug,
       title: insertArticle.title,
       content: insertArticle.content,
       categoryId: insertArticle.categoryId,
-      imageUrl: insertArticle.imageUrl || '',
+      imageUrl: insertArticle.imageUrl || "",
       excerpt: insertArticle.excerpt || null,
-      datePublished: insertArticle.datePublished
+      datePublished: insertArticle.datePublished,
     };
     this.articles.set(id, article);
     return article;
   }
-  
+
   // Testimonial methods
   async getTestimonials(): Promise<Testimonial[]> {
     return Array.from(this.testimonials.values());
   }
-  
-  async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
+
+  async createTestimonial(
+    insertTestimonial: InsertTestimonial,
+  ): Promise<Testimonial> {
     const id = this.currentTestimonialId++;
     // Ensure all required fields have values
-    const testimonial: Testimonial = { 
+    const testimonial: Testimonial = {
       id,
       personName: insertTestimonial.personName,
       content: insertTestimonial.content,
       rating: insertTestimonial.rating,
       role: insertTestimonial.role || null,
-      avatarUrl: insertTestimonial.avatarUrl || null
+      avatarUrl: insertTestimonial.avatarUrl || null,
     };
     this.testimonials.set(id, testimonial);
     return testimonial;
   }
-  
+
   // Subscriber methods
-  async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
+  async createSubscriber(
+    insertSubscriber: InsertSubscriber,
+  ): Promise<Subscriber> {
     // Check if email already exists
     const existingSubscriber = Array.from(this.subscribers.values()).find(
       (subscriber) => subscriber.email === insertSubscriber.email,
     );
-    
+
     if (existingSubscriber) {
       return existingSubscriber;
     }
-    
+
     const id = this.currentSubscriberId++;
-    const subscriber: Subscriber = { 
-      ...insertSubscriber, 
-      id, 
-      dateSubscribed: new Date() 
+    const subscriber: Subscriber = {
+      ...insertSubscriber,
+      id,
+      dateSubscribed: new Date(),
     };
-    
+
     this.subscribers.set(id, subscriber);
     return subscriber;
   }
-  
+
   // Search method
   async search(query: string): Promise<{
     products: Product[];
@@ -259,33 +274,36 @@ export class MemStorage implements IStorage {
     categories: Category[];
   }> {
     const lowercaseQuery = query.toLowerCase();
-    
+
     const matchedProducts = Array.from(this.products.values()).filter(
-      (product) => 
+      (product) =>
         product.name.toLowerCase().includes(lowercaseQuery) ||
-        (product.description && product.description.toLowerCase().includes(lowercaseQuery))
+        (product.description &&
+          product.description.toLowerCase().includes(lowercaseQuery)),
     );
-    
+
     const matchedArticles = Array.from(this.articles.values()).filter(
-      (article) => 
+      (article) =>
         article.title.toLowerCase().includes(lowercaseQuery) ||
         article.content.toLowerCase().includes(lowercaseQuery) ||
-        (article.excerpt && article.excerpt.toLowerCase().includes(lowercaseQuery))
+        (article.excerpt &&
+          article.excerpt.toLowerCase().includes(lowercaseQuery)),
     );
-    
+
     const matchedCategories = Array.from(this.categories.values()).filter(
-      (category) => 
+      (category) =>
         category.name.toLowerCase().includes(lowercaseQuery) ||
-        (category.description && category.description.toLowerCase().includes(lowercaseQuery))
+        (category.description &&
+          category.description.toLowerCase().includes(lowercaseQuery)),
     );
-    
+
     return {
       products: matchedProducts,
       articles: matchedArticles,
       categories: matchedCategories,
     };
   }
-  
+
   // Initialize with sample data
   private initializeSampleData() {
     // Sample categories with authentic Epic Gardening images
@@ -294,29 +312,35 @@ export class MemStorage implements IStorage {
       {
         name: "Fruit Trees",
         slug: "fruit-trees",
-        description: "Premium fruit trees including apple, cherry, fig, and citrus varieties for home orchards",
+        description:
+          "Premium fruit trees including apple, cherry, fig, and citrus varieties for home orchards",
         imageUrl: "/images/products/honeycrisp-apple-tree.svg",
         parentId: null,
       } as InsertCategory,
       {
         name: "Vegetables",
         slug: "vegetables",
-        description: "Seeds, plants, and supplies for growing your own delicious vegetables",
-        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        description:
+          "Seeds, plants, and supplies for growing your own delicious vegetables",
+        imageUrl:
+          "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
         parentId: null,
       },
       {
         name: "Flowers",
         slug: "flowers",
-        description: "Beautify your garden with a wide variety of flowering plants",
+        description:
+          "Beautify your garden with a wide variety of flowering plants",
         imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         parentId: null,
       },
       {
         name: "Container Gardening",
         slug: "container-gardening",
-        description: "Everything you need for successful gardening in pots and planters",
-        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
+        description:
+          "Everything you need for successful gardening in pots and planters",
+        imageUrl:
+          "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
         parentId: null,
       },
       {
@@ -351,7 +375,8 @@ export class MemStorage implements IStorage {
       {
         name: "Power Tools",
         slug: "power-tools",
-        description: "Electric and gas-powered tools for bigger gardening tasks",
+        description:
+          "Electric and gas-powered tools for bigger gardening tasks",
         imageUrl: "/images/products/electric-garden-tiller.svg",
         parentId: 6,
       } as InsertCategory,
@@ -365,14 +390,16 @@ export class MemStorage implements IStorage {
       {
         name: "Composting",
         slug: "composting",
-        description: "Turn kitchen scraps and yard waste into valuable garden gold",
+        description:
+          "Turn kitchen scraps and yard waste into valuable garden gold",
         imageUrl: "/images/products/compost_bin.svg",
         parentId: null,
       },
       {
         name: "Fertilizers",
         slug: "fertilizers",
-        description: "Organic and conventional fertilizers for healthier plants",
+        description:
+          "Organic and conventional fertilizers for healthier plants",
         imageUrl: "/images/categories/fertilizers_category.svg",
         parentId: null,
       },
@@ -387,7 +414,8 @@ export class MemStorage implements IStorage {
         name: "Seeds",
         slug: "seeds",
         description: "High-quality seeds for vegetables, herbs, and flowers",
-        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
+        imageUrl:
+          "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
         parentId: null,
       },
       {
@@ -407,18 +435,20 @@ export class MemStorage implements IStorage {
       {
         name: "Indoor Growing",
         slug: "indoor-growing",
-        description: "Lights, hydroponics, and supplies for growing plants indoors year-round",
+        description:
+          "Lights, hydroponics, and supplies for growing plants indoors year-round",
         imageUrl: "/images/products/grow-light-led-panel.svg",
         parentId: null,
       },
       {
         name: "Garden Décor",
         slug: "garden-decor",
-        description: "Beautify your outdoor space with functional and decorative garden elements",
+        description:
+          "Beautify your outdoor space with functional and decorative garden elements",
         imageUrl: "/images/products/solar-garden-lights.svg",
         parentId: null,
       },
-      
+
       // Subcategories - Tools
       {
         name: "Hand Tools",
@@ -448,7 +478,7 @@ export class MemStorage implements IStorage {
         imageUrl: "/images/products/bypass-pruners.svg",
         parentId: 6, // Parent: Tools
       },
-      
+
       // Subcategories - Indoor Growing
       {
         name: "Grow Lights",
@@ -464,7 +494,7 @@ export class MemStorage implements IStorage {
         imageUrl: "/images/products/hydroponic-system.svg",
         parentId: 13, // Parent: Indoor Growing
       },
-      
+
       // Subcategories - Seeds
       {
         name: "Vegetable Seeds",
@@ -488,930 +518,1065 @@ export class MemStorage implements IStorage {
         parentId: 10, // Parent: Seeds
       },
     ];
-    
+
     // Create categories
-    categories.forEach(category => {
+    categories.forEach((category) => {
       this.createCategory(category);
     });
-    
+
     // Sample products based on Epic Gardening website
     const products: InsertProduct[] = [
       // Fruit Trees
       {
         name: "Honeycrisp Apple Tree",
         slug: "honeycrisp-apple-tree",
-        description: "The Honeycrisp Apple Tree produces sweet, crisp apples that are perfect for fresh eating. This popular variety is known for its exceptional flavor and crunch.",
+        description:
+          "The Honeycrisp Apple Tree produces sweet, crisp apples that are perfect for fresh eating. This popular variety is known for its exceptional flavor and crunch.",
         shortDescription: "Sweet, crisp apples with exceptional flavor",
         price: 99.99,
         imageUrl: "/images/products/honeycrisp-apple-tree.svg",
         isBestSeller: true,
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Bing Cherry Tree",
         slug: "bing-cherry-tree",
-        description: "The Bing Cherry Tree produces large, sweet dark cherries that are perfect for fresh eating or baking. This popular variety is a must-have for cherry lovers.",
-        shortDescription: "Large, sweet dark cherries for fresh eating or baking",
+        description:
+          "The Bing Cherry Tree produces large, sweet dark cherries that are perfect for fresh eating or baking. This popular variety is a must-have for cherry lovers.",
+        shortDescription:
+          "Large, sweet dark cherries for fresh eating or baking",
         price: 89.99,
         imageUrl: "/images/products/bing-cherry-tree.svg",
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Wonderful Pomegranate Tree",
         slug: "wonderful-pomegranate-tree",
-        description: "The Wonderful Pomegranate Tree produces large, juicy fruits with vibrant red arils. This popular variety is known for its sweet-tart flavor and nutritional benefits.",
+        description:
+          "The Wonderful Pomegranate Tree produces large, juicy fruits with vibrant red arils. This popular variety is known for its sweet-tart flavor and nutritional benefits.",
         shortDescription: "Large, juicy pomegranates with sweet-tart flavor",
         price: 79.99,
         imageUrl: "/images/products/wonderful-pomegranate-tree.svg",
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Chicago Hardy Fig Tree",
         slug: "chicago-hardy-fig-tree",
-        description: "The Chicago Hardy Fig Tree is an exceptionally cold-hardy variety that produces sweet, purple-brown figs. It can die back to the ground in winter and still produce fruit the following year.",
-        shortDescription: "Cold-hardy fig variety that produces sweet, purple-brown figs",
+        description:
+          "The Chicago Hardy Fig Tree is an exceptionally cold-hardy variety that produces sweet, purple-brown figs. It can die back to the ground in winter and still produce fruit the following year.",
+        shortDescription:
+          "Cold-hardy fig variety that produces sweet, purple-brown figs",
         price: 69.99,
         imageUrl: "/images/products/chicago-hardy-fig-tree.svg",
         isBestSeller: true,
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Frost Peach Tree",
         slug: "frost-peach-tree",
-        description: "The Frost Peach Tree produces large, yellow-fleshed peaches with a sweet flavor. This variety is known for its excellent disease resistance.",
-        shortDescription: "Large, sweet peaches with excellent disease resistance",
+        description:
+          "The Frost Peach Tree produces large, yellow-fleshed peaches with a sweet flavor. This variety is known for its excellent disease resistance.",
+        shortDescription:
+          "Large, sweet peaches with excellent disease resistance",
         price: 89.99,
         imageUrl: "/images/products/frost-peach-tree.svg",
-        categoryId: 1
+        categoryId: 1,
       },
       // Berries and Vines
       {
         name: "Prolific Kiwi (Self-Fertile)",
         slug: "kiwi-prolific-self-fertile",
-        description: "This self-fertile kiwi variety doesn't require a male pollinator to produce fruit. It produces sweet, flavorful kiwis on a vigorous vine.",
-        shortDescription: "Self-fertile kiwi that produces sweet, flavorful fruits",
+        description:
+          "This self-fertile kiwi variety doesn't require a male pollinator to produce fruit. It produces sweet, flavorful kiwis on a vigorous vine.",
+        shortDescription:
+          "Self-fertile kiwi that produces sweet, flavorful fruits",
         price: 39.99,
         imageUrl: "/images/products/kiwi-prolific-self-fertile.svg",
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Thornless Blackberry Bush",
         slug: "thornless-blackberry-bush",
-        description: "This thornless blackberry variety produces large, sweet berries on canes without thorns, making harvesting easy and painless.",
-        shortDescription: "Large, sweet blackberries on thornless canes for easy harvesting",
+        description:
+          "This thornless blackberry variety produces large, sweet berries on canes without thorns, making harvesting easy and painless.",
+        shortDescription:
+          "Large, sweet blackberries on thornless canes for easy harvesting",
         price: 29.99,
         imageUrl: "/images/products/thornless-blackberry-bush.svg",
         isBestSeller: true,
-        categoryId: 1
+        categoryId: 1,
       },
       {
         name: "Pink Lemonade Blueberry",
         slug: "pink-lemonade-blueberry",
-        description: "This unique blueberry variety produces sweet, pink berries with a delicious flavor. It's a beautiful ornamental plant that also provides tasty fruit.",
-        shortDescription: "Unique blueberry with sweet, pink berries and ornamental value",
+        description:
+          "This unique blueberry variety produces sweet, pink berries with a delicious flavor. It's a beautiful ornamental plant that also provides tasty fruit.",
+        shortDescription:
+          "Unique blueberry with sweet, pink berries and ornamental value",
         price: 34.99,
         imageUrl: "/images/products/pink-lemonade-blueberry.svg",
-        categoryId: 1
+        categoryId: 1,
       },
       // Seed Starting Supplies
       {
         name: "Epic 16-Cell Seed Starting Trays",
         slug: "epic-16-cell-seed-starting-trays",
-        description: "Professional seed starting system with 16 individual cells, perfect for starting vegetables, flowers, and herbs.",
+        description:
+          "Professional seed starting system with 16 individual cells, perfect for starting vegetables, flowers, and herbs.",
         shortDescription: "Professional 16-cell seed starting system",
         price: 19.99,
         imageUrl: "/images/products/16-celltray2_400x400.svg",
         isNew: true,
-        categoryId: 11
+        categoryId: 11,
       },
       {
         name: "6-Cell Garden Propagation Trays",
         slug: "epic-tray-6-cell-garden-propagation-trays",
-        description: "Durable 6-cell seed starting tray with individual cells for better root development. Perfect for starting larger seedlings.",
-        shortDescription: "6-cell propagation system for strong seedling development",
+        description:
+          "Durable 6-cell seed starting tray with individual cells for better root development. Perfect for starting larger seedlings.",
+        shortDescription:
+          "6-cell propagation system for strong seedling development",
         price: 14.99,
         imageUrl: "/images/products/6cellblack_400x400.svg",
-        categoryId: 11
+        categoryId: 11,
       },
       {
         name: "4-Cell Garden Propagation Trays",
         slug: "epic-tray-4-cell-garden-propagation-trays",
-        description: "Perfect beginner seed starting system with 4 large cells for better root development. Ideal for larger seedlings.",
-        shortDescription: "4-cell propagation system with large cells for healthy roots",
+        description:
+          "Perfect beginner seed starting system with 4 large cells for better root development. Ideal for larger seedlings.",
+        shortDescription:
+          "4-cell propagation system with large cells for healthy roots",
         price: 12.99,
         imageUrl: "/images/products/4-cell-side-compressed_400x400.svg",
-        categoryId: 11
+        categoryId: 11,
       },
       {
         name: "6-Cell Germination Dome Kit",
         slug: "epic-tray-6-cell-germination-dome-and-bottom-tray",
-        description: "Complete seed starting kit with 6 cells, humidity dome, and bottom tray for water. Creates the perfect environment for seed germination.",
-        shortDescription: "Complete 6-cell seed starting kit with humidity dome",
+        description:
+          "Complete seed starting kit with 6 cells, humidity dome, and bottom tray for water. Creates the perfect environment for seed germination.",
+        shortDescription:
+          "Complete 6-cell seed starting kit with humidity dome",
         price: 16.99,
-        imageUrl: "/images/products/4CellDomeWithBottomSmallGardenStarterKits_59f087c6-7e6c-41ee-b5af-765c31bbc57c_20_1_400x400.svg",
+        imageUrl:
+          "/images/products/4CellDomeWithBottomSmallGardenStarterKits_59f087c6-7e6c-41ee-b5af-765c31bbc57c_20_1_400x400.svg",
         isBestSeller: true,
-        categoryId: 11
+        categoryId: 11,
       },
       // Raised Beds
       {
         name: "Round Metal Raised Garden Bed",
         slug: "round-short-metal-raised-bed",
-        description: "This beautiful round raised garden bed is perfect for growing vegetables, flowers, or herbs. Made from durable galvanized steel with a Light Clay finish.",
-        shortDescription: "Durable galvanized steel raised bed with Light Clay finish",
+        description:
+          "This beautiful round raised garden bed is perfect for growing vegetables, flowers, or herbs. Made from durable galvanized steel with a Light Clay finish.",
+        shortDescription:
+          "Durable galvanized steel raised bed with Light Clay finish",
         price: 99.99,
         imageUrl: "/images/products/10328_Large_short_LightClay.svg",
         isBestSeller: true,
-        categoryId: 10
+        categoryId: 10,
       },
       {
         name: "Medium Tall Metal Raised Garden Bed",
         slug: "medium-tall-metal-raised-bed",
-        description: "Stylish medium height raised garden bed in Light Clay finish. Perfect for vegetables that need deeper soil.",
-        shortDescription: "Stylish medium height metal raised bed in Light Clay finish",
+        description:
+          "Stylish medium height raised garden bed in Light Clay finish. Perfect for vegetables that need deeper soil.",
+        shortDescription:
+          "Stylish medium height metal raised bed in Light Clay finish",
         price: 119.99,
-        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
-        categoryId: 10
+        imageUrl:
+          "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
+        categoryId: 10,
       },
       {
         name: "Small Tall Metal Raised Garden Bed",
         slug: "small-tall-metal-raised-bed",
-        description: "Space-saving tall raised garden bed in Slate Grey finish. Ideal for small spaces and patio gardening.",
-        shortDescription: "Space-saving tall metal planter in elegant Slate Grey",
+        description:
+          "Space-saving tall raised garden bed in Slate Grey finish. Ideal for small spaces and patio gardening.",
+        shortDescription:
+          "Space-saving tall metal planter in elegant Slate Grey",
         price: 89.99,
         imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
-        categoryId: 10
+        categoryId: 10,
       },
       // Seeds
       {
         name: "Zinnia Persian Carpet Seeds",
         slug: "zinnia-persian-carpet-seeds",
-        description: "Beautiful bi-color zinnia mix with gold, mahogany, and burgundy blooms. Easy to grow and perfect for cut flowers.",
-        shortDescription: "Stunning bi-color zinnia mix for dramatic garden display",
+        description:
+          "Beautiful bi-color zinnia mix with gold, mahogany, and burgundy blooms. Easy to grow and perfect for cut flowers.",
+        shortDescription:
+          "Stunning bi-color zinnia mix for dramatic garden display",
         price: 4.99,
         imageUrl: "/images/products/1193i_Zinnia-Persian-Carpet_3oykxo.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Nasturtium Fiesta Blend Seeds",
         slug: "nasturtium-fiesta-blend-seeds",
-        description: "Vibrant mix of edible Nasturtium flowers in red, orange, and yellow shades. Great for containers or garden borders.",
-        shortDescription: "Colorful, edible nasturtium flowers for containers or borders",
+        description:
+          "Vibrant mix of edible Nasturtium flowers in red, orange, and yellow shades. Great for containers or garden borders.",
+        shortDescription:
+          "Colorful, edible nasturtium flowers for containers or borders",
         price: 3.99,
         imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         isBestSeller: true,
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Bean Bush Goldrush Organic Seeds",
         slug: "bean-bush-goldrush-organic-seeds",
-        description: "Organic yellow bush bean seeds for abundant harvests. Disease resistant and easy to grow.",
-        shortDescription: "Organic yellow bush beans - high yield and disease resistant",
+        description:
+          "Organic yellow bush bean seeds for abundant harvests. Disease resistant and easy to grow.",
+        shortDescription:
+          "Organic yellow bush beans - high yield and disease resistant",
         price: 4.29,
-        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        imageUrl:
+          "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
         isNew: true,
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Heirloom Organic Seed Collection",
         slug: "heirloom-organic-seed-bank",
-        description: "Comprehensive collection of 25 heirloom organic vegetable, herb, and flower seeds for a complete garden.",
-        shortDescription: "25 varieties of heirloom organic seeds for a complete garden",
+        description:
+          "Comprehensive collection of 25 heirloom organic vegetable, herb, and flower seeds for a complete garden.",
+        shortDescription:
+          "25 varieties of heirloom organic seeds for a complete garden",
         price: 29.99,
-        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
+        imageUrl:
+          "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
         isBestSeller: true,
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Heirloom Tomato Seed Collection",
         slug: "heirloom-tomato-seed-collection",
-        description: "Collection of 6 heirloom tomato varieties, from cherry to beefsteak. Non-GMO and open-pollinated.",
+        description:
+          "Collection of 6 heirloom tomato varieties, from cherry to beefsteak. Non-GMO and open-pollinated.",
         shortDescription: "Collection of 6 delicious heirloom tomato varieties",
         price: 18.99,
         imageUrl: "/images/products/tomato_seeds.svg",
         isNew: true,
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Butterfly Seed Mix",
         slug: "butterfly-seed-mix",
-        description: "Special blend of annual and perennial flowers selected to attract and support butterflies throughout the growing season.",
-        shortDescription: "Colorful flower mix to attract butterflies to your garden",
+        description:
+          "Special blend of annual and perennial flowers selected to attract and support butterflies throughout the growing season.",
+        shortDescription:
+          "Colorful flower mix to attract butterflies to your garden",
         price: 6.99,
         imageUrl: "/images/products/butterfly-seed-mix.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Wildflower Seed Mix",
         slug: "wildflower-seed-mix",
-        description: "Colorful blend of native and naturalized wildflowers that provides season-long color and attracts beneficial insects.",
-        shortDescription: "Easy-to-grow wildflower mix for naturalistic plantings",
+        description:
+          "Colorful blend of native and naturalized wildflowers that provides season-long color and attracts beneficial insects.",
+        shortDescription:
+          "Easy-to-grow wildflower mix for naturalistic plantings",
         price: 5.99,
         imageUrl: "/images/products/wildflower-seed-mix.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Basil Seed Collection",
         slug: "basil-seed-collection",
-        description: "Gourmet collection of 5 distinctive basil varieties including Sweet, Thai, Lemon, Purple, and Spicy Globe.",
+        description:
+          "Gourmet collection of 5 distinctive basil varieties including Sweet, Thai, Lemon, Purple, and Spicy Globe.",
         shortDescription: "5 gourmet basil varieties for culinary versatility",
         price: 8.99,
         imageUrl: "/images/products/basil-seed-collection.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Lettuce Seed Collection",
         slug: "lettuce-seed-collection",
-        description: "Mix of 6 gourmet lettuce varieties in different colors, textures, and flavors for continuous salad harvests.",
+        description:
+          "Mix of 6 gourmet lettuce varieties in different colors, textures, and flavors for continuous salad harvests.",
         shortDescription: "Colorful mix of lettuce varieties for fresh salads",
         price: 7.99,
         imageUrl: "/images/products/lettuce-seed-collection.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Microgreens Seed Mix",
         slug: "microgreens-seed-mix",
-        description: "Fast-growing blend of nutritious microgreens including radish, broccoli, kale, and sunflower for year-round indoor harvests.",
-        shortDescription: "Nutritious microgreens mix for quick indoor harvests",
+        description:
+          "Fast-growing blend of nutritious microgreens including radish, broccoli, kale, and sunflower for year-round indoor harvests.",
+        shortDescription:
+          "Nutritious microgreens mix for quick indoor harvests",
         price: 9.99,
         imageUrl: "/images/products/microgreens-seed-mix.svg",
         isNew: true,
-        categoryId: 9
+        categoryId: 9,
       },
       {
         name: "Hot Pepper Seed Collection",
         slug: "hot-pepper-seed-collection",
-        description: "Fiery collection of 5 hot pepper varieties ranging from mild to super-hot for adventurous gardeners.",
+        description:
+          "Fiery collection of 5 hot pepper varieties ranging from mild to super-hot for adventurous gardeners.",
         shortDescription: "Spicy pepper collection with varied heat levels",
         price: 12.99,
         imageUrl: "/images/products/hot-pepper-seed-collection.svg",
-        categoryId: 9
+        categoryId: 9,
       },
       // Garden tools - Hand Tools category
       {
         name: "Premium Garden Gloves",
         slug: "premium-garden-gloves",
-        description: "Durable and comfortable garden gloves with reinforced fingertips. Perfect for all gardening tasks.",
+        description:
+          "Durable and comfortable garden gloves with reinforced fingertips. Perfect for all gardening tasks.",
         shortDescription: "Durable garden gloves with reinforced fingertips",
         price: 14.99,
         imageUrl: "/images/products/garden_gloves.svg",
-        categoryId: 15 // Hand Tools
+        categoryId: 15, // Hand Tools
       },
       {
         name: "Ergonomic Hand Trowel",
         slug: "ergonomic-hand-trowel",
-        description: "Ergonomically designed hand trowel with comfortable grip and stainless steel construction.",
+        description:
+          "Ergonomically designed hand trowel with comfortable grip and stainless steel construction.",
         shortDescription: "Ergonomic hand trowel with comfortable grip",
         price: 12.99,
         imageUrl: "/images/products/hand_trowel.svg",
         isBestSeller: true,
-        categoryId: 15 // Hand Tools
+        categoryId: 15, // Hand Tools
       },
       {
         name: "Garden Hand Pruner",
         slug: "garden-hand-pruner",
-        description: "Sharp, precision garden pruners with comfort grip handles. Perfect for deadheading and small pruning tasks.",
+        description:
+          "Sharp, precision garden pruners with comfort grip handles. Perfect for deadheading and small pruning tasks.",
         shortDescription: "Precision pruners for small garden tasks",
         price: 19.99,
         imageUrl: "/images/products/garden_pruner.svg",
-        categoryId: 18 // Pruning Tools
+        categoryId: 18, // Pruning Tools
       },
       {
         name: "Bypass Loppers",
         slug: "bypass-loppers",
-        description: "Heavy-duty bypass loppers for cutting branches up to 1.5 inches thick. Telescoping handles extend reach.",
+        description:
+          "Heavy-duty bypass loppers for cutting branches up to 1.5 inches thick. Telescoping handles extend reach.",
         shortDescription: "Heavy-duty loppers for thicker branches",
         price: 34.99,
         imageUrl: "/images/products/bypass-loppers.svg",
         isNew: true,
-        categoryId: 18 // Pruning Tools
+        categoryId: 18, // Pruning Tools
       },
       {
         name: "Hedge Shears",
         slug: "hedge-shears",
-        description: "Precision hedge shears with wavy blade design for clean cuts. Shock-absorbing bumpers reduce fatigue.",
+        description:
+          "Precision hedge shears with wavy blade design for clean cuts. Shock-absorbing bumpers reduce fatigue.",
         shortDescription: "Precision hedge shears for clean, accurate cuts",
         price: 29.99,
         imageUrl: "/images/products/hedge-shears.svg",
-        categoryId: 18 // Pruning Tools
+        categoryId: 18, // Pruning Tools
       },
       {
         name: "Folding Hand Saw",
         slug: "folding-hand-saw",
-        description: "Compact folding saw with triple-ground teeth for efficient cutting. Locks in open and closed positions.",
+        description:
+          "Compact folding saw with triple-ground teeth for efficient cutting. Locks in open and closed positions.",
         shortDescription: "Compact folding saw for pruning small branches",
         price: 16.99,
         imageUrl: "/images/products/folding-hand-saw.svg",
-        categoryId: 18 // Pruning Tools
+        categoryId: 18, // Pruning Tools
       },
       {
         name: "Garden Cultivator",
         slug: "garden-cultivator",
-        description: "Three-prong garden cultivator for breaking up soil and removing weeds. Comfortable ergonomic handle.",
+        description:
+          "Three-prong garden cultivator for breaking up soil and removing weeds. Comfortable ergonomic handle.",
         shortDescription: "Three-prong cultivator for soil aeration",
         price: 15.99,
         imageUrl: "/images/products/garden-cultivator.svg",
-        categoryId: 15 // Hand Tools
+        categoryId: 15, // Hand Tools
       },
       {
         name: "Garden Digging Spade",
         slug: "garden-digging-spade",
-        description: "Heavy-duty digging spade with carbon steel blade and comfortable D-handle grip. Perfect for digging and edging.",
+        description:
+          "Heavy-duty digging spade with carbon steel blade and comfortable D-handle grip. Perfect for digging and edging.",
         shortDescription: "Heavy-duty digging spade for garden prep",
         price: 29.99,
         imageUrl: "/images/products/garden-spade.svg",
-        categoryId: 15 // Hand Tools
+        categoryId: 15, // Hand Tools
       },
       {
         name: "Garden Fork",
         slug: "garden-fork",
-        description: "Four-tine garden fork ideal for turning soil, lifting plants, and adding compost. Durable steel construction.",
+        description:
+          "Four-tine garden fork ideal for turning soil, lifting plants, and adding compost. Durable steel construction.",
         shortDescription: "Four-tine garden fork for soil work",
         price: 26.99,
         imageUrl: "/images/products/garden-fork.svg",
-        categoryId: 15 // Hand Tools
+        categoryId: 15, // Hand Tools
       },
       {
         name: "Mini Electric Tiller",
         slug: "mini-electric-tiller",
-        description: "Compact electric tiller with adjustable tilling width for garden beds and small spaces. Powerful 8.5-amp motor.",
+        description:
+          "Compact electric tiller with adjustable tilling width for garden beds and small spaces. Powerful 8.5-amp motor.",
         shortDescription: "Compact electric tiller for small garden beds",
         price: 129.99,
         imageUrl: "/images/products/electric-garden-tiller.svg",
         isNew: true,
-        categoryId: 16 // Power Tools
+        categoryId: 16, // Power Tools
       },
       {
         name: "Cordless Hedge Trimmer",
         slug: "cordless-hedge-trimmer",
-        description: "20V cordless hedge trimmer with 22-inch dual-action blade. Cuts branches up to 3/4 inch thick.",
-        shortDescription: "Cordless hedge trimmer for precise landscape maintenance",
+        description:
+          "20V cordless hedge trimmer with 22-inch dual-action blade. Cuts branches up to 3/4 inch thick.",
+        shortDescription:
+          "Cordless hedge trimmer for precise landscape maintenance",
         price: 89.99,
         imageUrl: "/images/products/cordless-hedge-trimmer.svg",
-        categoryId: 16 // Power Tools
+        categoryId: 16, // Power Tools
       },
       {
         name: "Electric Leaf Blower",
         slug: "electric-leaf-blower",
-        description: "Variable-speed electric leaf blower with vacuum capability. Includes collection bag for yard cleanup.",
+        description:
+          "Variable-speed electric leaf blower with vacuum capability. Includes collection bag for yard cleanup.",
         shortDescription: "Versatile electric leaf blower and vacuum",
         price: 59.99,
         imageUrl: "/images/products/electric-leaf-blower.svg",
-        categoryId: 16 // Power Tools
+        categoryId: 16, // Power Tools
       },
       {
         name: "Soaker Hose Kit",
         slug: "soaker-hose-kit",
-        description: "50-foot recycled rubber soaker hose with connectors. Conserves water by delivering moisture directly to plant roots.",
-        shortDescription: "Water-efficient soaker hose for direct root irrigation",
+        description:
+          "50-foot recycled rubber soaker hose with connectors. Conserves water by delivering moisture directly to plant roots.",
+        shortDescription:
+          "Water-efficient soaker hose for direct root irrigation",
         price: 24.99,
         imageUrl: "/images/products/soaker-hose.svg",
-        categoryId: 17 // Watering Tools
+        categoryId: 17, // Watering Tools
       },
       {
         name: "Garden Hose Nozzle",
         slug: "garden-hose-nozzle",
-        description: "Multi-pattern metal hose nozzle with 9 spray patterns. Comfortable rubber grip and flow control.",
+        description:
+          "Multi-pattern metal hose nozzle with 9 spray patterns. Comfortable rubber grip and flow control.",
         shortDescription: "9-pattern metal hose nozzle for versatile watering",
         price: 12.99,
         imageUrl: "/images/products/garden-hose-nozzle.svg",
         isBestSeller: true,
-        categoryId: 17 // Watering Tools
+        categoryId: 17, // Watering Tools
       },
       {
         name: "Watering Can",
         slug: "watering-can",
-        description: "Two-gallon plastic watering can with removable rose. Balanced design makes it easy to carry and pour.",
+        description:
+          "Two-gallon plastic watering can with removable rose. Balanced design makes it easy to carry and pour.",
         shortDescription: "Balanced 2-gallon watering can for precise watering",
         price: 19.99,
         imageUrl: "/images/products/watering-can.svg",
-        categoryId: 17 // Watering Tools
+        categoryId: 17, // Watering Tools
       },
       {
         name: "Rain Barrel",
         slug: "rain-barrel",
-        description: "50-gallon rainwater collection barrel with spigot and overflow port. Includes debris screen and linking kit.",
+        description:
+          "50-gallon rainwater collection barrel with spigot and overflow port. Includes debris screen and linking kit.",
         shortDescription: "50-gallon rainwater harvesting system",
-        price: 89.99, 
+        price: 89.99,
         imageUrl: "/images/products/rain-barrel.svg",
-        categoryId: 17 // Watering Tools
+        categoryId: 17, // Watering Tools
       },
       {
         name: "Galvanized Steel Watering Can",
         slug: "galvanized-steel-watering-can",
-        description: "Classic 2-gallon watering can with removable rose. Perfectly balanced for easy watering.",
+        description:
+          "Classic 2-gallon watering can with removable rose. Perfectly balanced for easy watering.",
         shortDescription: "Classic 2-gallon watering can with removable rose",
         price: 34.99,
         imageUrl: "/images/products/watering_can.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "5-Blade Herb Scissors",
         slug: "herb-scissors",
-        description: "Multi-blade herb scissors for quick and easy herb harvesting and chopping. Includes cleaning comb.",
+        description:
+          "Multi-blade herb scissors for quick and easy herb harvesting and chopping. Includes cleaning comb.",
         shortDescription: "Multi-blade scissors for easy herb harvesting",
         price: 16.99,
         imageUrl: "/images/products/herb_scissors.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Weather-Resistant Plant Labels",
         slug: "weather-resistant-plant-labels",
-        description: "Set of 50 weather-resistant plant labels with marking pen. Perfect for identifying plants in your garden.",
+        description:
+          "Set of 50 weather-resistant plant labels with marking pen. Perfect for identifying plants in your garden.",
         shortDescription: "50 durable plant labels with marking pen",
         price: 9.99,
         imageUrl: "/images/products/plant_labels.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Bypass Pruning Shears",
         slug: "bypass-pruning-shears",
-        description: "Professional-grade bypass pruning shears with titanium-coated blades and ergonomic handles.",
-        shortDescription: "Professional pruning shears with titanium-coated blades",
+        description:
+          "Professional-grade bypass pruning shears with titanium-coated blades and ergonomic handles.",
+        shortDescription:
+          "Professional pruning shears with titanium-coated blades",
         price: 24.99,
         imageUrl: "/images/products/pruning_shears.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Drip Irrigation Starter Kit",
         slug: "drip-irrigation-kit",
-        description: "Complete drip irrigation kit for up to 25 plants. Includes timer, tubing, emitters, and connectors.",
-        shortDescription: "Complete water-saving irrigation system for 25 plants",
+        description:
+          "Complete drip irrigation kit for up to 25 plants. Includes timer, tubing, emitters, and connectors.",
+        shortDescription:
+          "Complete water-saving irrigation system for 25 plants",
         price: 49.99,
         imageUrl: "/images/products/drip_irrigation.svg",
         isBestSeller: true,
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Garden Potting Bench",
         slug: "garden-potting-bench",
-        description: "Durable cedar potting bench with built-in storage shelf, soil sink, and tool hooks for organized gardening.",
+        description:
+          "Durable cedar potting bench with built-in storage shelf, soil sink, and tool hooks for organized gardening.",
         shortDescription: "Cedar potting bench with storage for garden work",
         price: 149.99,
         imageUrl: "/images/products/garden-potting-bench.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Garden Kneeling Pad",
         slug: "garden-kneeling-pad",
-        description: "Extra-thick memory foam kneeling pad that provides comfort for extended garden work. Water and dirt resistant.",
+        description:
+          "Extra-thick memory foam kneeling pad that provides comfort for extended garden work. Water and dirt resistant.",
         shortDescription: "Thick memory foam pad for comfortable gardening",
         price: 19.99,
         imageUrl: "/images/products/garden-kneeling-pad.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Garden Knee Pads",
         slug: "garden-knee-pads",
-        description: "Waterproof knee pads with adjustable straps for comfortable protection during garden work.",
+        description:
+          "Waterproof knee pads with adjustable straps for comfortable protection during garden work.",
         shortDescription: "Waterproof knee pads with adjustable straps",
         price: 24.99,
         imageUrl: "/images/products/garden-knee-pads.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Plant Support Cages",
         slug: "plant-support-cages",
-        description: "Set of 3 durable steel tomato cages with powder-coated finish. Provides sturdy support for tomatoes and other vining plants.",
+        description:
+          "Set of 3 durable steel tomato cages with powder-coated finish. Provides sturdy support for tomatoes and other vining plants.",
         shortDescription: "Durable steel support cages for tomatoes and vines",
         price: 29.99,
         imageUrl: "/images/products/plant-support-cages.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Tomato Support Stakes",
         slug: "tomato-support-stakes",
-        description: "Set of 5 heavy-duty 6-foot garden stakes perfect for supporting tomatoes, peppers, and other tall plants.",
+        description:
+          "Set of 5 heavy-duty 6-foot garden stakes perfect for supporting tomatoes, peppers, and other tall plants.",
         shortDescription: "Heavy-duty 6-foot stakes for tall garden plants",
         price: 18.99,
         imageUrl: "/images/products/tomato-support-stakes.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Fertilizer Spreader",
         slug: "fertilizer-spreader",
-        description: "Hand-held spreader for even application of fertilizers, seeds, and other granular garden products.",
-        shortDescription: "Hand-held spreader for fertilizer and seed application",
+        description:
+          "Hand-held spreader for even application of fertilizers, seeds, and other granular garden products.",
+        shortDescription:
+          "Hand-held spreader for fertilizer and seed application",
         price: 22.99,
         imageUrl: "/images/products/fertilizer-spreader.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       {
         name: "Expandable Garden Hose",
         slug: "expandable-garden-hose",
-        description: "Lightweight, expandable garden hose that grows to 50 feet when in use, but shrinks for easy storage. Includes nozzle.",
+        description:
+          "Lightweight, expandable garden hose that grows to 50 feet when in use, but shrinks for easy storage. Includes nozzle.",
         shortDescription: "Expandable 50-foot hose with storage-saving design",
         price: 39.99,
         imageUrl: "/images/products/garden-hose.svg",
-        categoryId: 5
+        categoryId: 5,
       },
       // Planters
       {
         name: "Stack & Grow Seedling Trays",
         slug: "stack-and-grow-trays",
-        description: "Stackable seed starting system for maximizing your growing space. Professional quality for serious gardeners.",
-        shortDescription: "Space-saving stackable seedling trays for serious gardeners",
+        description:
+          "Stackable seed starting system for maximizing your growing space. Professional quality for serious gardeners.",
+        shortDescription:
+          "Space-saving stackable seedling trays for serious gardeners",
         price: 42.99,
         imageUrl: "/images/products/2022-11-17-Diego0293-STACK_400x400.svg",
         isNew: true,
-        categoryId: 11
+        categoryId: 11,
       },
       {
         name: "Tiered Strawberry Planter",
         slug: "tiered-strawberry-planter",
-        description: "3-tier strawberry planter that maximizes growing space. Perfect for patios and small gardens.",
+        description:
+          "3-tier strawberry planter that maximizes growing space. Perfect for patios and small gardens.",
         shortDescription: "Space-saving 3-tier planter for strawberries",
         price: 29.99,
         imageUrl: "/images/products/strawberry_planter.svg",
-        categoryId: 3
+        categoryId: 3,
       },
       {
         name: "5-Tier Vertical Planter",
         slug: "vertical-planter",
-        description: "Space-saving vertical planter with 5 tiers, perfect for growing herbs, strawberries, or flowers on patios and balconies.",
+        description:
+          "Space-saving vertical planter with 5 tiers, perfect for growing herbs, strawberries, or flowers on patios and balconies.",
         shortDescription: "5-tier vertical planter for herbs and small plants",
         price: 59.99,
         imageUrl: "/images/products/vertical_planter.svg",
         isNew: true,
-        categoryId: 3
+        categoryId: 3,
       },
       // Composting
       {
         name: "Compact Compost Bin",
         slug: "compact-compost-bin",
-        description: "Space-saving 5-gallon compost bin with aeration system and activated charcoal filter to control odors.",
+        description:
+          "Space-saving 5-gallon compost bin with aeration system and activated charcoal filter to control odors.",
         shortDescription: "Space-saving compost bin with odor control",
         price: 39.99,
         imageUrl: "/images/products/compost_bin.svg",
-        categoryId: 6
+        categoryId: 6,
       },
       {
         name: "Kitchen Compost Bin",
         slug: "kitchen-compost-bin",
-        description: "Attractive stainless steel 1.3-gallon kitchen counter compost bin with replaceable charcoal filter to eliminate odors.",
+        description:
+          "Attractive stainless steel 1.3-gallon kitchen counter compost bin with replaceable charcoal filter to eliminate odors.",
         shortDescription: "Stylish countertop bin for collecting food scraps",
         price: 24.99,
         imageUrl: "/images/products/kitchen-compost-bin.svg",
-        categoryId: 6
+        categoryId: 6,
       },
       {
         name: "Compost Thermometer",
         slug: "compost-thermometer",
-        description: "Long-stem compost thermometer with temperature zones marked for monitoring your compost pile's decomposition process.",
-        shortDescription: "Long-stem thermometer for monitoring compost temperature",
+        description:
+          "Long-stem compost thermometer with temperature zones marked for monitoring your compost pile's decomposition process.",
+        shortDescription:
+          "Long-stem thermometer for monitoring compost temperature",
         price: 19.99,
         imageUrl: "/images/products/compost-thermometer.svg",
-        categoryId: 6
+        categoryId: 6,
       },
       {
         name: "Compost Activator",
         slug: "compost-activator",
-        description: "Natural compost accelerator that speeds up the decomposition process by adding essential microorganisms and nitrogen.",
-        shortDescription: "Natural accelerator for faster compost decomposition",
+        description:
+          "Natural compost accelerator that speeds up the decomposition process by adding essential microorganisms and nitrogen.",
+        shortDescription:
+          "Natural accelerator for faster compost decomposition",
         price: 12.99,
         imageUrl: "/images/products/compost-activator.svg",
-        categoryId: 6
+        categoryId: 6,
       },
       {
         name: "Compost Aerator Tool",
         slug: "compost-aerator",
-        description: "Specialized compost aerator tool that helps add oxygen to your compost pile without heavy turning or pitchforks.",
-        shortDescription: "Easy-to-use tool for aerating compost without heavy turning",
+        description:
+          "Specialized compost aerator tool that helps add oxygen to your compost pile without heavy turning or pitchforks.",
+        shortDescription:
+          "Easy-to-use tool for aerating compost without heavy turning",
         price: 29.99,
         imageUrl: "/images/products/compost-aerator.svg",
-        categoryId: 6
+        categoryId: 6,
       },
       // Fertilizers
       {
         name: "Organic Plant Food Concentrate",
         slug: "plant-food-concentrate",
-        description: "All-purpose liquid organic fertilizer concentrate made from plant-based ingredients. Gentle yet effective for all plants.",
-        shortDescription: "All-purpose organic liquid fertilizer for all plants",
+        description:
+          "All-purpose liquid organic fertilizer concentrate made from plant-based ingredients. Gentle yet effective for all plants.",
+        shortDescription:
+          "All-purpose organic liquid fertilizer for all plants",
         price: 14.99,
         imageUrl: "/images/products/plant-food-concentrate.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       {
         name: "Slow-Release Fertilizer",
         slug: "slow-release-fertilizer",
-        description: "Premium granular slow-release fertilizer that feeds plants continuously for up to 3 months with one application.",
-        shortDescription: "Long-lasting granular fertilizer for continuous feeding",
+        description:
+          "Premium granular slow-release fertilizer that feeds plants continuously for up to 3 months with one application.",
+        shortDescription:
+          "Long-lasting granular fertilizer for continuous feeding",
         price: 19.99,
         imageUrl: "/images/products/slow-release-fertilizer.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       {
         name: "Bone Meal Fertilizer",
         slug: "bone-meal",
-        description: "Organic bone meal fertilizer rich in phosphorus and calcium. Ideal for bulbs, flowering plants, and root development.",
-        shortDescription: "Phosphorus-rich organic fertilizer for flowers and bulbs",
+        description:
+          "Organic bone meal fertilizer rich in phosphorus and calcium. Ideal for bulbs, flowering plants, and root development.",
+        shortDescription:
+          "Phosphorus-rich organic fertilizer for flowers and bulbs",
         price: 8.99,
         imageUrl: "/images/products/bone-meal.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       {
         name: "Blood Meal Fertilizer",
         slug: "blood-meal",
-        description: "Organic nitrogen-rich blood meal for leafy greens and plants that need quick growth. Helps promote lush foliage.",
+        description:
+          "Organic nitrogen-rich blood meal for leafy greens and plants that need quick growth. Helps promote lush foliage.",
         shortDescription: "Nitrogen-rich organic fertilizer for leafy growth",
         price: 9.99,
         imageUrl: "/images/products/blood-meal.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       {
         name: "Fish Emulsion Fertilizer",
         slug: "fish-emulsion",
-        description: "Organic liquid fish emulsion that provides immediate nutrients and beneficial soil microbes. Ideal for regular feeding.",
+        description:
+          "Organic liquid fish emulsion that provides immediate nutrients and beneficial soil microbes. Ideal for regular feeding.",
         shortDescription: "Fast-acting fish-based liquid fertilizer",
         price: 12.99,
         imageUrl: "/images/products/fish-emulsion.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       {
         name: "Premium Worm Castings",
         slug: "worm-castings",
-        description: "Pure worm castings that improve soil structure, enhance microbial activity, and provide gentle nutrition for all plants.",
+        description:
+          "Pure worm castings that improve soil structure, enhance microbial activity, and provide gentle nutrition for all plants.",
         shortDescription: "Pure worm castings for gentle natural fertilization",
         price: 15.99,
         imageUrl: "/images/products/worm-castings.svg",
-        categoryId: 7
+        categoryId: 7,
       },
       // Pest Control
       {
         name: "Organic Neem Oil",
         slug: "neem-oil",
-        description: "Cold-pressed neem oil concentrate that acts as a natural insecticide, fungicide, and miticide for organic gardening.",
+        description:
+          "Cold-pressed neem oil concentrate that acts as a natural insecticide, fungicide, and miticide for organic gardening.",
         shortDescription: "Natural multi-purpose pest and disease control",
         price: 16.99,
         imageUrl: "/images/products/neem-oil.svg",
-        categoryId: 8
+        categoryId: 8,
       },
       {
         name: "Insecticidal Soap",
         slug: "insecticidal-soap",
-        description: "Ready-to-use organic insecticidal soap that controls soft-bodied pests like aphids, mealybugs, and spider mites.",
+        description:
+          "Ready-to-use organic insecticidal soap that controls soft-bodied pests like aphids, mealybugs, and spider mites.",
         shortDescription: "Targeted control for soft-bodied garden pests",
         price: 11.99,
         imageUrl: "/images/products/insecticidal-soap.svg",
-        categoryId: 8
+        categoryId: 8,
       },
       {
         name: "Diatomaceous Earth",
         slug: "diatomaceous-earth",
-        description: "Food-grade diatomaceous earth that controls crawling insects through physical rather than chemical action.",
+        description:
+          "Food-grade diatomaceous earth that controls crawling insects through physical rather than chemical action.",
         shortDescription: "Natural powder for controlling crawling insects",
         price: 13.99,
         imageUrl: "/images/products/diatomaceous-earth.svg",
-        categoryId: 8
+        categoryId: 8,
       },
       {
         name: "Yellow Sticky Traps",
         slug: "sticky-traps",
-        description: "Set of 20 dual-sided yellow sticky traps that attract and capture flying pests like fungus gnats, whiteflies, and aphids.",
-        shortDescription: "Sticky traps for monitoring and controlling flying pests",
+        description:
+          "Set of 20 dual-sided yellow sticky traps that attract and capture flying pests like fungus gnats, whiteflies, and aphids.",
+        shortDescription:
+          "Sticky traps for monitoring and controlling flying pests",
         price: 9.99,
         imageUrl: "/images/products/sticky-traps.svg",
-        categoryId: 8
+        categoryId: 8,
       },
       {
         name: "Bird Netting",
         slug: "bird-netting",
-        description: "Lightweight protective netting that keeps birds away from fruit trees, berry bushes, and garden beds without harming them.",
+        description:
+          "Lightweight protective netting that keeps birds away from fruit trees, berry bushes, and garden beds without harming them.",
         shortDescription: "Protective barrier to keep birds away from crops",
         price: 17.99,
         imageUrl: "/images/products/bird-netting.svg",
-        categoryId: 8
+        categoryId: 8,
       },
       // Indoor Growing
       {
         name: "LED Grow Light Panel",
         slug: "grow-light-led-panel",
-        description: "Full-spectrum LED grow light panel with adjustable height. Perfect for seed starting, indoor herbs, and houseplants.",
+        description:
+          "Full-spectrum LED grow light panel with adjustable height. Perfect for seed starting, indoor herbs, and houseplants.",
         shortDescription: "Full-spectrum light panel for indoor growing",
         price: 79.99,
         imageUrl: "/images/products/grow-light-led-panel.svg",
-        categoryId: 12
+        categoryId: 12,
       },
       {
         name: "Hydroponic Starter Kit",
         slug: "hydroponic-starter-kit",
-        description: "Complete starter kit for soil-free growing. Includes growing chamber, nutrients, growing medium, and instructions.",
+        description:
+          "Complete starter kit for soil-free growing. Includes growing chamber, nutrients, growing medium, and instructions.",
         shortDescription: "Complete kit for beginning soil-free growing",
         price: 69.99,
         imageUrl: "/images/products/hydroponic-starter-kit.svg",
         isNew: true,
-        categoryId: 12
+        categoryId: 12,
       },
       {
         name: "Seedling Heat Mat",
         slug: "heat-mat",
-        description: "Waterproof heat mat that warms soil 10-20°F above ambient temperature to improve germination rates and seedling growth.",
+        description:
+          "Waterproof heat mat that warms soil 10-20°F above ambient temperature to improve germination rates and seedling growth.",
         shortDescription: "Warming mat for faster seed germination",
         price: 24.99,
         imageUrl: "/images/products/heat-mat.svg",
-        categoryId: 12
+        categoryId: 12,
       },
       {
         name: "Digital Soil pH Meter",
         slug: "ph-meter",
-        description: "Easy-to-use digital meter that measures soil pH accurately. Essential for determining your garden's lime or sulfur needs.",
+        description:
+          "Easy-to-use digital meter that measures soil pH accurately. Essential for determining your garden's lime or sulfur needs.",
         shortDescription: "Digital meter for accurate soil pH readings",
         price: 29.99,
         imageUrl: "/images/products/ph-meter.svg",
-        categoryId: 12
+        categoryId: 12,
       },
       {
         name: "Digital Thermometer/Hygrometer",
         slug: "digital-thermometer",
-        description: "Combination digital thermometer and humidity monitor perfect for greenhouses, indoor growing spaces, and seed starting.",
+        description:
+          "Combination digital thermometer and humidity monitor perfect for greenhouses, indoor growing spaces, and seed starting.",
         shortDescription: "Temperature and humidity monitor for growing spaces",
         price: 19.99,
         imageUrl: "/images/products/digital-thermometer.svg",
-        categoryId: 12
+        categoryId: 12,
       },
       // Garden Décor
       {
         name: "Solar Garden Lights",
         slug: "solar-garden-lights",
-        description: "Set of 8 solar-powered LED garden path lights with automatic dusk-to-dawn operation. No wiring required.",
+        description:
+          "Set of 8 solar-powered LED garden path lights with automatic dusk-to-dawn operation. No wiring required.",
         shortDescription: "Solar path lights for nighttime garden illumination",
         price: 34.99,
         imageUrl: "/images/products/solar-garden-lights.svg",
-        categoryId: 13
+        categoryId: 13,
       },
       {
         name: "Garden Stepping Stones",
         slug: "garden-stepping-stones",
-        description: "Set of 3 decorative cast stone stepping stones with botanical design. Creates an attractive pathway through gardens.",
+        description:
+          "Set of 3 decorative cast stone stepping stones with botanical design. Creates an attractive pathway through gardens.",
         shortDescription: "Decorative stepping stones with botanical design",
         price: 39.99,
         imageUrl: "/images/products/garden-stepping-stones.svg",
-        categoryId: 13
+        categoryId: 13,
       },
       {
         name: "Butterfly House",
         slug: "butterfly-house",
-        description: "Cedar butterfly shelter that provides protected space for butterflies to rest and hibernate, enhancing your garden's ecosystem.",
-        shortDescription: "Cedar shelter for butterfly protection and observation",
+        description:
+          "Cedar butterfly shelter that provides protected space for butterflies to rest and hibernate, enhancing your garden's ecosystem.",
+        shortDescription:
+          "Cedar shelter for butterfly protection and observation",
         price: 29.99,
         imageUrl: "/images/products/butterfly-house.svg",
-        categoryId: 13
+        categoryId: 13,
       },
       {
         name: "Decorative Bird Bath",
         slug: "birdbath",
-        description: "Cast stone bird bath with elegant pedestal design. Provides drinking and bathing water for birds while adding garden decoration.",
+        description:
+          "Cast stone bird bath with elegant pedestal design. Provides drinking and bathing water for birds while adding garden decoration.",
         shortDescription: "Elegant bird bath to attract feathered visitors",
         price: 69.99,
         imageUrl: "/images/products/birdbath.svg",
-        categoryId: 13
+        categoryId: 13,
       },
       {
         name: "Wild Bird Feeder",
         slug: "bird-feeder",
-        description: "Clear plastic wild bird feeder with multiple perches. Easy to fill and clean, attracts a variety of songbirds to your garden.",
-        shortDescription: "Easy-to-use feeder to attract songbirds to your yard",
+        description:
+          "Clear plastic wild bird feeder with multiple perches. Easy to fill and clean, attracts a variety of songbirds to your garden.",
+        shortDescription:
+          "Easy-to-use feeder to attract songbirds to your yard",
         price: 19.99,
         imageUrl: "/images/products/bird-feeder.svg",
-        categoryId: 13
+        categoryId: 13,
       },
-      
+
       // Garden Tools - Hand Tools
       {
         name: "Garden Hand Pruner",
         slug: "garden-hand-pruner",
-        description: "High-quality garden pruners with ergonomic handles and precision cutting blades. Perfect for trimming small branches and stems.",
+        description:
+          "High-quality garden pruners with ergonomic handles and precision cutting blades. Perfect for trimming small branches and stems.",
         shortDescription: "Precision pruners for clean cuts on small branches",
         price: 24.99,
         imageUrl: "/images/products/garden_pruner.svg",
         isBestSeller: true,
-        categoryId: 15 // Hand Tools subcategory
+        categoryId: 15, // Hand Tools subcategory
       },
       {
         name: "Garden Cultivator",
         slug: "garden-cultivator",
-        description: "Three-pronged hand cultivator with comfortable ergonomic handle. Perfect for breaking up soil and removing weeds between plants.",
-        shortDescription: "Three-pronged tool for aerating soil and removing weeds",
+        description:
+          "Three-pronged hand cultivator with comfortable ergonomic handle. Perfect for breaking up soil and removing weeds between plants.",
+        shortDescription:
+          "Three-pronged tool for aerating soil and removing weeds",
         price: 19.99,
         imageUrl: "/images/products/garden-cultivator.svg",
-        categoryId: 15 // Hand Tools subcategory
+        categoryId: 15, // Hand Tools subcategory
       },
       {
         name: "Garden Digging Spade",
         slug: "garden-digging-spade",
-        description: "Heavy-duty garden spade with sharpened edge for cleaner cuts through soil and roots. Ergonomic handle reduces strain during use.",
+        description:
+          "Heavy-duty garden spade with sharpened edge for cleaner cuts through soil and roots. Ergonomic handle reduces strain during use.",
         shortDescription: "Heavy-duty digging spade with comfortable grip",
         price: 34.99,
         imageUrl: "/images/products/garden-spade.svg",
-        categoryId: 15 // Hand Tools subcategory
+        categoryId: 15, // Hand Tools subcategory
       },
       {
         name: "Garden Fork",
         slug: "garden-fork",
-        description: "Four-tine garden fork perfect for turning soil and compost. The strong tines easily penetrate compacted soil.",
+        description:
+          "Four-tine garden fork perfect for turning soil and compost. The strong tines easily penetrate compacted soil.",
         shortDescription: "Four-tine fork for turning soil and compost",
         price: 32.99,
         imageUrl: "/images/products/garden-fork.svg",
-        categoryId: 15 // Hand Tools subcategory
+        categoryId: 15, // Hand Tools subcategory
       },
-      
+
       // Garden Tools - Pruning Tools
       {
         name: "Bypass Loppers",
         slug: "bypass-loppers",
-        description: "Long-handled bypass loppers for cutting branches up to 1.5 inches. The compound action mechanism increases cutting power with less effort.",
+        description:
+          "Long-handled bypass loppers for cutting branches up to 1.5 inches. The compound action mechanism increases cutting power with less effort.",
         shortDescription: "Long-handled cutters for branches up to 1.5 inches",
         price: 39.99,
         imageUrl: "/images/products/bypass-loppers.svg",
         isBestSeller: true,
-        categoryId: 16 // Pruning Tools subcategory
+        categoryId: 16, // Pruning Tools subcategory
       },
       {
         name: "Hedge Shears",
         slug: "hedge-shears",
-        description: "Professional hedge shears with shock-absorbing bumpers and precision-ground wavy blades for clean cuts on leafy growth.",
+        description:
+          "Professional hedge shears with shock-absorbing bumpers and precision-ground wavy blades for clean cuts on leafy growth.",
         shortDescription: "Professional shears for trimming hedges and shrubs",
         price: 36.99,
         imageUrl: "/images/products/hedge-shears.svg",
-        categoryId: 16 // Pruning Tools subcategory
+        categoryId: 16, // Pruning Tools subcategory
       },
       {
         name: "Folding Hand Saw",
         slug: "folding-hand-saw",
-        description: "Compact folding saw with triple-cut razor teeth for efficient cutting of larger branches. Safety lock keeps the blade secure when folded.",
+        description:
+          "Compact folding saw with triple-cut razor teeth for efficient cutting of larger branches. Safety lock keeps the blade secure when folded.",
         shortDescription: "Portable folding saw for efficient branch cutting",
         price: 21.99,
         imageUrl: "/images/products/folding-hand-saw.svg",
         isNew: true,
-        categoryId: 16 // Pruning Tools subcategory
+        categoryId: 16, // Pruning Tools subcategory
       },
-      
+
       // Garden Tools - Power Tools
       {
         name: "Mini Electric Tiller",
         slug: "mini-electric-tiller",
-        description: "Compact electric tiller perfect for small gardens and raised beds. The 6.5-amp motor powers through soil with four durable steel tines.",
+        description:
+          "Compact electric tiller perfect for small gardens and raised beds. The 6.5-amp motor powers through soil with four durable steel tines.",
         shortDescription: "Compact electric tiller for small garden spaces",
         price: 129.99,
         imageUrl: "/images/products/electric-garden-tiller.svg",
         isBestSeller: true,
-        categoryId: 17 // Power Tools subcategory
+        categoryId: 17, // Power Tools subcategory
       },
       {
         name: "Cordless Hedge Trimmer",
         slug: "cordless-hedge-trimmer",
-        description: "Powerful 20V lithium-ion hedge trimmer with 22-inch dual-action blades. The lightweight design reduces fatigue during extended use.",
+        description:
+          "Powerful 20V lithium-ion hedge trimmer with 22-inch dual-action blades. The lightweight design reduces fatigue during extended use.",
         shortDescription: "Cordless 22-inch trimmer for hedge maintenance",
         price: 89.99,
         imageUrl: "/images/products/cordless-hedge-trimmer.svg",
-        categoryId: 17 // Power Tools subcategory
+        categoryId: 17, // Power Tools subcategory
       },
       {
         name: "Electric Leaf Blower",
         slug: "electric-leaf-blower",
-        description: "Versatile electric leaf blower with variable speed control. Effectively clears leaves and debris from your garden paths and lawn.",
+        description:
+          "Versatile electric leaf blower with variable speed control. Effectively clears leaves and debris from your garden paths and lawn.",
         shortDescription: "Versatile blower for clearing garden debris",
         price: 69.99,
         imageUrl: "/images/products/electric-leaf-blower.svg",
         isNew: true,
-        categoryId: 17 // Power Tools subcategory
+        categoryId: 17, // Power Tools subcategory
       },
-      
+
       // Garden Tools - Watering Tools
       {
         name: "Soaker Hose Kit",
         slug: "soaker-hose-kit",
-        description: "Water-efficient soaker hose kit that delivers water directly to plant roots. Includes 50 feet of hose and all necessary fittings.",
+        description:
+          "Water-efficient soaker hose kit that delivers water directly to plant roots. Includes 50 feet of hose and all necessary fittings.",
         shortDescription: "Water-saving hose for efficient root watering",
         price: 29.99,
         imageUrl: "/images/products/soaker-hose.svg",
-        categoryId: 18 // Watering Tools subcategory
+        categoryId: 18, // Watering Tools subcategory
       },
       {
         name: "Garden Watering Can",
         slug: "garden-watering-can",
-        description: "Ergonomic 2-gallon watering can with removable rose spout for gentle watering of delicate seedlings and plants.",
+        description:
+          "Ergonomic 2-gallon watering can with removable rose spout for gentle watering of delicate seedlings and plants.",
         shortDescription: "Ergonomic can for precise plant watering",
         price: 24.99,
         imageUrl: "/images/products/watering-can.svg",
         isNew: true,
-        categoryId: 18 // Watering Tools subcategory
+        categoryId: 18, // Watering Tools subcategory
       },
       {
         name: "Rain Barrel",
         slug: "rain-barrel",
-        description: "50-gallon rain barrel with spigot and overflow valve. Collect rainwater from your downspouts for garden irrigation and conservation.",
+        description:
+          "50-gallon rain barrel with spigot and overflow valve. Collect rainwater from your downspouts for garden irrigation and conservation.",
         shortDescription: "50-gallon barrel for rainwater collection and use",
         price: 119.99,
         imageUrl: "/images/products/rain-barrel.svg",
-        categoryId: 18 // Watering Tools subcategory
-      }
+        categoryId: 18, // Watering Tools subcategory
+      },
     ];
-    
+
     // Create products
-    products.forEach(product => {
+    products.forEach((product) => {
       this.createProduct(product);
     });
-    
+
     // Sample articles with authentic Epic Gardening images
     const articles: InsertArticle[] = [
       {
@@ -1431,8 +1596,10 @@ export class MemStorage implements IStorage {
         <h2>Harvesting and Storage</h2>
         <p>Harvest beans when they're young and tender, usually about 50-60 days after planting. Pick regularly to encourage continued production. Fresh beans will keep in the refrigerator for up to a week, or can be blanched and frozen for longer storage.</p>
         <p>With their ease of growing and abundant harvests, yellow bush beans are a perfect choice for both beginner and experienced gardeners!</p>`,
-        excerpt: "Learn how to grow productive, crisp yellow bush beans in your garden with these simple growing tips.",
-        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        excerpt:
+          "Learn how to grow productive, crisp yellow bush beans in your garden with these simple growing tips.",
+        imageUrl:
+          "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
         datePublished: new Date("2023-05-12"),
         categoryId: 1,
       },
@@ -1457,7 +1624,8 @@ export class MemStorage implements IStorage {
         <h2>Companion Planting Benefits</h2>
         <p>Nasturtiums make excellent companion plants. They repel aphids, whiteflies, and cucumber beetles, making them valuable additions near vegetables like tomatoes, cucumbers, and brassicas.</p>
         <p>With their easy growing requirements and multiple benefits, nasturtiums deserve a place in every garden!</p>`,
-        excerpt: "Discover how to grow vibrant, edible nasturtium flowers that add beauty to your garden and flavor to your plate.",
+        excerpt:
+          "Discover how to grow vibrant, edible nasturtium flowers that add beauty to your garden and flavor to your plate.",
         imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         datePublished: new Date("2023-05-08"),
         categoryId: 2,
@@ -1496,13 +1664,15 @@ export class MemStorage implements IStorage {
         </ul>
         <p>Add balanced organic fertilizer according to package directions to provide essential nutrients for your plants.</p>
         <p>With proper planning and setup, raised bed gardens can provide years of productive and enjoyable gardening!</p>`,
-        excerpt: "Discover the many advantages of raised bed gardening and learn how to create the perfect growing environment for your plants.",
-        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
+        excerpt:
+          "Discover the many advantages of raised bed gardening and learn how to create the perfect growing environment for your plants.",
+        imageUrl:
+          "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
         datePublished: new Date("2023-05-03"),
         categoryId: 5,
       },
     ];
-    
+
     // Add new gardening articles
     const newArticles: InsertArticle[] = [
       {
@@ -1533,7 +1703,8 @@ export class MemStorage implements IStorage {
         <h2>Early Season Maintenance</h2>
         <p>Stay ahead of garden maintenance by setting aside 15-30 minutes several times a week to pull young weeds, inspect plants for problems, and provide support for growing vines and stems before they need it.</p>
         <p>With these spring gardening tips, you'll create the foundation for a productive and beautiful garden throughout the growing season!</p>`,
-        excerpt: "Set your garden up for success with these essential spring gardening tasks and tips for a productive growing season.",
+        excerpt:
+          "Set your garden up for success with these essential spring gardening tasks and tips for a productive growing season.",
         imageUrl: "/images/articles/spring_gardening_tips.svg",
         datePublished: new Date("2023-03-10"),
         categoryId: 1,
@@ -1583,7 +1754,8 @@ export class MemStorage implements IStorage {
         <h2>Using Your Compost</h2>
         <p>Finished compost looks like dark, crumbly soil with an earthy smell. Use it to topdress garden beds, mix into potting soil, use as a seed starting medium, or make compost tea for liquid fertilizer.</p>
         <p>With these basics, you'll be well on your way to creating your own garden gold while reducing waste!</p>`,
-        excerpt: "Learn the fundamentals of composting to transform household waste into valuable garden fertilizer.",
+        excerpt:
+          "Learn the fundamentals of composting to transform household waste into valuable garden fertilizer.",
         imageUrl: "/images/articles/composting_basics.svg",
         datePublished: new Date("2023-03-15"),
         categoryId: 6,
@@ -1656,7 +1828,8 @@ export class MemStorage implements IStorage {
           <li>Record what works for future reference</li>
         </ol>
         <p>With patience and consistent application of these natural methods, you can keep pest damage to a minimum while maintaining a healthy ecosystem in your garden.</p>`,
-        excerpt: "Learn to identify common garden pests and control them using natural, environmentally friendly methods.",
+        excerpt:
+          "Learn to identify common garden pests and control them using natural, environmentally friendly methods.",
         imageUrl: "/images/articles/garden_pests.svg",
         datePublished: new Date("2023-04-22"),
         categoryId: 7,
@@ -1727,7 +1900,8 @@ export class MemStorage implements IStorage {
           <li><strong>Fix leaks promptly</strong> – even small drips waste gallons</li>
         </ul>
         <p>By tailoring your watering approach to your plants' specific needs and using efficient techniques, you'll grow healthier plants while conserving one of our most valuable resources.</p>`,
-        excerpt: "Master the art of garden watering with techniques that conserve water while keeping your plants thriving.",
+        excerpt:
+          "Master the art of garden watering with techniques that conserve water while keeping your plants thriving.",
         imageUrl: "/images/articles/watering_guide.svg",
         datePublished: new Date("2023-06-05"),
         categoryId: 1,
@@ -1811,50 +1985,54 @@ export class MemStorage implements IStorage {
           <li>Minimize pesticides that kill beneficial soil insects</li>
         </ul>
         <p>Remember, building great soil is a long-term process. Each season of thoughtful care creates a more vibrant, productive garden that requires less input and provides greater rewards.</p>`,
-        excerpt: "Discover proven techniques to enhance your soil quality for healthier plants and better harvests.",
+        excerpt:
+          "Discover proven techniques to enhance your soil quality for healthier plants and better harvests.",
         imageUrl: "/images/articles/soil_improvement.svg",
         datePublished: new Date("2023-02-18"),
         categoryId: 6,
-      }
+      },
     ];
-    
+
     // Create articles
-    articles.forEach(article => {
+    articles.forEach((article) => {
       this.createArticle(article);
     });
-    
+
     // Add new articles
-    newArticles.forEach(article => {
+    newArticles.forEach((article) => {
       this.createArticle(article);
     });
-    
+
     // Sample testimonials
     const testimonials: InsertTestimonial[] = [
       {
         personName: "Sarah L.",
         role: "Home Gardener",
         avatarUrl: "https://randomuser.me/api/portraits/women/44.svg",
-        content: "Epic Gardening has transformed my backyard! Their step-by-step guides made it easy to grow my own vegetables, even as a complete beginner. Now I have fresh produce all summer long!",
+        content:
+          "Epic Gardening has transformed my backyard! Their step-by-step guides made it easy to grow my own vegetables, even as a complete beginner. Now I have fresh produce all summer long!",
         rating: 5,
       },
       {
         personName: "Michael T.",
         role: "Urban Gardener",
         avatarUrl: "https://randomuser.me/api/portraits/men/32.svg",
-        content: "The gardening tools I purchased from Epic Gardening are top-quality and made my garden work so much easier. Their customer service was excellent when I had questions about which products to choose.",
+        content:
+          "The gardening tools I purchased from Epic Gardening are top-quality and made my garden work so much easier. Their customer service was excellent when I had questions about which products to choose.",
         rating: 5,
       },
       {
         personName: "Jennifer P.",
         role: "Herb Enthusiast",
         avatarUrl: "https://randomuser.me/api/portraits/women/68.svg",
-        content: "I've been following Epic Gardening's blog for years and it's been invaluable for my herb garden. Their pest control tips saved my basil from aphids last season, and now I have a thriving herb collection!",
+        content:
+          "I've been following Epic Gardening's blog for years and it's been invaluable for my herb garden. Their pest control tips saved my basil from aphids last season, and now I have a thriving herb collection!",
         rating: 4,
       },
     ];
-    
+
     // Create testimonials
-    testimonials.forEach(testimonial => {
+    testimonials.forEach((testimonial) => {
       this.createTestimonial(testimonial);
     });
   }
