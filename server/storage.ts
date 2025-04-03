@@ -324,27 +324,86 @@ export class MemStorage implements IStorage {
       this.createCategory(category);
     });
     
-    // Sample products with authentic Epic Gardening images
+    // Sample products based on Epic Gardening website
     const products: InsertProduct[] = [
+      // Fruit Trees
       {
-        name: "Round Short Metal Raised Garden Bed",
-        slug: "round-short-metal-raised-bed",
-        description: "This beautiful round raised garden bed is perfect for growing vegetables, flowers, or herbs. Made from durable galvanized steel with a Light Clay finish.",
-        shortDescription: "Durable galvanized steel raised bed with Light Clay finish",
+        name: "Honeycrisp Apple Tree",
+        slug: "honeycrisp-apple-tree",
+        description: "The Honeycrisp Apple Tree produces sweet, crisp apples that are perfect for fresh eating. This popular variety is known for its exceptional flavor and crunch.",
+        shortDescription: "Sweet, crisp apples with exceptional flavor",
         price: 99.99,
-        imageUrl: "/images/products/10328_Large_short_LightClay.svg",
+        imageUrl: "/images/products/honeycrisp-apple-tree.svg",
         isBestSeller: true,
-        categoryId: 5,
+        categoryId: 1
       },
       {
-        name: "Zinnia Persian Carpet Seeds",
-        slug: "zinnia-persian-carpet-seeds",
-        description: "Beautiful bi-color zinnia mix with gold, mahogany, and burgundy blooms. Easy to grow and perfect for cut flowers.",
-        shortDescription: "Stunning bi-color zinnia mix for dramatic garden display",
-        price: 4.99,
-        imageUrl: "/images/products/1193i_Zinnia-Persian-Carpet_3oykxo.svg",
-        categoryId: 2,
+        name: "Bing Cherry Tree",
+        slug: "bing-cherry-tree",
+        description: "The Bing Cherry Tree produces large, sweet dark cherries that are perfect for fresh eating or baking. This popular variety is a must-have for cherry lovers.",
+        shortDescription: "Large, sweet dark cherries for fresh eating or baking",
+        price: 89.99,
+        imageUrl: "/images/products/bing-cherry-tree.svg",
+        categoryId: 1
       },
+      {
+        name: "Wonderful Pomegranate Tree",
+        slug: "wonderful-pomegranate-tree",
+        description: "The Wonderful Pomegranate Tree produces large, juicy fruits with vibrant red arils. This popular variety is known for its sweet-tart flavor and nutritional benefits.",
+        shortDescription: "Large, juicy pomegranates with sweet-tart flavor",
+        price: 79.99,
+        imageUrl: "/images/products/wonderful-pomegranate-tree.svg",
+        categoryId: 1
+      },
+      {
+        name: "Chicago Hardy Fig Tree",
+        slug: "chicago-hardy-fig-tree",
+        description: "The Chicago Hardy Fig Tree is an exceptionally cold-hardy variety that produces sweet, purple-brown figs. It can die back to the ground in winter and still produce fruit the following year.",
+        shortDescription: "Cold-hardy fig variety that produces sweet, purple-brown figs",
+        price: 69.99,
+        imageUrl: "/images/products/chicago-hardy-fig-tree.svg",
+        isBestSeller: true,
+        categoryId: 1
+      },
+      {
+        name: "Frost Peach Tree",
+        slug: "frost-peach-tree",
+        description: "The Frost Peach Tree produces large, yellow-fleshed peaches with a sweet flavor. This variety is known for its excellent disease resistance.",
+        shortDescription: "Large, sweet peaches with excellent disease resistance",
+        price: 89.99,
+        imageUrl: "/images/products/frost-peach-tree.svg",
+        categoryId: 1
+      },
+      // Berries and Vines
+      {
+        name: "Prolific Kiwi (Self-Fertile)",
+        slug: "kiwi-prolific-self-fertile",
+        description: "This self-fertile kiwi variety doesn't require a male pollinator to produce fruit. It produces sweet, flavorful kiwis on a vigorous vine.",
+        shortDescription: "Self-fertile kiwi that produces sweet, flavorful fruits",
+        price: 39.99,
+        imageUrl: "/images/products/kiwi-prolific-self-fertile.svg",
+        categoryId: 1
+      },
+      {
+        name: "Thornless Blackberry Bush",
+        slug: "thornless-blackberry-bush",
+        description: "This thornless blackberry variety produces large, sweet berries on canes without thorns, making harvesting easy and painless.",
+        shortDescription: "Large, sweet blackberries on thornless canes for easy harvesting",
+        price: 29.99,
+        imageUrl: "/images/products/thornless-blackberry-bush.svg",
+        isBestSeller: true,
+        categoryId: 1
+      },
+      {
+        name: "Pink Lemonade Blueberry",
+        slug: "pink-lemonade-blueberry",
+        description: "This unique blueberry variety produces sweet, pink berries with a delicious flavor. It's a beautiful ornamental plant that also provides tasty fruit.",
+        shortDescription: "Unique blueberry with sweet, pink berries and ornamental value",
+        price: 34.99,
+        imageUrl: "/images/products/pink-lemonade-blueberry.svg",
+        categoryId: 1
+      },
+      // Seed Starting Supplies
       {
         name: "Epic 16-Cell Seed Starting Trays",
         slug: "epic-16-cell-seed-starting-trays",
@@ -353,16 +412,74 @@ export class MemStorage implements IStorage {
         price: 19.99,
         imageUrl: "/images/products/16-celltray2_400x400.svg",
         isNew: true,
-        categoryId: 6,
+        categoryId: 11
       },
       {
-        name: "Black 6-Cell Seed Starting Kit",
-        slug: "black-6-cell-seed-starting-kit",
-        description: "Durable 6-cell seed starting tray with dome lid for better germination rates.",
-        shortDescription: "6-cell seed starting system with humidity dome",
+        name: "6-Cell Garden Propagation Trays",
+        slug: "epic-tray-6-cell-garden-propagation-trays",
+        description: "Durable 6-cell seed starting tray with individual cells for better root development. Perfect for starting larger seedlings.",
+        shortDescription: "6-cell propagation system for strong seedling development",
         price: 14.99,
         imageUrl: "/images/products/6cellblack_400x400.svg",
-        categoryId: 6,
+        categoryId: 11
+      },
+      {
+        name: "4-Cell Garden Propagation Trays",
+        slug: "epic-tray-4-cell-garden-propagation-trays",
+        description: "Perfect beginner seed starting system with 4 large cells for better root development. Ideal for larger seedlings.",
+        shortDescription: "4-cell propagation system with large cells for healthy roots",
+        price: 12.99,
+        imageUrl: "/images/products/4-cell-side-compressed_400x400.svg",
+        categoryId: 11
+      },
+      {
+        name: "6-Cell Germination Dome Kit",
+        slug: "epic-tray-6-cell-germination-dome-and-bottom-tray",
+        description: "Complete seed starting kit with 6 cells, humidity dome, and bottom tray for water. Creates the perfect environment for seed germination.",
+        shortDescription: "Complete 6-cell seed starting kit with humidity dome",
+        price: 16.99,
+        imageUrl: "/images/products/4CellDomeWithBottomSmallGardenStarterKits_59f087c6-7e6c-41ee-b5af-765c31bbc57c_20_1_400x400.svg",
+        isBestSeller: true,
+        categoryId: 11
+      },
+      // Raised Beds
+      {
+        name: "Round Metal Raised Garden Bed",
+        slug: "round-short-metal-raised-bed",
+        description: "This beautiful round raised garden bed is perfect for growing vegetables, flowers, or herbs. Made from durable galvanized steel with a Light Clay finish.",
+        shortDescription: "Durable galvanized steel raised bed with Light Clay finish",
+        price: 99.99,
+        imageUrl: "/images/products/10328_Large_short_LightClay.svg",
+        isBestSeller: true,
+        categoryId: 10
+      },
+      {
+        name: "Medium Tall Metal Raised Garden Bed",
+        slug: "medium-tall-metal-raised-bed",
+        description: "Stylish medium height raised garden bed in Light Clay finish. Perfect for vegetables that need deeper soil.",
+        shortDescription: "Stylish medium height metal raised bed in Light Clay finish",
+        price: 119.99,
+        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
+        categoryId: 10
+      },
+      {
+        name: "Small Tall Metal Raised Garden Bed",
+        slug: "small-tall-metal-raised-bed",
+        description: "Space-saving tall raised garden bed in Slate Grey finish. Ideal for small spaces and patio gardening.",
+        shortDescription: "Space-saving tall metal planter in elegant Slate Grey",
+        price: 89.99,
+        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
+        categoryId: 10
+      },
+      // Seeds
+      {
+        name: "Zinnia Persian Carpet Seeds",
+        slug: "zinnia-persian-carpet-seeds",
+        description: "Beautiful bi-color zinnia mix with gold, mahogany, and burgundy blooms. Easy to grow and perfect for cut flowers.",
+        shortDescription: "Stunning bi-color zinnia mix for dramatic garden display",
+        price: 4.99,
+        imageUrl: "/images/products/1193i_Zinnia-Persian-Carpet_3oykxo.svg",
+        categoryId: 9
       },
       {
         name: "Nasturtium Fiesta Blend Seeds",
@@ -372,7 +489,7 @@ export class MemStorage implements IStorage {
         price: 3.99,
         imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
         isBestSeller: true,
-        categoryId: 2,
+        categoryId: 9
       },
       {
         name: "Bean Bush Goldrush Organic Seeds",
@@ -382,54 +499,19 @@ export class MemStorage implements IStorage {
         price: 4.29,
         imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
         isNew: true,
-        categoryId: 1,
+        categoryId: 9
       },
       {
-        name: "Medium Tall Metal Raised Garden Bed",
-        slug: "medium-tall-metal-raised-bed",
-        description: "Stylish medium height raised garden bed in Light Clay finish. Perfect for vegetables that need deeper soil.",
-        shortDescription: "Stylish medium height metal raised bed in Light Clay finish",
-        price: 119.99,
-        imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
-        categoryId: 5,
-      },
-      {
-        name: "Small Tall Metal Raised Garden Bed",
-        slug: "small-tall-metal-raised-bed",
-        description: "Space-saving tall raised garden bed in Slate Grey finish. Ideal for small spaces and patio gardening.",
-        shortDescription: "Space-saving tall metal planter in elegant Slate Grey",
-        price: 89.99,
-        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
-        categoryId: 5,
-      },
-      {
-        name: "Heirloom Organic Seed Bank Collection",
+        name: "Heirloom Organic Seed Collection",
         slug: "heirloom-organic-seed-bank",
         description: "Comprehensive collection of 25 heirloom organic vegetable, herb, and flower seeds for a complete garden.",
         shortDescription: "25 varieties of heirloom organic seeds for a complete garden",
         price: 29.99,
         imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
         isBestSeller: true,
-        categoryId: 4,
+        categoryId: 9
       },
-      {
-        name: "Epic 4-Cell Seed Starting Kit",
-        slug: "epic-4-cell-seed-starting-kit",
-        description: "Perfect beginner seed starting system with 4 large cells and humidity dome for better germination.",
-        shortDescription: "Beginner-friendly 4-cell seed starting system with dome",
-        price: 12.99,
-        imageUrl: "/images/products/4-cell-side-compressed_400x400.svg",
-        categoryId: 6,
-      },
-      {
-        name: "4-Cell Dome Seed Starting Kit",
-        slug: "4-cell-dome-seed-starting-kit",
-        description: "Professional 4-cell seed starting system with high dome for taller seedlings.",
-        shortDescription: "Professional seed starting kit with high dome for tall seedlings",
-        price: 16.99,
-        imageUrl: "/images/products/4CellDomeWithBottomSmallGardenStarterKits_59f087c6-7e6c-41ee-b5af-765c31bbc57c_20_1_400x400.svg",
-        categoryId: 6,
-      },
+      // More gardening products
       {
         name: "Stack & Grow Seedling Trays",
         slug: "stack-and-grow-trays",
@@ -438,7 +520,7 @@ export class MemStorage implements IStorage {
         price: 42.99,
         imageUrl: "/images/products/2022-11-17-Diego0293-STACK_400x400.svg",
         isNew: true,
-        categoryId: 6,
+        categoryId: 11
       },
       {
         name: "Premium Garden Gloves",
@@ -447,7 +529,7 @@ export class MemStorage implements IStorage {
         shortDescription: "Durable garden gloves with reinforced fingertips",
         price: 14.99,
         imageUrl: "/images/products/garden_gloves.svg",
-        categoryId: 5,
+        categoryId: 5
       },
       {
         name: "Ergonomic Hand Trowel",
@@ -457,7 +539,7 @@ export class MemStorage implements IStorage {
         price: 12.99,
         imageUrl: "/images/products/hand_trowel.svg",
         isBestSeller: true,
-        categoryId: 5,
+        categoryId: 5
       },
       {
         name: "Galvanized Steel Watering Can",
@@ -466,7 +548,7 @@ export class MemStorage implements IStorage {
         shortDescription: "Classic 2-gallon watering can with removable rose",
         price: 34.99,
         imageUrl: "/images/products/watering_can.svg",
-        categoryId: 5,
+        categoryId: 5
       },
       {
         name: "Heirloom Tomato Seed Collection",
@@ -476,73 +558,8 @@ export class MemStorage implements IStorage {
         price: 18.99,
         imageUrl: "/images/products/tomato_seeds.svg",
         isNew: true,
-        categoryId: 4,
-      },
-      {
-        name: "5-Blade Herb Scissors",
-        slug: "herb-scissors",
-        description: "Multi-blade herb scissors for quick and easy herb harvesting and chopping. Includes cleaning comb.",
-        shortDescription: "Multi-blade scissors for easy herb harvesting",
-        price: 16.99,
-        imageUrl: "/images/products/herb_scissors.svg",
-        categoryId: 5,
-      },
-      {
-        name: "Weather-Resistant Plant Labels",
-        slug: "weather-resistant-plant-labels",
-        description: "Set of 50 weather-resistant plant labels with marking pen. Perfect for identifying plants in your garden.",
-        shortDescription: "50 durable plant labels with marking pen",
-        price: 9.99,
-        imageUrl: "/images/products/plant_labels.svg",
-        categoryId: 5,
-      },
-      {
-        name: "Tiered Strawberry Planter",
-        slug: "tiered-strawberry-planter",
-        description: "3-tier strawberry planter that maximizes growing space. Perfect for patios and small gardens.",
-        shortDescription: "Space-saving 3-tier planter for strawberries",
-        price: 29.99,
-        imageUrl: "/images/products/strawberry_planter.svg",
-        categoryId: 3,
-      },
-      {
-        name: "Drip Irrigation Starter Kit",
-        slug: "drip-irrigation-kit",
-        description: "Complete drip irrigation kit for up to 25 plants. Includes timer, tubing, emitters, and connectors.",
-        shortDescription: "Complete water-saving irrigation system for 25 plants",
-        price: 49.99,
-        imageUrl: "/images/products/drip_irrigation.svg",
-        isBestSeller: true,
-        categoryId: 5,
-      },
-      {
-        name: "Bypass Pruning Shears",
-        slug: "bypass-pruning-shears",
-        description: "Professional-grade bypass pruning shears with titanium-coated blades and ergonomic handles.",
-        shortDescription: "Professional pruning shears with titanium-coated blades",
-        price: 24.99,
-        imageUrl: "/images/products/pruning_shears.svg",
-        categoryId: 5,
-      },
-      {
-        name: "Compact Compost Bin",
-        slug: "compact-compost-bin",
-        description: "Space-saving 5-gallon compost bin with aeration system and activated charcoal filter to control odors.",
-        shortDescription: "Space-saving compost bin with odor control",
-        price: 39.99,
-        imageUrl: "/images/products/compost_bin.svg",
-        categoryId: 6,
-      },
-      {
-        name: "5-Tier Vertical Planter",
-        slug: "vertical-planter",
-        description: "Space-saving vertical planter with 5 tiers, perfect for growing herbs, strawberries, or flowers on patios and balconies.",
-        shortDescription: "5-tier vertical planter for herbs and small plants",
-        price: 59.99,
-        imageUrl: "/images/products/vertical_planter.svg",
-        isNew: true,
-        categoryId: 3,
-      },
+        categoryId: 9
+      }
     ];
     
     // Create products
