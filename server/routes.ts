@@ -109,7 +109,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Direct download for the project ZIP file
   app.get("/download/epic-gardening-project", (req, res) => {
-    const filePath = path.resolve("./epic_gardening_project.zip");
+    const filePath = path.resolve("./public/epic_gardening_project.zip"); //Corrected path
 
     if (fs.existsSync(filePath)) {
       res.setHeader("Content-Type", "application/zip");
