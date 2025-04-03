@@ -9,19 +9,19 @@ const Footer = () => {
             <h3 className="font-montserrat font-bold text-xl mb-6">Epic Gardening</h3>
             <p className="mb-6 text-gray-300">Helping you become a better gardener with expert tips, tools, and resources to grow your own food and create beautiful gardens.</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-accent transition duration-300">
+              <a href="https://www.facebook.com/epicgardening" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent transition duration-300">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="text-white hover:text-accent transition duration-300">
+              <a href="https://www.instagram.com/epicgardening" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent transition duration-300">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="#" className="text-white hover:text-accent transition duration-300">
+              <a href="https://www.youtube.com/c/EpicGardening" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent transition duration-300">
                 <i className="fab fa-youtube"></i>
               </a>
-              <a href="#" className="text-white hover:text-accent transition duration-300">
+              <a href="https://www.pinterest.com/epicgardening" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent transition duration-300">
                 <i className="fab fa-pinterest"></i>
               </a>
-              <a href="#" className="text-white hover:text-accent transition duration-300">
+              <a href="https://twitter.com/epicgardening" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent transition duration-300">
                 <i className="fab fa-twitter"></i>
               </a>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
               <li><Link href="/about" className="text-gray-300 hover:text-white transition duration-300">About Us</Link></li>
               <li><Link href="/shop" className="text-gray-300 hover:text-white transition duration-300">Shop</Link></li>
               <li><Link href="/blog" className="text-gray-300 hover:text-white transition duration-300">Blog</Link></li>
-              <li><Link href="#" className="text-gray-300 hover:text-white transition duration-300">Podcast</Link></li>
+              <li><Link href="/podcast" className="text-gray-300 hover:text-white transition duration-300">Podcast</Link></li>
               <li><Link href="/contact" className="text-gray-300 hover:text-white transition duration-300">Contact Us</Link></li>
               <li><Link href="/blog" className="text-gray-300 hover:text-white transition duration-300">Gardening Guides</Link></li>
             </ul>
@@ -75,9 +75,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">&copy; {new Date().getFullYear()} Epic Gardening. All rights reserved.</p>
           <div className="flex space-x-6">
-            <Link href="#" className="text-gray-400 hover:text-white text-sm transition duration-300">Privacy Policy</Link>
-            <Link href="#" className="text-gray-400 hover:text-white text-sm transition duration-300">Terms of Service</Link>
-            <Link href="#" className="text-gray-400 hover:text-white text-sm transition duration-300">Shipping Policy</Link>
+            <Link href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition duration-300">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="text-gray-400 hover:text-white text-sm transition duration-300">Terms of Service</Link>
+            <Link href="/shipping-policy" className="text-gray-400 hover:text-white text-sm transition duration-300">Shipping Policy</Link>
           </div>
         </div>
       </div>

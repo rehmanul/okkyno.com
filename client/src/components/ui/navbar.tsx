@@ -93,7 +93,7 @@ const Navbar = () => {
             </div>
           </div>
           <Link href="/blog" className="font-montserrat font-semibold hover:text-primary">Blog</Link>
-          <Link href="#" className="font-montserrat font-semibold hover:text-primary">Podcast</Link>
+          <Link href="/podcast" className="font-montserrat font-semibold hover:text-primary">Podcast</Link>
         </nav>
         
         <div className="flex items-center space-x-4">

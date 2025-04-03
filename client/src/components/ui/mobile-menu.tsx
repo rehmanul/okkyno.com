@@ -87,7 +87,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         />
         
         <Link href="/blog" className="block py-2 font-montserrat font-semibold border-b pb-2">Blog</Link>
-        <Link href="#" className="block py-2 font-montserrat font-semibold border-b pb-2">Podcast</Link>
+        <Link href="/podcast" className="block py-2 font-montserrat font-semibold border-b pb-2">Podcast</Link>
         <Link href="/about" className="block py-2 font-montserrat font-semibold border-b pb-2">About</Link>
         <Link href="/contact" className="block py-2 font-montserrat font-semibold border-b pb-2">Contact</Link>
         <Link href="/shop" className="block py-2 font-montserrat font-semibold border-b pb-2">Shop</Link>

@@ -11,6 +11,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Shop from "@/pages/shop";
 import Blog from "@/pages/blog";
+import Podcast from "@/pages/podcast";
 import Product from "@/pages/product";
 import Article from "@/pages/article";
 import Category from "@/pages/category";
@@ -28,6 +29,7 @@ function Router() {
           <Route path="/contact" component={Contact} />
           <Route path="/shop" component={Shop} />
           <Route path="/blog" component={Blog} />
+          <Route path="/podcast" component={Podcast} />
           <Route path="/product/:slug" component={Product} />
           <Route path="/article/:slug" component={Article} />
           <Route path="/category/:slug" component={Category} />
