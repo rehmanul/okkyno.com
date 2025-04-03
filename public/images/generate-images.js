@@ -134,6 +134,25 @@ const products = [
   { filename: 'products/hose-splitter.svg', text: 'Hose\nSplitter', color: '#0277BD' },
   { filename: 'products/garden-hose.svg', text: 'Expandable\nGarden Hose', color: '#006064' },
   
+  // Garden Tools - Hand Tools
+  { filename: 'products/garden_pruner.svg', text: 'Garden\nHand Pruner', color: '#5D4037' },
+  { filename: 'products/bypass-loppers.svg', text: 'Bypass\nLoppers', color: '#4E342E' },
+  { filename: 'products/hedge-shears.svg', text: 'Hedge\nShears', color: '#6D4C41' },
+  { filename: 'products/folding-hand-saw.svg', text: 'Folding\nHand Saw', color: '#5D4037' },
+  { filename: 'products/garden-cultivator.svg', text: 'Garden\nCultivator', color: '#4E342E' },
+  { filename: 'products/garden-spade.svg', text: 'Garden\nDigging Spade', color: '#6D4C41' },
+  { filename: 'products/garden-fork.svg', text: 'Garden\nFork', color: '#5D4037' },
+  
+  // Garden Tools - Power Tools
+  { filename: 'products/electric-garden-tiller.svg', text: 'Mini Electric\nTiller', color: '#BF360C' },
+  { filename: 'products/cordless-hedge-trimmer.svg', text: 'Cordless\nHedge Trimmer', color: '#E64A19' },
+  { filename: 'products/electric-leaf-blower.svg', text: 'Electric\nLeaf Blower', color: '#F4511E' },
+  
+  // Garden Tools - Watering
+  { filename: 'products/soaker-hose.svg', text: 'Soaker\nHose Kit', color: '#01579B' },
+  { filename: 'products/watering-can.svg', text: 'Watering\nCan', color: '#0288D1' },
+  { filename: 'products/rain-barrel.svg', text: 'Rain\nBarrel', color: '#0277BD' },
+  
   // Seeds and plants
   { filename: 'products/butterfly-seed-mix.svg', text: 'Butterfly\nSeed Mix', color: '#7B1FA2' },
   { filename: 'products/wildflower-seed-mix.svg', text: 'Wildflower\nSeed Mix', color: '#8E24AA' },

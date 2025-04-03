@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad-fmamt6n" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad-roja3uo" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#616161" />
       <stop offset="100%" stop-color="#434343" />
     </linearGradient>
-    <pattern id="pattern-8spuorc" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
-      <rect width="30" height="30" fill="url(#grad-fmamt6n)" />
+    <pattern id="pattern-dbk3hde" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <rect width="30" height="30" fill="url(#grad-roja3uo)" />
       <circle cx="15" cy="15" r="2" fill="#7f7f7f" fill-opacity="0.3" />
     </pattern>
     <filter id="shadow" x="-2" y="-2" width="104%" height="104%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.3" />
     </filter>
   </defs>
-  <rect width="400" height="400" fill="url(#pattern-8spuorc)" />
+  <rect width="400" height="400" fill="url(#pattern-dbk3hde)" />
   <rect width="400" height="100" y="300" fill="#434343" opacity="0.2" />
   <text x="200" y="185" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Pruning</text>
     <text x="200" y="215" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Scissors</text>
