@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import MobileMenu from "./mobile-menu";
+import SearchDialog from "./search-dialog";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [location] = useLocation();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
@@ -91,10 +97,14 @@ const Navbar = () => {
         </nav>
         
         <div className="flex items-center space-x-4">
-          <button className="text-lg">
+          <button 
+            className="text-lg hover:text-primary transition-colors" 
+            onClick={toggleSearch}
+            aria-label="Search"
+          >
             <i className="fas fa-search"></i>
           </button>
-          <Link href="/shop" className="text-lg">
+          <Link href="/cart" className="text-lg hover:text-primary transition-colors">
             <i className="fas fa-shopping-cart"></i>
           </Link>
         </div>
@@ -102,6 +112,9 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+      
+      {/* Search Dialog */}
+      <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };
