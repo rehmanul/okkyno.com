@@ -90,6 +90,7 @@ const articles = [
 
 // Generate product images
 const products = [
+  // Original products
   { filename: 'products/16-celltray2_400x400.svg', text: 'Seed Starting', color: '#2E7D32' },
   { filename: 'products/10328_Large_short_LightClay.svg', text: 'Round Metal\nRaised Bed', color: '#558B2F' },
   { filename: 'products/1193i_Zinnia-Persian-Carpet_3oykxo.svg', text: 'Zinnia Seeds', color: '#7CB342' },
@@ -107,7 +108,80 @@ const products = [
   { filename: 'products/drip_irrigation.svg', text: 'Drip\nIrrigation Kit', color: '#0097A7' },
   { filename: 'products/pruning_shears.svg', text: 'Pruning\nShears', color: '#546E7A' },
   { filename: 'products/compost_bin.svg', text: 'Compost\nBin', color: '#6D4C41' },
-  { filename: 'products/vertical_planter.svg', text: 'Vertical\nPlanter', color: '#455A64' }
+  { filename: 'products/vertical_planter.svg', text: 'Vertical\nPlanter', color: '#455A64' },
+  
+  // Fruit trees
+  { filename: 'products/honeycrisp-apple-tree.svg', text: 'Honeycrisp\nApple Tree', color: '#C62828' },
+  { filename: 'products/bing-cherry-tree.svg', text: 'Bing\nCherry Tree', color: '#B71C1C' },
+  { filename: 'products/wonderful-pomegranate-tree.svg', text: 'Pomegranate\nTree', color: '#C2185B' },
+  { filename: 'products/chicago-hardy-fig-tree.svg', text: 'Chicago Hardy\nFig Tree', color: '#6A1B9A' },
+  { filename: 'products/frost-peach-tree.svg', text: 'Frost\nPeach Tree', color: '#EF6C00' },
+  
+  // Berries and vines
+  { filename: 'products/kiwi-prolific-self-fertile.svg', text: 'Prolific Kiwi\nSelf-Fertile', color: '#689F38' },
+  { filename: 'products/thornless-blackberry-bush.svg', text: 'Thornless\nBlackberry', color: '#4A148C' },
+  { filename: 'products/pink-lemonade-blueberry.svg', text: 'Pink Lemonade\nBlueberry', color: '#D81B60' },
+  
+  // Garden equipment
+  { filename: 'products/garden-potting-bench.svg', text: 'Garden\nPotting Bench', color: '#795548' },
+  { filename: 'products/garden-kneeling-pad.svg', text: 'Garden\nKneeling Pad', color: '#558B2F' },
+  { filename: 'products/garden-knee-pads.svg', text: 'Garden\nKnee Pads', color: '#2E7D32' },
+  { filename: 'products/plant-support-cages.svg', text: 'Plant Support\nCages', color: '#827717' },
+  { filename: 'products/tomato-support-stakes.svg', text: 'Tomato\nSupport Stakes', color: '#33691E' },
+  { filename: 'products/fertilizer-spreader.svg', text: 'Fertilizer\nSpreader', color: '#9E9D24' },
+  { filename: 'products/leaf-rake.svg', text: 'Leaf Rake', color: '#F9A825' },
+  { filename: 'products/garden-hose-nozzle.svg', text: 'Adjustable\nHose Nozzle', color: '#1565C0' },
+  { filename: 'products/hose-splitter.svg', text: 'Hose\nSplitter', color: '#0277BD' },
+  { filename: 'products/garden-hose.svg', text: 'Expandable\nGarden Hose', color: '#006064' },
+  
+  // Seeds and plants
+  { filename: 'products/butterfly-seed-mix.svg', text: 'Butterfly\nSeed Mix', color: '#7B1FA2' },
+  { filename: 'products/wildflower-seed-mix.svg', text: 'Wildflower\nSeed Mix', color: '#8E24AA' },
+  { filename: 'products/basil-seed-collection.svg', text: 'Basil Seed\nCollection', color: '#388E3C' },
+  { filename: 'products/lettuce-seed-collection.svg', text: 'Lettuce Seed\nCollection', color: '#8BC34A' },
+  { filename: 'products/microgreens-seed-mix.svg', text: 'Microgreens\nSeed Mix', color: '#9CCC65' },
+  { filename: 'products/hot-pepper-seed-collection.svg', text: 'Hot Pepper\nSeed Collection', color: '#D84315' },
+  
+  // Fertilizers and soil amendments
+  { filename: 'products/plant-food-concentrate.svg', text: 'Plant Food\nConcentrate', color: '#2E7D32' },
+  { filename: 'products/slow-release-fertilizer.svg', text: 'Slow Release\nFertilizer', color: '#1B5E20' },
+  { filename: 'products/bone-meal.svg', text: 'Bone\nMeal', color: '#ECEFF1' },
+  { filename: 'products/blood-meal.svg', text: 'Blood\nMeal', color: '#880E4F' },
+  { filename: 'products/fish-emulsion.svg', text: 'Fish\nEmulsion', color: '#01579B' },
+  { filename: 'products/worm-castings.svg', text: 'Worm\nCastings', color: '#5D4037' },
+  { filename: 'products/azomite.svg', text: 'Azomite\nMineral Powder', color: '#9E9E9E' },
+  { filename: 'products/garden-lime.svg', text: 'Garden\nLime', color: '#E0E0E0' },
+  
+  // Pest control
+  { filename: 'products/neem-oil.svg', text: 'Neem\nOil', color: '#827717' },
+  { filename: 'products/insecticidal-soap.svg', text: 'Insecticidal\nSoap', color: '#33691E' },
+  { filename: 'products/diatomaceous-earth.svg', text: 'Diatomaceous\nEarth', color: '#BDBDBD' },
+  { filename: 'products/slug-traps.svg', text: 'Slug\nTraps', color: '#37474F' },
+  { filename: 'products/sticky-traps.svg', text: 'Yellow\nSticky Traps', color: '#F9A825' },
+  { filename: 'products/bird-netting.svg', text: 'Bird\nNetting', color: '#263238' },
+  
+  // Indoor Growing
+  { filename: 'products/grow-light-led-panel.svg', text: 'LED Grow\nLight Panel', color: '#1565C0' },
+  { filename: 'products/hydroponic-starter-kit.svg', text: 'Hydroponic\nStarter Kit', color: '#00ACC1' },
+  { filename: 'products/humidity-dome.svg', text: 'Humidity\nDome', color: '#B3E5FC' },
+  { filename: 'products/heat-mat.svg', text: 'Seedling\nHeat Mat', color: '#FF7043' },
+  { filename: 'products/ph-meter.svg', text: 'pH\nMeter', color: '#FF6F00' },
+  { filename: 'products/digital-thermometer.svg', text: 'Digital\nThermometer', color: '#424242' },
+  { filename: 'products/pruning-scissors.svg', text: 'Pruning\nScissors', color: '#616161' },
+  
+  // Composting
+  { filename: 'products/compost-thermometer.svg', text: 'Compost\nThermometer', color: '#F57F17' },
+  { filename: 'products/compost-activator.svg', text: 'Compost\nActivator', color: '#8D6E63' },
+  { filename: 'products/kitchen-compost-bin.svg', text: 'Kitchen\nCompost Bin', color: '#4E342E' },
+  { filename: 'products/compost-aerator.svg', text: 'Compost\nAerator', color: '#6D4C41' },
+  
+  // Garden décor
+  { filename: 'products/solar-garden-lights.svg', text: 'Solar\nGarden Lights', color: '#FDD835' },
+  { filename: 'products/garden-stepping-stones.svg', text: 'Garden\nStepping Stones', color: '#9E9E9E' },
+  { filename: 'products/decorative-garden-stakes.svg', text: 'Decorative\nGarden Stakes', color: '#78909C' },
+  { filename: 'products/butterfly-house.svg', text: 'Butterfly\nHouse', color: '#CE93D8' },
+  { filename: 'products/birdbath.svg', text: 'Bird\nBath', color: '#90CAF9' },
+  { filename: 'products/bird-feeder.svg', text: 'Bird\nFeeder', color: '#A5D6A7' }
 ];
 
 // Generate and save all images

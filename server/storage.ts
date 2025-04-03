@@ -118,7 +118,15 @@ export class MemStorage implements IStorage {
   
   async createCategory(insertCategory: InsertCategory): Promise<Category> {
     const id = this.currentCategoryId++;
-    const category: Category = { ...insertCategory, id };
+    // Ensure all required fields have values
+    const category: Category = { 
+      id,
+      name: insertCategory.name,
+      slug: insertCategory.slug,
+      description: insertCategory.description || null,
+      imageUrl: insertCategory.imageUrl || null,
+      parentId: insertCategory.parentId || null
+    };
     this.categories.set(id, category);
     return category;
   }
@@ -146,7 +154,20 @@ export class MemStorage implements IStorage {
   
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.currentProductId++;
-    const product: Product = { ...insertProduct, id };
+    // Ensure all required fields have values
+    const product: Product = { 
+      id,
+      name: insertProduct.name,
+      slug: insertProduct.slug,
+      description: insertProduct.description || null,
+      shortDescription: insertProduct.shortDescription || null,
+      price: insertProduct.price,
+      salePrice: insertProduct.salePrice || null,
+      imageUrl: insertProduct.imageUrl || '',
+      isBestSeller: insertProduct.isBestSeller || null,
+      isNew: insertProduct.isNew || null,
+      categoryId: insertProduct.categoryId
+    };
     this.products.set(id, product);
     return product;
   }
@@ -174,7 +195,17 @@ export class MemStorage implements IStorage {
   
   async createArticle(insertArticle: InsertArticle): Promise<Article> {
     const id = this.currentArticleId++;
-    const article: Article = { ...insertArticle, id };
+    // Ensure all required fields have values
+    const article: Article = { 
+      id,
+      slug: insertArticle.slug,
+      title: insertArticle.title,
+      content: insertArticle.content,
+      categoryId: insertArticle.categoryId,
+      imageUrl: insertArticle.imageUrl || '',
+      excerpt: insertArticle.excerpt || null,
+      datePublished: insertArticle.datePublished
+    };
     this.articles.set(id, article);
     return article;
   }
@@ -186,7 +217,15 @@ export class MemStorage implements IStorage {
   
   async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
     const id = this.currentTestimonialId++;
-    const testimonial: Testimonial = { ...insertTestimonial, id };
+    // Ensure all required fields have values
+    const testimonial: Testimonial = { 
+      id,
+      personName: insertTestimonial.personName,
+      content: insertTestimonial.content,
+      rating: insertTestimonial.rating,
+      role: insertTestimonial.role || null,
+      avatarUrl: insertTestimonial.avatarUrl || null
+    };
     this.testimonials.set(id, testimonial);
     return testimonial;
   }
@@ -251,71 +290,173 @@ export class MemStorage implements IStorage {
   private initializeSampleData() {
     // Sample categories with authentic Epic Gardening images
     const categories: InsertCategory[] = [
+      // Main categories
+      {
+        name: "Fruit Trees",
+        slug: "fruit-trees",
+        description: "Premium fruit trees including apple, cherry, fig, and citrus varieties for home orchards",
+        imageUrl: "/images/products/honeycrisp-apple-tree.svg",
+        parentId: null,
+      } as InsertCategory,
       {
         name: "Vegetables",
         slug: "vegetables",
-        description: "All types of vegetable plants for your garden",
+        description: "Seeds, plants, and supplies for growing your own delicious vegetables",
         imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        parentId: null,
       },
       {
         name: "Flowers",
         slug: "flowers",
-        description: "Beautiful flowering plants to brighten your garden",
+        description: "Beautify your garden with a wide variety of flowering plants",
         imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
+        parentId: null,
       },
       {
         name: "Container Gardening",
         slug: "container-gardening",
-        description: "Everything you need for gardening in containers and raised beds",
+        description: "Everything you need for successful gardening in pots and planters",
         imageUrl: "/images/categories/10331_Medium_Tall_LightClay_Compressed.svg",
+        parentId: null,
       },
       {
         name: "Herbs",
         slug: "herbs",
-        description: "Flavorful and aromatic herb plants for culinary and medicinal use",
+        description: "Culinary and medicinal herbs to grow at home",
         imageUrl: "/images/categories/herbs_category.svg",
+        parentId: null,
       },
       {
         name: "Tools",
         slug: "tools",
-        description: "Quality gardening tools for all your gardening needs",
+        description: "Quality gardening tools for every task",
         imageUrl: "/images/categories/tools_category.svg",
+        parentId: null,
+      },
+      {
+        name: "Composting",
+        slug: "composting",
+        description: "Turn kitchen scraps and yard waste into valuable garden gold",
+        imageUrl: "/images/products/compost_bin.svg",
+        parentId: null,
       },
       {
         name: "Fertilizers",
         slug: "fertilizers",
-        description: "Organic fertilizers and soil amendments for healthy plants",
+        description: "Organic and conventional fertilizers for healthier plants",
         imageUrl: "/images/categories/fertilizers_category.svg",
+        parentId: null,
       },
       {
         name: "Pest Control",
         slug: "pest-control",
-        description: "Natural and organic solutions for garden pests and diseases",
+        description: "Eco-friendly solutions for garden pests and diseases",
         imageUrl: "/images/categories/pest_control_category.svg",
+        parentId: null,
       },
+      {
+        name: "Seeds",
+        slug: "seeds",
+        description: "High-quality seeds for vegetables, herbs, and flowers",
+        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
+        parentId: null,
+      },
+      {
+        name: "Raised Beds",
+        slug: "raised-beds",
+        description: "Modern raised garden beds for productive growing spaces",
+        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
+        parentId: null,
+      },
+      {
+        name: "Seed Starting",
+        slug: "seed-starting",
+        description: "Everything you need to start seeds indoors and out",
+        imageUrl: "/images/products/16-celltray2_400x400.svg",
+        parentId: null,
+      },
+      {
+        name: "Indoor Growing",
+        slug: "indoor-growing",
+        description: "Lights, hydroponics, and supplies for growing plants indoors year-round",
+        imageUrl: "/images/products/grow-light-led-panel.svg",
+        parentId: null,
+      },
+      {
+        name: "Garden Décor",
+        slug: "garden-decor",
+        description: "Beautify your outdoor space with functional and decorative garden elements",
+        imageUrl: "/images/products/solar-garden-lights.svg",
+        parentId: null,
+      },
+      
+      // Subcategories - Tools
+      {
+        name: "Hand Tools",
+        slug: "hand-tools",
+        description: "Quality hand tools for precision gardening tasks",
+        imageUrl: "/images/products/hand-trowel.svg",
+        parentId: 6, // Parent: Tools
+      },
+      {
+        name: "Power Tools",
+        slug: "power-tools",
+        description: "Efficient power tools to make gardening easier",
+        imageUrl: "/images/products/electric-garden-tiller.svg",
+        parentId: 6, // Parent: Tools
+      },
+      {
+        name: "Watering Tools",
+        slug: "watering-tools",
+        description: "Everything you need to keep your garden hydrated",
+        imageUrl: "/images/products/garden-hose-nozzle.svg",
+        parentId: 6, // Parent: Tools
+      },
+      {
+        name: "Pruning Tools",
+        slug: "pruning-tools",
+        description: "Precise pruning tools for plant maintenance and health",
+        imageUrl: "/images/products/bypass-pruners.svg",
+        parentId: 6, // Parent: Tools
+      },
+      
+      // Subcategories - Indoor Growing
       {
         name: "Grow Lights",
         slug: "grow-lights",
         description: "LED grow lights for indoor gardening and seed starting",
         imageUrl: "/images/categories/grow_lights_category.svg",
+        parentId: 13, // Parent: Indoor Growing
       },
       {
-        name: "Seeds",
-        slug: "seeds",
-        description: "High-quality seeds for your garden",
-        imageUrl: "/images/articles/4560i-Heirloom-ORG-Seed-Bank-Collection_35vk3o_m4m7ls.svg",
+        name: "Hydroponics",
+        slug: "hydroponics",
+        description: "Systems and supplies for soil-free growing",
+        imageUrl: "/images/products/hydroponic-system.svg",
+        parentId: 13, // Parent: Indoor Growing
+      },
+      
+      // Subcategories - Seeds
+      {
+        name: "Vegetable Seeds",
+        slug: "vegetable-seeds",
+        description: "High-quality vegetable seeds for your edible garden",
+        imageUrl: "/images/products/vegetable-seed-collection.svg",
+        parentId: 10, // Parent: Seeds
       },
       {
-        name: "Raised Beds",
-        slug: "raised-beds",
-        description: "Beautiful raised beds for your garden",
-        imageUrl: "/images/articles/10344_Small_Tall_SlateGrey_Compressed.svg",
+        name: "Flower Seeds",
+        slug: "flower-seeds",
+        description: "Beautiful flower seeds to brighten your garden",
+        imageUrl: "/images/products/flower-seed-collection.svg",
+        parentId: 10, // Parent: Seeds
       },
       {
-        name: "Seed Starting",
-        slug: "seed-starting",
-        description: "Everything you need to start your seeds right",
-        imageUrl: "/images/products/16-celltray2_400x400.svg",
+        name: "Herb Seeds",
+        slug: "herb-seeds",
+        description: "Culinary and medicinal herb seeds for your garden",
+        imageUrl: "/images/products/herb-seed-collection.svg",
+        parentId: 10, // Parent: Seeds
       },
     ];
     
@@ -511,17 +652,72 @@ export class MemStorage implements IStorage {
         isBestSeller: true,
         categoryId: 9
       },
-      // More gardening products
       {
-        name: "Stack & Grow Seedling Trays",
-        slug: "stack-and-grow-trays",
-        description: "Stackable seed starting system for maximizing your growing space. Professional quality for serious gardeners.",
-        shortDescription: "Space-saving stackable seedling trays for serious gardeners",
-        price: 42.99,
-        imageUrl: "/images/products/2022-11-17-Diego0293-STACK_400x400.svg",
+        name: "Heirloom Tomato Seed Collection",
+        slug: "heirloom-tomato-seed-collection",
+        description: "Collection of 6 heirloom tomato varieties, from cherry to beefsteak. Non-GMO and open-pollinated.",
+        shortDescription: "Collection of 6 delicious heirloom tomato varieties",
+        price: 18.99,
+        imageUrl: "/images/products/tomato_seeds.svg",
         isNew: true,
-        categoryId: 11
+        categoryId: 9
       },
+      {
+        name: "Butterfly Seed Mix",
+        slug: "butterfly-seed-mix",
+        description: "Special blend of annual and perennial flowers selected to attract and support butterflies throughout the growing season.",
+        shortDescription: "Colorful flower mix to attract butterflies to your garden",
+        price: 6.99,
+        imageUrl: "/images/products/butterfly-seed-mix.svg",
+        categoryId: 9
+      },
+      {
+        name: "Wildflower Seed Mix",
+        slug: "wildflower-seed-mix",
+        description: "Colorful blend of native and naturalized wildflowers that provides season-long color and attracts beneficial insects.",
+        shortDescription: "Easy-to-grow wildflower mix for naturalistic plantings",
+        price: 5.99,
+        imageUrl: "/images/products/wildflower-seed-mix.svg",
+        categoryId: 9
+      },
+      {
+        name: "Basil Seed Collection",
+        slug: "basil-seed-collection",
+        description: "Gourmet collection of 5 distinctive basil varieties including Sweet, Thai, Lemon, Purple, and Spicy Globe.",
+        shortDescription: "5 gourmet basil varieties for culinary versatility",
+        price: 8.99,
+        imageUrl: "/images/products/basil-seed-collection.svg",
+        categoryId: 9
+      },
+      {
+        name: "Lettuce Seed Collection",
+        slug: "lettuce-seed-collection",
+        description: "Mix of 6 gourmet lettuce varieties in different colors, textures, and flavors for continuous salad harvests.",
+        shortDescription: "Colorful mix of lettuce varieties for fresh salads",
+        price: 7.99,
+        imageUrl: "/images/products/lettuce-seed-collection.svg",
+        categoryId: 9
+      },
+      {
+        name: "Microgreens Seed Mix",
+        slug: "microgreens-seed-mix",
+        description: "Fast-growing blend of nutritious microgreens including radish, broccoli, kale, and sunflower for year-round indoor harvests.",
+        shortDescription: "Nutritious microgreens mix for quick indoor harvests",
+        price: 9.99,
+        imageUrl: "/images/products/microgreens-seed-mix.svg",
+        isNew: true,
+        categoryId: 9
+      },
+      {
+        name: "Hot Pepper Seed Collection",
+        slug: "hot-pepper-seed-collection",
+        description: "Fiery collection of 5 hot pepper varieties ranging from mild to super-hot for adventurous gardeners.",
+        shortDescription: "Spicy pepper collection with varied heat levels",
+        price: 12.99,
+        imageUrl: "/images/products/hot-pepper-seed-collection.svg",
+        categoryId: 9
+      },
+      // Garden tools - Hand Tools category
       {
         name: "Premium Garden Gloves",
         slug: "premium-garden-gloves",
@@ -529,7 +725,7 @@ export class MemStorage implements IStorage {
         shortDescription: "Durable garden gloves with reinforced fingertips",
         price: 14.99,
         imageUrl: "/images/products/garden_gloves.svg",
-        categoryId: 5
+        categoryId: 15 // Hand Tools
       },
       {
         name: "Ergonomic Hand Trowel",
@@ -539,7 +735,136 @@ export class MemStorage implements IStorage {
         price: 12.99,
         imageUrl: "/images/products/hand_trowel.svg",
         isBestSeller: true,
-        categoryId: 5
+        categoryId: 15 // Hand Tools
+      },
+      {
+        name: "Garden Hand Pruner",
+        slug: "garden-hand-pruner",
+        description: "Sharp, precision garden pruners with comfort grip handles. Perfect for deadheading and small pruning tasks.",
+        shortDescription: "Precision pruners for small garden tasks",
+        price: 19.99,
+        imageUrl: "/images/products/garden_pruner.svg",
+        categoryId: 18 // Pruning Tools
+      },
+      {
+        name: "Bypass Loppers",
+        slug: "bypass-loppers",
+        description: "Heavy-duty bypass loppers for cutting branches up to 1.5 inches thick. Telescoping handles extend reach.",
+        shortDescription: "Heavy-duty loppers for thicker branches",
+        price: 34.99,
+        imageUrl: "/images/products/bypass-loppers.svg",
+        isNew: true,
+        categoryId: 18 // Pruning Tools
+      },
+      {
+        name: "Hedge Shears",
+        slug: "hedge-shears",
+        description: "Precision hedge shears with wavy blade design for clean cuts. Shock-absorbing bumpers reduce fatigue.",
+        shortDescription: "Precision hedge shears for clean, accurate cuts",
+        price: 29.99,
+        imageUrl: "/images/products/hedge-shears.svg",
+        categoryId: 18 // Pruning Tools
+      },
+      {
+        name: "Folding Hand Saw",
+        slug: "folding-hand-saw",
+        description: "Compact folding saw with triple-ground teeth for efficient cutting. Locks in open and closed positions.",
+        shortDescription: "Compact folding saw for pruning small branches",
+        price: 16.99,
+        imageUrl: "/images/products/folding-hand-saw.svg",
+        categoryId: 18 // Pruning Tools
+      },
+      {
+        name: "Garden Cultivator",
+        slug: "garden-cultivator",
+        description: "Three-prong garden cultivator for breaking up soil and removing weeds. Comfortable ergonomic handle.",
+        shortDescription: "Three-prong cultivator for soil aeration",
+        price: 15.99,
+        imageUrl: "/images/products/garden-cultivator.svg",
+        categoryId: 15 // Hand Tools
+      },
+      {
+        name: "Garden Digging Spade",
+        slug: "garden-digging-spade",
+        description: "Heavy-duty digging spade with carbon steel blade and comfortable D-handle grip. Perfect for digging and edging.",
+        shortDescription: "Heavy-duty digging spade for garden prep",
+        price: 29.99,
+        imageUrl: "/images/products/garden-spade.svg",
+        categoryId: 15 // Hand Tools
+      },
+      {
+        name: "Garden Fork",
+        slug: "garden-fork",
+        description: "Four-tine garden fork ideal for turning soil, lifting plants, and adding compost. Durable steel construction.",
+        shortDescription: "Four-tine garden fork for soil work",
+        price: 26.99,
+        imageUrl: "/images/products/garden-fork.svg",
+        categoryId: 15 // Hand Tools
+      },
+      {
+        name: "Mini Electric Tiller",
+        slug: "mini-electric-tiller",
+        description: "Compact electric tiller with adjustable tilling width for garden beds and small spaces. Powerful 8.5-amp motor.",
+        shortDescription: "Compact electric tiller for small garden beds",
+        price: 129.99,
+        imageUrl: "/images/products/electric-garden-tiller.svg",
+        isNew: true,
+        categoryId: 16 // Power Tools
+      },
+      {
+        name: "Cordless Hedge Trimmer",
+        slug: "cordless-hedge-trimmer",
+        description: "20V cordless hedge trimmer with 22-inch dual-action blade. Cuts branches up to 3/4 inch thick.",
+        shortDescription: "Cordless hedge trimmer for precise landscape maintenance",
+        price: 89.99,
+        imageUrl: "/images/products/cordless-hedge-trimmer.svg",
+        categoryId: 16 // Power Tools
+      },
+      {
+        name: "Electric Leaf Blower",
+        slug: "electric-leaf-blower",
+        description: "Variable-speed electric leaf blower with vacuum capability. Includes collection bag for yard cleanup.",
+        shortDescription: "Versatile electric leaf blower and vacuum",
+        price: 59.99,
+        imageUrl: "/images/products/electric-leaf-blower.svg",
+        categoryId: 16 // Power Tools
+      },
+      {
+        name: "Soaker Hose Kit",
+        slug: "soaker-hose-kit",
+        description: "50-foot recycled rubber soaker hose with connectors. Conserves water by delivering moisture directly to plant roots.",
+        shortDescription: "Water-efficient soaker hose for direct root irrigation",
+        price: 24.99,
+        imageUrl: "/images/products/soaker-hose.svg",
+        categoryId: 17 // Watering Tools
+      },
+      {
+        name: "Garden Hose Nozzle",
+        slug: "garden-hose-nozzle",
+        description: "Multi-pattern metal hose nozzle with 9 spray patterns. Comfortable rubber grip and flow control.",
+        shortDescription: "9-pattern metal hose nozzle for versatile watering",
+        price: 12.99,
+        imageUrl: "/images/products/garden-hose-nozzle.svg",
+        isBestSeller: true,
+        categoryId: 17 // Watering Tools
+      },
+      {
+        name: "Watering Can",
+        slug: "watering-can",
+        description: "Two-gallon plastic watering can with removable rose. Balanced design makes it easy to carry and pour.",
+        shortDescription: "Balanced 2-gallon watering can for precise watering",
+        price: 19.99,
+        imageUrl: "/images/products/watering-can.svg",
+        categoryId: 17 // Watering Tools
+      },
+      {
+        name: "Rain Barrel",
+        slug: "rain-barrel",
+        description: "50-gallon rainwater collection barrel with spigot and overflow port. Includes debris screen and linking kit.",
+        shortDescription: "50-gallon rainwater harvesting system",
+        price: 89.99, 
+        imageUrl: "/images/products/rain-barrel.svg",
+        categoryId: 17 // Watering Tools
       },
       {
         name: "Galvanized Steel Watering Can",
@@ -551,14 +876,374 @@ export class MemStorage implements IStorage {
         categoryId: 5
       },
       {
-        name: "Heirloom Tomato Seed Collection",
-        slug: "heirloom-tomato-seed-collection",
-        description: "Collection of 6 heirloom tomato varieties, from cherry to beefsteak. Non-GMO and open-pollinated.",
-        shortDescription: "Collection of 6 delicious heirloom tomato varieties",
+        name: "5-Blade Herb Scissors",
+        slug: "herb-scissors",
+        description: "Multi-blade herb scissors for quick and easy herb harvesting and chopping. Includes cleaning comb.",
+        shortDescription: "Multi-blade scissors for easy herb harvesting",
+        price: 16.99,
+        imageUrl: "/images/products/herb_scissors.svg",
+        categoryId: 5
+      },
+      {
+        name: "Weather-Resistant Plant Labels",
+        slug: "weather-resistant-plant-labels",
+        description: "Set of 50 weather-resistant plant labels with marking pen. Perfect for identifying plants in your garden.",
+        shortDescription: "50 durable plant labels with marking pen",
+        price: 9.99,
+        imageUrl: "/images/products/plant_labels.svg",
+        categoryId: 5
+      },
+      {
+        name: "Bypass Pruning Shears",
+        slug: "bypass-pruning-shears",
+        description: "Professional-grade bypass pruning shears with titanium-coated blades and ergonomic handles.",
+        shortDescription: "Professional pruning shears with titanium-coated blades",
+        price: 24.99,
+        imageUrl: "/images/products/pruning_shears.svg",
+        categoryId: 5
+      },
+      {
+        name: "Drip Irrigation Starter Kit",
+        slug: "drip-irrigation-kit",
+        description: "Complete drip irrigation kit for up to 25 plants. Includes timer, tubing, emitters, and connectors.",
+        shortDescription: "Complete water-saving irrigation system for 25 plants",
+        price: 49.99,
+        imageUrl: "/images/products/drip_irrigation.svg",
+        isBestSeller: true,
+        categoryId: 5
+      },
+      {
+        name: "Garden Potting Bench",
+        slug: "garden-potting-bench",
+        description: "Durable cedar potting bench with built-in storage shelf, soil sink, and tool hooks for organized gardening.",
+        shortDescription: "Cedar potting bench with storage for garden work",
+        price: 149.99,
+        imageUrl: "/images/products/garden-potting-bench.svg",
+        categoryId: 5
+      },
+      {
+        name: "Garden Kneeling Pad",
+        slug: "garden-kneeling-pad",
+        description: "Extra-thick memory foam kneeling pad that provides comfort for extended garden work. Water and dirt resistant.",
+        shortDescription: "Thick memory foam pad for comfortable gardening",
+        price: 19.99,
+        imageUrl: "/images/products/garden-kneeling-pad.svg",
+        categoryId: 5
+      },
+      {
+        name: "Garden Knee Pads",
+        slug: "garden-knee-pads",
+        description: "Waterproof knee pads with adjustable straps for comfortable protection during garden work.",
+        shortDescription: "Waterproof knee pads with adjustable straps",
+        price: 24.99,
+        imageUrl: "/images/products/garden-knee-pads.svg",
+        categoryId: 5
+      },
+      {
+        name: "Plant Support Cages",
+        slug: "plant-support-cages",
+        description: "Set of 3 durable steel tomato cages with powder-coated finish. Provides sturdy support for tomatoes and other vining plants.",
+        shortDescription: "Durable steel support cages for tomatoes and vines",
+        price: 29.99,
+        imageUrl: "/images/products/plant-support-cages.svg",
+        categoryId: 5
+      },
+      {
+        name: "Tomato Support Stakes",
+        slug: "tomato-support-stakes",
+        description: "Set of 5 heavy-duty 6-foot garden stakes perfect for supporting tomatoes, peppers, and other tall plants.",
+        shortDescription: "Heavy-duty 6-foot stakes for tall garden plants",
         price: 18.99,
-        imageUrl: "/images/products/tomato_seeds.svg",
+        imageUrl: "/images/products/tomato-support-stakes.svg",
+        categoryId: 5
+      },
+      {
+        name: "Fertilizer Spreader",
+        slug: "fertilizer-spreader",
+        description: "Hand-held spreader for even application of fertilizers, seeds, and other granular garden products.",
+        shortDescription: "Hand-held spreader for fertilizer and seed application",
+        price: 22.99,
+        imageUrl: "/images/products/fertilizer-spreader.svg",
+        categoryId: 5
+      },
+      {
+        name: "Expandable Garden Hose",
+        slug: "expandable-garden-hose",
+        description: "Lightweight, expandable garden hose that grows to 50 feet when in use, but shrinks for easy storage. Includes nozzle.",
+        shortDescription: "Expandable 50-foot hose with storage-saving design",
+        price: 39.99,
+        imageUrl: "/images/products/garden-hose.svg",
+        categoryId: 5
+      },
+      // Planters
+      {
+        name: "Stack & Grow Seedling Trays",
+        slug: "stack-and-grow-trays",
+        description: "Stackable seed starting system for maximizing your growing space. Professional quality for serious gardeners.",
+        shortDescription: "Space-saving stackable seedling trays for serious gardeners",
+        price: 42.99,
+        imageUrl: "/images/products/2022-11-17-Diego0293-STACK_400x400.svg",
         isNew: true,
-        categoryId: 9
+        categoryId: 11
+      },
+      {
+        name: "Tiered Strawberry Planter",
+        slug: "tiered-strawberry-planter",
+        description: "3-tier strawberry planter that maximizes growing space. Perfect for patios and small gardens.",
+        shortDescription: "Space-saving 3-tier planter for strawberries",
+        price: 29.99,
+        imageUrl: "/images/products/strawberry_planter.svg",
+        categoryId: 3
+      },
+      {
+        name: "5-Tier Vertical Planter",
+        slug: "vertical-planter",
+        description: "Space-saving vertical planter with 5 tiers, perfect for growing herbs, strawberries, or flowers on patios and balconies.",
+        shortDescription: "5-tier vertical planter for herbs and small plants",
+        price: 59.99,
+        imageUrl: "/images/products/vertical_planter.svg",
+        isNew: true,
+        categoryId: 3
+      },
+      // Composting
+      {
+        name: "Compact Compost Bin",
+        slug: "compact-compost-bin",
+        description: "Space-saving 5-gallon compost bin with aeration system and activated charcoal filter to control odors.",
+        shortDescription: "Space-saving compost bin with odor control",
+        price: 39.99,
+        imageUrl: "/images/products/compost_bin.svg",
+        categoryId: 6
+      },
+      {
+        name: "Kitchen Compost Bin",
+        slug: "kitchen-compost-bin",
+        description: "Attractive stainless steel 1.3-gallon kitchen counter compost bin with replaceable charcoal filter to eliminate odors.",
+        shortDescription: "Stylish countertop bin for collecting food scraps",
+        price: 24.99,
+        imageUrl: "/images/products/kitchen-compost-bin.svg",
+        categoryId: 6
+      },
+      {
+        name: "Compost Thermometer",
+        slug: "compost-thermometer",
+        description: "Long-stem compost thermometer with temperature zones marked for monitoring your compost pile's decomposition process.",
+        shortDescription: "Long-stem thermometer for monitoring compost temperature",
+        price: 19.99,
+        imageUrl: "/images/products/compost-thermometer.svg",
+        categoryId: 6
+      },
+      {
+        name: "Compost Activator",
+        slug: "compost-activator",
+        description: "Natural compost accelerator that speeds up the decomposition process by adding essential microorganisms and nitrogen.",
+        shortDescription: "Natural accelerator for faster compost decomposition",
+        price: 12.99,
+        imageUrl: "/images/products/compost-activator.svg",
+        categoryId: 6
+      },
+      {
+        name: "Compost Aerator Tool",
+        slug: "compost-aerator",
+        description: "Specialized compost aerator tool that helps add oxygen to your compost pile without heavy turning or pitchforks.",
+        shortDescription: "Easy-to-use tool for aerating compost without heavy turning",
+        price: 29.99,
+        imageUrl: "/images/products/compost-aerator.svg",
+        categoryId: 6
+      },
+      // Fertilizers
+      {
+        name: "Organic Plant Food Concentrate",
+        slug: "plant-food-concentrate",
+        description: "All-purpose liquid organic fertilizer concentrate made from plant-based ingredients. Gentle yet effective for all plants.",
+        shortDescription: "All-purpose organic liquid fertilizer for all plants",
+        price: 14.99,
+        imageUrl: "/images/products/plant-food-concentrate.svg",
+        categoryId: 7
+      },
+      {
+        name: "Slow-Release Fertilizer",
+        slug: "slow-release-fertilizer",
+        description: "Premium granular slow-release fertilizer that feeds plants continuously for up to 3 months with one application.",
+        shortDescription: "Long-lasting granular fertilizer for continuous feeding",
+        price: 19.99,
+        imageUrl: "/images/products/slow-release-fertilizer.svg",
+        categoryId: 7
+      },
+      {
+        name: "Bone Meal Fertilizer",
+        slug: "bone-meal",
+        description: "Organic bone meal fertilizer rich in phosphorus and calcium. Ideal for bulbs, flowering plants, and root development.",
+        shortDescription: "Phosphorus-rich organic fertilizer for flowers and bulbs",
+        price: 8.99,
+        imageUrl: "/images/products/bone-meal.svg",
+        categoryId: 7
+      },
+      {
+        name: "Blood Meal Fertilizer",
+        slug: "blood-meal",
+        description: "Organic nitrogen-rich blood meal for leafy greens and plants that need quick growth. Helps promote lush foliage.",
+        shortDescription: "Nitrogen-rich organic fertilizer for leafy growth",
+        price: 9.99,
+        imageUrl: "/images/products/blood-meal.svg",
+        categoryId: 7
+      },
+      {
+        name: "Fish Emulsion Fertilizer",
+        slug: "fish-emulsion",
+        description: "Organic liquid fish emulsion that provides immediate nutrients and beneficial soil microbes. Ideal for regular feeding.",
+        shortDescription: "Fast-acting fish-based liquid fertilizer",
+        price: 12.99,
+        imageUrl: "/images/products/fish-emulsion.svg",
+        categoryId: 7
+      },
+      {
+        name: "Premium Worm Castings",
+        slug: "worm-castings",
+        description: "Pure worm castings that improve soil structure, enhance microbial activity, and provide gentle nutrition for all plants.",
+        shortDescription: "Pure worm castings for gentle natural fertilization",
+        price: 15.99,
+        imageUrl: "/images/products/worm-castings.svg",
+        categoryId: 7
+      },
+      // Pest Control
+      {
+        name: "Organic Neem Oil",
+        slug: "neem-oil",
+        description: "Cold-pressed neem oil concentrate that acts as a natural insecticide, fungicide, and miticide for organic gardening.",
+        shortDescription: "Natural multi-purpose pest and disease control",
+        price: 16.99,
+        imageUrl: "/images/products/neem-oil.svg",
+        categoryId: 8
+      },
+      {
+        name: "Insecticidal Soap",
+        slug: "insecticidal-soap",
+        description: "Ready-to-use organic insecticidal soap that controls soft-bodied pests like aphids, mealybugs, and spider mites.",
+        shortDescription: "Targeted control for soft-bodied garden pests",
+        price: 11.99,
+        imageUrl: "/images/products/insecticidal-soap.svg",
+        categoryId: 8
+      },
+      {
+        name: "Diatomaceous Earth",
+        slug: "diatomaceous-earth",
+        description: "Food-grade diatomaceous earth that controls crawling insects through physical rather than chemical action.",
+        shortDescription: "Natural powder for controlling crawling insects",
+        price: 13.99,
+        imageUrl: "/images/products/diatomaceous-earth.svg",
+        categoryId: 8
+      },
+      {
+        name: "Yellow Sticky Traps",
+        slug: "sticky-traps",
+        description: "Set of 20 dual-sided yellow sticky traps that attract and capture flying pests like fungus gnats, whiteflies, and aphids.",
+        shortDescription: "Sticky traps for monitoring and controlling flying pests",
+        price: 9.99,
+        imageUrl: "/images/products/sticky-traps.svg",
+        categoryId: 8
+      },
+      {
+        name: "Bird Netting",
+        slug: "bird-netting",
+        description: "Lightweight protective netting that keeps birds away from fruit trees, berry bushes, and garden beds without harming them.",
+        shortDescription: "Protective barrier to keep birds away from crops",
+        price: 17.99,
+        imageUrl: "/images/products/bird-netting.svg",
+        categoryId: 8
+      },
+      // Indoor Growing
+      {
+        name: "LED Grow Light Panel",
+        slug: "grow-light-led-panel",
+        description: "Full-spectrum LED grow light panel with adjustable height. Perfect for seed starting, indoor herbs, and houseplants.",
+        shortDescription: "Full-spectrum light panel for indoor growing",
+        price: 79.99,
+        imageUrl: "/images/products/grow-light-led-panel.svg",
+        categoryId: 12
+      },
+      {
+        name: "Hydroponic Starter Kit",
+        slug: "hydroponic-starter-kit",
+        description: "Complete starter kit for soil-free growing. Includes growing chamber, nutrients, growing medium, and instructions.",
+        shortDescription: "Complete kit for beginning soil-free growing",
+        price: 69.99,
+        imageUrl: "/images/products/hydroponic-starter-kit.svg",
+        isNew: true,
+        categoryId: 12
+      },
+      {
+        name: "Seedling Heat Mat",
+        slug: "heat-mat",
+        description: "Waterproof heat mat that warms soil 10-20°F above ambient temperature to improve germination rates and seedling growth.",
+        shortDescription: "Warming mat for faster seed germination",
+        price: 24.99,
+        imageUrl: "/images/products/heat-mat.svg",
+        categoryId: 12
+      },
+      {
+        name: "Digital Soil pH Meter",
+        slug: "ph-meter",
+        description: "Easy-to-use digital meter that measures soil pH accurately. Essential for determining your garden's lime or sulfur needs.",
+        shortDescription: "Digital meter for accurate soil pH readings",
+        price: 29.99,
+        imageUrl: "/images/products/ph-meter.svg",
+        categoryId: 12
+      },
+      {
+        name: "Digital Thermometer/Hygrometer",
+        slug: "digital-thermometer",
+        description: "Combination digital thermometer and humidity monitor perfect for greenhouses, indoor growing spaces, and seed starting.",
+        shortDescription: "Temperature and humidity monitor for growing spaces",
+        price: 19.99,
+        imageUrl: "/images/products/digital-thermometer.svg",
+        categoryId: 12
+      },
+      // Garden Décor
+      {
+        name: "Solar Garden Lights",
+        slug: "solar-garden-lights",
+        description: "Set of 8 solar-powered LED garden path lights with automatic dusk-to-dawn operation. No wiring required.",
+        shortDescription: "Solar path lights for nighttime garden illumination",
+        price: 34.99,
+        imageUrl: "/images/products/solar-garden-lights.svg",
+        categoryId: 13
+      },
+      {
+        name: "Garden Stepping Stones",
+        slug: "garden-stepping-stones",
+        description: "Set of 3 decorative cast stone stepping stones with botanical design. Creates an attractive pathway through gardens.",
+        shortDescription: "Decorative stepping stones with botanical design",
+        price: 39.99,
+        imageUrl: "/images/products/garden-stepping-stones.svg",
+        categoryId: 13
+      },
+      {
+        name: "Butterfly House",
+        slug: "butterfly-house",
+        description: "Cedar butterfly shelter that provides protected space for butterflies to rest and hibernate, enhancing your garden's ecosystem.",
+        shortDescription: "Cedar shelter for butterfly protection and observation",
+        price: 29.99,
+        imageUrl: "/images/products/butterfly-house.svg",
+        categoryId: 13
+      },
+      {
+        name: "Decorative Bird Bath",
+        slug: "birdbath",
+        description: "Cast stone bird bath with elegant pedestal design. Provides drinking and bathing water for birds while adding garden decoration.",
+        shortDescription: "Elegant bird bath to attract feathered visitors",
+        price: 69.99,
+        imageUrl: "/images/products/birdbath.svg",
+        categoryId: 13
+      },
+      {
+        name: "Wild Bird Feeder",
+        slug: "bird-feeder",
+        description: "Clear plastic wild bird feeder with multiple perches. Easy to fill and clean, attracts a variety of songbirds to your garden.",
+        shortDescription: "Easy-to-use feeder to attract songbirds to your yard",
+        price: 19.99,
+        imageUrl: "/images/products/bird-feeder.svg",
+        categoryId: 13
       }
     ];
     
