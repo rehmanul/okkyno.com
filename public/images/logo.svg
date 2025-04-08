@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; }
+    .leaf { fill: #4ade80; }
+  </style>
+  <g>
+    <text x="50" y="35" class="logo-text" font-size="24" fill="#333333">OKKYNO</text>
+    <path class="leaf" d="M30,10 C20,10 15,20 15,30 C15,40 25,45 35,35 C31,33 29,30 30,25 C35,28 40,25 42,20 C44,15 40,10 30,10 Z" />
+    <path class="leaf" d="M35,35 C40,40 42,38 42,35 C42,32 40,30 35,35 Z" />
+  </g>
+</svg>

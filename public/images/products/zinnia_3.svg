@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-zinnia-3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5722" />
+      <stop offset="100%" stop-color="#D84315" />
+    </linearGradient>
+    <pattern id="pattern-zinnia-3" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <rect width="30" height="30" fill="url(#grad-zinnia-3)" />
+      <circle cx="15" cy="15" r="2" fill="#FFAB91" fill-opacity="0.3" />
+    </pattern>
+    <filter id="shadow" x="-2" y="-2" width="104%" height="104%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#pattern-zinnia-3)" />
+  <rect width="400" height="100" y="300" fill="#D84315" opacity="0.2" />
+  <text x="200" y="190" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Zinnia Persian</text>
+  <text x="200" y="230" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Carpet Close-up</text>
+</svg>

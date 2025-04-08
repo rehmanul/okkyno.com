@@ -1,0 +1,62 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#edf6f5"/>
+  
+  <!-- Person -->
+  <g transform="translate(400, 300) scale(2.5)">
+    <!-- Head -->
+    <circle cx="0" cy="-30" r="25" fill="#e6c3a5"/>
+    
+    <!-- Hair -->
+    <path d="M-25 -30 Q-25 -55 0 -55 Q25 -55 25 -30 Q25 -45 10 -48 Q-10 -48 -25 -30 Z" fill="#222222"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="-8" cy="-32" rx="3" ry="2" fill="#3d2314"/>
+    <ellipse cx="8" cy="-32" rx="3" ry="2" fill="#3d2314"/>
+    
+    <!-- Glasses -->
+    <rect x="-16" y="-35" width="12" height="6" rx="2" ry="2" stroke="#222" stroke-width="1" fill="none"/>
+    <rect x="4" y="-35" width="12" height="6" rx="2" ry="2" stroke="#222" stroke-width="1" fill="none"/>
+    <line x1="-4" y1="-32" x2="4" y2="-32" stroke="#222" stroke-width="1"/>
+    
+    <!-- Smile -->
+    <path d="M-10 -20 Q0 -15 10 -20" stroke="#3d2314" stroke-width="1.5" fill="none"/>
+    
+    <!-- Shirt -->
+    <rect x="-20" y="-5" width="40" height="45" fill="#518ab3"/>
+    <path d="M0 -5 L-20 -5 L-25 -15 L-5 -15 Z" fill="#518ab3"/>
+    <path d="M0 -5 L20 -5 L25 -15 L5 -15 Z" fill="#518ab3"/>
+    
+    <!-- Gardening tool - shovel -->
+    <line x1="20" y1="20" x2="20" y2="-20" stroke="#8b5a2b" stroke-width="2"/>
+    <path d="M15 20 L25 20 L25 30 L15 30 Z" fill="#aaa"/>
+  </g>
+  
+  <!-- Plants -->
+  <g transform="translate(230, 500)">
+    <path d="M0 0 C-15 -40 -30 -30 -20 -60 C-10 -50 10 -70 20 -50 C30 -30 15 -40 0 0 Z" fill="#4c7c3f"/>
+    <rect x="-5" y="0" width="10" height="20" fill="#8b5a2b"/>
+  </g>
+  
+  <!-- Garden Tools Display -->
+  <g transform="translate(600, 450)">
+    <line x1="-80" y1="30" x2="80" y2="30" stroke="#8b5a2b" stroke-width="6"/>
+    <!-- Rake -->
+    <line x1="-60" y1="30" x2="-60" y2="-20" stroke="#8b5a2b" stroke-width="2"/>
+    <path d="M-60 -15 L-80 -30 L-40 -30 Z" fill="#aaa"/>
+    <!-- Shovel -->
+    <line x1="-20" y1="30" x2="-20" y2="-40" stroke="#8b5a2b" stroke-width="2"/>
+    <ellipse cx="-20" cy="-40" rx="10" ry="5" fill="#aaa"/>
+    <!-- Pruning Shears -->
+    <line x1="20" y1="30" x2="20" y2="-10" stroke="#8b5a2b" stroke-width="2"/>
+    <path d="M15 -10 Q15 -20 25 -20 Q25 -10 15 -10 Z" fill="#aaa"/>
+    <!-- Watering Can -->
+    <line x1="60" y1="30" x2="60" y2="5" stroke="#8b5a2b" stroke-width="2"/>
+    <ellipse cx="60" cy="0" rx="15" ry="10" fill="#518ab3"/>
+    <path d="M60 -5 L80 -15 L80 -10 L60 0 Z" fill="#518ab3"/>
+  </g>
+  
+  <!-- Label -->
+  <rect x="200" y="500" width="400" height="80" rx="10" ry="10" fill="rgba(255, 255, 255, 0.8)"/>
+  <text x="400" y="550" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Robert Chen, Product Manager</text>
+</svg>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#03A9F4"/>
+  <text x="400" y="300" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Watering Basics</text>
+  <path d="M 350 150 C 400 100, 400 200, 400 250" stroke="white" stroke-width="4" fill="none"/>
+  <path d="M 400 250 L 380 270 M 400 250 L 420 270" stroke="white" stroke-width="4"/>
+  <circle cx="400" cy="350" r="40" fill="#81D4FA"/>
+</svg>

@@ -1,0 +1,59 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#f0f9f0"/>
+  
+  <!-- Garden tools pattern -->
+  <g opacity="0.05" fill="#1e6823">
+    <!-- Spade silhouettes -->
+    <path d="M100 100 L120 150 L80 150 Z" />
+    <path d="M700 100 L720 150 L680 150 Z" />
+    <path d="M100 700 L120 650 L80 650 Z" />
+    <path d="M700 700 L720 650 L680 650 Z" />
+    
+    <!-- Watering can silhouettes -->
+    <path d="M400 100 C360 100 350 130 360 150 L440 150 C450 130 440 100 400 100 Z" />
+    <path d="M400 700 C360 700 350 670 360 650 L440 650 C450 670 440 700 400 700 Z" />
+    
+    <!-- Rake silhouettes -->
+    <path d="M200 200 L230 200 L230 220 L200 220 L200 200 M215 220 L215 250" />
+    <path d="M600 200 L630 200 L630 220 L600 220 L600 200 M615 220 L615 250" />
+    <path d="M200 600 L230 600 L230 580 L200 580 L200 600 M215 580 L215 550" />
+    <path d="M600 600 L630 600 L630 580 L600 580 L600 600 M615 580 L615 550" />
+  </g>
+  
+  <!-- Product outline -->
+  <g transform="translate(400, 400)">
+    <!-- Pot -->
+    <path d="M-150 150 Q-175 0 -150 -150 Q-75 -200 0 -200 Q75 -200 150 -150 Q175 0 150 150 Z" fill="#8d6e63"/>
+    <ellipse cx="0" cy="-150" rx="150" ry="50" fill="#a1887f"/>
+    
+    <!-- Soil -->
+    <ellipse cx="0" cy="-150" rx="130" ry="35" fill="#5d4037"/>
+    
+    <!-- Plant -->
+    <!-- Main stems -->
+    <path d="M-30 -150 C-60 -200 -70 -250 -30 -350" stroke="#558b2f" stroke-width="10" fill="none"/>
+    <path d="M30 -150 C60 -200 70 -250 30 -350" stroke="#558b2f" stroke-width="10" fill="none"/>
+    <path d="M0 -150 C0 -200 0 -250 0 -300" stroke="#558b2f" stroke-width="12" fill="none"/>
+    
+    <!-- Leaves -->
+    <path d="M-30 -200 C-80 -180 -120 -200 -130 -240 Q-80 -260 -30 -200 Z" fill="#7cb342"/>
+    <path d="M30 -200 C80 -180 120 -200 130 -240 Q80 -260 30 -200 Z" fill="#7cb342"/>
+    <path d="M-40 -250 C-90 -230 -130 -250 -140 -290 Q-90 -310 -40 -250 Z" fill="#7cb342"/>
+    <path d="M40 -250 C90 -230 130 -250 140 -290 Q90 -310 40 -250 Z" fill="#7cb342"/>
+    <path d="M0 -280 C-50 -260 -90 -280 -100 -320 Q-50 -340 0 -280 Z" fill="#7cb342"/>
+    <path d="M0 -280 C50 -260 90 -280 100 -320 Q50 -340 0 -280 Z" fill="#7cb342"/>
+    
+    <!-- Flowers/fruits -->
+    <circle cx="-30" cy="-350" r="25" fill="#f9a825"/>
+    <circle cx="30" cy="-350" r="25" fill="#f9a825"/>
+    <circle cx="0" cy="-300" r="30" fill="#f9a825"/>
+    <circle cx="-30" cy="-350" r="15" fill="#fdd835"/>
+    <circle cx="30" cy="-350" r="15" fill="#fdd835"/>
+    <circle cx="0" cy="-300" r="18" fill="#fdd835"/>
+  </g>
+  
+  <!-- Product label -->
+  <rect x="250" y="600" width="300" height="80" rx="10" ry="10" fill="rgba(255, 255, 255, 0.8)"/>
+  <text x="400" y="650" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#2e7d32">Garden Product</text>
+</svg>

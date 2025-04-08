@@ -1,0 +1,117 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f1f7ea"/>
+  
+  <!-- Sky -->
+  <rect width="800" height="350" fill="#e6f4fa"/>
+  
+  <!-- Sun -->
+  <circle cx="650" cy="150" r="60" fill="#ffd166"/>
+  <g opacity="0.5">
+    <line x1="650" y1="70" x2="650" y2="40" stroke="#ffd166" stroke-width="5"/>
+    <line x1="650" y1="260" x2="650" y2="230" stroke="#ffd166" stroke-width="5"/>
+    <line x1="730" y1="150" x2="760" y2="150" stroke="#ffd166" stroke-width="5"/>
+    <line x1="570" y1="150" x2="540" y2="150" stroke="#ffd166" stroke-width="5"/>
+    <line x1="707" y1="93" x2="727" y2="73" stroke="#ffd166" stroke-width="5"/>
+    <line x1="707" y1="207" x2="727" y2="227" stroke="#ffd166" stroke-width="5"/>
+    <line x1="593" y1="93" x2="573" y2="73" stroke="#ffd166" stroke-width="5"/>
+    <line x1="593" y1="207" x2="573" y2="227" stroke="#ffd166" stroke-width="5"/>
+  </g>
+  
+  <!-- Ground -->
+  <rect y="350" width="800" height="250" fill="#83be71"/>
+  
+  <!-- Garden Boxes -->
+  <rect x="80" y="400" width="150" height="100" fill="#a05a2c"/>
+  <rect x="90" y="410" width="130" height="80" fill="#704214"/>
+  <rect x="100" y="390" width="110" height="30" fill="#8b5a2b"/>
+  
+  <rect x="330" y="450" width="150" height="100" fill="#a05a2c"/>
+  <rect x="340" y="460" width="130" height="80" fill="#704214"/>
+  <rect x="350" y="440" width="110" height="30" fill="#8b5a2b"/>
+  
+  <rect x="580" y="420" width="150" height="100" fill="#a05a2c"/>
+  <rect x="590" y="430" width="130" height="80" fill="#704214"/>
+  <rect x="600" y="410" width="110" height="30" fill="#8b5a2b"/>
+  
+  <!-- Plants -->
+  <!-- First garden box -->
+  <g transform="translate(125, 390)">
+    <path d="M0 0 Q-15 -20 -30 -10 Q-10 -30 0 -40 Q10 -30 30 -10 Q15 -20 0 0 Z" fill="#406143"/>
+    <rect x="-2" y="0" width="4" height="20" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(155, 390)">
+    <path d="M0 0 Q-10 -30 -20 -20 Q-5 -25 0 -50 Q5 -25 20 -20 Q10 -30 0 0 Z" fill="#406143"/>
+    <rect x="-2" y="0" width="4" height="25" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(185, 390)">
+    <path d="M0 0 Q-15 -15 -25 -5 Q-5 -20 0 -30 Q5 -20 25 -5 Q15 -15 0 0 Z" fill="#406143"/>
+    <rect x="-2" y="0" width="4" height="15" fill="#704214"/>
+  </g>
+  
+  <!-- Second garden box -->
+  <g transform="translate(375, 440)">
+    <path d="M0 0 Q-15 -20 -30 -10 Q-10 -30 0 -40 Q10 -30 30 -10 Q15 -20 0 0 Z" fill="#ee964b"/>
+    <rect x="-2" y="0" width="4" height="20" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(405, 440)">
+    <path d="M0 0 Q-10 -30 -20 -20 Q-5 -25 0 -50 Q5 -25 20 -20 Q10 -30 0 0 Z" fill="#ee964b"/>
+    <rect x="-2" y="0" width="4" height="25" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(435, 440)">
+    <path d="M0 0 Q-15 -15 -25 -5 Q-5 -20 0 -30 Q5 -20 25 -5 Q15 -15 0 0 Z" fill="#ee964b"/>
+    <rect x="-2" y="0" width="4" height="15" fill="#704214"/>
+  </g>
+  
+  <!-- Third garden box -->
+  <g transform="translate(625, 410)">
+    <path d="M0 0 Q-15 -20 -30 -10 Q-10 -30 0 -40 Q10 -30 30 -10 Q15 -20 0 0 Z" fill="#9379c1"/>
+    <rect x="-2" y="0" width="4" height="20" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(655, 410)">
+    <path d="M0 0 Q-10 -30 -20 -20 Q-5 -25 0 -50 Q5 -25 20 -20 Q10 -30 0 0 Z" fill="#9379c1"/>
+    <rect x="-2" y="0" width="4" height="25" fill="#704214"/>
+  </g>
+  
+  <g transform="translate(685, 410)">
+    <path d="M0 0 Q-15 -15 -25 -5 Q-5 -20 0 -30 Q5 -20 25 -5 Q15 -15 0 0 Z" fill="#9379c1"/>
+    <rect x="-2" y="0" width="4" height="15" fill="#704214"/>
+  </g>
+  
+  <!-- Person tending garden -->
+  <g transform="translate(250, 450)">
+    <!-- Body -->
+    <ellipse cx="0" cy="20" rx="25" ry="35" fill="#5b92e5"/>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-30" r="20" fill="#f4d5c2"/>
+    
+    <!-- Hair -->
+    <path d="M-20 -30 Q-20 -50 0 -50 Q20 -50 20 -30 Q10 -45 0 -45 Q-10 -45 -20 -30 Z" fill="#8B4513"/>
+    
+    <!-- Hat -->
+    <path d="M-25 -35 Q0 -45 25 -35 Q20 -30 0 -30 Q-20 -30 -25 -35 Z" fill="#83be71"/>
+    
+    <!-- Arms -->
+    <rect x="-50" y="0" width="25" height="10" rx="5" ry="5" fill="#f4d5c2" transform="rotate(30 -50 0)"/>
+    <rect x="25" y="0" width="25" height="10" rx="5" ry="5" fill="#f4d5c2" transform="rotate(-30 25 0)"/>
+    
+    <!-- Legs -->
+    <rect x="-15" y="55" width="10" height="30" fill="#2a4365"/>
+    <rect x="5" y="55" width="10" height="30" fill="#2a4365"/>
+    
+    <!-- Gardening tool -->
+    <line x1="-50" y1="-5" x2="-70" y2="30" stroke="#8b5a2b" stroke-width="3"/>
+    <path d="M-75 35 L-65 25 L-60 35 Z" fill="#aaa"/>
+  </g>
+  
+  <!-- Mission text banner -->
+  <rect x="100" y="100" width="400" height="100" rx="20" ry="20" fill="rgba(255, 255, 255, 0.8)"/>
+  <text x="300" y="155" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#406143">Our Mission</text>
+  <text x="300" y="185" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Growing better gardens for a sustainable future</text>
+</svg>
