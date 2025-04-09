@@ -355,68 +355,168 @@ class MemStorage {
     }
 
     // Sample articles
-    const articleData = [
+    const articles = [
       {
-        title: "How to Start a Vegetable Garden: A Beginner's Guide",
-        slug: "how-to-start-vegetable-garden-beginners-guide",
-        content: "Starting a vegetable garden is a rewarding experience that can provide fresh, healthy produce right from your backyard. This guide covers everything you need to know to get started, from selecting the right location to choosing the best vegetables for beginners...",
-        excerpt: "Learn how to create your first vegetable garden with this comprehensive beginner's guide.",
-        imageUrl: "/images/articles/spring_gardening_tips.svg",
-        datePublished: new Date("2023-03-15"),
-        categoryId: 1, // Vegetables
+        title: "Yellow Bush Beans: Growing Guide",
+        slug: "yellow-bush-beans-growing-guide",
+        content: `Yellow bush beans are one of the easiest and most productive vegetables for home gardeners. Here's how to grow them successfully:
+
+## Benefits of Growing Yellow Bush Beans
+
+Yellow bush beans, also known as wax beans, are compact, productive, and don't require trellising like pole beans. They're perfect for small gardens and containers, and their bright color makes them easy to spot during harvest.
+
+## Starting from Seed
+
+Direct sow seeds in the garden after all danger of frost has passed and soil temperatures reach at least 60°F. Plant seeds 1 inch deep and 2-3 inches apart in rows 18-24 inches apart. For continuous harvests, succession plant every 2-3 weeks.
+
+## Growing Conditions
+
+Bush beans thrive in full sun (6+ hours daily) and well-draining soil rich in organic matter. They prefer a soil pH between 6.0 and 7.0. Keep soil consistently moist but not waterlogged, especially during flowering and pod development.
+
+## Care and Maintenance
+
+Mulch around plants to conserve moisture and suppress weeds. Avoid working around bean plants when they're wet to prevent spreading diseases. Support bean plants with light stakes or cages if they become top-heavy with pods.
+
+## Pest and Disease Management
+
+Watch for common bean pests like bean beetles, aphids, and spider mites. Disease resistance varies by variety, but most yellow bush beans are fairly resistant to common bean diseases like anthracnose and bean mosaic virus.
+
+## Harvesting and Storage
+
+Harvest beans when they're young and tender, usually about 50-60 days after planting. Pick regularly to encourage continued production. Fresh beans will keep in the refrigerator for up to a week, or can be blanched and frozen for longer storage.
+
+With their ease of growing and abundant harvests, yellow bush beans are a perfect choice for both beginner and experienced gardeners!`,
+        excerpt: "Learn how to grow productive, crisp yellow bush beans in your garden with these simple growing tips.",
+        imageUrl: "/images/categories/3139i_Bean-Bush-Goldrush-ORG-new2025_ndzu9h.svg",
+        datePublished: new Date("2023-05-12"),
+        categoryId: 1,
       },
       {
-        title: "10 Easy-to-Grow Flowers for Your Cutting Garden",
-        slug: "10-easy-grow-flowers-cutting-garden",
-        content: "Creating a cutting garden allows you to enjoy beautiful bouquets all season long without depleting your landscape. This article explores 10 flowers that are both easy to grow and excellent for arrangements...",
-        excerpt: "Discover the best flowers for creating beautiful homegrown bouquets.",
-        imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg",
-        datePublished: new Date("2023-04-10"),
-        categoryId: 2, // Flowers
+        title: "Growing Beautiful Nasturtiums in Your Garden",
+        slug: "growing-beautiful-nasturtiums",
+        content: `Nasturtiums are among the easiest and most rewarding flowers to grow, offering vibrant colors, edible blooms and leaves, and excellent companion planting benefits.
+
+## Why Grow Nasturtiums
+
+These versatile flowers add bright splashes of red, orange, and yellow to gardens while attracting beneficial pollinators. The entire plant is edible with a peppery taste similar to watercress, making them perfect for edible landscaping.
+
+## Starting from Seed
+
+Nasturtiums are easy to grow from seed. Their large seeds can be directly sown outdoors after the last frost, or started indoors 4 weeks before the last frost date. Plant seeds 1/2 inch deep, and thin seedlings to 8-12 inches apart.
+
+## Growing Conditions
+
+These flowers prefer full sun but will tolerate partial shade in hot climates. One of the secrets to prolific blooms is to grow them in poor to average soil with minimal fertilizer. Rich soil produces lush foliage but fewer flowers. Water moderately, allowing soil to dry between waterings.
+
+## Varieties to Try
+
+**Climbing varieties:** Ideal for trellises and fences, can reach 6-8 feet tall
+**Dwarf varieties:** Perfect for containers and borders
+**Fiesta Blend:** A beautiful mix of red, orange, and yellow flowers that creates a stunning display
+
+## Culinary Uses
+
+Harvest young leaves and flowers regularly to encourage continuous blooming. Add the peppery leaves to salads, use the colorful flowers as edible garnishes, or try pickling the seed pods as a substitute for capers.
+
+## Companion Planting Benefits
+
+Nasturtiums make excellent companion plants. They repel aphids, whiteflies, and cucumber beetles, making them valuable additions near vegetables like tomatoes, cucumbers, and brassicas.
+
+With their easy growing requirements and multiple benefits, nasturtiums deserve a place in every garden!`,
+        excerpt: "Discover how to grow vibrant, edible nasturtium flowers that add beauty to your garden and flavor to your plate.",
+        imageUrl: "/images/categories/2026i_Nasturtium-Fiesta-Blend_6ceu81.svg", 
+        datePublished: new Date("2023-05-08"),
+        categoryId: 2,
       }
     ];
 
-    // Insert sample articles
-    for (const article of articleData) {
+    // Add new gardening articles
+    const newArticles = [
+      {
+        title: "Spring Gardening Tips for a Bountiful Season",
+        slug: "spring-gardening-tips-bountiful-season",
+        content: `Spring is the perfect time to prepare your garden for a season of abundant growth. Here are essential tips to get your garden off to a great start.
+
+## Early Spring Garden Preparation
+
+As soon as soil can be worked, clear out winter debris, add compost, and test your soil pH. Most vegetables and flowers prefer a slightly acidic to neutral pH (6.0-7.0). Adjust soil pH if necessary using lime to raise pH or sulfur to lower it.
+
+## Smart Seed Starting
+
+Get a jump on the growing season by starting seeds indoors 6-8 weeks before your last frost date. Use a quality seed starting mix and provide consistent moisture and bright light. Harden off seedlings before transplanting by gradually exposing them to outdoor conditions over 7-10 days.
+
+## Strategic Planting Schedule
+
+Follow a strategic planting schedule based on your local frost dates:
+
+**4-6 weeks before last frost:** Plant cold-tolerant vegetables like peas, spinach, and radishes
+**2-4 weeks before last frost:** Plant potatoes, carrots, beets, and onions
+**After last frost:** Plant warm-season crops like tomatoes, peppers, and cucumbers
+
+## Water Management
+
+Set up an efficient watering system early in the season. Drip irrigation or soaker hoses deliver water directly to plant roots while minimizing evaporation and fungal issues. Apply a 2-3 inch layer of mulch to conserve moisture and suppress weeds.
+
+## Pest Prevention
+
+Take preventative measures against pests with these organic approaches:
+
+- Install physical barriers like row covers for vulnerable young plants
+- Plant companion flowers like marigolds and nasturtiums to repel certain pests
+- Introduce beneficial insects like ladybugs and lacewings
+- Implement crop rotation to disrupt pest life cycles
+
+## Early Season Maintenance
+
+Stay ahead of garden maintenance by setting aside 15-30 minutes several times a week to pull young weeds, inspect plants for problems, and provide support for growing vines and stems before they need it.
+
+With these spring gardening tips, you'll create the foundation for a productive and beautiful garden throughout the growing season!`,
+        excerpt: "Set your garden up for success with these essential spring gardening tasks and tips for a productive growing season.",
+        imageUrl: "/images/articles/spring_gardening_tips.svg",
+        datePublished: new Date("2023-03-10"),
+        categoryId: 1,
+      }
+    ];
+
+    // Create articles
+    articles.forEach((article) => {
       this.createArticle(article);
-    }
+    });
+
+    // Add new articles
+    newArticles.forEach((article) => {
+      this.createArticle(article);
+    });
 
     // Sample testimonials
-    const testimonialData = [
+    const testimonials = [
       {
-        personName: "Sarah Johnson",
-        role: "Hobby Gardener",
-        avatarUrl: "/images/testimonials/sarah.svg",
-        content: "I've been using the raised garden bed kit for two seasons now and it's held up beautifully. My vegetable yields have increased dramatically with the improved drainage and soil quality!",
+        personName: "Sarah L.",
+        role: "Home Gardener",
+        avatarUrl: "https://randomuser.me/api/portraits/women/44.svg",
+        content: "Epic Gardening has transformed my backyard! Their step-by-step guides made it easy to grow my own vegetables, even as a complete beginner. Now I have fresh produce all summer long!",
         rating: 5,
-      }
-    ];
-
-    // Insert sample testimonials
-    for (const testimonial of testimonialData) {
-      this.createTestimonial(testimonial);
-    }
-
-    // Add sample product images
-    const productImageData = [
-      {
-        productId: 1,
-        imageUrl: "/images/products/10328_Large_short_LightClay.svg",
-        isPrimary: true,
-        sortOrder: 0,
       },
       {
-        productId: 1,
-        imageUrl: "/images/products/raised_bed_2.svg",
-        isPrimary: false,
-        sortOrder: 1,
-      }
+        personName: "Michael T.",
+        role: "Urban Gardener",
+        avatarUrl: "https://randomuser.me/api/portraits/men/32.svg",
+        content: "The gardening tools I purchased from Epic Gardening are top-quality and made my garden work so much easier. Their customer service was excellent when I had questions about which products to choose.",
+        rating: 5,
+      },
+      {
+        personName: "Jennifer P.",
+        role: "Herb Enthusiast",
+        avatarUrl: "https://randomuser.me/api/portraits/women/68.svg",
+        content: "I've been following Epic Gardening's blog for years and it's been invaluable for my herb garden. Their pest control tips saved my basil from aphids last season, and now I have a thriving herb collection!",
+        rating: 4,
+      },
     ];
 
-    // Insert sample product images
-    for (const productImage of productImageData) {
-      this.createProductImage(productImage);
-    }
+    // Create testimonials
+    testimonials.forEach((testimonial) => {
+      this.createTestimonial(testimonial);
+    });
   }
 }
 
