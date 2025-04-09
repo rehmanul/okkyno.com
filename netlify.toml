@@ -1,15 +1,17 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+command = "npm run build && npm run build:functions"
+publish = "dist"
+functions = "functions"
 
-[dev]
-  command = "npm run dev"
-  port = 3000
-  
+[build.environment]
+NODE_VERSION = "20.19.0"
+
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200
 
-[functions]
-  directory = "functions"
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/api/:splat"
+status = 200
