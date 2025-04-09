@@ -9,7 +9,7 @@ export const categories = pgTable("categories", {
   slug: text("slug").notNull().unique(),
   description: text("description"),
   imageUrl: text("image_url"),
-  parentId: integer("parent_id"),
+  parentId: integer("parent_id").references(() => categories.id),
 });
 
 export const insertCategorySchema = createInsertSchema(categories).omit({
@@ -28,25 +28,10 @@ export const products = pgTable("products", {
   imageUrl: text("image_url").notNull().default(''),
   isBestSeller: boolean("is_best_seller").default(false),
   isNew: boolean("is_new").default(false),
-  features: text("features"),
-  specifications: text("specifications"),
   categoryId: integer("category_id").references(() => categories.id).notNull(),
 });
 
 export const insertProductSchema = createInsertSchema(products).omit({
-  id: true,
-});
-
-// Product Images (multiple images per product)
-export const productImages = pgTable("product_images", {
-  id: serial("id").primaryKey(),
-  productId: integer("product_id").references(() => products.id).notNull(),
-  imageUrl: text("image_url").notNull(),
-  isPrimary: boolean("is_primary").default(false),
-  sortOrder: integer("sort_order").default(0),
-});
-
-export const insertProductImageSchema = createInsertSchema(productImages).omit({
   id: true,
 });
 
@@ -92,7 +77,7 @@ export const insertSubscriberSchema = createInsertSchema(subscribers).omit({
   dateSubscribed: true,
 });
 
-// Users table schema (keep from original)
+// Users table from existing schema
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
@@ -104,39 +89,12 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
 });
 
-// Contact messages table schema (keep from original)
-export const contacts = pgTable("contacts", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull(),
-  phone: text("phone"),
-  service: text("service").notNull(),
-  message: text("message").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
-export const contactSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  service: z.string().min(1),
-  message: z.string().min(10),
-  agree: z.boolean().refine(val => val === true, {
-    message: "You must agree to the terms and conditions"
-  }),
-});
-
-export const insertContactSchema = createInsertSchema(contacts);
-
-// Export types for all schemas
+// Export types
 export type Category = typeof categories.$inferSelect;
 export type InsertCategory = z.infer<typeof insertCategorySchema>;
 
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
-
-export type ProductImage = typeof productImages.$inferSelect;
-export type InsertProductImage = z.infer<typeof insertProductImageSchema>;
 
 export type Article = typeof articles.$inferSelect;
 export type InsertArticle = z.infer<typeof insertArticleSchema>;
@@ -147,8 +105,5 @@ export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
 export type Subscriber = typeof subscribers.$inferSelect;
 export type InsertSubscriber = z.infer<typeof insertSubscriberSchema>;
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
-
-export type InsertContact = z.infer<typeof insertContactSchema>;
-export type Contact = typeof contacts.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;

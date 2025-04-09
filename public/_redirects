@@ -1,8 +1,0 @@
-# Netlify redirects file
-# This ensures that the React router works correctly with client-side routing
-
-# Redirect API calls to Netlify functions
-/api/*  /.netlify/functions/api/:splat  200
-
-# Handle client-side routing - always return index.html for all other paths
-/*      /index.html                     200

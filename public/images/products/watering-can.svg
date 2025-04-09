@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad-09z9a63" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad-kfmcsaf" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0288D1" />
       <stop offset="100%" stop-color="#006ab3" />
     </linearGradient>
-    <pattern id="pattern-agaz9nv" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
-      <rect width="30" height="30" fill="url(#grad-09z9a63)" />
+    <pattern id="pattern-ez44yzw" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <rect width="30" height="30" fill="url(#grad-kfmcsaf)" />
       <circle cx="15" cy="15" r="2" fill="#20a6ef" fill-opacity="0.3" />
     </pattern>
     <filter id="shadow" x="-2" y="-2" width="104%" height="104%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.3" />
     </filter>
   </defs>
-  <rect width="400" height="400" fill="url(#pattern-agaz9nv)" />
+  <rect width="400" height="400" fill="url(#pattern-ez44yzw)" />
   <rect width="400" height="100" y="300" fill="#006ab3" opacity="0.2" />
   <text x="200" y="185" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Watering</text>
     <text x="200" y="215" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Can</text>

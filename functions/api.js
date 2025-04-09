@@ -1,8 +1,5 @@
 // Netlify serverless function to handle API requests
-const { MemStorage } = require('../server/storage');
-
-// Initialize our storage
-const storage = new MemStorage();
+const { storage } = require('./storage');
 
 // Set CORS headers for all responses
 const headers = {
@@ -24,179 +21,215 @@ exports.handler = async (event, context) => {
 
   const path = event.path.replace('/.netlify/functions/api', '');
   const segments = path.split('/').filter(Boolean);
-  
+  const method = event.httpMethod;
+
   try {
-    // Handle GET requests
-    if (event.httpMethod === 'GET') {
-      // Handle /api/categories
-      if (segments[0] === 'categories') {
-        if (segments.length === 1) {
-          const categories = await storage.getCategories();
-          return {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify(categories)
-          };
-        } else if (segments.length === 2) {
-          const category = await storage.getCategoryBySlug(segments[1]);
-          if (category) {
-            return {
-              statusCode: 200,
-              headers,
-              body: JSON.stringify(category)
-            };
-          } else {
-            return {
-              statusCode: 404,
-              headers,
-              body: JSON.stringify({ error: 'Category not found' })
-            };
-          }
-        }
-      }
-      
-      // Handle /api/products
-      if (segments[0] === 'products') {
-        if (segments.length === 1) {
-          const products = await storage.getProducts();
-          return {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify(products)
-          };
-        } else if (segments.length === 2) {
-          const product = await storage.getProductBySlug(segments[1]);
-          if (product) {
-            // Get product images
-            const productImages = await storage.getProductImages(product.id);
-            const productWithImages = { ...product, images: productImages };
-            
-            return {
-              statusCode: 200,
-              headers,
-              body: JSON.stringify(productWithImages)
-            };
-          } else {
-            return {
-              statusCode: 404,
-              headers,
-              body: JSON.stringify({ error: 'Product not found' })
-            };
-          }
-        } else if (segments.length === 3 && segments[1] === 'category') {
-          const category = await storage.getCategoryBySlug(segments[2]);
-          if (category) {
-            const products = await storage.getProductsByCategory(category.id);
-            return {
-              statusCode: 200,
-              headers,
-              body: JSON.stringify(products)
-            };
-          } else {
-            return {
-              statusCode: 404,
-              headers,
-              body: JSON.stringify({ error: 'Category not found' })
-            };
-          }
-        }
-      }
-      
-      // Handle /api/articles
-      if (segments[0] === 'articles') {
-        if (segments.length === 1) {
-          const articles = await storage.getArticles();
-          return {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify(articles)
-          };
-        } else if (segments.length === 2) {
-          const article = await storage.getArticleBySlug(segments[1]);
-          if (article) {
-            return {
-              statusCode: 200,
-              headers,
-              body: JSON.stringify(article)
-            };
-          } else {
-            return {
-              statusCode: 404,
-              headers,
-              body: JSON.stringify({ error: 'Article not found' })
-            };
-          }
-        } else if (segments.length === 3 && segments[1] === 'category') {
-          const category = await storage.getCategoryBySlug(segments[2]);
-          if (category) {
-            const articles = await storage.getArticlesByCategory(category.id);
-            return {
-              statusCode: 200,
-              headers,
-              body: JSON.stringify(articles)
-            };
-          } else {
-            return {
-              statusCode: 404,
-              headers,
-              body: JSON.stringify({ error: 'Category not found' })
-            };
-          }
-        }
-      }
-      
-      // Handle /api/testimonials
-      if (segments[0] === 'testimonials') {
-        const testimonials = await storage.getTestimonials();
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify(testimonials)
-        };
-      }
-      
-      // Handle search
-      if (segments[0] === 'search' && event.queryStringParameters?.q) {
-        const results = await storage.search(event.queryStringParameters.q);
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify(results)
-        };
-      }
+    // Handle different API endpoints
+    
+    // GET /api/categories
+    if (method === 'GET' && segments[0] === 'categories' && segments.length === 1) {
+      const categories = await storage.getCategories();
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(categories)
+      };
     }
     
-    // Handle POST requests
-    if (event.httpMethod === 'POST') {
+    // GET /api/categories/:slug
+    if (method === 'GET' && segments[0] === 'categories' && segments.length === 2) {
+      const slug = segments[1];
+      const category = await storage.getCategoryBySlug(slug);
+      
+      if (!category) {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Category not found' })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(category)
+      };
+    }
+    
+    // GET /api/categories/:slug/products
+    if (method === 'GET' && segments[0] === 'categories' && segments.length === 3 && segments[2] === 'products') {
+      const slug = segments[1];
+      const category = await storage.getCategoryBySlug(slug);
+      
+      if (!category) {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Category not found' })
+        };
+      }
+      
+      const products = await storage.getProductsByCategory(category.id);
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(products)
+      };
+    }
+    
+    // GET /api/products
+    if (method === 'GET' && segments[0] === 'products' && segments.length === 1) {
+      const products = await storage.getProducts();
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(products)
+      };
+    }
+    
+    // GET /api/products/:slug
+    if (method === 'GET' && segments[0] === 'products' && segments.length === 2) {
+      const slug = segments[1];
+      const product = await storage.getProductBySlug(slug);
+      
+      if (!product) {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Product not found' })
+        };
+      }
+      
+      // Get product images
+      const images = await storage.getProductImages(product.id);
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ ...product, images })
+      };
+    }
+    
+    // GET /api/articles
+    if (method === 'GET' && segments[0] === 'articles' && segments.length === 1) {
+      const articles = await storage.getArticles();
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(articles)
+      };
+    }
+    
+    // GET /api/articles/:slug
+    if (method === 'GET' && segments[0] === 'articles' && segments.length === 2) {
+      const slug = segments[1];
+      const article = await storage.getArticleBySlug(slug);
+      
+      if (!article) {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Article not found' })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(article)
+      };
+    }
+    
+    // GET /api/testimonials
+    if (method === 'GET' && segments[0] === 'testimonials' && segments.length === 1) {
+      const testimonials = await storage.getTestimonials();
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(testimonials)
+      };
+    }
+    
+    // POST /api/subscribers
+    if (method === 'POST' && segments[0] === 'subscribers' && segments.length === 1) {
       const data = JSON.parse(event.body);
       
-      // Handle /api/subscribers
-      if (segments[0] === 'subscribers') {
-        const subscriber = await storage.createSubscriber(data);
+      if (!data.email) {
         return {
-          statusCode: 201,
+          statusCode: 400,
           headers,
-          body: JSON.stringify(subscriber)
+          body: JSON.stringify({ error: 'Email is required' })
         };
       }
       
-      // Handle /api/contact
-      if (segments[0] === 'contact') {
-        const contact = await storage.createContact(data);
-        return {
-          statusCode: 201,
-          headers,
-          body: JSON.stringify(contact)
-        };
-      }
+      const subscriber = await storage.createSubscriber({
+        email: data.email,
+        firstName: data.firstName || null,
+        lastName: data.lastName || null
+      });
+      
+      return {
+        statusCode: 201,
+        headers,
+        body: JSON.stringify(subscriber)
+      };
     }
     
-    // If we get here, return 404
+    // POST /api/contacts
+    if (method === 'POST' && segments[0] === 'contacts' && segments.length === 1) {
+      const data = JSON.parse(event.body);
+      
+      if (!data.name || !data.email || !data.message || !data.service) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: 'Name, email, service, and message are required' })
+        };
+      }
+      
+      const contact = await storage.createContact({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        service: data.service,
+        message: data.message
+      });
+      
+      return {
+        statusCode: 201,
+        headers,
+        body: JSON.stringify(contact)
+      };
+    }
+    
+    // GET /api/search?q=query
+    if (method === 'GET' && segments[0] === 'search' && segments.length === 1) {
+      const query = event.queryStringParameters?.q;
+      
+      if (!query) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: 'Search query is required' })
+        };
+      }
+      
+      const results = await storage.search(query);
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(results)
+      };
+    }
+    
+    // Endpoint not found
     return {
       statusCode: 404,
       headers,
-      body: JSON.stringify({ error: 'Not found', path: path })
+      body: JSON.stringify({ error: 'Endpoint not found' })
     };
+    
   } catch (error) {
     console.error('Error handling request:', error);
     return {

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad-ir4tp35" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad-tm4rdli" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#689F38" />
       <stop offset="100%" stop-color="#4a811a" />
     </linearGradient>
-    <pattern id="pattern-uosp5d4" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
-      <rect width="30" height="30" fill="url(#grad-ir4tp35)" />
+    <pattern id="pattern-y94qnjf" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <rect width="30" height="30" fill="url(#grad-tm4rdli)" />
       <circle cx="15" cy="15" r="2" fill="#86bd56" fill-opacity="0.3" />
     </pattern>
     <filter id="shadow" x="-2" y="-2" width="104%" height="104%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.3" />
     </filter>
   </defs>
-  <rect width="400" height="400" fill="url(#pattern-uosp5d4)" />
+  <rect width="400" height="400" fill="url(#pattern-y94qnjf)" />
   <rect width="400" height="100" y="300" fill="#4a811a" opacity="0.2" />
   <text x="200" y="185" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Container</text>
     <text x="200" y="215" fill="white" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" filter="url(#shadow)">Gardening</text>
