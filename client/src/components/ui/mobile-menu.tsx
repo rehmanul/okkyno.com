@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'wouter';
-import { X, ChevronDown, ChevronUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { navLinks } from '@/utils/constants';
+import { useEffect } from "react";
+import { Link, useLocation } from "wouter";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { navLinks } from "@/utils/constants";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -10,74 +10,102 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
+  const [currentLocation] = useLocation();
+  
+  // Close the menu when location changes
+  useEffect(() => {
+    if (isOpen) {
+      onClose();
+    }
+  }, [currentLocation, isOpen, onClose]);
 
-  const toggleSubmenu = (name: string) => {
-    setOpenSubmenus((prev) => ({
-      ...prev,
-      [name]: !prev[name]
-    }));
-  };
+  // Prevent body scrolling when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="lg:hidden bg-white border-t fixed inset-0 z-50 pt-16 overflow-y-auto">
-      <div className="absolute top-4 right-4">
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={onClose}
-          aria-label="Close menu"
-        >
-          <X className="h-6 w-6" />
-        </Button>
-      </div>
-      
-      <div className="container mx-auto px-4 py-3">
-        <nav className="space-y-3">
-          {navLinks.map((link, index) => (
-            <div key={index} className="py-2 border-b">
-              {link.submenu.length > 0 ? (
-                <>
-                  <button 
-                    className="flex items-center justify-between w-full text-left font-semibold"
-                    onClick={() => toggleSubmenu(link.name)}
-                  >
-                    <span>{link.name}</span>
-                    {openSubmenus[link.name] ? (
-                      <ChevronUp className="h-4 w-4" />
-                    ) : (
-                      <ChevronDown className="h-4 w-4" />
-                    )}
-                  </button>
-                  {openSubmenus[link.name] && (
-                    <div className="mt-2 ml-4 space-y-2">
-                      {link.submenu.map((sublink, subIndex) => (
-                        <Link 
-                          key={subIndex} 
-                          href={sublink.path}
-                          className="block py-1 hover:text-primary transition"
-                          onClick={onClose}
-                        >
-                          {sublink.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
+      <div className="fixed right-0 top-0 h-full w-80 max-w-full bg-white shadow-xl overflow-y-auto">
+        <div className="p-5">
+          <div className="flex justify-between items-center mb-6">
+            <Link href="/" className="text-2xl font-bold text-primary" onClick={onClose}>
+              OKKYNO
+            </Link>
+            <Button variant="ghost" size="icon" onClick={onClose}>
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
+          
+          <nav className="space-y-1">
+            {navLinks.map((link, index) => (
+              <div key={index}>
+                <Link 
                   href={link.path}
-                  className="block font-semibold hover:text-primary transition"
-                  onClick={onClose}
+                  className={`block py-3 text-lg font-semibold ${
+                    currentLocation === link.path ? "text-primary" : "text-gray-800"
+                  }`}
+                  onClick={link.submenu.length === 0 ? onClose : undefined}
                 >
                   {link.name}
                 </Link>
-              )}
+                
+                {link.submenu.length > 0 && (
+                  <div className="pl-4 border-l border-gray-200 mt-1 mb-3 space-y-1">
+                    {link.submenu.map((sublink, subIndex) => (
+                      <Link 
+                        key={subIndex} 
+                        href={sublink.path}
+                        className="block py-2 text-gray-600 hover:text-primary"
+                        onClick={onClose}
+                      >
+                        {sublink.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+          
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <Link 
+              href="/account" 
+              className="block py-3 text-lg font-semibold text-gray-800 hover:text-primary"
+              onClick={onClose}
+            >
+              My Account
+            </Link>
+            <Link 
+              href="/cart" 
+              className="block py-3 text-lg font-semibold text-gray-800 hover:text-primary"
+              onClick={onClose}
+            >
+              Shopping Cart
+            </Link>
+          </div>
+          
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <div className="space-y-3">
+              <a href="tel:+18005551234" className="block py-2 text-gray-600 hover:text-primary">
+                📞 (800) 555-1234
+              </a>
+              <a href="mailto:info@okkyno.com" className="block py-2 text-gray-600 hover:text-primary">
+                ✉️ info@okkyno.com
+              </a>
             </div>
-          ))}
-        </nav>
+          </div>
+        </div>
       </div>
     </div>
   );

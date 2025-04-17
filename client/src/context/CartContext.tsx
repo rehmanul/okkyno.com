@@ -1,18 +1,19 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { apiRequest } from '@/lib/queryClient';
-import { useToast } from '@/hooks/use-toast';
-import { Product } from '@shared/schema';
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { CartItem, Product } from "../../shared/schema";
 
-export interface CartItem {
+// Extended CartItem with product details
+export interface CartItemWithProduct {
   id: number;
   sessionId: string;
   productId: number;
   quantity: number;
+  createdAt: string;
   product?: Product;
 }
 
 interface CartContextType {
-  cartItems: CartItem[];
+  cartItems: CartItemWithProduct[];
   isLoading: boolean;
   addToCart: (productId: number, quantity: number) => Promise<void>;
   updateQuantity: (itemId: number, quantity: number) => Promise<void>;
@@ -25,78 +26,75 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { toast } = useToast();
+  const [cartItems, setCartItems] = useState<CartItemWithProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sessionId, setSessionId] = useState<string>("");
 
-  // Calculate totals
-  const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const subtotal = cartItems.reduce((total, item) => {
-    return total + (item.product?.price || 0) * item.quantity;
-  }, 0);
-
-  // Fetch cart items on mount
+  // Initialize session ID and load cart items on mount
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('/api/cart', {
-          credentials: 'include'
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setCartItems(data);
-        }
-      } catch (error) {
-        console.error('Error fetching cart:', error);
-        toast({
-          title: 'Error',
-          description: 'Could not fetch your cart items',
-          variant: 'destructive'
-        });
-      } finally {
-        setIsLoading(false);
+    const initializeCart = async () => {
+      // Get or create session ID from localStorage
+      let sid = localStorage.getItem("cartSessionId");
+      if (!sid) {
+        sid = uuidv4();
+        localStorage.setItem("cartSessionId", sid);
       }
+      setSessionId(sid);
+      
+      // Fetch cart items
+      await fetchCartItems(sid);
     };
 
-    fetchCartItems();
-  }, [toast]);
+    initializeCart();
+  }, []);
+
+  // Fetch cart items from API
+  const fetchCartItems = async (sid: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/cart?sessionId=${sid}`);
+      if (response.ok) {
+        const items = await response.json();
+        setCartItems(items);
+      }
+    } catch (error) {
+      console.error("Failed to fetch cart items:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Add item to cart
   const addToCart = async (productId: number, quantity: number) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const response = await apiRequest('POST', '/api/cart', { productId, quantity });
+      // Check if item already exists in cart
+      const existingItem = cartItems.find(item => item.productId === productId);
       
-      if (response.ok) {
-        const newItem = await response.json();
-        
-        // Check if the item already exists in the cart
-        const existingItemIndex = cartItems.findIndex(item => item.productId === productId);
-        
-        if (existingItemIndex >= 0) {
-          // Update existing item
-          const updatedItems = [...cartItems];
-          updatedItems[existingItemIndex] = newItem;
-          setCartItems(updatedItems);
-        } else {
-          // Add new item
-          setCartItems([...cartItems, newItem]);
-        }
-        
-        toast({
-          title: 'Added to cart',
-          description: `${newItem.product.name} added to your cart`,
+      if (existingItem) {
+        // Update quantity if item exists
+        await updateQuantity(existingItem.id, existingItem.quantity + quantity);
+      } else {
+        // Add new item
+        const response = await fetch("/api/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sessionId,
+            productId,
+            quantity,
+          }),
         });
+
+        if (response.ok) {
+          const newItem = await response.json();
+          setCartItems(prev => [...prev, newItem]);
+        }
       }
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      toast({
-        title: 'Error',
-        description: 'Could not add item to cart',
-        variant: 'destructive'
-      });
+      console.error("Failed to add item to cart:", error);
     } finally {
       setIsLoading(false);
     }
@@ -104,33 +102,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   // Update item quantity
   const updateQuantity = async (itemId: number, quantity: number) => {
+    if (quantity < 1) {
+      await removeFromCart(itemId);
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      
-      if (quantity === 0) {
-        await removeFromCart(itemId);
-        return;
-      }
-      
-      const response = await apiRequest('PATCH', `/api/cart/${itemId}`, { quantity });
-      
+      const response = await fetch(`/api/cart/${itemId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity }),
+      });
+
       if (response.ok) {
         const updatedItem = await response.json();
-        
-        // Update cart items
-        const updatedItems = cartItems.map(item => 
-          item.id === itemId ? updatedItem : item
+        setCartItems(prev => 
+          prev.map(item => item.id === itemId ? updatedItem : item)
         );
-        
-        setCartItems(updatedItems);
       }
     } catch (error) {
-      console.error('Error updating cart:', error);
-      toast({
-        title: 'Error',
-        description: 'Could not update item quantity',
-        variant: 'destructive'
-      });
+      console.error("Failed to update cart item quantity:", error);
     } finally {
       setIsLoading(false);
     }
@@ -138,67 +132,60 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   // Remove item from cart
   const removeFromCart = async (itemId: number) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const response = await apiRequest('DELETE', `/api/cart/${itemId}`, undefined);
-      
+      const response = await fetch(`/api/cart/${itemId}`, {
+        method: "DELETE",
+      });
+
       if (response.ok) {
-        // Remove item from cart
-        setCartItems(cartItems.filter(item => item.id !== itemId));
-        
-        toast({
-          title: 'Item removed',
-          description: 'Item removed from your cart',
-        });
+        setCartItems(prev => prev.filter(item => item.id !== itemId));
       }
     } catch (error) {
-      console.error('Error removing from cart:', error);
-      toast({
-        title: 'Error',
-        description: 'Could not remove item from cart',
-        variant: 'destructive'
-      });
+      console.error("Failed to remove item from cart:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Clear cart
+  // Clear entire cart
   const clearCart = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const response = await apiRequest('DELETE', '/api/cart', undefined);
-      
+      const response = await fetch(`/api/cart?sessionId=${sessionId}`, {
+        method: "DELETE",
+      });
+
       if (response.ok) {
         setCartItems([]);
-        toast({
-          title: 'Cart cleared',
-          description: 'Your cart has been cleared',
-        });
       }
     } catch (error) {
-      console.error('Error clearing cart:', error);
-      toast({
-        title: 'Error',
-        description: 'Could not clear your cart',
-        variant: 'destructive'
-      });
+      console.error("Failed to clear cart:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Calculate total number of items in cart
+  const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  // Calculate cart subtotal
+  const subtotal = cartItems.reduce((total, item) => {
+    const price = item.product?.price || 0;
+    return total + (price * item.quantity);
+  }, 0);
+
   return (
-    <CartContext.Provider 
-      value={{ 
-        cartItems, 
+    <CartContext.Provider
+      value={{
+        cartItems,
         isLoading,
-        addToCart, 
-        updateQuantity, 
-        removeFromCart, 
+        addToCart,
+        updateQuantity,
+        removeFromCart,
         clearCart,
         itemCount,
-        subtotal
+        subtotal,
       }}
     >
       {children}
@@ -209,7 +196,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };

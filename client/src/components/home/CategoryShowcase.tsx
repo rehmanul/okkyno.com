@@ -1,29 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'wouter';
-import { Category } from '@shared/schema';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Category } from "../../../shared/schema";
 
 export default function CategoryShowcase() {
-  const { data: categories, isLoading, error } = useQuery<Category[]>({
-    queryKey: ['/api/categories'],
+  const { data: categories, isLoading } = useQuery<Category[]>({
+    queryKey: ["/api/categories"],
   });
-
-  // Only show up to 6 categories
-  const displayCategories = categories?.slice(0, 6);
 
   // Loading state
   if (isLoading) {
     return (
-      <section className="py-12 bg-light">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-heading font-bold text-center mb-8">What Are You Looking For?</h2>
+          <h2 className="text-3xl font-bold text-center mb-10">Explore By Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[...Array(6)].map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <Skeleton className="h-40 w-full" />
-                <div className="p-3">
-                  <Skeleton className="h-5 w-24 mx-auto" />
-                </div>
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-gray-200 aspect-square rounded-lg mb-3"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
               </div>
             ))}
           </div>
@@ -32,41 +27,51 @@ export default function CategoryShowcase() {
     );
   }
 
-  // Error state
-  if (error || !categories) {
-    return (
-      <section className="py-12 bg-light">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-heading font-bold text-center mb-8">What Are You Looking For?</h2>
-          <div className="text-center text-gray-500">
-            Unable to load categories. Please try again later.
-          </div>
-        </div>
-      </section>
-    );
+  // No categories case
+  if (!categories || categories.length === 0) {
+    return null;
   }
 
+  // Only display up to 6 categories
+  const displayCategories = categories.slice(0, 6);
+
   return (
-    <section className="py-12 bg-light">
+    <section className="py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-heading font-bold text-center mb-8">What Are You Looking For?</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-2">Explore By Category</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Browse our carefully curated plant categories for your perfect garden
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           {displayCategories.map((category) => (
             <Link key={category.id} href={`/products/category/${category.slug}`}>
-              <a className="category-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition group">
-                <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src={category.imageUrl || `https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80`} 
-                    alt={category.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                  />
+              <div className="text-center transition-all hover:transform hover:scale-105 cursor-pointer">
+                <div className="bg-light rounded-lg aspect-square mb-3 overflow-hidden">
+                  {category.imageUrl ? (
+                    <img 
+                      src={category.imageUrl} 
+                      alt={category.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-full flex items-center justify-center bg-primary/10">
+                      <span className="text-4xl text-primary">🌿</span>
+                    </div>
+                  )}
                 </div>
-                <div className="p-3 text-center">
-                  <h3 className="font-heading font-semibold text-dark">{category.name}</h3>
-                </div>
-              </a>
+                <h3 className="font-medium text-center">{category.name}</h3>
+              </div>
             </Link>
           ))}
+        </div>
+        
+        <div className="text-center">
+          <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+            <Link href="/products">View All Categories</Link>
+          </Button>
         </div>
       </div>
     </section>

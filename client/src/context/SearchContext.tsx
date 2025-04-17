@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { useLocation } from 'wouter';
-import { Product } from '@shared/schema';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { Product } from "../../shared/schema";
 
 interface SearchContextType {
   searchQuery: string;
@@ -14,10 +13,9 @@ interface SearchContextType {
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
-  const [, setLocation] = useLocation();
+  const [isSearching, setIsSearching] = useState(false);
 
   const performSearch = async (query: string) => {
     if (!query.trim()) {
@@ -25,25 +23,18 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
+    setIsSearching(true);
     try {
-      setIsSearching(true);
-      setSearchQuery(query);
-
-      const response = await fetch(`/api/products/search?q=${encodeURIComponent(query)}`, {
-        credentials: 'include'
-      });
-
+      const response = await fetch(`/api/products/search?q=${encodeURIComponent(query)}`);
+      
       if (response.ok) {
         const results = await response.json();
         setSearchResults(results);
-
-        // Navigate to products page with search query if not already there
-        setLocation(`/products?search=${encodeURIComponent(query)}`);
       } else {
         setSearchResults([]);
       }
     } catch (error) {
-      console.error('Search error:', error);
+      console.error("Search failed:", error);
       setSearchResults([]);
     } finally {
       setIsSearching(false);
@@ -51,7 +42,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearSearch = () => {
-    setSearchQuery('');
+    setSearchQuery("");
     setSearchResults([]);
   };
 
@@ -63,7 +54,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
         searchResults,
         isSearching,
         performSearch,
-        clearSearch
+        clearSearch,
       }}
     >
       {children}
@@ -71,10 +62,10 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useSearch = () => {
+export const useSearch = (): SearchContextType => {
   const context = useContext(SearchContext);
   if (context === undefined) {
-    throw new Error('useSearch must be used within a SearchProvider');
+    throw new Error("useSearch must be used within a SearchProvider");
   }
   return context;
 };

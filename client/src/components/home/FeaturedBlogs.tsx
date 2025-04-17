@@ -1,16 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'wouter';
-import { ArrowRight, CalendarIcon, MessageSquare } from 'lucide-react';
-import { BlogPost } from '@shared/schema';
-import { formatShortDate, truncateText } from '@/utils/formatters';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
+import { formatDistanceToNow } from "date-fns";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BlogPost } from "../../../shared/schema";
 
 export default function FeaturedBlogs() {
-  const { data: posts, isLoading, error } = useQuery<BlogPost[]>({
-    queryKey: ['/api/blog'],
+  const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
+    queryKey: ["/api/blog"],
     queryFn: async () => {
-      const response = await fetch('/api/blog?limit=3');
-      if (!response.ok) throw new Error('Failed to fetch blog posts');
+      const response = await fetch("/api/blog?limit=3&publishedOnly=true");
+      if (!response.ok) {
+        throw new Error("Failed to fetch blog posts");
+      }
       return response.json();
     }
   });
@@ -18,29 +20,16 @@ export default function FeaturedBlogs() {
   // Loading state
   if (isLoading) {
     return (
-      <section className="py-12">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-heading font-bold">Latest From The Blog</h2>
-            <Link href="/blog" className="text-primary hover:underline font-semibold">
-              View All Articles <ArrowRight className="h-4 w-4 ml-1 inline" />
-            </Link>
-          </div>
-          
+          <h2 className="text-3xl font-bold text-center mb-10">From Our Blog</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[...Array(3)].map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <Skeleton className="h-48 w-full" />
-                <div className="p-6">
-                  <div className="flex items-center mb-2">
-                    <Skeleton className="h-4 w-24 mr-4" />
-                    <Skeleton className="h-4 w-20" />
-                  </div>
-                  <Skeleton className="h-6 w-full mb-2" />
-                  <Skeleton className="h-4 w-full mb-2" />
-                  <Skeleton className="h-4 w-3/4 mb-4" />
-                  <Skeleton className="h-5 w-24" />
-                </div>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3"></div>
               </div>
             ))}
           </div>
@@ -49,68 +38,72 @@ export default function FeaturedBlogs() {
     );
   }
 
-  // Error state
-  if (error || !posts) {
-    return (
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-heading font-bold">Latest From The Blog</h2>
-            <Link href="/blog" className="text-primary hover:underline font-semibold">
-              View All Articles <ArrowRight className="h-4 w-4 ml-1 inline" />
-            </Link>
-          </div>
-          <div className="text-center text-gray-500 py-8">
-            Unable to load blog posts. Please try again later.
-          </div>
-        </div>
-      </section>
-    );
+  // No blog posts case
+  if (!blogPosts || blogPosts.length === 0) {
+    return null;
   }
 
   return (
-    <section className="py-12">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-heading font-bold">Latest From The Blog</h2>
-          <Link href="/blog" className="text-primary hover:underline font-semibold">
-            View All Articles <ArrowRight className="h-4 w-4 ml-1 inline" />
-          </Link>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-2">Garden Wisdom & Inspiration</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Expert tips, plant guides, and creative ideas to help your garden flourish
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-              <Link href={`/blog/${post.slug}`}>
-                <a className="block">
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={post.imageUrl || "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover hover:scale-105 transition duration-300"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center mb-2 text-sm text-gray-600">
-                      <span className="mr-4 flex items-center">
-                        <CalendarIcon className="h-4 w-4 mr-1" /> 
-                        {formatShortDate(post.createdAt)}
+          {blogPosts.map((post) => (
+            <Link key={post.id} href={`/blog/${post.slug}`}>
+              <Card className="h-full transition-all hover:shadow-md cursor-pointer overflow-hidden">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={post.imageUrl || "https://images.unsplash.com/photo-1598901847978-4ce242253a8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"} 
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform hover:scale-105"
+                  />
+                </div>
+                
+                <CardContent className="p-5">
+                  <div className="flex items-center text-sm text-gray-500 mb-2">
+                    <span>
+                      {post.createdAt ? formatDistanceToNow(new Date(post.createdAt), { addSuffix: true }) : "Recently"}
+                    </span>
+                    {post.commentCount > 0 && (
+                      <span className="ml-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                        </svg>
+                        {post.commentCount}
                       </span>
-                      <span className="flex items-center">
-                        <MessageSquare className="h-4 w-4 mr-1" /> 
-                        {post.commentCount} Comments
-                      </span>
-                    </div>
-                    <h3 className="font-heading font-bold text-xl mb-2 hover:text-primary transition">{post.title}</h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {post.excerpt || truncateText(post.content.replace(/<[^>]*>/g, ''), 150)}
-                    </p>
-                    <span className="text-primary font-semibold hover:underline">Read More</span>
+                    )}
                   </div>
-                </a>
-              </Link>
-            </article>
+                  
+                  <h3 className="font-semibold text-xl mb-2 line-clamp-2">{post.title}</h3>
+                  
+                  {post.excerpt && (
+                    <p className="text-gray-600 line-clamp-3 mb-3">{post.excerpt}</p>
+                  )}
+                </CardContent>
+                
+                <CardFooter className="px-5 py-4 border-t">
+                  <Button
+                    variant="ghost"
+                    className="text-green-600 hover:text-green-700 hover:bg-green-50 p-0"
+                  >
+                    Read More →
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
+        </div>
+        
+        <div className="text-center mt-10">
+          <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+            <Link href="/blog">View All Articles</Link>
+          </Button>
         </div>
       </div>
     </section>

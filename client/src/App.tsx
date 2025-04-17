@@ -17,6 +17,11 @@ import AdminOrdersPage from "@/pages/AdminOrdersPage";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { useAuth } from "@/context/AuthContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@/context/AuthContext";
+import { CartProvider } from "@/context/CartContext";
+import { SearchProvider } from "@/context/SearchContext";
+import { queryClient } from "@/lib/queryClient";
 
 function Router() {
   const { user } = useAuth();
@@ -51,14 +56,21 @@ function Router() {
   );
 }
 
+// This App function is not used directly anymore - see main.tsx
 function App() {
   return (
-    <>
-      <Header />
-      <Router />
-      <Footer />
-      <Toaster />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <CartProvider>
+          <SearchProvider>
+            <Header />
+            <Router />
+            <Footer />
+            <Toaster />
+          </SearchProvider>
+        </CartProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
