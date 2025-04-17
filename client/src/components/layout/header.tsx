@@ -53,18 +53,10 @@ export default function Header() {
     setMobileMenuOpen(false);
   }, [location]);
   
-  // Listen for custom close event from mobile menu
-  useEffect(() => {
-    const handleCloseMobileMenu = () => {
-      setMobileMenuOpen(false);
-    };
-    
-    document.addEventListener('close-mobile-menu', handleCloseMobileMenu);
-    
-    return () => {
-      document.removeEventListener('close-mobile-menu', handleCloseMobileMenu);
-    };
-  }, []);
+  // Handle closing the mobile menu
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
   
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -213,7 +205,11 @@ export default function Header() {
       </div>
       
       {/* Mobile menu */}
-      <MobileMenu isOpen={mobileMenuOpen} categories={categories} />
+      <MobileMenu 
+        isOpen={mobileMenuOpen} 
+        categories={categories} 
+        onClose={closeMobileMenu}
+      />
     </header>
   );
 }

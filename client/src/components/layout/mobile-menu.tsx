@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
-import { X } from "lucide-react";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
 
 type MenuItem = {
   name: string;
@@ -11,108 +11,100 @@ type MenuItem = {
 type MobileMenuProps = {
   isOpen: boolean;
   categories: MenuItem[];
+  onClose: () => void;
 };
 
-export default function MobileMenu({ isOpen, categories }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, categories, onClose }: MobileMenuProps) {
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
-  const [mounted, setMounted] = useState(false);
   
-  // Set mounted state on component mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Prevent scroll when menu is open
-  useEffect(() => {
-    if (!mounted) return;
+  // Toggle submenu open/closed
+  const toggleSubmenu = (name: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, mounted]);
-  
-  const toggleSubmenu = (name: string) => {
     setOpenSubmenus(prev => ({
       ...prev,
       [name]: !prev[name]
     }));
   };
   
-  if (!mounted) return null;
+  // Stop event propagation to prevent menu closing
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+  
+  // If menu is not open, render nothing
+  if (!isOpen) {
+    return null;
+  }
   
   return (
-    <>
-      {/* Overlay */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={() => document.dispatchEvent(new CustomEvent('close-mobile-menu'))}
-        />
-      )}
-      
-      {/* Side drawer */}
+    <div className="fixed inset-0 z-50 lg:hidden overflow-hidden" aria-modal="true" role="dialog">
+      {/* Overlay backdrop */}
       <div 
-        className={`fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white z-50 lg:hidden shadow-xl transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className="fixed inset-0 bg-black/50 transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      ></div>
+      
+      {/* Mobile menu drawer */}
+      <div 
+        className="fixed inset-y-0 right-0 w-[80%] max-w-sm bg-white shadow-xl overflow-y-auto" 
+        onClick={handleMenuClick}
       >
-        <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="font-bold text-lg">Menu</h2>
+        {/* Menu header with close button */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
           <button 
-            className="p-1 rounded-full hover:bg-gray-100"
-            onClick={() => document.dispatchEvent(new CustomEvent('close-mobile-menu'))}
+            className="p-2 -mr-1 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+            onClick={onClose}
             aria-label="Close menu"
           >
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
         
-        <div className="overflow-y-auto h-[calc(100%-60px)] pb-20">
-          <nav className="p-4">
+        {/* Navigation links */}
+        <div className="px-4 py-2">
+          <nav className="space-y-1">
             {categories.map((category, index) => (
-              <div key={index} className="py-2 border-b">
+              <div key={index} className="border-b border-gray-200 py-2">
                 {category.submenu ? (
                   <>
+                    {/* Category with submenu */}
                     <button
-                      className="flex items-center justify-between w-full text-left py-2"
-                      onClick={() => toggleSubmenu(category.name)}
-                      aria-expanded={openSubmenus[category.name]}
+                      className="flex items-center justify-between w-full py-2 text-left text-gray-900 hover:text-primary"
+                      onClick={(e) => toggleSubmenu(category.name, e)}
+                      aria-expanded={!!openSubmenus[category.name]}
                     >
-                      <span className="font-semibold text-lg">{category.name}</span>
+                      <span className="font-medium text-base">{category.name}</span>
                       {openSubmenus[category.name] ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="18 15 12 9 6 15"></polyline>
-                        </svg>
+                        <ChevronUp size={18} className="text-gray-500" />
                       ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        <ChevronDown size={18} className="text-gray-500" />
                       )}
                     </button>
-                    <div
-                      className={`${openSubmenus[category.name] ? 'block' : 'hidden'} mt-1 ml-4 space-y-2`}
-                    >
-                      {category.submenu.map((subItem, subIndex) => (
-                        <Link
-                          key={subIndex}
-                          href={subItem.path}
-                          className="block py-2 hover:text-primary transition"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
+                    
+                    {/* Submenu items */}
+                    {openSubmenus[category.name] && (
+                      <div className="pl-4 mt-1 space-y-1">
+                        {category.submenu.map((subItem, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            href={subItem.path}
+                            className="block py-2 text-gray-600 hover:text-primary"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </>
                 ) : (
+                  /* Regular category link */
                   <Link
                     href={category.path}
-                    className="block font-semibold text-lg py-2 hover:text-primary transition"
+                    className="block py-2 font-medium text-base text-gray-900 hover:text-primary"
                   >
                     {category.name}
                   </Link>
@@ -122,6 +114,6 @@ export default function MobileMenu({ isOpen, categories }: MobileMenuProps) {
           </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 }
