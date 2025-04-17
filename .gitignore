@@ -39,7 +39,6 @@ out
 
 # Netlify
 .netlify
-netlify.toml
 
 # Misc
 coverage
