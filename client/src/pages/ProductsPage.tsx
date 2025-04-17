@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useRoute, useLocation, Link } from "wouter";
 import { Category, Product } from "@shared/schema";
 import { Button } from "@/components/ui/button";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import ProductGrid from "@/components/products/ProductGrid";
 import ProductFilter, { FilterOptions } from "@/components/products/ProductFilter";
 import { useSearch } from "@/context/SearchContext";
@@ -12,7 +11,9 @@ import { ChevronLeft } from "lucide-react";
 
 export default function ProductsPage() {
   // Check if we're on a category page or search page
-  const [, params] = useRoute("/products/category/:slug");
+  const [, paramsProducts] = useRoute("/products/category/:slug");
+  const [, paramsCategory] = useRoute("/category/:slug");
+  const params = paramsProducts || paramsCategory; // Use whichever route matched
   const [location] = useLocation();
   const { searchQuery, searchResults } = useSearch();
   
@@ -89,32 +90,26 @@ export default function ProductsPage() {
       </Helmet>
       
       <main className="container mx-auto px-4 py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} href="/products">Products</BreadcrumbLink>
-          </BreadcrumbItem>
+        {/* Simple Breadcrumbs */}
+        <nav className="flex mb-6 text-sm">
+          <Link href="/" className="text-gray-600 hover:text-primary">Home</Link>
+          <span className="mx-2 text-gray-400">/</span>
+          <Link href="/products" className="text-gray-600 hover:text-primary">Products</Link>
+          
           {activeCategory && (
             <>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink isCurrentPage>{activeCategory.name}</BreadcrumbLink>
-              </BreadcrumbItem>
+              <span className="mx-2 text-gray-400">/</span>
+              <span className="text-primary">{activeCategory.name}</span>
             </>
           )}
+          
           {searchQuery && (
             <>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink isCurrentPage>Search: {searchQuery}</BreadcrumbLink>
-              </BreadcrumbItem>
+              <span className="mx-2 text-gray-400">/</span>
+              <span className="text-primary">Search: {searchQuery}</span>
             </>
           )}
-        </Breadcrumb>
+        </nav>
         
         <div className="mb-8">
           <h1 className="text-3xl font-heading font-bold mb-2">{getPageTitle()}</h1>
