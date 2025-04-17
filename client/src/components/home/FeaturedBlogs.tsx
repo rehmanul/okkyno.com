@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { formatDistanceToNow } from "date-fns";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BlogPost } from "../../../shared/schema";
+import type { BlogPost } from "../../../shared/schema";
 
 export default function FeaturedBlogs() {
   const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
