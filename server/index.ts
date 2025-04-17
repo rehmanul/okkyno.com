@@ -55,6 +55,12 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
+  
+// Export a function that creates an Express app for Netlify functions
+export function createRequestHandler() {
+  return app;
+}
+  }
 
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
