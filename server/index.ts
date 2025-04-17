@@ -2,14 +2,13 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
+const app = express();
+app.use(express.json());
+
 // Export a function that creates an Express app for Netlify functions
 export function createRequestHandler() {
   return app;
 }
-
-
-const app = express();
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
