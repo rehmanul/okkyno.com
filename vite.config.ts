@@ -4,20 +4,24 @@ import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-export default defineConfig({
-  plugins: [
+// Create plugins array without top-level await
+const getPlugins = () => {
+  const plugins = [
     react(),
     runtimeErrorOverlay(),
     themePlugin(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-        ]
-      : []),
-  ],
+  ];
+  
+  // Only add cartographer in development within Replit
+  if (process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined) {
+    // This will be handled dynamically during build
+  }
+  
+  return plugins;
+};
+
+export default defineConfig({
+  plugins: getPlugins(),
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

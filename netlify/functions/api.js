@@ -1,9 +1,10 @@
 
 import serverless from 'serverless-http';
-import { createRequestHandler } from '../../server/index.js';
+import { createRequestHandler } from '../../dist/index.js';
 
-// Create the Express app
-const app = createRequestHandler();
-
-// Export the serverless function
-export const handler = serverless(app);
+// Create the Express app and handle as serverless function
+export const handler = async (event, context) => {
+  const app = createRequestHandler();
+  const handler = serverless(app);
+  return await handler(event, context);
+};
