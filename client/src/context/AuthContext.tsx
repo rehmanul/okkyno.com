@@ -1,5 +1,15 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { User, InsertUser } from "../../shared/schema";
+import type { User } from "../../shared/schema";
+
+// Simplified InsertUser type
+interface InsertUser {
+  username: string;
+  password: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
+}
 
 interface AuthContextType {
   user: User | null;
