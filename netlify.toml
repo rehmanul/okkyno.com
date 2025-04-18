@@ -1,3 +1,4 @@
+
 [build]
   command = "npm run build && cp sitemap.xml dist/public/"
   publish = "dist/public"
@@ -77,18 +78,18 @@
   package = "netlify-plugin-cache-headers"
 
   [plugins.inputs]
-    "/*.(css|js|json)": '''
+    "/*.(css|js|json)" = """
       Cache-Control: public, max-age=31536000, immutable
-    '''
-    "/*.(jpg|jpeg|png|gif|webp|svg|ico)": '''
+    """
+    "/*.(jpg|jpeg|png|gif|webp|svg|ico)" = """
       Cache-Control: public, max-age=31536000, immutable
-    '''
-    "/*.(woff|woff2|ttf|otf|eot)": '''
+    """
+    "/*.(woff|woff2|ttf|otf|eot)" = """
       Cache-Control: public, max-age=31536000, immutable
-    '''
-    "/": '''
+    """
+    "/" = """
       Cache-Control: public, max-age=0, must-revalidate
-    '''
+    """
 
 # Check for accessibility issues
 [[plugins]]
@@ -97,4 +98,3 @@
   [plugins.inputs]
     checkPaths = ['/']
     failWithoutPrefix = false
-    
