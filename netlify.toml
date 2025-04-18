@@ -2,7 +2,7 @@
   command = "npm run build && cp sitemap.xml dist/public/"
   publish = "dist/public"
   functions = "netlify/functions"
-  
+
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
@@ -28,7 +28,7 @@
 # Check for broken links
 [[plugins]]
   package = "netlify-plugin-checklinks"
-  
+
   [plugins.inputs]
   entryPoints = [
     "*.html",
@@ -68,7 +68,7 @@
 # Prefetch initial links to improve perceived load time
 [[plugins]]
   package = "netlify-plugin-inline-source"
-  
+
   [plugins.inputs]
     attribute = "inline"
 
@@ -93,7 +93,8 @@
 # Check for accessibility issues
 [[plugins]]
   package = "netlify-plugin-a11y"
-  
+
   [plugins.inputs]
     checkPaths = ['/']
     failWithoutPrefix = false
+    
