@@ -1,20 +1,15 @@
-
 [build]
-  command = "npm run build && cp sitemap.xml dist/public/"
+  command = "npm run build"
   publish = "dist/public"
   functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
-
-[dev]
-  command = "npm run dev"
-  port = 5000
 
 [[redirects]]
   from = "/api/*"
@@ -31,9 +26,7 @@
   package = "netlify-plugin-checklinks"
 
   [plugins.inputs]
-  entryPoints = [
-    "*.html",
-  ]
+  entryPoints = ["*.html"]
   recursive = true
   pretty = true
   skipPatterns = []
