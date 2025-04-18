@@ -23,8 +23,8 @@
 
 # Check for broken links
 [[plugins]]
-  package = "netlify-plugin-checklinks@4.1.1"
-
+  package = "netlify-plugin-checklinks"
+  
   [plugins.inputs]
   entryPoints = ["*.html"]
   recursive = true
