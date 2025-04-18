@@ -23,7 +23,7 @@
 
 # Check for broken links
 [[plugins]]
-  package = "netlify-plugin-checklinks"
+  package = "netlify-plugin-checklinks@4.1.1"
 
   [plugins.inputs]
   entryPoints = ["*.html"]
