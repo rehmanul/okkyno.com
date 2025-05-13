@@ -3,11 +3,12 @@ import CategoryShowcase from "@/components/home/CategoryShowcase";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import PromoSection from "@/components/home/PromoSection";
 import FeaturedBlogs from "@/components/home/FeaturedBlogs";
-import Testimonials from "@/components/home/Testimonials";
-import Newsletter from "@/components/home/Newsletter";
+import Testimonials from "@/components/home/testimonials";
+import Newsletter from "@/components/home/newsletter";
 import { Helmet } from "react-helmet";
 
 export default function HomePage() {
+  console.log("HomePage component is rendering");
   return (
     <>
       <Helmet>
