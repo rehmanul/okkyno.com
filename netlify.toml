@@ -120,8 +120,8 @@
   package = "netlify-plugin-inline-critical-css"
 
   [plugins.inputs]
-  minify = true
-  basedir = "./dist/public"
+  # minify = true
+  # basedir = "./dist/public"
 
 # Submit sitemap to search engines
 [[plugins]]
