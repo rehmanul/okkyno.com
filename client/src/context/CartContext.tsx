@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
-import type { Product } from "../../shared/schema";
+import type { Product } from "@shared/schema";
 
 // Extended CartItem with product details
 export interface CartItemWithProduct {

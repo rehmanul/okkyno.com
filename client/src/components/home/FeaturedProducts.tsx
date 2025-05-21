@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import type { Product } from "../../../shared/schema";
+import type { Product } from "@shared/schema";
 
 export default function FeaturedProducts() {
   const [visibleProducts, setVisibleProducts] = useState(8);

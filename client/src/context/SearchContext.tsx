@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import type { Product } from "../../shared/schema";
+import type { Product } from "@shared/schema";
 
 interface SearchContextType {
   searchQuery: string;
