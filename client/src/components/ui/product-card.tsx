@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Product } from "@shared/schema";
 import StarRating from "./star-rating";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {

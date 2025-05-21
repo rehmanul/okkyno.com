@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import FloatingButtons from "@/components/home/FloatingButtons";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
