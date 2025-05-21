@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import FloatingButtons from "@/components/home/FloatingButtons";
 import { useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
@@ -10,10 +10,20 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { sampleFeaturedProducts } from "@/lib/data";
 import { productImages } from "@/lib/data";
+import type { Product } from "@shared/schema";
+
+interface ExtendedProduct extends Partial<Product> {
+  salePrice?: number | null;
+  inStock?: boolean;
+  isFeatured?: boolean;
+  isNew?: boolean;
+  isBestseller?: boolean;
+  isOrganic?: boolean;
+}
 
 // Generate more products (in a real app these would come from the backend)
-const generateProducts = () => {
-  const allProducts = [...sampleFeaturedProducts];
+const generateProducts = (): ExtendedProduct[] => {
+  const allProducts: ExtendedProduct[] = [...sampleFeaturedProducts];
   
   // Names for different product types
   const toolNames = [
@@ -168,7 +178,7 @@ export default function Shop() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   
-  const { data: allProducts, isLoading } = useQuery({
+  const { data: allProducts, isLoading } = useQuery<ExtendedProduct[]>({
     queryKey: ['/api/products'],
     queryFn: async () => {
       // Simulate API call with more products
@@ -210,7 +220,7 @@ export default function Shop() {
     } else if (sortBy === "price-high") {
       return (b.salePrice || b.price) - (a.salePrice || a.price);
     } else if (sortBy === "rating") {
-      return b.rating - a.rating;
+      return (b.rating ?? 0) - (a.rating ?? 0);
     } else {
       // Default: featured
       return b.isFeatured ? 1 : -1;

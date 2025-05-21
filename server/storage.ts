@@ -349,7 +349,14 @@ export class MemStorage implements IStorage {
   async createUser(user: InsertUser): Promise<User> {
     const id = this.userIdCounter++;
     const now = new Date();
-    const newUser: User = { ...user, id, createdAt: now };
+    const newUser: User = {
+      ...user,
+      id,
+      createdAt: now,
+      firstName: user.firstName ?? null,
+      lastName: user.lastName ?? null,
+      role: user.role ?? "customer",
+    };
     this.users.set(id, newUser);
     return newUser;
   }
@@ -380,7 +387,12 @@ export class MemStorage implements IStorage {
   
   async createCategory(category: InsertCategory): Promise<Category> {
     const id = this.categoryIdCounter++;
-    const newCategory: Category = { ...category, id };
+    const newCategory: Category = {
+      ...category,
+      id,
+      description: category.description ?? null,
+      imageUrl: category.imageUrl ?? null,
+    };
     this.categories.set(id, newCategory);
     return newCategory;
   }
@@ -446,11 +458,19 @@ export class MemStorage implements IStorage {
   async createProduct(product: InsertProduct): Promise<Product> {
     const id = this.productIdCounter++;
     const now = new Date();
-    const newProduct: Product = { 
-      ...product, 
-      id, 
+    const newProduct: Product = {
+      ...product,
+      id,
       createdAt: now,
-      imageUrls: product.imageUrls || []
+      description: product.description ?? null,
+      shortDescription: product.shortDescription ?? null,
+      comparePrice: product.comparePrice ?? null,
+      imageUrl: product.imageUrl ?? null,
+      imageUrls: product.imageUrls ?? [],
+      featured: product.featured ?? false,
+      rating: product.rating ?? 0,
+      reviewCount: product.reviewCount ?? 0,
+      stock: product.stock ?? 0,
     };
     this.products.set(id, newProduct);
     return newProduct;
@@ -499,12 +519,15 @@ export class MemStorage implements IStorage {
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
     const id = this.blogPostIdCounter++;
     const now = new Date();
-    const newPost: BlogPost = { 
-      ...post, 
-      id, 
+    const newPost: BlogPost = {
+      ...post,
+      id,
       commentCount: 0,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
+      excerpt: post.excerpt ?? null,
+      imageUrl: post.imageUrl ?? null,
+      published: post.published ?? false,
     };
     this.blogPosts.set(id, newPost);
     return newPost;
@@ -543,7 +566,7 @@ export class MemStorage implements IStorage {
     // Update blog post comment count
     const post = await this.getBlogPost(comment.blogPostId);
     if (post) {
-      await this.updateBlogPost(post.id, { commentCount: post.commentCount + 1 });
+      await this.updateBlogPost(post.id, { commentCount: (post.commentCount ?? 0) + 1 });
     }
     
     return newComment;
@@ -556,7 +579,7 @@ export class MemStorage implements IStorage {
     // Update blog post comment count
     const post = await this.getBlogPost(comment.blogPostId);
     if (post) {
-      await this.updateBlogPost(post.id, { commentCount: post.commentCount - 1 });
+      await this.updateBlogPost(post.id, { commentCount: (post.commentCount ?? 0) - 1 });
     }
     
     return this.comments.delete(id);
@@ -581,7 +604,12 @@ export class MemStorage implements IStorage {
   async createOrder(order: InsertOrder): Promise<Order> {
     const id = this.orderIdCounter++;
     const now = new Date();
-    const newOrder: Order = { ...order, id, createdAt: now };
+    const newOrder: Order = {
+      ...order,
+      id,
+      createdAt: now,
+      status: order.status ?? "pending",
+    };
     this.orders.set(id, newOrder);
     return newOrder;
   }
@@ -623,11 +651,13 @@ export class MemStorage implements IStorage {
   async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
     const id = this.testimonialIdCounter++;
     const now = new Date();
-    const newTestimonial: Testimonial = { 
-      ...testimonial, 
-      id, 
+    const newTestimonial: Testimonial = {
+      ...testimonial,
+      id,
       approved: false,
-      createdAt: now
+      createdAt: now,
+      customerTitle: testimonial.customerTitle ?? null,
+      customerImage: testimonial.customerImage ?? null,
     };
     this.testimonials.set(id, newTestimonial);
     return newTestimonial;

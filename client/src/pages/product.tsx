@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import FloatingButtons from "@/components/home/FloatingButtons";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
