@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "wouter";
-import AdminLayout from "@/components/admin/layout";
+import AdminLayout from "@/components/admin/AdminLayout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
