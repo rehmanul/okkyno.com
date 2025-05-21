@@ -22,7 +22,8 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
+// Promise that resolves when routes have been registered
+const routesReady = (async () => {
   try {
     // Register routes
     await registerRoutes(app);
@@ -48,12 +49,15 @@ const serverlessHandler = serverless(app);
 
 // Export the handler function
 export const handler = async (event, context) => {
-  log('Request received', { 
-    path: event.path, 
-    httpMethod: event.httpMethod, 
-    queryStringParameters: event.queryStringParameters 
+  // Ensure routes are ready before handling the request
+  await routesReady;
+
+  log('Request received', {
+    path: event.path,
+    httpMethod: event.httpMethod,
+    queryStringParameters: event.queryStringParameters
   });
-  
+
   // Process the request through the serverless-http wrapper
   const result = await serverlessHandler(event, context);
   
