@@ -1,4 +1,4 @@
-import { Category, Product, BlogPost, Review } from '@shared/schema';
+import { Category, Product, BlogPost, Testimonial } from '@shared/schema';
 
 // Sample images for products from Unsplash
 export const productImages = {
@@ -248,7 +248,7 @@ export const sampleBlogPosts: BlogPost[] = [
 ];
 
 // Sample reviews/testimonials
-export const sampleTestimonials: Review[] = [
+export const sampleTestimonials: Testimonial[] = [
   {
     id: 1,
     productId: 2,
