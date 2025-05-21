@@ -1,8 +1,8 @@
-import { Review } from "@shared/schema";
+import { Testimonial } from "@shared/schema";
 import StarRating from "./star-rating";
 
 interface TestimonialCardProps {
-  testimonial: Review;
+  testimonial: Testimonial;
 }
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
