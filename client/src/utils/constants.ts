@@ -62,6 +62,11 @@ export const navLinks = [
     path: "/about",
     submenu: [],
   },
+  {
+    name: "Contact",
+    path: "/contact",
+    submenu: [],
+  },
 ];
 
 // Footer quick links
