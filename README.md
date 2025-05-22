@@ -36,8 +36,8 @@ A professional gardening e-commerce platform offering comprehensive product list
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/okkyno.git
-   cd okkyno
+   git clone https://github.com/yourusername/okkyno.com.git
+   cd okkyno.com
    ```
 
 2. Install dependencies:
