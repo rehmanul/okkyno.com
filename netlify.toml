@@ -6,6 +6,7 @@
 [build.environment]
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
+  CSS_TRANSFORMER_WASM = "false"
 
 [functions]
   directory = "netlify/functions"
