@@ -82,8 +82,7 @@
     "zod": "^3.23.8",
     "zod-validation-error": "^3.4.0",
     "serverless-http": "^3.1.0",
-    "dayjs": "^1.11.10",
-    "lightningcss": "^1.30.0"
+    "dayjs": "^1.11.10"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
