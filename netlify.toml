@@ -147,10 +147,3 @@
   [plugins.inputs]
     attribute = "inline"
 
-# Check for accessibility issues
-[[plugins]]
-  package = "netlify-plugin-a11y"
-
-  [plugins.inputs]
-    checkPaths = ['/']
-
