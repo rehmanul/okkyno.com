@@ -107,6 +107,61 @@ export class MemStorage implements IStorage {
     { name: "Pots & Planters", slug: "pots-planters", description: "Decorative pots for your plants", imageUrl: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
     { name: "Seeds", slug: "seeds", description: "High-quality seeds for planting", imageUrl: "https://images.unsplash.com/photo-1574478155394-84eee6d97a8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" }
   ];
+
+  private placeholderImage =
+    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiBmb250LXNpemU9IjI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2IiBkeT0iLjNlbSI+SW1hZ2U8L3RleHQ+PC9zdmc+";
+
+  private productNamesByCategory: Record<number, string[]> = {
+    1: [
+      "Fresh Carrot Bundle",
+      "Organic Cucumber",
+      "Sweet Bell Pepper",
+      "Heirloom Tomato",
+      "Leafy Lettuce"
+    ],
+    2: [
+      "Snake Plant",
+      "Peace Lily",
+      "Monstera Deliciosa",
+      "ZZ Plant",
+      "Aloe Vera"
+    ],
+    3: [
+      "Garden Trowel",
+      "Pruning Shears",
+      "Steel Rake",
+      "Garden Gloves",
+      "Watering Can"
+    ],
+    4: [
+      "Rose Bouquet",
+      "Tulip Bulb Pack",
+      "Daisy Seeds",
+      "Lavender Pot",
+      "Sunflower Starter"
+    ],
+    5: [
+      "Ceramic Planter",
+      "Hanging Basket",
+      "Terracotta Pot",
+      "Metal Planter",
+      "Wooden Raised Bed"
+    ],
+    6: [
+      "Basil Seed Pack",
+      "Parsley Seeds",
+      "Dill Seeds",
+      "Chive Seeds",
+      "Coriander Seeds"
+    ]
+  };
+
+  private slugify(str: string) {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  }
   
   constructor() {
     this.users = new Map();
@@ -285,20 +340,24 @@ export class MemStorage implements IStorage {
       reviewCount: 37
     });
 
-    // Generate additional sample products to populate the catalog
+    // Generate additional products with realistic names
     for (let i = 1; i <= 100; i++) {
       const categoryId = ((i - 1) % this.sampleCategories.length) + 1;
+      const nameList = this.productNamesByCategory[categoryId] ?? ["Garden Item"];
+      const baseName = nameList[i % nameList.length];
+      const name = `${baseName} ${i}`;
+      const slug = this.slugify(name);
       this.createProduct({
-        name: `Sample Product ${i}`,
-        slug: `sample-product-${i}`,
-        description: `Description for sample product ${i}.`,
-        shortDescription: `Sample product ${i}`,
+        name,
+        slug,
+        description: `${baseName} for your garden`,
+        shortDescription: baseName,
         price: parseFloat((5.99 + (i % 50)).toFixed(2)),
         comparePrice: null,
-        imageUrl: `https://source.unsplash.com/seed/sample-product-${i}/600x600`,
+        imageUrl: this.placeholderImage,
         imageUrls: [],
         categoryId,
-        sku: `SAMPLE-${String(i).padStart(3, "0")}`,
+        sku: `PROD-${String(i).padStart(3, "0")}`,
         stock: 100,
         featured: false,
         rating: 0,
