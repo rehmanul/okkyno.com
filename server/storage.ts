@@ -284,6 +284,27 @@ export class MemStorage implements IStorage {
       rating: 4.3,
       reviewCount: 37
     });
+
+    // Generate additional sample products to populate the catalog
+    for (let i = 1; i <= 100; i++) {
+      const categoryId = ((i - 1) % this.sampleCategories.length) + 1;
+      this.createProduct({
+        name: `Sample Product ${i}`,
+        slug: `sample-product-${i}`,
+        description: `Description for sample product ${i}.`,
+        shortDescription: `Sample product ${i}`,
+        price: parseFloat((5.99 + (i % 50)).toFixed(2)),
+        comparePrice: null,
+        imageUrl: `https://source.unsplash.com/seed/sample-product-${i}/600x600`,
+        imageUrls: [],
+        categoryId,
+        sku: `SAMPLE-${String(i).padStart(3, "0")}`,
+        stock: 100,
+        featured: false,
+        rating: 0,
+        reviewCount: 0,
+      });
+    }
     
     // Create sample blog posts
     this.createBlogPost({
