@@ -14,9 +14,9 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
       <p className="text-gray-600 mb-6 italic">"{testimonial.comment}"</p>
       <div className="flex items-center">
         {testimonial.userImageUrl && (
-          <img 
-            src={`${testimonial.userImageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80`} 
-            alt={testimonial.userName} 
+          <img
+            src={testimonial.userImageUrl}
+            alt={testimonial.userName}
             className="w-10 h-10 rounded-full mr-3"
           />
         )}

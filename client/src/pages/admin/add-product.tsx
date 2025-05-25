@@ -303,8 +303,8 @@ export default function AddProduct() {
                       <div className="mt-4">
                         <h3 className="text-sm font-medium mb-2">Preview:</h3>
                         <div className="border rounded-md p-2 w-40 h-40">
-                          <img 
-                            src={`${form.watch('imageUrl')}?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80`}
+                          <img
+                            src={form.watch('imageUrl')}
                             alt="Product preview"
                             className="w-full h-full object-cover rounded"
                             onError={() => setPreviewUrl("")}
@@ -324,8 +324,8 @@ export default function AddProduct() {
                             }`}
                             onClick={() => handleSelectSampleImage(img)}
                           >
-                            <img 
-                              src={`${img}?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80`}
+                            <img
+                              src={img}
                               alt={`Sample ${idx + 1}`}
                               className="w-full h-full object-cover"
                             />
