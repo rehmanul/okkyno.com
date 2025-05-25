@@ -215,6 +215,75 @@ export class MemStorage implements IStorage {
       rating: 4.5,
       reviewCount: 54
     });
+
+    // Additional sample products
+    this.createProduct({
+      name: "Deluxe Garden Trowel",
+      slug: "deluxe-garden-trowel",
+      description: "Sturdy stainless steel trowel with ergonomic handle for easy digging and planting.",
+      shortDescription: "Stainless steel garden trowel",
+      price: 14.99,
+      comparePrice: 19.99,
+      imageUrl: "https://images.unsplash.com/photo-1583244493066-4bbf37da8c8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      imageUrls: [],
+      categoryId: 3, // Garden Tools category
+      sku: "TOOL-TRO-002",
+      stock: 40,
+      featured: false,
+      rating: 4.7,
+      reviewCount: 98
+    });
+
+    this.createProduct({
+      name: "Tomato Seedling Starter Kit",
+      slug: "tomato-seedling-starter-kit",
+      description: "All-in-one kit to start tomato seedlings indoors including tray, dome and soil pellets.",
+      shortDescription: "Complete kit for starting tomatoes",
+      price: 12.99,
+      comparePrice: null,
+      imageUrl: "https://images.unsplash.com/photo-1556911220-e15b29be8c82?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      imageUrls: [],
+      categoryId: 6, // Seeds category
+      sku: "SEED-KIT-001",
+      stock: 60,
+      featured: false,
+      rating: 4.2,
+      reviewCount: 21
+    });
+
+    this.createProduct({
+      name: "Snake Plant - Sansevieria",
+      slug: "snake-plant-sansevieria",
+      description: "Low-maintenance houseplant that thrives in low light conditions.",
+      shortDescription: "Hardy houseplant for low light",
+      price: 24.5,
+      comparePrice: null,
+      imageUrl: "https://images.unsplash.com/photo-1510626176961-4b5323c8fecc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      imageUrls: [],
+      categoryId: 2, // Indoor Plants category
+      sku: "PLANT-IND-002",
+      stock: 80,
+      featured: false,
+      rating: 4.8,
+      reviewCount: 110
+    });
+
+    this.createProduct({
+      name: "Terracotta Pot Set (3 Pack)",
+      slug: "terracotta-pot-set-3-pack",
+      description: "Classic terracotta pots with drainage holes, perfect for herbs and succulents.",
+      shortDescription: "Set of 3 terracotta pots",
+      price: 16.99,
+      comparePrice: 21.99,
+      imageUrl: "https://images.unsplash.com/photo-1585238342023-c7906dc93c7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      imageUrls: [],
+      categoryId: 5, // Pots & Planters category
+      sku: "POT-TER-003",
+      stock: 90,
+      featured: false,
+      rating: 4.3,
+      reviewCount: 37
+    });
     
     // Create sample blog posts
     this.createBlogPost({

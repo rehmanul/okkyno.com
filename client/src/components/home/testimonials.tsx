@@ -55,11 +55,11 @@ export default function Testimonials() {
               </div>
               <p className="text-gray-600 italic mb-4">{testimonial.content}</p>
               <div className="flex items-center">
-                {testimonial.avatarUrl && (
+                {testimonial.customerImage && (
                   <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
-                    <img 
-                      src={testimonial.avatarUrl} 
-                      alt={testimonial.customerName} 
+                    <img
+                      src={testimonial.customerImage}
+                      alt={testimonial.customerName}
                       className="w-full h-full object-cover"
                     />
                   </div>
