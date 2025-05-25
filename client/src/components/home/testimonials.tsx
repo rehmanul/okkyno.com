@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Testimonial } from "@shared/schema";
 import { Card } from "@/components/ui/card";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 export default function Testimonials() {
   const { data: testimonials, isLoading } = useQuery<Testimonial[]>({
@@ -46,10 +47,10 @@ export default function Testimonials() {
             <Card key={testimonial.id} className="p-6">
               <div className="flex text-[#f8b042] mb-3">
                 {Array(testimonial.rating).fill(0).map((_, i) => (
-                  <i key={i} className="fas fa-star"></i>
+                  <FaStar key={i} />
                 ))}
                 {Array(5 - testimonial.rating).fill(0).map((_, i) => (
-                  <i key={i} className="far fa-star"></i>
+                  <FaRegStar key={i} />
                 ))}
               </div>
               <p className="text-gray-600 italic mb-4">{testimonial.content}</p>

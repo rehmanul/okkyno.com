@@ -12,6 +12,18 @@ import { generateProducts } from "@/lib/product-generator";
 import StarRating from "@/components/ui/star-rating";
 import { Separator } from "@/components/ui/separator";
 import ProductCard from "@/components/ui/product-card";
+import {
+  FaExclamationCircle,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaLeaf,
+  FaAward,
+  FaShippingFast,
+  FaMinus,
+  FaPlus,
+  FaShoppingCart,
+  FaRegHeart
+} from "react-icons/fa";
 
 export default function ProductPage() {
   const [match, params] = useRoute("/product/:slug");
@@ -125,7 +137,7 @@ export default function ProductPage() {
         <main className="py-8 bg-neutral min-h-screen">
           <div className="container mx-auto px-4">
             <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-              <i className="fas fa-exclamation-circle text-4xl text-red-500 mb-4"></i>
+              <FaExclamationCircle className="text-4xl text-red-500 mb-4" />
               <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
               <p className="mb-6">Sorry, the product you're looking for doesn't exist or has been removed.</p>
               <Link href="/shop">
@@ -220,27 +232,31 @@ export default function ProductPage() {
                 <div className="mb-6">
                   <div className="flex items-center gap-2 text-sm mb-2">
                     <span className={product.inStock ? "text-green-600" : "text-red-600"}>
-                      <i className={`fas ${product.inStock ? "fa-check-circle" : "fa-times-circle"} mr-1`}></i>
+                      {product.inStock ? (
+                        <FaCheckCircle className="mr-1" />
+                      ) : (
+                        <FaTimesCircle className="mr-1" />
+                      )}
                       {product.inStock ? "In Stock" : "Out of Stock"}
                     </span>
                     
                     {product.isOrganic && (
                       <span className="text-success">
-                        <i className="fas fa-leaf mr-1"></i>
+                        <FaLeaf className="mr-1" />
                         Organic
                       </span>
                     )}
                     
                     {product.isBestseller && (
                       <span className="text-primary">
-                        <i className="fas fa-award mr-1"></i>
+                        <FaAward className="mr-1" />
                         Bestseller
                       </span>
                     )}
                   </div>
                   
                   <div className="flex items-center text-sm text-gray-600">
-                    <i className="fas fa-shipping-fast mr-1"></i>
+                    <FaShippingFast className="mr-1" />
                     Free shipping on orders over $50
                   </div>
                 </div>
@@ -254,7 +270,7 @@ export default function ProductPage() {
                       onClick={decrementQuantity}
                       disabled={!product.inStock}
                     >
-                      <i className="fas fa-minus text-gray-600"></i>
+                      <FaMinus className="text-gray-600" />
                     </button>
                     <input
                       type="number"
@@ -269,7 +285,7 @@ export default function ProductPage() {
                       onClick={incrementQuantity}
                       disabled={!product.inStock}
                     >
-                      <i className="fas fa-plus text-gray-600"></i>
+                      <FaPlus className="text-gray-600" />
                     </button>
                   </div>
                 </div>
@@ -283,7 +299,7 @@ export default function ProductPage() {
                   >
                     {product.inStock ? (
                       <>
-                        <i className="fas fa-shopping-cart mr-2"></i> Add to Cart
+                      <FaShoppingCart className="mr-2" /> Add to Cart
                       </>
                     ) : (
                       "Out of Stock"
@@ -294,7 +310,7 @@ export default function ProductPage() {
                     variant="outline"
                     className="px-4 py-3 border border-gray-300 hover:bg-gray-100 text-gray-700 font-medium rounded-full"
                   >
-                    <i className="far fa-heart mr-2"></i> Add to Wishlist
+                    <FaRegHeart className="mr-2" /> Add to Wishlist
                   </Button>
                 </div>
               </div>

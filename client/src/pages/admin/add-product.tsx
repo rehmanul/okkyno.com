@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "wouter";
 import AdminLayout from "@/components/admin/AdminLayout";
+import { FaArrowLeft } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -145,7 +146,7 @@ export default function AddProduct() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Add New Product</h1>
           <Button variant="outline" onClick={() => navigate("/admin/products")}>
-            <i className="fas fa-arrow-left mr-2"></i> Back to Products
+            <FaArrowLeft className="mr-2" /> Back to Products
           </Button>
         </div>
         

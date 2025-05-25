@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import type { Product } from "@shared/schema";
 import { generateProducts, ExtendedProduct } from "@/lib/product-generator";
+import { FaSearch, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 // Reuse the shared product generator for consistent mock data across pages.
 
@@ -113,7 +114,7 @@ export default function Shop() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                    <i className="fas fa-search"></i>
+                    <FaSearch />
                   </button>
                 </div>
               </div>
@@ -255,7 +256,7 @@ export default function Shop() {
                 </div>
               ) : filteredProducts?.length === 0 ? (
                 <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-                  <i className="fas fa-search text-4xl text-gray-400 mb-4"></i>
+                  <FaSearch className="text-4xl text-gray-400 mb-4" />
                   <h3 className="text-xl font-semibold mb-2">No products found</h3>
                   <p className="text-gray-600">Try adjusting your filters or search query.</p>
                 </div>
@@ -271,12 +272,12 @@ export default function Shop() {
                   {totalPages > 1 && (
                     <div className="flex justify-center mt-8">
                       <div className="flex gap-2">
-                        <button 
+                        <button
                           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-primary hover:text-white disabled:opacity-50 disabled:pointer-events-none"
                           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                           disabled={currentPage === 1}
                         >
-                          <i className="fas fa-chevron-left"></i>
+                          <FaChevronLeft />
                         </button>
                         
                         {[...Array(totalPages)].map((_, i) => (
@@ -289,12 +290,12 @@ export default function Shop() {
                           </button>
                         ))}
                         
-                        <button 
+                        <button
                           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-primary hover:text-white disabled:opacity-50 disabled:pointer-events-none"
                           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                           disabled={currentPage === totalPages}
                         >
-                          <i className="fas fa-chevron-right"></i>
+                          <FaChevronRight />
                         </button>
                       </div>
                     </div>

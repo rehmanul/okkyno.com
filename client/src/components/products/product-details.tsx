@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ShoppingCart, Heart, ArrowLeftRight, Truck, Calendar, Shield } from "lucide-react";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 interface ProductDetailsProps {
   product: Product;
@@ -121,11 +122,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <div className="flex items-center mb-4">
               <div className="flex text-[#f8b042]">
                 {Array(Math.floor(product.rating)).fill(0).map((_, i) => (
-                  <i key={i} className="fas fa-star"></i>
+                  <FaStar key={i} />
                 ))}
-                {product.rating % 1 >= 0.5 && <i className="fas fa-star-half-alt"></i>}
+                {product.rating % 1 >= 0.5 && <FaStarHalfAlt />}
                 {Array(5 - Math.ceil(product.rating)).fill(0).map((_, i) => (
-                  <i key={i} className="far fa-star"></i>
+                  <FaRegStar key={i} />
                 ))}
               </div>
               <span className="text-gray-600 ml-2">

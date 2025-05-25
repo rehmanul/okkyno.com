@@ -3,6 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  FaLeaf,
+  FaArrowUp,
+  FaChartLine,
+  FaShoppingCart,
+  FaFileAlt,
+  FaEdit,
+  FaTrashAlt
+} from "react-icons/fa";
 import { 
   BarChart, 
   Bar, 
@@ -119,11 +128,11 @@ export default function AdminDashboard() {
                   <h3 className="text-3xl font-bold mt-1">{totalProducts}</h3>
                 </div>
                 <div className="bg-primary/10 p-3 rounded-full">
-                  <i className="fas fa-leaf text-primary text-xl"></i>
+                  <FaLeaf className="text-primary text-xl" />
                 </div>
               </div>
               <p className="text-sm text-green-600 mt-4">
-                <i className="fas fa-arrow-up mr-1"></i> 12% from last month
+                <FaArrowUp className="mr-1" /> 12% from last month
               </p>
             </CardContent>
           </Card>
@@ -136,11 +145,11 @@ export default function AdminDashboard() {
                   <h3 className="text-3xl font-bold mt-1">${(totalSales / 1000).toFixed(1)}k</h3>
                 </div>
                 <div className="bg-blue-100 p-3 rounded-full">
-                  <i className="fas fa-chart-line text-blue-600 text-xl"></i>
+                  <FaChartLine className="text-blue-600 text-xl" />
                 </div>
               </div>
               <p className="text-sm text-green-600 mt-4">
-                <i className="fas fa-arrow-up mr-1"></i> 8% from last month
+                <FaArrowUp className="mr-1" /> 8% from last month
               </p>
             </CardContent>
           </Card>
@@ -153,11 +162,11 @@ export default function AdminDashboard() {
                   <h3 className="text-3xl font-bold mt-1">${averageOrderValue.toFixed(2)}</h3>
                 </div>
                 <div className="bg-purple-100 p-3 rounded-full">
-                  <i className="fas fa-shopping-cart text-purple-600 text-xl"></i>
+                  <FaShoppingCart className="text-purple-600 text-xl" />
                 </div>
               </div>
               <p className="text-sm text-green-600 mt-4">
-                <i className="fas fa-arrow-up mr-1"></i> 3% from last month
+                <FaArrowUp className="mr-1" /> 3% from last month
               </p>
             </CardContent>
           </Card>
@@ -170,11 +179,11 @@ export default function AdminDashboard() {
                   <h3 className="text-3xl font-bold mt-1">{totalBlogPosts}</h3>
                 </div>
                 <div className="bg-orange-100 p-3 rounded-full">
-                  <i className="fas fa-file-alt text-orange-600 text-xl"></i>
+                  <FaFileAlt className="text-orange-600 text-xl" />
                 </div>
               </div>
               <p className="text-sm text-green-600 mt-4">
-                <i className="fas fa-arrow-up mr-1"></i> 5% from last month
+                <FaArrowUp className="mr-1" /> 5% from last month
               </p>
             </CardContent>
           </Card>
@@ -364,10 +373,10 @@ export default function AdminDashboard() {
                               </td>
                               <td className="px-4 py-3 text-right">
                                 <a href={`/admin/products/edit/${product.id}`} className="text-blue-600 hover:text-blue-800 mr-2">
-                                  <i className="fas fa-edit"></i>
+                                  <FaEdit />
                                 </a>
                                 <button className="text-red-600 hover:text-red-800">
-                                  <i className="fas fa-trash-alt"></i>
+                                  <FaTrashAlt />
                                 </button>
                               </td>
                             </tr>
@@ -426,10 +435,10 @@ export default function AdminDashboard() {
                               </td>
                               <td className="px-4 py-3 text-right">
                                 <a href={`/admin/blog-posts/edit/${post.id}`} className="text-blue-600 hover:text-blue-800 mr-2">
-                                  <i className="fas fa-edit"></i>
+                                  <FaEdit />
                                 </a>
                                 <button className="text-red-600 hover:text-red-800">
-                                  <i className="fas fa-trash-alt"></i>
+                                  <FaTrashAlt />
                                 </button>
                               </td>
                             </tr>

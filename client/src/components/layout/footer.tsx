@@ -1,4 +1,14 @@
 import { Link } from "wouter";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaPinterestP,
+  FaYoutube,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
+  FaClock
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -12,16 +22,16 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition" aria-label="Facebook">
-                <i className="fab fa-facebook-f"></i>
+                <FaFacebookF />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition" aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
+                <FaInstagram />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition" aria-label="Pinterest">
-                <i className="fab fa-pinterest-p"></i>
+                <FaPinterestP />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition" aria-label="YouTube">
-                <i className="fab fa-youtube"></i>
+                <FaYoutube />
               </a>
             </div>
           </div>
@@ -92,19 +102,19 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <i className="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                <FaMapMarkerAlt className="text-primary mt-1 mr-3" />
                 <span className="text-gray-400">123 Garden Street, Plantville, PL 12345</span>
               </li>
               <li className="flex items-center">
-                <i className="fas fa-phone text-primary mr-3"></i>
+                <FaPhone className="text-primary mr-3" />
                 <a href="tel:+18005551234" className="text-gray-400 hover:text-white transition">(800) 555-1234</a>
               </li>
               <li className="flex items-center">
-                <i className="fas fa-envelope text-primary mr-3"></i>
+                <FaEnvelope className="text-primary mr-3" />
                 <a href="mailto:info@okkyno.com" className="text-gray-400 hover:text-white transition">info@okkyno.com</a>
               </li>
               <li className="flex items-center">
-                <i className="fas fa-clock text-primary mr-3"></i>
+                <FaClock className="text-primary mr-3" />
                 <span className="text-gray-400">Mon-Fri: 9am-5pm, Sat: 10am-4pm</span>
               </li>
             </ul>

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRoute, useLocation } from "wouter";
 import { BlogPost, User } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
+import { FaRegCalendar, FaRegComment } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/lib/utils";
@@ -83,11 +84,11 @@ export default function BlogPostPage() {
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             <div className="flex items-center text-gray-600 mb-6">
               <span className="mr-4">
-                <i className="far fa-calendar mr-1"></i> 
+                <FaRegCalendar className="mr-1" />
                 {post.publishedAt ? formatDate(post.publishedAt) : "Draft"}
               </span>
               <span>
-                <i className="far fa-comment mr-1"></i> 
+                <FaRegComment className="mr-1" />
                 {post.commentCount} {post.commentCount === 1 ? "Comment" : "Comments"}
               </span>
             </div>
