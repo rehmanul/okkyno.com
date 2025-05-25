@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaArrowUp, FaWhatsapp } from "react-icons/fa";
 
 export default function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,12 +27,12 @@ export default function FloatingButtons() {
   return (
     <div className="fixed bottom-8 right-8 z-40 flex flex-col space-y-4">
       {isVisible && (
-        <button 
+        <button
           className="bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition"
           onClick={scrollToTop}
           aria-label="Scroll to top"
         >
-          <i className="fas fa-arrow-up"></i>
+          <FaArrowUp />
         </button>
       )}
       <a 
@@ -41,7 +42,7 @@ export default function FloatingButtons() {
         className="bg-green-500 hover:bg-green-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition"
         aria-label="Contact us on WhatsApp"
       >
-        <i className="fab fa-whatsapp"></i>
+        <FaWhatsapp />
       </a>
     </div>
   );

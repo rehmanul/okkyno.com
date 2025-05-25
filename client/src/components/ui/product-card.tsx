@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { Product } from "@shared/schema";
 import StarRating from "./star-rating";
 import { useCart } from "@/context/CartContext";
@@ -43,10 +44,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="absolute top-2 right-2 flex space-x-1">
             <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100 transition">
-              <i className="far fa-heart text-dark text-sm"></i>
+              <FaRegHeart className="text-dark text-sm" />
             </button>
             <button className="bg-white p-2 rounded-full shadow hover:bg-gray-100 transition">
-              <i className="fas fa-search text-dark text-sm"></i>
+              <FaSearch className="text-dark text-sm" />
             </button>
           </div>
           {product.salePrice && (

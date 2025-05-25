@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Promotion() {
   return (
@@ -36,15 +37,15 @@ export default function Promotion() {
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
-                <i className="fas fa-check-circle text-success mt-1 mr-3"></i>
+                <FaCheckCircle className="text-success mt-1 mr-3" />
                 <span>Free garden planning consultation with orders over $100</span>
               </li>
               <li className="flex items-start">
-                <i className="fas fa-check-circle text-success mt-1 mr-3"></i>
+                <FaCheckCircle className="text-success mt-1 mr-3" />
                 <span>Exclusive access to rare plant varieties</span>
               </li>
               <li className="flex items-start">
-                <i className="fas fa-check-circle text-success mt-1 mr-3"></i>
+                <FaCheckCircle className="text-success mt-1 mr-3" />
                 <span>30-day plant health guarantee</span>
               </li>
             </ul>

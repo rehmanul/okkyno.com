@@ -1,3 +1,5 @@
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+
 interface StarRatingProps {
   rating: number;
   size?: 'sm' | 'md' | 'lg';
@@ -18,15 +20,15 @@ export default function StarRating({ rating, size = 'sm' }: StarRatingProps) {
   return (
     <div className={`flex text-yellow-400 ${sizeClasses[size]}`}>
       {[...Array(fullStars)].map((_, i) => (
-        <i key={`full-${i}`} className="fas fa-star"></i>
+        <FaStar key={`full-${i}`} />
       ))}
       
       {hasHalfStar && (
-        <i className="fas fa-star-half-alt"></i>
+        <FaStarHalfAlt />
       )}
       
       {[...Array(emptyStars)].map((_, i) => (
-        <i key={`empty-${i}`} className="far fa-star"></i>
+        <FaRegStar key={`empty-${i}`} />
       ))}
     </div>
   );

@@ -4,6 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  FaPlus,
+  FaSearch,
+  FaBoxOpen,
+  FaStar,
+  FaEdit,
+  FaTrashAlt,
+  FaChevronLeft,
+  FaChevronRight
+} from "react-icons/fa";
 import { 
   Select, 
   SelectContent, 
@@ -129,7 +139,7 @@ export default function AdminProducts() {
           <h1 className="text-3xl font-bold">Products</h1>
           <Link href="/admin/products/add">
             <Button>
-              <i className="fas fa-plus mr-2"></i> Add Product
+              <FaPlus className="mr-2" /> Add Product
             </Button>
           </Link>
         </div>
@@ -146,7 +156,7 @@ export default function AdminProducts() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
                 />
-                <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               </div>
             </div>
             
@@ -214,12 +224,12 @@ export default function AdminProducts() {
             </div>
           ) : filteredProducts?.length === 0 ? (
             <div className="p-8 text-center">
-              <i className="fas fa-box-open text-4xl text-gray-300 mb-4"></i>
+              <FaBoxOpen className="text-4xl text-gray-300 mb-4" />
               <h3 className="text-xl font-semibold mb-2">No products found</h3>
               <p className="text-gray-600">Try adjusting your filters or adding a new product.</p>
               <Link href="/admin/products/add">
                 <Button className="mt-4">
-                  <i className="fas fa-plus mr-2"></i> Add Product
+                  <FaPlus className="mr-2" /> Add Product
                 </Button>
               </Link>
             </div>
@@ -284,23 +294,23 @@ export default function AdminProducts() {
                           </span>
                         </td>
                         <td className="px-4 py-3 text-center">
-                          <span className={`text-lg ${product.isFeatured ? 'text-yellow-500' : 'text-gray-300'}`}>
-                            <i className="fas fa-star"></i>
+                          <span className={`text-lg ${product.isFeatured ? 'text-yellow-500' : 'text-gray-300'}`}> 
+                            <FaStar />
                           </span>
                         </td>
                         <td className="px-4 py-3 text-right whitespace-nowrap">
                           <Link href={`/admin/products/edit/${product.id}`}>
                             <Button variant="ghost" size="sm" className="text-blue-600 h-8 px-2">
-                              <i className="fas fa-edit"></i>
+                              <FaEdit />
                             </Button>
                           </Link>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             className="text-red-600 h-8 px-2"
                             onClick={() => openDeleteDialog(product.id)}
                           >
-                            <i className="fas fa-trash-alt"></i>
+                            <FaTrashAlt />
                           </Button>
                         </td>
                       </tr>
@@ -316,13 +326,13 @@ export default function AdminProducts() {
                     Showing {indexOfFirstProduct + 1} to {Math.min(indexOfLastProduct, filteredProducts?.length || 0)} of {filteredProducts?.length} products
                   </div>
                   <div className="flex gap-2">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
                     >
-                      <i className="fas fa-chevron-left text-xs"></i>
+                      <FaChevronLeft className="text-xs" />
                     </Button>
                     
                     {Array.from({ length: totalPages }).map((_, index) => (
@@ -336,13 +346,13 @@ export default function AdminProducts() {
                       </Button>
                     ))}
                     
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                       disabled={currentPage === totalPages}
                     >
-                      <i className="fas fa-chevron-right text-xs"></i>
+                      <FaChevronRight className="text-xs" />
                     </Button>
                   </div>
                 </div>
