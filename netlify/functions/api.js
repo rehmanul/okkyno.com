@@ -3,7 +3,7 @@ import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
 import { registerRoutes } from '../../server/routes'; // Import routes
-import { log } from '../../server/vite'; // Import log function
+import { log } from '../../server/log';
 
 // Create Express app for Netlify Functions
 const app = express();
