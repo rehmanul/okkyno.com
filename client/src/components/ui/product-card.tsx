@@ -36,9 +36,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       <Link href={`/product/${product.slug}`}>
         <div className="relative">
           <div className="h-56 overflow-hidden">
-            <img 
-              src={`${product.imageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80`} 
-              alt={product.name} 
+            <img
+              src={product.imageUrl}
+              alt={product.name}
               className={`w-full h-full object-cover transition-transform duration-300 ${isHovered ? 'scale-105' : ''}`}
             />
           </div>

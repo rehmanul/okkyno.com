@@ -86,12 +86,14 @@ export default function ProductPage() {
   };
 
   // Create a gallery view of images
-  const productImages = product ? [
-    `${product.imageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`,
-    `${product.imageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80&sat=-100`, // Desaturated version
-    `${product.imageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80&blur=100`, // Blurred version 
-    `${product.imageUrl}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80&flip=h`, // Flipped version
-  ] : [];
+  const productImages = product
+    ? [
+        product.imageUrl,
+        product.imageUrl,
+        product.imageUrl,
+        product.imageUrl,
+      ]
+    : [];
 
   if (isLoading) {
     return (
