@@ -214,7 +214,7 @@ export default function BlogList() {
                     <div className="flex items-start gap-3">
                       {post.imageUrl && (
                         <div className="h-12 w-16 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
-                          <img 
+                          <img loading="lazy" 
                             src={post.imageUrl} 
                             alt={post.title} 
                             className="h-full w-full object-cover"

@@ -75,7 +75,7 @@ export default function FeaturedProducts() {
                     </div>
                   )}
                   
-                  <img 
+                  <img loading="lazy" 
                     src={product.imageUrl || "https://images.unsplash.com/photo-1624398146237-35f5a407958d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"} 
                     alt={product.name}
                     className="h-full w-full object-cover transition-transform hover:scale-105"

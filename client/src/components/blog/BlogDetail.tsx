@@ -158,7 +158,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
           {/* Featured image */}
           {post.imageUrl && (
             <div className="rounded-lg overflow-hidden mb-8">
-              <img 
+              <img loading="lazy" 
                 src={post.imageUrl} 
                 alt={post.title} 
                 className="w-full h-auto"

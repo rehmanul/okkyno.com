@@ -51,7 +51,7 @@ export default function CategoryShowcase() {
               <div className="text-center transition-all hover:transform hover:scale-105 cursor-pointer">
                 <div className="bg-light rounded-lg aspect-square mb-3 overflow-hidden">
                   {category.imageUrl ? (
-                    <img 
+                    <img loading="lazy" 
                       src={category.imageUrl} 
                       alt={category.name} 
                       className="w-full h-full object-cover"

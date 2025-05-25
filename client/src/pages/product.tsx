@@ -201,7 +201,7 @@ export default function ProductPage() {
                       }`}
                       onClick={() => setSelectedImage(idx)}
                     >
-                      <img src={img} alt={`${product.name} view ${idx + 1}`} className="w-20 h-20 object-cover" />
+                      <img loading="lazy" src={img} alt={`${product.name} view ${idx + 1}`} className="w-20 h-20 object-cover" />
                     </div>
                   ))}
                 </div>
@@ -440,7 +440,7 @@ export default function ProductPage() {
                     <div key={idx} className="border-b border-gray-200 pb-6 last:border-b-0">
                       <div className="flex justify-between mb-2">
                         <div className="flex items-center">
-                          <img 
+                          <img loading="lazy" 
                             src={`https://images.unsplash.com/photo-${1500000000000 + idx}?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80`} 
                             alt="Reviewer" 
                             className="w-10 h-10 rounded-full mr-3"

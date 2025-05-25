@@ -36,7 +36,7 @@ export default function BlogPage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="h-64 md:h-auto">
-                <img 
+                <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1527069438729-2eb562e7c9e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
                   alt="Featured post" 
                   className="w-full h-full object-cover"

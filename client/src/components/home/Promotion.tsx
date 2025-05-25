@@ -7,7 +7,7 @@ export default function Promotion() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="relative">
-            <img 
+            <img loading="lazy" 
               src="https://images.unsplash.com/photo-1599685315640-4273badc0234?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
               alt="Garden Transformation" 
               className="rounded-lg shadow-lg w-full" 
@@ -15,14 +15,14 @@ export default function Promotion() {
               height="400"
             />
             <div className="absolute -bottom-4 right-4 bg-white p-2 rounded-lg shadow-lg transform rotate-3 hidden md:block">
-              <img 
+              <img loading="lazy" 
                 src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" 
                 alt="Garden Detail" 
                 className="rounded w-24 h-24 object-cover"
               />
             </div>
             <div className="absolute -top-4 -left-4 bg-white p-2 rounded-lg shadow-lg transform -rotate-6 hidden md:block">
-              <img 
+              <img loading="lazy" 
                 src="https://images.unsplash.com/photo-1586952205463-96136c9777b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" 
                 alt="Garden Detail" 
                 className="rounded w-24 h-24 object-cover"

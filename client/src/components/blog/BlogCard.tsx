@@ -17,7 +17,7 @@ export default function BlogCard({ post, variant = 'default' }: BlogCardProps) {
       <Link href={`/blog/${post.slug}`}>
         <a className="block">
           <div className={`relative ${imageHeight} overflow-hidden`}>
-            <img 
+            <img loading="lazy" 
               src={post.imageUrl || "https://images.unsplash.com/photo-1527069438729-2eb562e7c9e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
               alt={post.title} 
               className="w-full h-full object-cover hover:scale-105 transition duration-300"

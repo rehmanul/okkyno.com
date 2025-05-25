@@ -58,7 +58,7 @@ export default function FeaturedBlogs() {
             <Link key={post.id} href={`/blog/${post.slug}`}>
               <Card className="h-full transition-all hover:shadow-md cursor-pointer overflow-hidden">
                 <div className="h-48 overflow-hidden">
-                  <img 
+                  <img loading="lazy" 
                     src={post.imageUrl || "https://images.unsplash.com/photo-1598901847978-4ce242253a8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"} 
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
