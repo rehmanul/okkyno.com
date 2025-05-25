@@ -1,7 +1,7 @@
 import { sampleFeaturedProducts, productImages } from "./data";
 import type { Product } from "@shared/schema";
 
-export interface ExtendedProduct extends Partial<Product> {
+export interface ExtendedProduct extends Product {
   salePrice?: number | null;
   inStock?: boolean;
   isFeatured?: boolean;
