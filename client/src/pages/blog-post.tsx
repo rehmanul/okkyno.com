@@ -94,7 +94,7 @@ export default function BlogPostPage() {
             </div>
             
             <div className="rounded-lg overflow-hidden mb-8">
-              <img 
+              <img loading="lazy" 
                 src={post.imageUrl} 
                 alt={post.title} 
                 className="w-full h-auto object-cover"
@@ -138,7 +138,7 @@ export default function BlogPostPage() {
                 >
                   <a href={`/blog/${relatedPost.slug}`}>
                     <div className="h-48 overflow-hidden">
-                      <img 
+                      <img loading="lazy" 
                         src={relatedPost.imageUrl} 
                         alt={relatedPost.title} 
                         className="w-full h-full object-cover hover:scale-105 transition duration-300"

@@ -178,7 +178,7 @@ export default function ProductList() {
                     <div className="flex items-center">
                       {product.imageUrl && (
                         <div className="h-10 w-10 mr-3 bg-gray-100 rounded overflow-hidden">
-                          <img 
+                          <img loading="lazy" 
                             src={product.imageUrl} 
                             alt={product.name} 
                             className="h-full w-full object-cover"

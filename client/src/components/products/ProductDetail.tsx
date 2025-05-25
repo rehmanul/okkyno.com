@@ -177,7 +177,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
         {/* Image section */}
         <div>
           <div className="bg-white rounded-lg overflow-hidden border">
-            <img 
+            <img loading="lazy" 
               src={activeImage} 
               alt={product.name} 
               className="w-full h-auto aspect-square object-contain p-4"
@@ -192,7 +192,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
                 }`}
                 onClick={() => setActiveImageIndex(index)}
               >
-                <img 
+                <img loading="lazy" 
                   src={image} 
                   alt={`${product.name} - view ${index + 1}`} 
                   className="w-full h-full aspect-square object-cover"

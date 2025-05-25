@@ -76,7 +76,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               {product.imageUrls.map((image, index) => (
                 <CarouselItem key={index}>
                   <div className="h-80 md:h-96 overflow-hidden rounded-lg">
-                    <img 
+                    <img loading="lazy" 
                       src={image} 
                       alt={`${product.name} - Image ${index + 1}`} 
                       className="w-full h-full object-cover"
@@ -99,7 +99,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                   // In a real implementation, this would control the Carousel
                 }}
               >
-                <img 
+                <img loading="lazy" 
                   src={image} 
                   alt={`Thumbnail ${index + 1}`} 
                   className="w-full h-full object-cover"
@@ -282,7 +282,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               >
                 <a href={`/product/${relatedProduct.slug}`}>
                   <div className="h-48 overflow-hidden">
-                    <img 
+                    <img loading="lazy" 
                       src={relatedProduct.imageUrls[0]} 
                       alt={relatedProduct.name} 
                       className="w-full h-full object-cover hover:scale-105 transition duration-300"

@@ -64,7 +64,7 @@ export function ProductCard({ product }: ProductCardProps) {
       
       <Link href={`/products/${product.slug}`} className="block">
         <div className="relative h-60 overflow-hidden">
-          <img 
+          <img loading="lazy" 
             src={product.imageUrl || "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"} 
             alt={product.name} 
             className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
