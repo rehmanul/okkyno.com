@@ -111,7 +111,7 @@ export default function AdminDashboard() {
   const averageOrderValue = totalSales / 1200; // Assuming 1200 orders
 
   return (
-    <AdminLayout>
+    <AdminLayout title="Dashboard">
       <div className="p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Dashboard</h1>
