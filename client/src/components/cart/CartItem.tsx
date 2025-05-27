@@ -65,9 +65,9 @@ export default function CartItem({ item }: CartItemProps) {
     <div className="flex items-center py-6 border-b">
       <div className="w-20 h-20 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
         <Link href={`/products/${product.slug}`}>
-          <img loading="lazy" 
-            src={product.imageUrl || "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"} 
-            alt={product.name} 
+          <img loading="lazy"
+            src={product.imageUrl || "/placeholder-product.svg"}
+            alt={product.name}
             className="w-full h-full object-cover"
           />
         </Link>
