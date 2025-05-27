@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Product } from "@shared/schema";
+import type { ExtendedProduct } from "@/lib/product-generator";
 import { formatPrice } from "@/lib/utils";
-import { useCart } from "@/context/cart-context";
+import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Carousel,
@@ -25,7 +26,7 @@ import { ShoppingCart, Heart, ArrowLeftRight, Truck, Calendar, Shield } from "lu
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 interface ProductDetailsProps {
-  product: Product;
+  product: ExtendedProduct;
 }
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
@@ -36,7 +37,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const { toast } = useToast();
   
   // Fetch related products
-  const { data: relatedProductsData } = useQuery<{ products: Product[] }>({
+  const { data: relatedProductsData } = useQuery<{ products: ExtendedProduct[] }>({
     queryKey: ["/api/products", { categoryId: product.categoryId, limit: 4 }],
   });
   
@@ -111,9 +112,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         
         {/* Product Info */}
         <div>
-          {product.isBestSeller && (
-            <Badge variant="secondary" className="mb-2">BEST SELLER</Badge>
-          )}
+            {product.isBestseller && (
+              <Badge variant="secondary" className="mb-2">BEST SELLER</Badge>
+            )}
           
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           

@@ -151,7 +151,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
             
             <span className="flex items-center">
               <MessageSquare className="h-4 w-4 mr-2" />
-              {post.commentCount} Comments
+              {post.commentCount ?? 0} Comments
             </span>
           </div>
           
@@ -225,7 +225,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
         
         {/* Comments section */}
         <div>
-          <h2 className="text-2xl font-heading font-bold mb-6">Comments ({post.commentCount})</h2>
+          <h2 className="text-2xl font-heading font-bold mb-6">Comments ({post.commentCount ?? 0})</h2>
           
           {/* Comment form */}
           <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
@@ -258,7 +258,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
           
           {/* Sample comments - in a real app, these would be fetched from API */}
           <div className="space-y-6">
-            {post.commentCount > 0 ? (
+              {(post.commentCount ?? 0) > 0 ? (
               <>
                 <div className="flex">
                   <Avatar className="h-10 w-10 mr-4">

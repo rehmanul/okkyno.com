@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { Product } from "@shared/schema";
+import type { ExtendedProduct } from "@/lib/product-generator";
 import StarRating from "./star-rating";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
-  product: Product;
+  product: ExtendedProduct;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {

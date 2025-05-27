@@ -1,9 +1,16 @@
 import { Link } from "wouter";
 import { BlogPost } from "@shared/schema";
+
+type ExtendedBlogPost = BlogPost & {
+  publishDate?: Date;
+  category?: string;
+  authorName?: string;
+  authorImageUrl?: string;
+};
 import { formatDistanceToNow } from "date-fns";
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: ExtendedBlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {

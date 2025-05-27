@@ -1,5 +1,33 @@
 import { Category, Product, BlogPost, Testimonial } from '@shared/schema';
 
+export interface CategoryWithCount extends Category {
+  productCount?: number;
+}
+
+export interface SampleProduct extends Product {
+  salePrice?: number | null;
+  inStock?: boolean;
+  isFeatured?: boolean;
+  isNew?: boolean;
+  isBestseller?: boolean;
+  isOrganic?: boolean;
+}
+
+export interface SampleBlogPost extends BlogPost {
+  category?: string;
+  authorName?: string;
+  authorImageUrl?: string;
+  publishDate?: Date;
+  isFeatured?: boolean;
+}
+
+export interface SampleTestimonial extends Testimonial {
+  comment?: string;
+  userName?: string;
+  userImageUrl?: string;
+  isVerified?: boolean;
+}
+
 // Sample images for products from Unsplash
 export const productImages = {
   gardenTools: [
@@ -77,7 +105,7 @@ export const authorImages = [
 ];
 
 // Sample categories data
-export const sampleCategories: Category[] = [
+export const sampleCategories: CategoryWithCount[] = [
   {
     id: 1,
     name: "Garden Tools",
@@ -129,7 +157,7 @@ export const sampleCategories: Category[] = [
 ];
 
 // Sample featured products
-export const sampleFeaturedProducts: Product[] = [
+export const sampleFeaturedProducts: SampleProduct[] = [
   {
     id: 1,
     name: "Premium Garden Shears",
@@ -205,7 +233,7 @@ export const sampleFeaturedProducts: Product[] = [
 ];
 
 // Sample blog posts
-export const sampleBlogPosts: BlogPost[] = [
+export const sampleBlogPosts: SampleBlogPost[] = [
   {
     id: 1,
     title: "Starting a Vegetable Garden: A Complete Guide for Beginners",
@@ -248,7 +276,7 @@ export const sampleBlogPosts: BlogPost[] = [
 ];
 
 // Sample reviews/testimonials
-export const sampleTestimonials: Testimonial[] = [
+export const sampleTestimonials: SampleTestimonial[] = [
   {
     id: 1,
     productId: 2,

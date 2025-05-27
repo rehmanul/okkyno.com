@@ -88,10 +88,10 @@ export default function ProductPage() {
   // Create a gallery view of images
   const productImages = product
     ? [
-        product.imageUrl,
-        product.imageUrl,
-        product.imageUrl,
-        product.imageUrl,
+        product.imageUrl ?? "",
+        product.imageUrl ?? "",
+        product.imageUrl ?? "",
+        product.imageUrl ?? "",
       ]
     : [];
 
@@ -212,9 +212,9 @@ export default function ProductPage() {
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.name}</h1>
                 
                 <div className="flex items-center gap-2 mb-4">
-                  <StarRating rating={product.rating} size="md" />
+                  <StarRating rating={product.rating ?? 0} size="md" />
                   <span className="text-sm text-gray-500">
-                    ({product.reviewCount} {product.reviewCount === 1 ? 'review' : 'reviews'})
+                      ({product.reviewCount ?? 0} {product.reviewCount === 1 ? 'review' : 'reviews'})
                   </span>
                 </div>
                 
@@ -325,7 +325,7 @@ export default function ProductPage() {
               <TabsList className="w-full border-b mb-6">
                 <TabsTrigger value="description" className="text-lg px-6 py-3">Description</TabsTrigger>
                 <TabsTrigger value="specifications" className="text-lg px-6 py-3">Specifications</TabsTrigger>
-                <TabsTrigger value="reviews" className="text-lg px-6 py-3">Reviews ({product.reviewCount})</TabsTrigger>
+                  <TabsTrigger value="reviews" className="text-lg px-6 py-3">Reviews ({product.reviewCount ?? 0})</TabsTrigger>
               </TabsList>
               
               <TabsContent value="description" className="text-gray-700 leading-relaxed">
@@ -402,7 +402,7 @@ export default function ProductPage() {
                 <div className="mb-6">
                   <div className="flex items-center mb-4">
                     <div className="mr-4">
-                      <div className="text-5xl font-bold text-gray-800">{product.rating.toFixed(1)}</div>
+                        <div className="text-5xl font-bold text-gray-800">{(product.rating ?? 0).toFixed(1)}</div>
                       <div className="text-sm text-gray-500">out of 5</div>
                     </div>
                     <div className="flex-1">
@@ -417,7 +417,7 @@ export default function ProductPage() {
                               ></div>
                             </div>
                             <span className="text-sm text-gray-500">
-                              {Math.floor(Math.random() * product.reviewCount)}
+                                {Math.floor(Math.random() * (product.reviewCount ?? 0))}
                             </span>
                           </div>
                         ))}
