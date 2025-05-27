@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, useLocation } from "wouter";
 import { BlogPost, User } from "@shared/schema";
+import type { ExtendedBlogPost } from "@/lib/blog-generator";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaRegCalendar, FaRegComment } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ export default function BlogPostPage() {
   const [match, params] = useRoute("/blog/:slug");
   const [, setLocation] = useLocation();
   
-  const { data: post, isLoading: postLoading, error } = useQuery<BlogPost>({
+  const { data: post, isLoading: postLoading, error } = useQuery<ExtendedBlogPost>({
     queryKey: ["/api/blog/slug", params?.slug],
     enabled: !!params?.slug,
   });
@@ -26,7 +27,7 @@ export default function BlogPostPage() {
   });
   
   // Fetch related blog posts
-  const { data: relatedData } = useQuery<{ posts: BlogPost[] }>({
+  const { data: relatedData } = useQuery<{ posts: ExtendedBlogPost[] }>({
     queryKey: ["/api/blog", { limit: 3 }],
     enabled: !!post,
   });
@@ -66,7 +67,7 @@ export default function BlogPostPage() {
     <main className="container mx-auto px-4 py-8">
       <Helmet>
         <title>{post.title} | Okkyno Blog</title>
-        <meta name="description" content={post.excerpt} />
+        <meta name="description" content={post.excerpt ?? undefined} />
       </Helmet>
       
       <div className="max-w-4xl mx-auto">
@@ -85,7 +86,7 @@ export default function BlogPostPage() {
             <div className="flex items-center text-gray-600 mb-6">
               <span className="mr-4">
                 <FaRegCalendar className="mr-1" />
-                {post.publishedAt ? formatDate(post.publishedAt) : "Draft"}
+                {post.publishDate ? formatDate(post.publishDate) : "Draft"}
               </span>
               <span>
                 <FaRegComment className="mr-1" />
@@ -94,9 +95,9 @@ export default function BlogPostPage() {
             </div>
             
             <div className="rounded-lg overflow-hidden mb-8">
-              <img loading="lazy" 
-                src={post.imageUrl} 
-                alt={post.title} 
+              <img loading="lazy"
+                src={post.imageUrl ?? "/placeholder-blog.png"}
+                alt={post.title}
                 className="w-full h-auto object-cover"
               />
             </div>
@@ -138,9 +139,9 @@ export default function BlogPostPage() {
                 >
                   <a href={`/blog/${relatedPost.slug}`}>
                     <div className="h-48 overflow-hidden">
-                      <img loading="lazy" 
-                        src={relatedPost.imageUrl} 
-                        alt={relatedPost.title} 
+                      <img loading="lazy"
+                        src={relatedPost.imageUrl ?? "/placeholder-blog.png"}
+                        alt={relatedPost.title}
                         className="w-full h-full object-cover hover:scale-105 transition duration-300"
                       />
                     </div>
@@ -149,7 +150,7 @@ export default function BlogPostPage() {
                         {relatedPost.title}
                       </h3>
                       <p className="text-sm text-gray-600 mt-2">
-                        {relatedPost.publishedAt ? formatDate(relatedPost.publishedAt) : "Draft"}
+                        {relatedPost.publishDate ? formatDate(relatedPost.publishDate) : "Draft"}
                       </p>
                     </CardContent>
                   </a>

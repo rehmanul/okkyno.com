@@ -1,8 +1,15 @@
 import { Testimonial } from "@shared/schema";
+
+type ExtendedTestimonial = Testimonial & {
+  comment?: string;
+  userName?: string;
+  userImageUrl?: string;
+  isVerified?: boolean;
+};
 import StarRating from "./star-rating";
 
 interface TestimonialCardProps {
-  testimonial: Testimonial;
+  testimonial: ExtendedTestimonial;
 }
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {

@@ -431,7 +431,7 @@ export default function AdminDashboard() {
                                 {post.authorName}
                               </td>
                               <td className="px-4 py-3 text-gray-500">
-                                {new Date(post.publishDate).toLocaleDateString()}
+                                {post.publishDate ? new Date(post.publishDate).toLocaleDateString() : ""}
                               </td>
                               <td className="px-4 py-3 text-right">
                                 <a href={`/admin/blog-posts/edit/${post.id}`} className="text-blue-600 hover:text-blue-800 mr-2">

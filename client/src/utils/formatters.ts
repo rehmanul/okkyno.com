@@ -17,8 +17,8 @@ export const formatDate = (dateString: string): string => {
 };
 
 // Short date format
-export const formatShortDate = (dateString: string): string => {
-  const date = new Date(dateString);
+export const formatShortDate = (dateInput: Date | string): string => {
+  const date = new Date(dateInput);
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',

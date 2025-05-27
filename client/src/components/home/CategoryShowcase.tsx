@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import type { Category } from "../../../shared/schema";
+import type { Category } from "../../../../shared/schema";
 
 export default function CategoryShowcase() {
   const { data: categories, isLoading } = useQuery<Category[]>({

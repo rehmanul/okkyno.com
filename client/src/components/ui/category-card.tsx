@@ -1,8 +1,12 @@
 import { Link } from "wouter";
 import { Category } from "@shared/schema";
 
+type CategoryWithCount = Category & {
+  productCount?: number;
+};
+
 interface CategoryCardProps {
-  category: Category;
+  category: CategoryWithCount;
 }
 
 export default function CategoryCard({ category }: CategoryCardProps) {

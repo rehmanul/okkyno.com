@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { useLocation } from 'wouter';
-import { insertBlogPostSchema } from '@shared/schema';
+import { insertBlogPostSchema, BlogPost } from '@shared/schema';
 import { z } from 'zod';
 import { 
   Form, 
@@ -47,9 +47,14 @@ export default function BlogForm({ postId }: BlogFormProps) {
   const { user } = useAuth();
   
   // Fetch blog post if in edit mode
-  const { data: post, isLoading } = useQuery({
+  const { data: post, isLoading } = useQuery<BlogPost>({
     queryKey: [`/api/blog/${postId}`],
     enabled: !!postId,
+    queryFn: async () => {
+      const response = await fetch(`/api/blog/${postId}`);
+      if (!response.ok) throw new Error('Failed to fetch blog post');
+      return response.json();
+    }
   });
   
   const isEditMode = !!postId;

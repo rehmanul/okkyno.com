@@ -253,9 +253,9 @@ export default function AdminProducts() {
                       <tr key={product.id} className="hover:bg-gray-50">
                         <td className="px-4 py-3">
                           <div className="flex items-center">
-                            <img
-                              src={product.imageUrl}
-                              alt={product.name}
+                              <img
+                                src={product.imageUrl ?? "/placeholder-product.svg"}
+                                alt={product.name}
                               className="w-12 h-12 rounded object-cover mr-3"
                             />
                             <div>

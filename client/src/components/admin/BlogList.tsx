@@ -232,11 +232,11 @@ export default function BlogList() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Switch 
-                      checked={post.published} 
-                      onCheckedChange={() => handleTogglePublish(post.id, post.published)}
-                      disabled={togglePublishMutation.isPending}
-                    />
+                      <Switch
+                        checked={!!post.published}
+                        onCheckedChange={() => handleTogglePublish(post.id, post.published ?? false)}
+                        disabled={togglePublishMutation.isPending}
+                      />
                   </TableCell>
                   <TableCell>{formatShortDate(post.createdAt)}</TableCell>
                   <TableCell>
@@ -255,7 +255,7 @@ export default function BlogList() {
                         <DropdownMenuItem onClick={() => handleEditPost(post.id)}>
                           <Edit className="h-4 w-4 mr-2" /> Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleTogglePublish(post.id, post.published)}>
+                          <DropdownMenuItem onClick={() => handleTogglePublish(post.id, post.published ?? false)}>
                           {post.published ? (
                             <>
                               <EyeOff className="h-4 w-4 mr-2" /> Unpublish
