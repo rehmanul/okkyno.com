@@ -98,7 +98,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
     
     // If no images, use a placeholder
     if (images.length === 0) {
-      images.push("https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80");
+      images.push("/placeholder-product.svg");
     }
     
     return images;

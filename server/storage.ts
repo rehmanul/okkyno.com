@@ -108,8 +108,8 @@ export class MemStorage implements IStorage {
     { name: "Seeds", slug: "seeds", description: "High-quality seeds for planting", imageUrl: "https://images.unsplash.com/photo-1574478155394-84eee6d97a8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" }
   ];
 
-  private placeholderImage =
-    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiBmb250LXNpemU9IjI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2IiBkeT0iLjNlbSI+SW1hZ2U8L3RleHQ+PC9zdmc+";
+  // Use a simple SVG placeholder stored in the public folder for products
+  private placeholderImage = "/placeholder-product.svg";
 
   private productNamesByCategory: Record<number, string[]> = {
     1: [
