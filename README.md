@@ -1,6 +1,6 @@
 # Okkyno.com - Professional Gardening E-commerce Platform
 
-![Okkyno.com](generated-icon.png)
+![Okkyno.com](icon.svg)
 
 A professional gardening e-commerce platform offering comprehensive product listings, interactive user experience, and robust admin management.
 

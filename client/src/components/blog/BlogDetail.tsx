@@ -195,7 +195,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
         {author && (
           <div className="bg-light p-6 rounded-lg flex flex-col md:flex-row items-center mb-12">
             <Avatar className="h-20 w-20 mb-4 md:mb-0 md:mr-6">
-              <AvatarImage src="/placeholder-avatar.jpg" alt={author.username} />
+              <AvatarImage src="/placeholder-avatar.svg" alt={author.username} />
               <AvatarFallback>{getInitials(author.firstName || author.username)}</AvatarFallback>
             </Avatar>
             <div className="text-center md:text-left">
