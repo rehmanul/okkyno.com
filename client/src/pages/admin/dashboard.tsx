@@ -345,7 +345,7 @@ export default function AdminDashboard() {
                               <td className="px-4 py-3">
                                 <div className="flex items-center">
                                   <img
-                                    src={product.imageUrl}
+                                    src={product.imageUrl ?? ""}
                                     alt={product.name}
                                     className="w-8 h-8 rounded object-cover mr-3"
                                   />
@@ -417,8 +417,8 @@ export default function AdminDashboard() {
                               <td className="px-4 py-3">
                                 <div className="flex items-center">
                                   <img
-                                    src={post.imageUrl}
-                                    alt={post.title}
+                                    src={post.imageUrl ?? ""}
+                                    alt={post.title ?? ""}
                                     className="w-8 h-8 rounded object-cover mr-3"
                                   />
                                   <span className="font-medium">{post.title}</span>
