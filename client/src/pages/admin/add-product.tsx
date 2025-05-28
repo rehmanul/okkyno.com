@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "wouter";
+import { useLocation } from "wouter";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { FaArrowLeft } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,23 +29,27 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { insertProductSchema } from "@shared/schema";
 import { productImages } from "@/lib/data";
 import { sampleCategories } from "@/lib/data";
 
-// Extend the schema for form validation
-const formSchema = insertProductSchema.extend({
-  // Add client-side validation rules
+// Form schema for product creation
+const formSchema = z.object({
   name: z.string().min(3, "Product name must be at least 3 characters"),
+  slug: z.string(),
   description: z.string().min(10, "Description must be at least 10 characters"),
   price: z.coerce.number().positive("Price must be positive"),
   salePrice: z.coerce.number().positive("Sale price must be positive").optional().nullable(),
   imageUrl: z.string().url("Please enter a valid image URL"),
   categoryId: z.coerce.number().int().positive("Please select a category"),
+  inStock: z.boolean(),
+  isFeatured: z.boolean(),
+  isNew: z.boolean(),
+  isBestseller: z.boolean(),
+  isOrganic: z.boolean(),
 });
 
 export default function AddProduct() {
-  const [, navigate] = useRouter();
+  const [, navigate] = useLocation();
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -141,7 +145,7 @@ export default function AddProduct() {
   };
   
   return (
-    <AdminLayout>
+    <AdminLayout title="Add Product">
       <div className="p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Add New Product</h1>
