@@ -73,26 +73,21 @@ export default function AboutPage() {
       <h2 className="text-2xl font-semibold mb-6">Meet Our Team</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
         {[
-          {
-            name: "Emma Chen",
-            title: "Founder & Plant Specialist",
-            bio: "Emma has over 15 years of experience in urban gardening and a degree in horticulture."
-          },
-          {
-            name: "David Rodriguez",
-            title: "Product Development",
-            bio: "David combines his engineering background with a passion for sustainable design."
-          },
-          {
-            name: "Sarah Johnson",
-            title: "Content Director",
-            bio: "Sarah manages our blog and educational content with expertise in botany and garden writing."
-          },
-          {
-            name: "Michael Patel",
-            title: "Customer Experience",
-            bio: "Michael ensures that every customer receives expert advice and support for their gardening journey."
-          }
+        {
+          name: "Eason Lin",
+          title: "Owner",
+          bio: "Eason founded Okkyno and oversees all aspects of the business."
+        },
+        {
+          name: "Md Rehmanul Alam Shojol",
+          title: "Web & Production Developer",
+          bio: "Shojol ensures our website and production systems run smoothly."
+        },
+        {
+          name: "Prity Mokta",
+          title: "Customer Experience Manager",
+          bio: "Prity leads the team that supports our customers every day."
+        }
         ].map((member, index) => (
           <Card key={index}>
             <CardContent className="p-6 text-center">
