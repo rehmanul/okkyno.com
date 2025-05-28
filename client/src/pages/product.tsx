@@ -24,6 +24,7 @@ import {
   FaShoppingCart,
   FaRegHeart
 } from "react-icons/fa";
+import placeholderAvatar from "/placeholder-avatar.svg?url";
 
 export default function ProductPage() {
   const [match, params] = useRoute("/product/:slug");
@@ -441,7 +442,7 @@ export default function ProductPage() {
                       <div className="flex justify-between mb-2">
                         <div className="flex items-center">
                           <img loading="lazy"
-                            src="/placeholder-avatar.svg"
+                            src={placeholderAvatar}
                             alt="Reviewer"
                             className="w-10 h-10 rounded-full mr-3"
                           />

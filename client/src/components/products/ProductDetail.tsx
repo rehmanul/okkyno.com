@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { 
-  Minus, 
-  Plus, 
-  ShoppingCart, 
-  Heart, 
-  Share2, 
-  ArrowLeft, 
+import {
+  Minus,
+  Plus,
+  ShoppingCart,
+  Heart,
+  Share2,
+  ArrowLeft,
   Truck,
   Shield,
   RefreshCw
 } from 'lucide-react';
+import placeholderProduct from '/placeholder-product.svg?url';
 import { Product, Category } from '@shared/schema';
 import { Button } from '@/components/ui/button';
 import { Rating } from '@/components/ui/rating';
@@ -98,7 +99,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
     
     // If no images, use a placeholder
     if (images.length === 0) {
-      images.push("/placeholder-product.svg");
+      images.push(placeholderProduct);
     }
     
     return images;

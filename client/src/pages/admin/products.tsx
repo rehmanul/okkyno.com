@@ -14,6 +14,7 @@ import {
   FaChevronLeft,
   FaChevronRight
 } from "react-icons/fa";
+import placeholderProduct from "/placeholder-product.svg?url";
 import { 
   Select, 
   SelectContent, 
@@ -254,7 +255,7 @@ export default function AdminProducts() {
                         <td className="px-4 py-3">
                           <div className="flex items-center">
                               <img
-                                src={product.imageUrl ?? "/placeholder-product.svg"}
+                                src={product.imageUrl ?? placeholderProduct}
                                 alt={product.name}
                               className="w-12 h-12 rounded object-cover mr-3"
                             />
