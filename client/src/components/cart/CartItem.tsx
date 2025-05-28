@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { Trash2, Minus, Plus } from 'lucide-react';
+import placeholderProduct from '/placeholder-product.svg?url';
 import { Button } from '@/components/ui/button';
 import { CartItem as CartItemType } from '@/context/CartContext';
 import { formatPrice } from '@/utils/formatters';
@@ -66,7 +67,7 @@ export default function CartItem({ item }: CartItemProps) {
       <div className="w-20 h-20 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
         <Link href={`/products/${product.slug}`}>
           <img loading="lazy"
-            src={product.imageUrl || "/placeholder-product.svg"}
+            src={product.imageUrl || placeholderProduct}
             alt={product.name}
             className="w-full h-full object-cover"
           />

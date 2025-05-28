@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 import { formatDate, getInitials } from '@/utils/formatters';
 import BlogCard from '@/components/blog/BlogCard';
+import placeholderAvatar from '/placeholder-avatar.svg?url';
 
 interface BlogDetailProps {
   postSlug: string;
@@ -195,7 +196,7 @@ export default function BlogDetail({ postSlug }: BlogDetailProps) {
         {author && (
           <div className="bg-light p-6 rounded-lg flex flex-col md:flex-row items-center mb-12">
             <Avatar className="h-20 w-20 mb-4 md:mb-0 md:mr-6">
-              <AvatarImage src="/placeholder-avatar.svg" alt={author.username} />
+              <AvatarImage src={placeholderAvatar} alt={author.username} />
               <AvatarFallback>{getInitials(author.firstName || author.username)}</AvatarFallback>
             </Avatar>
             <div className="text-center md:text-left">

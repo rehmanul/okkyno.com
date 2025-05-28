@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { Heart } from 'lucide-react';
+import placeholderProduct from '/placeholder-product.svg?url';
 import { Button } from '@/components/ui/button';
 import { Rating } from '@/components/ui/rating';
 import { useToast } from '@/hooks/use-toast';
@@ -65,7 +66,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/products/${product.slug}`} className="block">
         <div className="relative h-60 overflow-hidden">
           <img loading="lazy"
-            src={product.imageUrl || "/placeholder-product.svg"}
+            src={product.imageUrl || placeholderProduct}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
           />
