@@ -3,11 +3,18 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import cors from "cors";
+import cookie from "cookie";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+// Minimal cookie parser to populate req.cookies
+app.use((req, _res, next) => {
+  const header = req.headers.cookie;
+  req.cookies = header ? cookie.parse(header) : {};
+  next();
+});
 
 // Export a function that creates an Express app for Netlify functions
 export function createRequestHandler() {
