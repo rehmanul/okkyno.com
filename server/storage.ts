@@ -1,14 +1,32 @@
-import { 
-  User, InsertUser, users,
-  Category, InsertCategory, categories,
-  Product, InsertProduct, products,
-  BlogPost, InsertBlogPost, blogPosts,
-  Comment, InsertComment, comments,
-  Order, InsertOrder, orders,
-  OrderItem, InsertOrderItem, orderItems,
-  Testimonial, InsertTestimonial, testimonials,
-  CartItem, InsertCartItem, cartItems
-} from "@shared/schema";
+import {
+  BlogPost,
+  blogPosts,
+  CartItem,
+  cartItems,
+  categories,
+  Category,
+  Comment,
+  comments,
+  InsertBlogPost,
+  InsertCartItem,
+  InsertCategory,
+  InsertComment,
+  InsertOrder,
+  InsertOrderItem,
+  InsertProduct,
+  InsertTestimonial,
+  InsertUser,
+  Order,
+  OrderItem,
+  orderItems,
+  orders,
+  Product,
+  products,
+  Testimonial,
+  testimonials,
+  User,
+  users,
+} from '@shared/schema';
 
 // Storage interface for all CRUD operations
 export interface IStorage {
@@ -18,7 +36,7 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, user: Partial<User>): Promise<User | undefined>;
-  
+
   // Category operations
   getCategories(): Promise<Category[]>;
   getCategory(id: number): Promise<Category | undefined>;
@@ -26,7 +44,7 @@ export interface IStorage {
   createCategory(category: InsertCategory): Promise<Category>;
   updateCategory(id: number, category: Partial<Category>): Promise<Category | undefined>;
   deleteCategory(id: number): Promise<boolean>;
-  
+
   // Product operations
   getProducts(limit?: number, offset?: number): Promise<Product[]>;
   getProductsByCategory(categoryId: number): Promise<Product[]>;
@@ -37,7 +55,7 @@ export interface IStorage {
   createProduct(product: InsertProduct): Promise<Product>;
   updateProduct(id: number, product: Partial<Product>): Promise<Product | undefined>;
   deleteProduct(id: number): Promise<boolean>;
-  
+
   // Blog operations
   getBlogPosts(limit?: number, offset?: number, publishedOnly?: boolean): Promise<BlogPost[]>;
   getBlogPost(id: number): Promise<BlogPost | undefined>;
@@ -45,29 +63,29 @@ export interface IStorage {
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
   updateBlogPost(id: number, post: Partial<BlogPost>): Promise<BlogPost | undefined>;
   deleteBlogPost(id: number): Promise<boolean>;
-  
+
   // Comment operations
   getCommentsByBlogPost(blogPostId: number): Promise<Comment[]>;
   createComment(comment: InsertComment): Promise<Comment>;
   deleteComment(id: number): Promise<boolean>;
-  
+
   // Order operations
   getOrders(): Promise<Order[]>;
   getOrdersByUser(userId: number): Promise<Order[]>;
   getOrder(id: number): Promise<Order | undefined>;
   createOrder(order: InsertOrder): Promise<Order>;
   updateOrderStatus(id: number, status: string): Promise<Order | undefined>;
-  
+
   // Order item operations
   getOrderItems(orderId: number): Promise<OrderItem[]>;
   createOrderItem(item: InsertOrderItem): Promise<OrderItem>;
-  
+
   // Testimonial operations
   getTestimonials(approvedOnly?: boolean): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
   approveTestimonial(id: number): Promise<Testimonial | undefined>;
   deleteTestimonial(id: number): Promise<boolean>;
-  
+
   // Cart operations
   getCartItems(sessionId: string): Promise<CartItem[]>;
   getCartItem(sessionId: string, productId: number): Promise<CartItem | undefined>;
@@ -87,7 +105,7 @@ export class MemStorage implements IStorage {
   private orderItems: Map<number, OrderItem>;
   private testimonials: Map<number, Testimonial>;
   private cartItems: Map<number, CartItem>;
-  
+
   private userIdCounter: number;
   private categoryIdCounter: number;
   private productIdCounter: number;
@@ -97,7 +115,7 @@ export class MemStorage implements IStorage {
   private orderItemIdCounter: number;
   private testimonialIdCounter: number;
   private cartItemIdCounter: number;
-  
+
   // Sample data for initial load
   private sampleCategories: InsertCategory[] = [
     { name: "Vegetables", slug: "vegetables", description: "Fresh vegetables for your garden", imageUrl: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
@@ -162,7 +180,7 @@ export class MemStorage implements IStorage {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
   }
-  
+
   constructor() {
     this.users = new Map();
     this.categories = new Map();
@@ -173,7 +191,7 @@ export class MemStorage implements IStorage {
     this.orderItems = new Map();
     this.testimonials = new Map();
     this.cartItems = new Map();
-    
+
     this.userIdCounter = 1;
     this.categoryIdCounter = 1;
     this.productIdCounter = 1;
@@ -183,11 +201,11 @@ export class MemStorage implements IStorage {
     this.orderItemIdCounter = 1;
     this.testimonialIdCounter = 1;
     this.cartItemIdCounter = 1;
-    
+
     // Initialize with sample data
     this.initSampleData();
   }
-  
+
   private initSampleData() {
     // Create admin user
     this.createUser({
@@ -198,11 +216,11 @@ export class MemStorage implements IStorage {
       lastName: "User",
       role: "admin"
     });
-    
+
     // Create sample categories
     this.sampleCategories.forEach(category => this.createCategory(category));
-    
-    // Create sample products (just a few to start, more can be added)
+
+    // Create sample products (all with real image URLs)
     this.createProduct({
       name: "Cucumber 'Marketmore' Organic Seeds",
       slug: "cucumber-marketmore-organic-seeds",
@@ -219,7 +237,7 @@ export class MemStorage implements IStorage {
       rating: 4.5,
       reviewCount: 42
     });
-    
+
     this.createProduct({
       name: "Premium Pruning Shears",
       slug: "premium-pruning-shears",
@@ -236,7 +254,7 @@ export class MemStorage implements IStorage {
       rating: 5.0,
       reviewCount: 128
     });
-    
+
     this.createProduct({
       name: "Monstera Deliciosa Plant",
       slug: "monstera-deliciosa-plant",
@@ -253,7 +271,7 @@ export class MemStorage implements IStorage {
       rating: 4.0,
       reviewCount: 76
     });
-    
+
     this.createProduct({
       name: "Ceramic Plant Pot - White",
       slug: "ceramic-plant-pot-white",
@@ -340,8 +358,30 @@ export class MemStorage implements IStorage {
       reviewCount: 37
     });
 
-    // Generate additional products with realistic names
-    for (let i = 1; i <= 100; i++) {
+    // Generate additional products with realistic names and real image URLs
+    const realImageUrls = [
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+    ];
+    for (let i = 1; i <= 20; i++) {
       const categoryId = ((i - 1) % this.sampleCategories.length) + 1;
       const nameList = this.productNamesByCategory[categoryId] ?? ["Garden Item"];
       const baseName = nameList[i % nameList.length];
@@ -354,7 +394,7 @@ export class MemStorage implements IStorage {
         shortDescription: baseName,
         price: parseFloat((5.99 + (i % 50)).toFixed(2)),
         comparePrice: null,
-        imageUrl: this.placeholderImage,
+        imageUrl: realImageUrls[i - 1],
         imageUrls: [],
         categoryId,
         sku: `PROD-${String(i).padStart(3, "0")}`,
@@ -364,7 +404,7 @@ export class MemStorage implements IStorage {
         reviewCount: 0,
       });
     }
-    
+
     // Create sample blog posts
     this.createBlogPost({
       title: "How to Start a Vegetable Garden: Complete Guide for Beginners",
@@ -388,7 +428,7 @@ export class MemStorage implements IStorage {
       authorId: 1,
       published: true
     });
-    
+
     this.createBlogPost({
       title: "10 Low-Maintenance Indoor Plants That Purify Your Air",
       slug: "10-low-maintenance-indoor-plants-purify-air",
@@ -419,7 +459,7 @@ export class MemStorage implements IStorage {
       authorId: 1,
       published: true
     });
-    
+
     this.createBlogPost({
       title: "The Ultimate Guide to Garden Soil Preparation and Amendments",
       slug: "ultimate-guide-garden-soil-preparation-amendments",
@@ -446,7 +486,7 @@ export class MemStorage implements IStorage {
       authorId: 1,
       published: true
     });
-    
+
     // Create sample testimonials
     this.createTestimonial({
       content: "I've been buying plants from Okkyno for over a year now and I'm always impressed with the quality. The tomato seedlings I purchased last spring produced the best harvest I've ever had!",
@@ -455,7 +495,7 @@ export class MemStorage implements IStorage {
       customerTitle: "Home Gardener",
       customerImage: "https://randomuser.me/api/portraits/women/45.jpg"
     });
-    
+
     this.createTestimonial({
       content: "The gardening tools I purchased from Okkyno are exceptional quality. The ergonomic design makes gardening much easier on my wrists and the customer service was fantastic when I had questions.",
       rating: 5,
@@ -463,7 +503,7 @@ export class MemStorage implements IStorage {
       customerTitle: "Landscape Designer",
       customerImage: "https://randomuser.me/api/portraits/men/32.jpg"
     });
-    
+
     this.createTestimonial({
       content: "As someone new to gardening, I really appreciate the detailed care instructions that come with every plant. The blog articles have also been incredibly helpful. My indoor garden is thriving thanks to Okkyno!",
       rating: 4,
@@ -471,30 +511,30 @@ export class MemStorage implements IStorage {
       customerTitle: "Indoor Plant Enthusiast",
       customerImage: "https://randomuser.me/api/portraits/women/68.jpg"
     });
-    
+
     // Set all testimonials to approved
     this.testimonials.forEach((testimonial, id) => {
       this.approveTestimonial(id);
     });
   }
-  
+
   // User operations
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
-  
+
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
       (user) => user.username.toLowerCase() === username.toLowerCase()
     );
   }
-  
+
   async getUserByEmail(email: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
   }
-  
+
   async createUser(user: InsertUser): Promise<User> {
     const id = this.userIdCounter++;
     const now = new Date();
@@ -509,31 +549,31 @@ export class MemStorage implements IStorage {
     this.users.set(id, newUser);
     return newUser;
   }
-  
+
   async updateUser(id: number, userData: Partial<User>): Promise<User | undefined> {
     const user = await this.getUser(id);
     if (!user) return undefined;
-    
+
     const updatedUser = { ...user, ...userData };
     this.users.set(id, updatedUser);
     return updatedUser;
   }
-  
+
   // Category operations
   async getCategories(): Promise<Category[]> {
     return Array.from(this.categories.values());
   }
-  
+
   async getCategory(id: number): Promise<Category | undefined> {
     return this.categories.get(id);
   }
-  
+
   async getCategoryBySlug(slug: string): Promise<Category | undefined> {
     return Array.from(this.categories.values()).find(
       (category) => category.slug === slug
     );
   }
-  
+
   async createCategory(category: InsertCategory): Promise<Category> {
     const id = this.categoryIdCounter++;
     const newCategory: Category = {
@@ -545,20 +585,20 @@ export class MemStorage implements IStorage {
     this.categories.set(id, newCategory);
     return newCategory;
   }
-  
+
   async updateCategory(id: number, categoryData: Partial<Category>): Promise<Category | undefined> {
     const category = await this.getCategory(id);
     if (!category) return undefined;
-    
+
     const updatedCategory = { ...category, ...categoryData };
     this.categories.set(id, updatedCategory);
     return updatedCategory;
   }
-  
+
   async deleteCategory(id: number): Promise<boolean> {
     return this.categories.delete(id);
   }
-  
+
   // Product operations
   async getProducts(limit?: number, offset = 0): Promise<Product[]> {
     const products = Array.from(this.products.values());
@@ -567,13 +607,13 @@ export class MemStorage implements IStorage {
     }
     return products;
   }
-  
+
   async getProductsByCategory(categoryId: number): Promise<Product[]> {
     return Array.from(this.products.values()).filter(
       (product) => product.categoryId === categoryId
     );
   }
-  
+
   async getFeaturedProducts(limit?: number): Promise<Product[]> {
     const featuredProducts = Array.from(this.products.values()).filter(
       (product) => product.featured
@@ -583,27 +623,27 @@ export class MemStorage implements IStorage {
     }
     return featuredProducts;
   }
-  
+
   async getProduct(id: number): Promise<Product | undefined> {
     return this.products.get(id);
   }
-  
+
   async getProductBySlug(slug: string): Promise<Product | undefined> {
     return Array.from(this.products.values()).find(
       (product) => product.slug === slug
     );
   }
-  
+
   async searchProducts(query: string): Promise<Product[]> {
     const lowercaseQuery = query.toLowerCase();
     return Array.from(this.products.values()).filter(
-      (product) => 
+      (product) =>
         product.name.toLowerCase().includes(lowercaseQuery) ||
         (product.description && product.description.toLowerCase().includes(lowercaseQuery)) ||
         (product.shortDescription && product.shortDescription.toLowerCase().includes(lowercaseQuery))
     );
   }
-  
+
   async createProduct(product: InsertProduct): Promise<Product> {
     const id = this.productIdCounter++;
     const now = new Date();
@@ -624,47 +664,47 @@ export class MemStorage implements IStorage {
     this.products.set(id, newProduct);
     return newProduct;
   }
-  
+
   async updateProduct(id: number, productData: Partial<Product>): Promise<Product | undefined> {
     const product = await this.getProduct(id);
     if (!product) return undefined;
-    
+
     const updatedProduct = { ...product, ...productData };
     this.products.set(id, updatedProduct);
     return updatedProduct;
   }
-  
+
   async deleteProduct(id: number): Promise<boolean> {
     return this.products.delete(id);
   }
-  
+
   // Blog operations
   async getBlogPosts(limit?: number, offset = 0, publishedOnly = true): Promise<BlogPost[]> {
     let posts = Array.from(this.blogPosts.values());
-    
+
     if (publishedOnly) {
       posts = posts.filter(post => post.published);
     }
-    
+
     // Sort by creation date, newest first
     posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    
+
     if (limit) {
       return posts.slice(offset, offset + limit);
     }
     return posts;
   }
-  
+
   async getBlogPost(id: number): Promise<BlogPost | undefined> {
     return this.blogPosts.get(id);
   }
-  
+
   async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
     return Array.from(this.blogPosts.values()).find(
       (post) => post.slug === slug
     );
   }
-  
+
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
     const id = this.blogPostIdCounter++;
     const now = new Date();
@@ -681,75 +721,75 @@ export class MemStorage implements IStorage {
     this.blogPosts.set(id, newPost);
     return newPost;
   }
-  
+
   async updateBlogPost(id: number, postData: Partial<BlogPost>): Promise<BlogPost | undefined> {
     const post = await this.getBlogPost(id);
     if (!post) return undefined;
-    
-    const updatedPost = { 
-      ...post, 
+
+    const updatedPost = {
+      ...post,
       ...postData,
       updatedAt: new Date()
     };
     this.blogPosts.set(id, updatedPost);
     return updatedPost;
   }
-  
+
   async deleteBlogPost(id: number): Promise<boolean> {
     return this.blogPosts.delete(id);
   }
-  
+
   // Comment operations
   async getCommentsByBlogPost(blogPostId: number): Promise<Comment[]> {
     return Array.from(this.comments.values())
       .filter(comment => comment.blogPostId === blogPostId)
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
-  
+
   async createComment(comment: InsertComment): Promise<Comment> {
     const id = this.commentIdCounter++;
     const now = new Date();
     const newComment: Comment = { ...comment, id, createdAt: now };
     this.comments.set(id, newComment);
-    
+
     // Update blog post comment count
     const post = await this.getBlogPost(comment.blogPostId);
     if (post) {
       await this.updateBlogPost(post.id, { commentCount: (post.commentCount ?? 0) + 1 });
     }
-    
+
     return newComment;
   }
-  
+
   async deleteComment(id: number): Promise<boolean> {
     const comment = this.comments.get(id);
     if (!comment) return false;
-    
+
     // Update blog post comment count
     const post = await this.getBlogPost(comment.blogPostId);
     if (post) {
       await this.updateBlogPost(post.id, { commentCount: (post.commentCount ?? 0) - 1 });
     }
-    
+
     return this.comments.delete(id);
   }
-  
+
   // Order operations
   async getOrders(): Promise<Order[]> {
     return Array.from(this.orders.values())
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
-  
+
   async getOrdersByUser(userId: number): Promise<Order[]> {
     return Array.from(this.orders.values())
       .filter(order => order.userId === userId)
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
-  
+
   async getOrder(id: number): Promise<Order | undefined> {
     return this.orders.get(id);
   }
-  
+
   async createOrder(order: InsertOrder): Promise<Order> {
     const id = this.orderIdCounter++;
     const now = new Date();
@@ -762,41 +802,41 @@ export class MemStorage implements IStorage {
     this.orders.set(id, newOrder);
     return newOrder;
   }
-  
+
   async updateOrderStatus(id: number, status: string): Promise<Order | undefined> {
     const order = await this.getOrder(id);
     if (!order) return undefined;
-    
+
     const updatedOrder = { ...order, status };
     this.orders.set(id, updatedOrder);
     return updatedOrder;
   }
-  
+
   // Order item operations
   async getOrderItems(orderId: number): Promise<OrderItem[]> {
     return Array.from(this.orderItems.values()).filter(
       (item) => item.orderId === orderId
     );
   }
-  
+
   async createOrderItem(item: InsertOrderItem): Promise<OrderItem> {
     const id = this.orderItemIdCounter++;
     const newItem: OrderItem = { ...item, id };
     this.orderItems.set(id, newItem);
     return newItem;
   }
-  
+
   // Testimonial operations
   async getTestimonials(approvedOnly = true): Promise<Testimonial[]> {
     let testimonials = Array.from(this.testimonials.values());
-    
+
     if (approvedOnly) {
       testimonials = testimonials.filter(testimonial => testimonial.approved);
     }
-    
+
     return testimonials;
   }
-  
+
   async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
     const id = this.testimonialIdCounter++;
     const now = new Date();
@@ -811,42 +851,42 @@ export class MemStorage implements IStorage {
     this.testimonials.set(id, newTestimonial);
     return newTestimonial;
   }
-  
+
   async approveTestimonial(id: number): Promise<Testimonial | undefined> {
     const testimonial = this.testimonials.get(id);
     if (!testimonial) return undefined;
-    
+
     const updatedTestimonial = { ...testimonial, approved: true };
     this.testimonials.set(id, updatedTestimonial);
     return updatedTestimonial;
   }
-  
+
   async deleteTestimonial(id: number): Promise<boolean> {
     return this.testimonials.delete(id);
   }
-  
+
   // Cart operations
   async getCartItems(sessionId: string): Promise<CartItem[]> {
     return Array.from(this.cartItems.values()).filter(
       (item) => item.sessionId === sessionId
     );
   }
-  
+
   async getCartItem(sessionId: string, productId: number): Promise<CartItem | undefined> {
     return Array.from(this.cartItems.values()).find(
       (item) => item.sessionId === sessionId && item.productId === productId
     );
   }
-  
+
   async addCartItem(item: InsertCartItem): Promise<CartItem> {
     // Check if item already exists in cart
     const existingItem = await this.getCartItem(item.sessionId, item.productId);
-    
+
     if (existingItem) {
       // Update quantity of existing item
       return this.updateCartItemQuantity(existingItem.id, existingItem.quantity + item.quantity) as Promise<CartItem>;
     }
-    
+
     // Create new item
     const id = this.cartItemIdCounter++;
     const now = new Date();
@@ -854,35 +894,35 @@ export class MemStorage implements IStorage {
     this.cartItems.set(id, newItem);
     return newItem;
   }
-  
+
   async updateCartItemQuantity(id: number, quantity: number): Promise<CartItem | undefined> {
     const item = this.cartItems.get(id);
     if (!item) return undefined;
-    
+
     if (quantity <= 0) {
       this.cartItems.delete(id);
       return undefined;
     }
-    
+
     const updatedItem = { ...item, quantity };
     this.cartItems.set(id, updatedItem);
     return updatedItem;
   }
-  
+
   async removeCartItem(id: number): Promise<boolean> {
     return this.cartItems.delete(id);
   }
-  
+
   async clearCart(sessionId: string): Promise<boolean> {
     const cartItems = await this.getCartItems(sessionId);
     let success = true;
-    
+
     for (const item of cartItems) {
       if (!this.cartItems.delete(item.id)) {
         success = false;
       }
     }
-    
+
     return success;
   }
 }

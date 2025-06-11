@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
+
 import type { Category } from "../../../../shared/schema";
 
 export default function CategoryShowcase() {
@@ -44,22 +45,28 @@ export default function CategoryShowcase() {
             Browse our carefully curated plant categories for your perfect garden
           </p>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           {displayCategories.map((category) => (
             <Link key={category.id} href={`/products/category/${category.slug}`}>
               <div className="text-center transition-all hover:transform hover:scale-105 cursor-pointer">
                 <div className="bg-light rounded-lg aspect-square mb-3 overflow-hidden">
                   {category.imageUrl ? (
-                    <img loading="lazy" 
-                      src={category.imageUrl} 
-                      alt={category.name} 
+                    <img loading="lazy"
+                      src={category.imageUrl}
+                      alt={category.name}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/placeholder-product.svg";
+                      }}
                     />
                   ) : (
-                    <div className="h-full flex items-center justify-center bg-primary/10">
-                      <span className="text-4xl text-primary">🌿</span>
-                    </div>
+                    <img loading="lazy"
+                      src="/placeholder-product.svg"
+                      alt="Placeholder category"
+                      className="w-full h-full object-cover"
+                    />
                   )}
                 </div>
                 <h3 className="font-medium text-center">{category.name}</h3>
@@ -67,7 +74,7 @@ export default function CategoryShowcase() {
             </Link>
           ))}
         </div>
-        
+
         <div className="text-center">
           <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
             <Link href="/products">View All Categories</Link>

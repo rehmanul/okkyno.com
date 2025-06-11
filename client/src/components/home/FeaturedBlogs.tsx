@@ -1,8 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
-import { formatDistanceToNow } from "date-fns";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { useQuery } from '@tanstack/react-query';
+import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'wouter';
+
 import type { BlogPost } from "../../../../shared/schema";
 
 export default function FeaturedBlogs() {
@@ -52,19 +53,23 @@ export default function FeaturedBlogs() {
             Expert tips, plant guides, and creative ideas to help your garden flourish
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Link key={post.id} href={`/blog/${post.slug}`}>
               <Card className="h-full transition-all hover:shadow-md cursor-pointer overflow-hidden">
                 <div className="h-48 overflow-hidden">
-                  <img loading="lazy" 
-                    src={post.imageUrl || "https://images.unsplash.com/photo-1598901847978-4ce242253a8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"} 
+                  <img loading="lazy"
+                    src={post.imageUrl || "https://images.unsplash.com/photo-1598901847978-4ce242253a8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"}
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "/placeholder-product.svg";
+                    }}
                   />
                 </div>
-                
+
                 <CardContent className="p-5">
                   <div className="flex items-center text-sm text-gray-500 mb-2">
                     <span>
@@ -79,14 +84,14 @@ export default function FeaturedBlogs() {
                       </span>
                     )}
                   </div>
-                  
+
                   <h3 className="font-semibold text-xl mb-2 line-clamp-2">{post.title}</h3>
-                  
+
                   {post.excerpt && (
                     <p className="text-gray-600 line-clamp-3 mb-3">{post.excerpt}</p>
                   )}
                 </CardContent>
-                
+
                 <CardFooter className="px-5 py-4 border-t">
                   <Button
                     variant="ghost"
@@ -99,7 +104,7 @@ export default function FeaturedBlogs() {
             </Link>
           ))}
         </div>
-        
+
         <div className="text-center mt-10">
           <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
             <Link href="/blog">View All Articles</Link>

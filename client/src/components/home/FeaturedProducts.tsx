@@ -1,18 +1,15 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
-import { 
-  Card, 
-  CardContent, 
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { Link } from 'wouter';
+
 import type { Product } from "../../../../shared/schema";
 
 export default function FeaturedProducts() {
   const [visibleProducts, setVisibleProducts] = useState(8);
-  
+
   // Query for featured products
   const { data: products, isLoading } = useQuery<Product[]>({
     queryKey: ["/api/products/featured"],
@@ -57,7 +54,7 @@ export default function FeaturedProducts() {
             Our expert-selected gardening essentials, designed to help your garden thrive
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.slice(0, visibleProducts).map((product) => (
             <Link key={product.id} href={`/products/${product.slug}`}>
@@ -68,20 +65,24 @@ export default function FeaturedProducts() {
                       Sale
                     </Badge>
                   )}
-                  
+
                   {product.stock <= 0 && (
                     <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
                       <span className="text-white font-medium text-lg">Out of Stock</span>
                     </div>
                   )}
-                  
-                  <img loading="lazy" 
-                    src={product.imageUrl || "https://images.unsplash.com/photo-1624398146237-35f5a407958d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"} 
+
+                  <img loading="lazy"
+                    src={product.imageUrl || "https://images.unsplash.com/photo-1624398146237-35f5a407958d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"}
                     alt={product.name}
                     className="h-full w-full object-cover transition-transform hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "/placeholder-product.svg";
+                    }}
                   />
                 </div>
-                
+
                 <CardContent className="p-4">
                   <div className="flex items-center mb-1">
                     {product.rating > 0 && (
@@ -97,14 +98,14 @@ export default function FeaturedProducts() {
                       <span className="text-xs text-gray-500">({product.reviewCount})</span>
                     )}
                   </div>
-                  
+
                   <h3 className="font-medium text-lg text-gray-900 line-clamp-2 mb-1">{product.name}</h3>
-                  
+
                   {product.shortDescription && (
                     <p className="text-sm text-gray-600 line-clamp-2 mb-2">{product.shortDescription}</p>
                   )}
                 </CardContent>
-                
+
                 <CardFooter className="px-4 py-3 border-t flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="font-semibold text-lg">${product.price.toFixed(2)}</span>
@@ -126,10 +127,10 @@ export default function FeaturedProducts() {
             </Link>
           ))}
         </div>
-        
+
         {products.length > visibleProducts && (
           <div className="text-center mt-10">
-            <Button 
+            <Button
               onClick={showMoreProducts}
               variant="outline"
               className="border-green-600 text-green-600 hover:bg-green-50"
@@ -138,7 +139,7 @@ export default function FeaturedProducts() {
             </Button>
           </div>
         )}
-        
+
         <div className="text-center mt-8">
           <Button asChild className="bg-green-600 hover:bg-green-700">
             <Link href="/products">Browse All Products</Link>
