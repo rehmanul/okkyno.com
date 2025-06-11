@@ -1,5 +1,5 @@
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 
 export default function HeroSection() {
   return (
@@ -22,7 +22,7 @@ export default function HeroSection() {
               </Button>
             </div>
           </div>
-          
+
           <div className="md:w-1/2 relative">
             <div className="relative rounded-lg overflow-hidden shadow-xl h-[400px] md:h-[500px] bg-green-200 flex items-center justify-center">
               {/* This would ideally be a real image */}
@@ -34,7 +34,7 @@ export default function HeroSection() {
                 <p className="opacity-90">Perfect solutions for limited spaces</p>
               </div>
             </div>
-            
+
             <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 hidden md:block">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl font-bold">
@@ -51,14 +51,14 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
+
       <div className="container mx-auto px-4 mt-16">
         <div className="bg-white rounded-lg shadow-lg p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { icon: "🚚", title: "Free Shipping", desc: "On orders over $75" },
-            { icon: "🌱", title: "Plant Guarantee", desc: "30-day guarantee" },
-            { icon: "💬", title: "Expert Advice", desc: "Garden consultations" },
-            { icon: "🔒", title: "Secure Payment", desc: "100% secure checkout" }
+            { icon: (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 mx-auto mb-2 text-green-600"><path strokeLinecap="round" strokeLinejoin="round" d="M3 10h1l1 2h13l1-2h1M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10M5 10V6a1 1 0 011-1h3m10 5v4m-6-4v4m-6-4v4m6-4v4m-6-4v4" /></svg>), title: "Free Shipping", desc: "On orders over $75" },
+            { icon: (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 mx-auto mb-2 text-green-600"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>), title: "Plant Guarantee", desc: "30-day guarantee" },
+            { icon: (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 mx-auto mb-2 text-green-600"><path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10M7 12h8m-8 4h6" /></svg>), title: "Expert Advice", desc: "Garden consultations" },
+            { icon: (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 mx-auto mb-2 text-green-600"><path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0-1.104-.896-2-2-2s-2 .896-2 2 .896 2 2 2 2-.896 2-2zm0 0v2m0 4h.01" /></svg>), title: "Secure Payment", desc: "100% secure checkout" }
           ].map((feature, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl mb-2">{feature.icon}</div>
