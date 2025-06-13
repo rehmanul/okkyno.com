@@ -1,4 +1,4 @@
-
+typescript
 import {
   User, InsertUser,
   Category, InsertCategory,
@@ -209,73 +209,190 @@ export class MemStorage implements IStorage {
     });
 
     // Create sample products
-    this.createProduct({
-      name: "Cherokee Purple Heirloom Tomato Seeds",
-      slug: "cherokee-purple-heirloom-tomato-seeds",
-      description: "A legendary heirloom variety with deep purple-brown fruits that offer exceptional flavor. These beefsteak-type tomatoes can weigh up to 1 pound each and are perfect for slicing.",
-      shortDescription: "Large, flavorful heirloom tomato with deep purple coloring",
-      price: 4.99,
-      comparePrice: 6.99,
-      imageUrl: "https://images.unsplash.com/photo-1561136594-7f68413baa99?w=800&auto=format&fit=crop&q=80",
-      imageUrls: ["https://images.unsplash.com/photo-1561136594-7f68413baa99?w=800&auto=format&fit=crop&q=80"],
-      categoryId: 1,
-      sku: "TOM-CHE-001",
-      stock: 150,
-      featured: true,
-      rating: 4.8,
-      reviewCount: 234
-    });
+    this.initializeProducts();
+  }
 
-    this.createProduct({
-      name: "Japanese Hori Hori Garden Knife",
-      slug: "japanese-hori-hori-garden-knife",
-      description: "The ultimate multi-purpose garden tool. This traditional Japanese knife features a sharp stainless steel blade with serrated edge, depth markings, and comfortable wooden handle.",
-      shortDescription: "Versatile Japanese garden knife for multiple tasks",
-      price: 34.99,
-      comparePrice: 44.99,
-      imageUrl: "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80",
-      imageUrls: ["https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80"],
-      categoryId: 4,
-      sku: "HOR-JAP-001",
-      stock: 75,
-      featured: true,
-      rating: 4.9,
-      reviewCount: 189
-    });
+  private initializeProducts() {
+    const sampleProducts = [
+      // Vegetables (Category 1)
+      {
+        name: "Cherokee Purple Heirloom Tomato Seeds",
+        slug: "cherokee-purple-heirloom-tomato-seeds",
+        description: "Large, beefsteak-type tomatoes with deep purple-red color and exceptional flavor. These indeterminate heirloom tomatoes are perfect for slicing and have won numerous taste tests.",
+        shortDescription: "Premium heirloom tomato seeds with exceptional flavor",
+        price: 4.99,
+        comparePrice: 6.99,
+        imageUrl: "https://images.unsplash.com/photo-1592841200221-21e1c9bf5921?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1592841200221-21e1c9bf5921?w=800&auto=format&fit=crop&q=80"],
+        videoUrl: "https://player.vimeo.com/video/456123456",
+        categoryId: 1,
+        sku: "CHE-PUR-001",
+        stock: 150,
+        featured: true,
+        rating: 4.8,
+        reviewCount: 124,
+        tags: ["heirloom", "indeterminate", "beefsteak"],
+        botanicalName: "Solanum lycopersicum",
+        difficulty: "Intermediate",
+        sunRequirement: "Full Sun",
+        waterRequirement: "Regular",
+        dimensions: "6-8 feet tall",
+        weight: 0.1
+      },
+      // Dragon Tongue Bush Bean Seeds
+      {
+        name: "Dragon Tongue Bush Bean Seeds",
+        slug: "dragon-tongue-bush-bean-seeds",
+        description: "Stunning purple-streaked yellow pods with excellent flavor. These compact bush beans are both ornamental and delicious, perfect for container gardens.",
+        shortDescription: "Colorful bush beans with purple streaks",
+        price: 3.49,
+        comparePrice: 4.99,
+        imageUrl: "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80"
+        ],
+        categoryId: 1,
+        sku: "BEA-DRA-001",
+        stock: 125,
+        featured: true,
+        rating: 4.7,
+        reviewCount: 67,
+        tags: ["bush bean", "heirloom", "compact"],
+        botanicalName: "Phaseolus vulgaris",
+        difficulty: "Easy",
+        sunRequirement: "Full Sun",
+        waterRequirement: "Regular",
+        dimensions: "18-24 inches tall",
+        weight: 0.08
+      },
 
-    this.createProduct({
-      name: "Fiddle Leaf Fig",
-      slug: "fiddle-leaf-fig",
-      description: "A stunning statement plant with large, violin-shaped leaves. Perfect for bright, indirect light and makes an excellent focal point in any room.",
-      shortDescription: "Statement plant with violin-shaped leaves",
-      price: 89.99,
-      comparePrice: 109.99,
-      imageUrl: "https://images.unsplash.com/photo-1586093248106-bbf80d13b57f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      imageUrls: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"],
-      categoryId: 2,
-      sku: "PLANT-FLF-001",
-      stock: 25,
-      featured: true,
-      rating: 4.8,
-      reviewCount: 127
-    });
+      // French Thyme Live Plant
+      {
+        name: "French Thyme Live Plant",
+        slug: "french-thyme-live-plant",
+        description: "Aromatic perennial herb with small gray-green leaves. Essential for French cuisine and herb gardens. Drought tolerant once established.",
+        shortDescription: "Classic French culinary thyme plant",
+        price: 8.99,
+        comparePrice: 12.99,
+        imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80"],
+        categoryId: 7,
+        sku: "THY-FRE-001",
+        stock: 145,
+        featured: false,
+        rating: 4.6,
+        reviewCount: 198,
+        tags: ["culinary", "french cuisine", "aromatic", "spreading"],
+        botanicalName: "Thymus vulgaris",
+        difficulty: "Easy",
+        sunRequirement: "Full Sun",
+        waterRequirement: "Low",
+        dimensions: "6-8 inches tall",
+        weight: 0.2
+      },
 
-    // Create testimonials
-    this.createTestimonial({
-      content: "I've been buying plants from Okkyno for months now and every single one has thrived! Their care instructions are spot-on and the quality is amazing.",
-      customerName: "Sarah M.",
-      customerLocation: "California",
-      rating: 5,
-      approved: true
-    });
+      // Terra Cotta Classic Round Pot
+      {
+        name: "Terra Cotta Classic Round Pot 12-inch",
+        slug: "terra-cotta-classic-round-pot-12-inch",
+        description: "Traditional unglazed terra cotta pot with drainage hole. Breathable clay material promotes healthy root growth. Perfect for herbs, vegetables, and flowering plants.",
+        shortDescription: "Classic terra cotta pot with excellent drainage",
+        price: 18.99,
+        comparePrice: 24.99,
+        imageUrl: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80"],
+        categoryId: 5,
+        sku: "TER-CLA-001",
+        stock: 85,
+        featured: true,
+        rating: 4.5,
+        reviewCount: 267,
+        tags: ["terra cotta", "drainage hole", "breathable", "traditional"],
+        difficulty: "N/A",
+        sunRequirement: "N/A",
+        waterRequirement: "N/A",
+        dimensions: "12 inches diameter",
+        weight: 2.8
+      },
 
-    this.createTestimonial({
-      content: "The garden tools I purchased have completely transformed how I work in my garden. Professional quality at great prices!",
-      customerName: "Mike Johnson",
-      customerLocation: "Texas",
-      rating: 5,
-      approved: true
-    });
+      // Self-Watering Planter Box
+      {
+        name: "Self-Watering Planter Box 24-inch",
+        slug: "self-watering-planter-box-24-inch",
+        description: "Innovative self-watering system with water reservoir. Perfect for busy gardeners or vacation plant care. Includes water level indicator and overflow drain.",
+        shortDescription: "Self-watering planter with reservoir system",
+        price: 45.99,
+        comparePrice: 59.99,
+        imageUrl: "https://images.unsplash.com/photo-1493400448374-3b3e5ab7e0fa?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1493400448374-3b3e5ab7e0fa?w=800&auto=format&fit=crop&q=80"],
+        videoUrl: "https://player.vimeo.com/video/456123789",
+        categoryId: 5,
+        sku: "SEL-WAT-001",
+        stock: 35,
+        featured: true,
+        rating: 4.8,
+        reviewCount: 189,
+        tags: ["self-watering", "reservoir", "vacation care", "indicator"],
+        difficulty: "N/A",
+        sunRequirement: "N/A",
+        waterRequirement: "N/A",
+        dimensions: "24 x 8 x 8 inches",
+        weight: 3.5
+      },
+
+      // Patriot Blueberry Bush
+      {
+        name: "Patriot Blueberry Bush",
+        slug: "patriot-blueberry-bush",
+        description: "Cold-hardy northern highbush blueberry with large, sweet berries. Self-pollinating variety with beautiful fall foliage. Perfect for home gardens.",
+        shortDescription: "Cold-hardy blueberry bush with large berries",
+        price: 24.99,
+        comparePrice: 32.99,
+        imageUrl: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&auto=format&fit=crop&q=80"],
+        categoryId: 9,
+        sku: "BLU-PAT-001",
+        stock: 65,
+        featured: false,
+        rating: 4.7,
+        reviewCount: 189,
+        tags: ["cold-hardy", "self-pollinating", "large berries", "fall foliage"],
+        botanicalName: "Vaccinium corymbosum",
+        difficulty: "Intermediate",
+        sunRequirement: "Full Sun to Partial Shade",
+        waterRequirement: "Regular",
+        dimensions: "4-6 feet tall",
+        weight: 3.5
+      },
+
+      // Basil 'Genovese' Seeds
+      {
+        name: "Basil 'Genovese' Seeds",
+        slug: "basil-genovese-seeds",
+        description: "Classic Italian basil variety with large, aromatic leaves. Perfect for pesto, pasta, and Mediterranean cooking.",
+        shortDescription: "Classic Italian basil for culinary use",
+        price: 3.99,
+        comparePrice: 5.99,
+        imageUrl: "https://images.unsplash.com/photo-1618164435735-413d3b066c9a?w=800&auto=format&fit=crop&q=80",
+        imageUrls: ["https://images.unsplash.com/photo-1618164435735-413d3b066c9a?w=800&auto=format&fit=crop&q=80"],
+        videoUrl: "https://player.vimeo.com/video/789123456",
+        categoryId: 7,
+        sku: "BAS-GEN-001",
+        stock: 200,
+        featured: false,
+        rating: 4.6,
+        reviewCount: 89,
+        tags: ["culinary", "herb", "aromatic"],
+        botanicalName: "Ocimum basilicum",
+        difficulty: "Easy",
+        sunRequirement: "Full Sun",
+        waterRequirement: "Regular",
+        dimensions: "12-18 inches tall",
+        weight: 0.05
+      }
+    ];
+
+    sampleProducts.forEach(product => this.createProduct(product));
   }
 
   // User operations

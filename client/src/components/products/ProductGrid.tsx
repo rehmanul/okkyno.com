@@ -26,6 +26,20 @@ export default function ProductGrid({ categoryId, searchQuery }: ProductGridProp
       
   const { data, isLoading, error } = useQuery<Product[]>({
     queryKey,
+    queryFn: async () => {
+      const url = categoryId 
+        ? `/api/products/category/${categoryId}` 
+        : searchQuery 
+          ? `/api/products/search?q=${searchQuery}`
+          : '/api/products';
+      
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      return response.json();
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
   
   // Sort products
