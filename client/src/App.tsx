@@ -11,6 +11,11 @@ import CheckoutPage from "@/pages/CheckoutPage";
 import LoginPage from "@/pages/LoginPage";
 import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
+import FAQPage from "@/pages/FAQPage";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
+import TermsOfServicePage from "@/pages/TermsOfServicePage";
+import ShippingPolicyPage from "@/pages/ShippingPolicyPage";
+import ReturnPolicyPage from "@/pages/ReturnPolicyPage";
 import AdminDashboardPage from "@/pages/AdminDashboardPage";
 import AdminProductsPage from "@/pages/AdminProductsPage";
 import AdminBlogsPage from "@/pages/AdminBlogsPage";
@@ -42,6 +47,11 @@ function Router() {
       <Route path="/login" component={LoginPage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/faq" component={FAQPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route path="/terms-of-service" component={TermsOfServicePage} />
+      <Route path="/shipping-policy" component={ShippingPolicyPage} />
+      <Route path="/return-policy" component={ReturnPolicyPage} />
       
       {/* Admin routes - only accessible if user is admin */}
       {isAdmin && (
