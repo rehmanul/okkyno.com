@@ -28,6 +28,19 @@ import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { SearchProvider } from "@/context/SearchContext";
 import { queryClient } from "@/lib/queryClient";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+
+// Component to handle scroll to top on route changes
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   const { user } = useAuth();
@@ -52,7 +65,7 @@ function Router() {
       <Route path="/terms-of-service" component={TermsOfServicePage} />
       <Route path="/shipping-policy" component={ShippingPolicyPage} />
       <Route path="/return-policy" component={ReturnPolicyPage} />
-      
+
       {/* Admin routes - only accessible if user is admin */}
       {isAdmin && (
         <>
@@ -62,7 +75,7 @@ function Router() {
           <Route path="/admin/orders" component={AdminOrdersPage} />
         </>
       )}
-      
+
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>

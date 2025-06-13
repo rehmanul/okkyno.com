@@ -311,7 +311,9 @@ export default function AddProduct() {
                             src={form.watch('imageUrl')}
                             alt="Product preview"
                             className="w-full h-full object-cover rounded"
-                            onError={() => setPreviewUrl("")}
+                            onError={(e) => {
+                              e.currentTarget.src = "/placeholder-product.svg";
+                            }}
                           />
                         </div>
                       </div>
