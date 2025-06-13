@@ -1548,21 +1548,21 @@ export class MemStorage implements IStorage {
       <p>A classic houseplant that produces baby plants you can propagate. It's non-toxic to pets and very forgiving of neglect.</p>
       <h2>3. Peace Lily (Spathiphyllum)</h2>
       <p>With elegant white flowers, peace lilies thrive in low light and help remove toxins like ammonia and formaldehyde.</p>
-      <h2>4. Pothos (Epipremnum aureum)</h2>
-      <p>An excellent trailing plant for beginners. It can grow in water or soil and adapts to various light conditions.</p>
+      <h2>4. ZZ Plant (Zamioculcas zamiifolia)</h2>
+      <p>Glossy leaves and extreme drought tolerance make this perfect for busy schedules. It can survive weeks without water.</p>
       <h2>5. Rubber Plant (Ficus elastica)</h2>
-      <p>This plant has thick, glossy leaves and can grow into an impressive indoor tree with minimal care.</p>
-      <h2>6. ZZ Plant (Zamioculcas zamiifolia)</h2>
-      <p>Extremely drought-tolerant with glossy leaves, the ZZ plant rarely needs watering and can survive in low light.</p>
-      <h2>7. Aloe Vera</h2>
-      <p>Beyond air purification, aloe provides medicinal gel for burns and cuts. It needs bright light but infrequent watering.</p>
-      <h2>8. Chinese Evergreen (Aglaonema)</h2>
-      <p>Available in various patterns and colors, these plants tolerate low light and irregular watering.</p>
+      <p>Large, glossy leaves make a bold statement. It's forgiving and adapts well to various light conditions.</p>
+      <h2>6. Pothos (Epipremnum aureum)</h2>
+      <p>Trailing vines make this perfect for hanging baskets or shelves. It roots easily in water for propagation.</p>
+      <h2>7. Philodendron</h2>
+      <p>Heart-shaped leaves and low light tolerance make this a beginner favorite. Many varieties available.</p>
+      <h2>8. Aloe Vera</h2>
+      <p>Succulent that requires minimal water and provides natural healing gel for burns and cuts.</p>
       <h2>9. Boston Fern (Nephrolepis exaltata)</h2>
-      <p>One of the best air-purifying plants, Boston ferns remove formaldehyde. They prefer humidity and indirect light.</p>
-      <h2>10. Dracaena</h2>
-      <p>With many varieties available, dracaenas are easy to grow and effective at removing toxins from the air.</p>
-      <p>These plants will not only beautify your home but also contribute to a healthier living environment!</p>`,
+      <p>Adds lush texture and helps humidify dry indoor air. Perfect for bathrooms with natural light.</p>
+      <h2>10. Chinese Evergreen (Aglaonema)</h2>
+      <p>Colorful foliage patterns and low light tolerance. Available in many varieties with different leaf patterns.</p>
+      <p>These plants require minimal care while providing maximum benefit to your indoor environment.</p>`,
       excerpt: "Discover beautiful houseplants that not only look great but also help clean the air in your home while requiring minimal care.",
       imageUrl: "https://images.unsplash.com/photo-1603436326446-e8beaa0c2956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       authorId: 1,

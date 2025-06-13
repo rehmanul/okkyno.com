@@ -22,6 +22,7 @@ import AdminBlogsPage from "@/pages/AdminBlogsPage";
 import AdminOrdersPage from "@/pages/AdminOrdersPage";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { useAuth } from "@/context/AuthContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
@@ -95,6 +96,7 @@ function App() {
             <Header />
             <Router />
             <Footer />
+            <PromotionalPopup />
             <Toaster />
           </SearchProvider>
         </CartProvider>
