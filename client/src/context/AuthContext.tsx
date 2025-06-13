@@ -37,11 +37,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await fetch("/api/users/me");
         if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const userData = await response.json();
+            setUser(userData);
+          }
         }
       } catch (error) {
-        console.error("Auth check failed:", error);
+        // Silently handle auth check failures - user is just not logged in
+        console.log("User not authenticated");
       } finally {
         setIsLoading(false);
       }
@@ -63,9 +67,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (response.ok) {
-        const userData = await response.json();
-        setUser(userData);
-        return true;
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const userData = await response.json();
+          setUser(userData);
+          return true;
+        }
       }
       return false;
     } catch (error) {
@@ -101,9 +108,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (response.ok) {
-        const newUser = await response.json();
-        setUser(newUser);
-        return true;
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const newUser = await response.json();
+          setUser(newUser);
+          return true;
+        }
       }
       return false;
     } catch (error) {
