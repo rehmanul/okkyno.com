@@ -118,61 +118,364 @@ export class MemStorage implements IStorage {
 
   // Sample data for initial load
   private sampleCategories: InsertCategory[] = [
-    { name: "Vegetables", slug: "vegetables", description: "Fresh vegetables for your garden", imageUrl: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
-    { name: "Indoor Plants", slug: "indoor-plants", description: "Beautiful plants for your home", imageUrl: "https://images.unsplash.com/photo-1599590984817-0c0aee0de8be?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
-    { name: "Garden Tools", slug: "garden-tools", description: "Quality tools for gardening", imageUrl: "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
-    { name: "Flowers", slug: "flowers", description: "Colorful flowers for your garden", imageUrl: "https://images.unsplash.com/photo-1446071103084-c257b5f70672?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
-    { name: "Pots & Planters", slug: "pots-planters", description: "Decorative pots for your plants", imageUrl: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" },
-    { name: "Seeds", slug: "seeds", description: "High-quality seeds for planting", imageUrl: "https://images.unsplash.com/photo-1574478155394-84eee6d97a8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" }
+    { name: "Vegetables", slug: "vegetables", description: "Fresh vegetables for your garden", imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80" },
+    { name: "Indoor Plants", slug: "indoor-plants", description: "Beautiful plants for your home", imageUrl: "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80" },
+    { name: "Garden Tools", slug: "garden-tools", description: "Quality tools for gardening", imageUrl: "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80" },
+    { name: "Flowers", slug: "flowers", description: "Colorful flowers for your garden", imageUrl: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80" },
+    { name: "Pots & Planters", slug: "pots-planters", description: "Decorative pots for your plants", imageUrl: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80" },
+    { name: "Seeds", slug: "seeds", description: "High-quality seeds for planting", imageUrl: "https://images.unsplash.com/photo-1597254563670-2df0f6b27a5e?w=800&auto=format&fit=crop&q=80" },
+    { name: "Herbs", slug: "herbs", description: "Fresh herbs for cooking and wellness", imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80" },
+    { name: "Succulents", slug: "succulents", description: "Low-maintenance succulent plants", imageUrl: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&auto=format&fit=crop&q=80" },
+    { name: "Fruit Trees", slug: "fruit-trees", description: "Fruit-bearing trees for your garden", imageUrl: "https://images.unsplash.com/photo-1572915904405-c13b2eecfac7?w=800&auto=format&fit=crop&q=80" },
+    { name: "Organic Fertilizers", slug: "organic-fertilizers", description: "Natural fertilizers for healthy plants", imageUrl: "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80" }
   ];
 
-  // Use a simple SVG placeholder stored in the public folder for products
-  private placeholderImage = "/placeholder-product.svg";
+  // Comprehensive product database based on Epic Gardening
+  private comprehensiveProducts: InsertProduct[] = [
+    // Vegetables (Category 1)
+    {
+      name: "Cherokee Purple Heirloom Tomato",
+      slug: "cherokee-purple-heirloom-tomato",
+      description: "A legendary heirloom variety with deep purple-brown fruits that offer exceptional flavor. These beefsteak-type tomatoes can weigh up to 1 pound each and are perfect for slicing. The complex, rich flavor combines sweet and smoky notes that make this variety a favorite among gardeners.",
+      shortDescription: "Large, flavorful heirloom tomato with deep purple coloring",
+      price: 4.99,
+      comparePrice: 6.99,
+      imageUrl: "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80"
+      ],
+      videoUrl: "https://player.vimeo.com/video/123456789",
+      categoryId: 1,
+      sku: "TOM-CHE-001",
+      stock: 150,
+      featured: true,
+      rating: 4.8,
+      reviewCount: 124,
+      tags: ["heirloom", "organic", "indeterminate", "beefsteak"],
+      botanicalName: "Solanum lycopersicum",
+      difficulty: "Intermediate",
+      sunRequirement: "Full Sun",
+      waterRequirement: "Regular",
+      dimensions: "6-8 feet tall",
+      weight: 0.1
+    },
+    {
+      name: "Detroit Dark Red Beet",
+      slug: "detroit-dark-red-beet",
+      description: "A classic beet variety with deep red roots and tender greens. Perfect for roasting, pickling, or eating fresh. The roots are sweet and earthy, while the tops can be harvested as nutritious leafy greens.",
+      shortDescription: "Classic deep red beet variety with edible greens",
+      price: 3.49,
+      imageUrl: "https://images.unsplash.com/photo-1593113598332-4c853d3d1e8c?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1593113598332-4c853d3d1e8c?w=800&auto=format&fit=crop&q=80"
+      ],
+      categoryId: 1,
+      sku: "BEE-DET-001",
+      stock: 200,
+      featured: false,
+      rating: 4.6,
+      reviewCount: 89,
+      tags: ["root vegetable", "organic", "heirloom"],
+      botanicalName: "Beta vulgaris",
+      difficulty: "Easy",
+      sunRequirement: "Full Sun to Partial Shade",
+      waterRequirement: "Regular",
+      dimensions: "2-3 inches diameter",
+      weight: 0.05
+    },
+    {
+      name: "Dragon Tongue Bush Bean",
+      slug: "dragon-tongue-bush-bean",
+      description: "Stunning purple-streaked pods that are as beautiful as they are delicious. These bush beans are compact and productive, perfect for small gardens. The pods are tender when young and the beans inside are creamy white.",
+      shortDescription: "Purple-streaked bush beans with exceptional flavor",
+      price: 4.25,
+      imageUrl: "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80"
+      ],
+      categoryId: 1,
+      sku: "BEA-DRA-001",
+      stock: 125,
+      featured: true,
+      rating: 4.7,
+      reviewCount: 67,
+      tags: ["bush bean", "heirloom", "compact"],
+      botanicalName: "Phaseolus vulgaris",
+      difficulty: "Easy",
+      sunRequirement: "Full Sun",
+      waterRequirement: "Regular",
+      dimensions: "18-24 inches tall",
+      weight: 0.08
+    },
 
-  private productNamesByCategory: Record<number, string[]> = {
-    1: [
-      "Fresh Carrot Bundle",
-      "Organic Cucumber",
-      "Sweet Bell Pepper",
-      "Heirloom Tomato",
-      "Leafy Lettuce"
-    ],
-    2: [
-      "Snake Plant",
-      "Peace Lily",
-      "Monstera Deliciosa",
-      "ZZ Plant",
-      "Aloe Vera"
-    ],
-    3: [
-      "Garden Trowel",
-      "Pruning Shears",
-      "Steel Rake",
-      "Garden Gloves",
-      "Watering Can"
-    ],
-    4: [
-      "Rose Bouquet",
-      "Tulip Bulb Pack",
-      "Daisy Seeds",
-      "Lavender Pot",
-      "Sunflower Starter"
-    ],
-    5: [
-      "Ceramic Planter",
-      "Hanging Basket",
-      "Terracotta Pot",
-      "Metal Planter",
-      "Wooden Raised Bed"
-    ],
-    6: [
-      "Basil Seed Pack",
-      "Parsley Seeds",
-      "Dill Seeds",
-      "Chive Seeds",
-      "Coriander Seeds"
-    ]
-  };
+    // Indoor Plants (Category 2)
+    {
+      name: "Monstera Deliciosa 'Swiss Cheese Plant'",
+      slug: "monstera-deliciosa-swiss-cheese-plant",
+      description: "The iconic split-leaf philodendron that's taken social media by storm. Known for its dramatic fenestrations (holes and splits) that develop as the plant matures. This tropical beauty can grow quite large indoors and is surprisingly easy to care for.",
+      shortDescription: "Popular split-leaf houseplant with dramatic fenestrations",
+      price: 29.99,
+      comparePrice: 39.99,
+      imageUrl: "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1583879620084-de3d35b0eeaa?w=800&auto=format&fit=crop&q=80"
+      ],
+      videoUrl: "https://player.vimeo.com/video/987654321",
+      categoryId: 2,
+      sku: "MON-DEL-001",
+      stock: 45,
+      featured: true,
+      rating: 4.9,
+      reviewCount: 234,
+      tags: ["tropical", "low-light", "air-purifying", "climbing"],
+      botanicalName: "Monstera deliciosa",
+      difficulty: "Easy",
+      sunRequirement: "Bright Indirect Light",
+      waterRequirement: "Weekly",
+      dimensions: "6-8 feet indoors",
+      weight: 2.5
+    },
+    {
+      name: "Snake Plant 'Sansevieria Trifasciata'",
+      slug: "snake-plant-sansevieria-trifasciata",
+      description: "The ultimate low-maintenance houseplant. This architectural beauty with its sword-like leaves can tolerate neglect better than almost any other plant. It's also one of the best air-purifying plants according to NASA studies.",
+      shortDescription: "Nearly indestructible air-purifying houseplant",
+      price: 19.99,
+      imageUrl: "https://images.unsplash.com/photo-1493400448374-3b3e5ab7e0fa?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1493400448374-3b3e5ab7e0fa?w=800&auto=format&fit=crop&q=80"
+      ],
+      categoryId: 2,
+      sku: "SNA-TRI-001",
+      stock: 85,
+      featured: true,
+      rating: 4.8,
+      reviewCount: 456,
+      tags: ["low-light", "drought-tolerant", "air-purifying", "beginner-friendly"],
+      botanicalName: "Sansevieria trifasciata",
+      difficulty: "Easy",
+      sunRequirement: "Low to Bright Light",
+      waterRequirement: "Monthly",
+      dimensions: "2-4 feet tall",
+      weight: 1.8
+    },
+
+    // Garden Tools (Category 3)
+    {
+      name: "Japanese Hori Hori Garden Knife",
+      slug: "japanese-hori-hori-garden-knife",
+      description: "The ultimate multi-purpose garden tool. This traditional Japanese knife features a sharp stainless steel blade with serrated edge, depth markings, and comfortable wooden handle. Perfect for digging, cutting, measuring, and transplanting.",
+      shortDescription: "Versatile Japanese garden knife for multiple tasks",
+      price: 34.99,
+      comparePrice: 44.99,
+      imageUrl: "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80"
+      ],
+      videoUrl: "https://player.vimeo.com/video/456789123",
+      categoryId: 3,
+      sku: "HOR-JAP-001",
+      stock: 75,
+      featured: true,
+      rating: 4.9,
+      reviewCount: 189,
+      tags: ["stainless steel", "multi-purpose", "professional", "japanese"],
+      difficulty: "N/A",
+      sunRequirement: "N/A",
+      waterRequirement: "N/A",
+      dimensions: "12 inches long",
+      weight: 0.75
+    },
+
+    // More Vegetables (Category 1)
+    {
+      name: "Purple Top Turnip",
+      slug: "purple-top-turnip",
+      description: "A classic root vegetable with white flesh and purple shoulders. Both roots and greens are edible, making this a dual-purpose crop. Sweet, mild flavor that improves with cool weather.",
+      shortDescription: "Dual-purpose root vegetable with edible greens",
+      price: 2.99,
+      imageUrl: "https://images.unsplash.com/photo-1609501676725-7186f634ed8a?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1609501676725-7186f634ed8a?w=800&auto=format&fit=crop&q=80"],
+      categoryId: 1,
+      sku: "TUR-PUR-001",
+      stock: 180,
+      featured: false,
+      rating: 4.4,
+      reviewCount: 76,
+      tags: ["root vegetable", "cold hardy", "dual purpose"],
+      botanicalName: "Brassica rapa",
+      difficulty: "Easy",
+      sunRequirement: "Full Sun",
+      waterRequirement: "Regular",
+      dimensions: "3-4 inches diameter",
+      weight: 0.04
+    },
+    {
+      name: "Scarlet Nantes Carrot",
+      slug: "scarlet-nantes-carrot",
+      description: "The gold standard for home garden carrots. Bright orange, cylindrical roots with sweet flavor and crisp texture. Excellent for fresh eating, cooking, or juicing.",
+      shortDescription: "Classic orange carrot variety with sweet flavor",
+      price: 3.25,
+      imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&auto=format&fit=crop&q=80"],
+      videoUrl: "https://player.vimeo.com/video/789123456",
+      categoryId: 1,
+      sku: "CAR-SCA-001",
+      stock: 220,
+      featured: true,
+      rating: 4.7,
+      reviewCount: 156,
+      tags: ["root vegetable", "sweet", "versatile"],
+      botanicalName: "Daucus carota",
+      difficulty: "Easy",
+      sunRequirement: "Full Sun",
+      waterRequirement: "Regular",
+      dimensions: "6-7 inches long",
+      weight: 0.03
+    },
+    {
+      name: "Buttercrunch Lettuce",
+      slug: "buttercrunch-lettuce",
+      description: "Award-winning butter lettuce with tender, sweet leaves and compact heads. Perfect for salads and sandwiches. Heat-resistant variety that's slow to bolt.",
+      shortDescription: "Tender butter lettuce with sweet flavor",
+      price: 2.75,
+      imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80"],
+      categoryId: 1,
+      sku: "LET-BUT-001",
+      stock: 165,
+      featured: false,
+      rating: 4.5,
+      reviewCount: 94,
+      tags: ["lettuce", "tender", "heat resistant"],
+      botanicalName: "Lactuca sativa",
+      difficulty: "Easy",
+      sunRequirement: "Partial Shade",
+      waterRequirement: "Regular",
+      dimensions: "8 inches diameter",
+      weight: 0.02
+    },
+    {
+      name: "Sugar Snap Pea",
+      slug: "sugar-snap-pea",
+      description: "Sweet, crunchy pods that are eaten whole. These climbing peas produce abundant harvests and are perfect for fresh eating, stir-fries, or light cooking.",
+      shortDescription: "Sweet edible-pod peas for fresh eating",
+      price: 4.50,
+      imageUrl: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80"],
+      categoryId: 1,
+      sku: "PEA-SUG-001",
+      stock: 140,
+      featured: true,
+      rating: 4.8,
+      reviewCount: 203,
+      tags: ["climbing", "edible pod", "sweet"],
+      botanicalName: "Pisum sativum",
+      difficulty: "Easy",
+      sunRequirement: "Full Sun",
+      waterRequirement: "Regular",
+      dimensions: "6 feet tall",
+      weight: 0.06
+    },
+
+    // More Indoor Plants (Category 2)
+    {
+      name: "Fiddle Leaf Fig",
+      slug: "fiddle-leaf-fig",
+      description: "The ultimate statement houseplant with large, violin-shaped leaves. This tree can grow quite tall indoors and adds dramatic architectural interest to any space.",
+      shortDescription: "Dramatic statement plant with large violin-shaped leaves",
+      price: 45.99,
+      comparePrice: 65.99,
+      imageUrl: "https://images.unsplash.com/photo-1462037165750-500d68bfad65?w=800&auto=format&fit=crop&q=80",
+      imageUrls: [
+        "https://images.unsplash.com/photo-1462037165750-500d68bfad65?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80"
+      ],
+      videoUrl: "https://player.vimeo.com/video/321654987",
+      categoryId: 2,
+      sku: "FID-LEA-001",
+      stock: 25,
+      featured: true,
+      rating: 4.6,
+      reviewCount: 178,
+      tags: ["statement plant", "tree", "architectural"],
+      botanicalName: "Ficus lyrata",
+      difficulty: "Intermediate",
+      sunRequirement: "Bright Indirect Light",
+      waterRequirement: "Weekly",
+      dimensions: "6-10 feet indoors",
+      weight: 4.2
+    },
+    {
+      name: "Pothos 'Golden'",
+      slug: "pothos-golden",
+      description: "The perfect beginner houseplant with heart-shaped leaves variegated in green and yellow. Extremely easy to care for and propagate, this trailing vine works great in hanging baskets.",
+      shortDescription: "Easy-care trailing vine with variegated leaves",
+      price: 12.99,
+      imageUrl: "https://images.unsplash.com/photo-1520301255226-bf5f144451c1?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1520301255226-bf5f144451c1?w=800&auto=format&fit=crop&q=80"],
+      categoryId: 2,
+      sku: "POT-GOL-001",
+      stock: 95,
+      featured: false,
+      rating: 4.9,
+      reviewCount: 342,
+      tags: ["trailing", "variegated", "beginner-friendly", "propagates easily"],
+      botanicalName: "Epipremnum aureum",
+      difficulty: "Easy",
+      sunRequirement: "Low to Bright Light",
+      waterRequirement: "Weekly",
+      dimensions: "Trailing to 8 feet",
+      weight: 0.8
+    },
+    {
+      name: "ZZ Plant 'Zamioculcas Zamiifolia'",
+      slug: "zz-plant-zamioculcas-zamiifolia",
+      description: "Nearly indestructible plant with glossy, waxy leaves. Perfect for offices and low-light areas. Can survive weeks without water and still look great.",
+      shortDescription: "Low-maintenance plant with glossy waxy leaves",
+      price: 24.99,
+      imageUrl: "https://images.unsplash.com/photo-1581992015047-b5e5c4633fcb?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1581992015047-b5e5c4633fcb?w=800&auto=format&fit=crop&q=80"],
+      categoryId: 2,
+      sku: "ZZ-ZAM-001",
+      stock: 65,
+      featured: true,
+      rating: 4.8,
+      reviewCount: 267,
+      tags: ["low-light", "drought-tolerant", "office plant"],
+      botanicalName: "Zamioculcas zamiifolia",
+      difficulty: "Easy",
+      sunRequirement: "Low to Medium Light",
+      waterRequirement: "Monthly",
+      dimensions: "2-3 feet tall",
+      weight: 2.1
+    },
+    {
+      name: "Rubber Plant 'Ficus Elastica'",
+      slug: "rubber-plant-ficus-elastica",
+      description: "Classic houseplant with large, glossy dark green leaves. Easy to care for and can grow into an impressive indoor tree with proper care.",
+      shortDescription: "Classic plant with large glossy leaves",
+      price: 32.99,
+      imageUrl: "https://images.unsplash.com/photo-1591958911259-bee2173bdcdc?w=800&auto=format&fit=crop&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1591958911259-bee2173bdcdc?w=800&auto=format&fit=crop&q=80"],
+      videoUrl: "https://player.vimeo.com/video/654321789",
+      categoryId: 2,
+      sku: "RUB-ELA-001",
+      stock: 40,
+      featured: false,
+      rating: 4.7,
+      reviewCount: 145,
+      tags: ["tree", "glossy leaves", "classic"],
+      botanicalName: "Ficus elastica",
+      difficulty: "Easy",
+      sunRequirement: "Bright Indirect Light",
+      waterRequirement: "Weekly",
+      dimensions: "6-8 feet indoors",
+      weight: 3.5
+    }
+  ];
 
   private slugify(str: string) {
     return str
@@ -426,51 +729,9 @@ export class MemStorage implements IStorage {
       reviewCount: 37
     });
 
-    // Generate additional products with realistic names and real image URLs
-    const realImageUrls = [
-      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1468071174046-657d9d351a40?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-    ];
-    for (let i = 1; i <= 20; i++) {
-      const categoryId = ((i - 1) % this.sampleCategories.length) + 1;
-      const nameList = this.productNamesByCategory[categoryId] ?? ["Garden Item"];
-      const baseName = nameList[i % nameList.length];
-      const name = `${baseName} ${i}`;
-      const slug = this.slugify(name);
-      this.createProduct({
-        name,
-        slug,
-        description: `${baseName} for your garden`,
-        shortDescription: baseName,
-        price: parseFloat((5.99 + (i % 50)).toFixed(2)),
-        comparePrice: null,
-        imageUrl: realImageUrls[i - 1],
-        imageUrls: [],
-        categoryId,
-        sku: `PROD-${String(i).padStart(3, "0")}`,
-        stock: 100,
-        featured: false,
-        rating: 0,
-        reviewCount: 0,
-      });
+    // Create comprehensive products from Epic Gardening inspired database
+    for (const productData of this.comprehensiveProducts) {
+      this.createProduct(productData);
     }
 
     // Create sample blog posts
