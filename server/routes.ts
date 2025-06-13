@@ -71,6 +71,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(userWithoutPassword);
   });
 
+  app.get("/api/users/me", async (req: Request, res: Response) => {
+    // In a real app, you would verify JWT token here
+    // For demo purposes, we'll just return null (not authenticated)
+    res.json(null);
+  });
+
   // ===== Category Routes =====
   app.get("/api/categories", async (_req: Request, res: Response) => {
     const categories = await storage.getCategories();

@@ -1,3 +1,4 @@
+
 import {
   User, InsertUser,
   Category, InsertCategory,
@@ -384,7 +385,7 @@ export class MemStorage implements IStorage {
     const lowerQuery = query.toLowerCase();
     return Array.from(this.products.values()).filter(product =>
       product.name.toLowerCase().includes(lowerQuery) ||
-      product.description.toLowerCase().includes(lowerQuery)
+      (product.description && product.description.toLowerCase().includes(lowerQuery))
     );
   }
 
