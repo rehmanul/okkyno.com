@@ -47,7 +47,9 @@ function Router() {
   const isAdmin = user?.role === "admin";
 
   return (
-    <Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/products" component={ProductsPage} />
       <Route path="/products/category/:slug" component={ProductsPage} />
@@ -79,6 +81,7 @@ function Router() {
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
+    </>
   );
 }
 

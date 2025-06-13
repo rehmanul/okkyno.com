@@ -311,7 +311,9 @@ export default function AddProduct() {
                             src={form.watch('imageUrl')}
                             alt="Product preview"
                             className="w-full h-full object-cover rounded"
+                            onLoad={() => console.log('Image loaded successfully')}
                             onError={(e) => {
+                              console.log('Image failed to load, using placeholder');
                               e.currentTarget.src = "/placeholder-product.svg";
                             }}
                           />

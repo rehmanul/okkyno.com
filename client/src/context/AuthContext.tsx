@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error) {
         // Silently handle auth check failures - user is just not logged in
-        console.log("User not authenticated");
       } finally {
         setIsLoading(false);
       }
