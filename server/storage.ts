@@ -220,22 +220,90 @@ export class MemStorage implements IStorage {
     // Create sample categories
     this.sampleCategories.forEach(category => this.createCategory(category));
 
-    // Create sample products (all with real image URLs)
+    // Create sample products with real plant images
     this.createProduct({
-      name: "Cucumber 'Marketmore' Organic Seeds",
-      slug: "cucumber-marketmore-organic-seeds",
-      description: "Organic cucumber seeds that produce high yields of straight, dark green slicing cucumbers. Disease resistant and perfect for home gardens.",
-      shortDescription: "Organic cucumber seeds for your garden",
-      price: 6.99,
-      comparePrice: null,
-      imageUrl: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      imageUrls: [],
-      categoryId: 6, // Seeds category
-      sku: "SEED-CUC-001",
-      stock: 100,
+      name: "Fiddle Leaf Fig",
+      slug: "fiddle-leaf-fig",
+      description: "A stunning statement plant with large, violin-shaped leaves. Perfect for bright, indirect light and makes an excellent focal point in any room.",
+      shortDescription: "Statement plant with violin-shaped leaves",
+      price: 89.99,
+      comparePrice: 109.99,
+      imageUrl: "https://images.unsplash.com/photo-1586093248106-bbf80d13b57f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"],
+      categoryId: 2, // Indoor Plants
+      sku: "PLANT-FLF-001",
+      stock: 25,
       featured: true,
-      rating: 4.5,
-      reviewCount: 42
+      rating: 4.8,
+      reviewCount: 127
+    });
+
+    this.createProduct({
+      name: "Monstera Deliciosa",
+      slug: "monstera-deliciosa",
+      description: "The beloved Swiss Cheese Plant with its iconic split leaves. Fast-growing and perfect for creating a tropical atmosphere in your home.",
+      shortDescription: "Swiss Cheese Plant with split leaves",
+      price: 45.99,
+      comparePrice: 59.99,
+      imageUrl: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"],
+      categoryId: 2, // Indoor Plants
+      sku: "PLANT-MON-001",
+      stock: 40,
+      featured: true,
+      rating: 4.7,
+      reviewCount: 89
+    });
+
+    this.createProduct({
+      name: "Snake Plant (Sansevieria)",
+      slug: "snake-plant-sansevieria",
+      description: "The ultimate low-maintenance plant. Thrives in low light and requires minimal watering. Perfect for beginners and busy plant parents.",
+      shortDescription: "Low-maintenance plant for any environment",
+      price: 32.99,
+      comparePrice: null,
+      imageUrl: "https://images.unsplash.com/photo-1631377819268-d7f921975224?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1572688484438-313a6e50c333?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"],
+      categoryId: 2, // Indoor Plants
+      sku: "PLANT-SNK-001",
+      stock: 60,
+      featured: true,
+      rating: 4.9,
+      reviewCount: 203
+    });
+
+    this.createProduct({
+      name: "Peace Lily",
+      slug: "peace-lily",
+      description: "Elegant white flowers and glossy green leaves make this a perfect choice for offices and homes. Air-purifying and tolerates low light.",
+      shortDescription: "Elegant flowering plant with air-purifying qualities",
+      price: 28.99,
+      comparePrice: null,
+      imageUrl: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      imageUrls: ["https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"],
+      categoryId: 2, // Indoor Plants
+      sku: "PLANT-PCE-001",
+      stock: 35,
+      featured: false,
+      rating: 4.6,
+      reviewCount: 156
+    });
+
+    this.createProduct({
+      name: "ZZ Plant (Zamioculcas zamiifolia)",
+      slug: "zz-plant",
+      description: "Glossy, dark green leaves and extreme drought tolerance make this the perfect plant for travelers and those new to plant care.",
+      shortDescription: "Drought-tolerant plant with glossy leaves",
+      price: 39.99,
+      comparePrice: 49.99,
+      imageUrl: "https://images.unsplash.com/photo-1597798641621-0e3c8c204c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      imageUrls: [],
+      categoryId: 2, // Indoor Plants
+      sku: "PLANT-ZZ-001",
+      stock: 45,
+      featured: false,
+      rating: 4.8,
+      reviewCount: 134
     });
 
     this.createProduct({
