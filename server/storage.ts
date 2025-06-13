@@ -213,321 +213,427 @@ export class MemStorage implements IStorage {
   }
 
   // Comprehensive product database with 200+ products
-  private comprehensiveProducts: InsertProduct[] = [
-    // Vegetables (Category 1)
-    {
-      name: "Cherokee Purple Heirloom Tomato",
-      slug: "cherokee-purple-heirloom-tomato",
-      description: "A legendary heirloom variety with deep purple-brown fruits that offer exceptional flavor. These beefsteak-type tomatoes can weigh up to 1 pound each and are perfect for slicing. The complex, rich flavor combines sweet and smoky notes that make this variety a favorite among gardeners.",
-      shortDescription: "Large, flavorful heirloom tomato with deep purple coloring",
-      price: 4.99,
-      comparePrice: 6.99,
-      imageUrl: "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
-      imageUrls: [
-        "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80"
-      ],
-      videoUrl: "https://player.vimeo.com/video/123456789",
-      categoryId: 1,
-      sku: "TOM-CHE-001",
-      stock: 150,
-      featured: true,
-      rating: 4.8,
-      reviewCount: 124,
-      tags: ["heirloom", "organic", "indeterminate", "beefsteak"],
-      botanicalName: "Solanum lycopersicum",
-      difficulty: "Intermediate",
-      sunRequirement: "Full Sun",
-      waterRequirement: "Regular",
-      dimensions: "6-8 feet tall",
-      weight: 0.1
-    },
-    {
-      name: "Dragon Tongue Bush Bean",
-      slug: "dragon-tongue-bush-bean",
-      description: "Stunning purple-streaked pods that are as beautiful as they are delicious. These bush beans are compact and productive, perfect for small gardens. The pods are tender when young and the beans inside are creamy white.",
-      shortDescription: "Purple-streaked bush beans with exceptional flavor",
-      price: 4.25,
-      imageUrl: "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80",
-      imageUrls: [
-        "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80"
-      ],
-      categoryId: 1,
-      sku: "BEA-DRA-001",
-      stock: 125,
-      featured: true,
-      rating: 4.7,
-      reviewCount: 67,
-      tags: ["bush bean", "heirloom", "compact"],
-      botanicalName: "Phaseolus vulgaris",
-      difficulty: "Easy",
-      sunRequirement: "Full Sun",
-      waterRequirement: "Regular",
-      dimensions: "18-24 inches tall",
-      weight: 0.08
-    },
-    // Additional 200+ products would continue here...
-    // For brevity, I'll add a representative sample and the system will expand to full 200+
-  ];
+  private comprehensiveProducts: InsertProduct[] = [];
 
   private initializeProducts() {
-    // Initialize the full comprehensive product database
-    this.comprehensiveProducts.forEach(product => this.createProduct(product));
-    
-    // Add additional generated products to reach 200+ total
-    this.generateAdditionalProducts();
+    // Generate comprehensive product database with 200+ products
+    this.generateComprehensiveProducts();
   }
 
-  private generateAdditionalProducts() {
-    // Generate vegetables
+  private generateComprehensiveProducts() {
+    // Image collections for different categories
+    const imageCollections = {
+      vegetables: [
+        "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=800&auto=format&fit=crop&q=80"
+      ],
+      plants: [
+        "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1603436326446-e8beaa0c2956?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1618377531907-42e7e7a54e69?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=800&auto=format&fit=crop&q=80"
+      ],
+      tools: [
+        "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1598521112314-a9addabd2a2a?w=800&auto=format&fit=crop&q=80"
+      ],
+      flowers: [
+        "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1463554050456-f2ed7d3fec09?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=800&auto=format&fit=crop&q=80"
+      ],
+      planters: [
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1502394202744-021cfbb17454?w=800&auto=format&fit=crop&q=80"
+      ],
+      herbs: [
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1521944521548-a8ed0caa8f38?w=800&auto=format&fit=crop&q=80"
+      ],
+      succulents: [
+        "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1508022152233-9254631e31d1?w=800&auto=format&fit=crop&q=80"
+      ],
+      fruitTrees: [
+        "https://images.unsplash.com/photo-1572915904405-c13b2eecfac7?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&auto=format&fit=crop&q=80"
+      ],
+      fertilizers: [
+        "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80"
+      ]
+    };
+
+    const videoUrls = [
+      "https://player.vimeo.com/video/123456789",
+      "https://player.vimeo.com/video/987654321",
+      "https://player.vimeo.com/video/456789123",
+      "https://player.vimeo.com/video/789123456"
+    ];
+
+    // Generate vegetables (Category 1) - 30 products
     const vegetableProducts = [
-      "Detroit Dark Red Beet", "Purple Top Turnip", "Scarlet Nantes Carrot", "Buttercrunch Lettuce",
-      "Sugar Snap Pea", "Black Krim Heirloom Tomato", "Rainbow Swiss Chard", "Japanese Long Cucumber"
+      "Cherokee Purple Heirloom Tomato", "Dragon Tongue Bush Bean", "Detroit Dark Red Beet", 
+      "Purple Top Turnip", "Scarlet Nantes Carrot", "Buttercrunch Lettuce", "Sugar Snap Pea", 
+      "Black Krim Heirloom Tomato", "Rainbow Swiss Chard", "Japanese Long Cucumber",
+      "Green Zebra Tomato", "Provider Green Bean", "Chioggia Beet", "Hakurei Turnip",
+      "Paris Market Carrot", "Black Seeded Simpson Lettuce", "Mammoth Melting Sugar Pea",
+      "Brandywine Tomato", "Bright Lights Swiss Chard", "Lemon Cucumber",
+      "Roma Tomato", "Royal Burgundy Bean", "Early Wonder Beet", "White Egg Turnip",
+      "Chantenay Red Core Carrot", "Red Sails Lettuce", "Oregon Sugar Pod Pea",
+      "San Marzano Tomato", "Fordhook Giant Swiss Chard", "Armenian Cucumber"
     ];
 
     vegetableProducts.forEach((name, index) => {
+      const images = imageCollections.vegetables;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      
       this.createProduct({
         name: `${name} Seeds`,
         slug: this.slugify(`${name}-seeds`),
-        description: `Premium ${name.toLowerCase()} seeds for your vegetable garden. High germination rate and excellent flavor.`,
+        description: `Premium ${name.toLowerCase()} seeds for your vegetable garden. High germination rate and excellent flavor. Perfect for home gardeners who want fresh, organic produce.`,
         shortDescription: `Premium ${name.toLowerCase()} seeds`,
-        price: 2.99 + Math.random() * 3,
-        imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&auto=format&fit=crop&q=80",
+        price: 2.99 + Math.random() * 4,
+        comparePrice: index % 3 === 0 ? 5.99 + Math.random() * 2 : null,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
+        videoUrl: index % 10 === 0 ? videoUrls[index % videoUrls.length] : null,
         categoryId: 1,
-        sku: `VEG-${index + 10}-001`,
-        stock: 100 + Math.floor(Math.random() * 100),
-        featured: Math.random() > 0.8,
+        sku: `VEG-${String(index + 1).padStart(3, '0')}`,
+        stock: 50 + Math.floor(Math.random() * 200),
+        featured: index < 5,
         rating: 4.0 + Math.random() * 1,
-        reviewCount: Math.floor(Math.random() * 200),
-        tags: ["seeds", "vegetable", "organic"],
-        difficulty: "Easy",
+        reviewCount: Math.floor(Math.random() * 300),
+        tags: ["seeds", "vegetable", "organic", "heirloom"],
+        botanicalName: "Various species",
+        difficulty: index % 3 === 0 ? "Easy" : index % 3 === 1 ? "Intermediate" : "Advanced",
         sunRequirement: "Full Sun",
-        waterRequirement: "Regular"
+        waterRequirement: "Regular",
+        dimensions: "Varies",
+        weight: 0.05 + Math.random() * 0.15
       });
     });
 
-    // Generate indoor plants
+    // Generate indoor plants (Category 2) - 25 products
     const indoorPlants = [
       "Monstera Deliciosa", "Fiddle Leaf Fig", "Pothos Golden", "ZZ Plant", "Rubber Plant",
-      "Bird of Paradise", "Philodendron Pink Princess", "Snake Plant", "Peace Lily", "Spider Plant"
+      "Bird of Paradise", "Philodendron Pink Princess", "Snake Plant", "Peace Lily", "Spider Plant",
+      "Fiddle Leaf Fig Bambino", "Pothos Marble Queen", "ZZ Plant Raven", "Rubber Plant Burgundy",
+      "Bird of Paradise White", "Philodendron Brasil", "Snake Plant Laurentii", "Peace Lily Sensation",
+      "Spider Plant Variegated", "Monstera Adansonii", "Pothos Jade", "ZZ Plant Zenzi",
+      "Rubber Plant Tineke", "Philodendron Heartleaf", "Snake Plant Moonshine"
     ];
 
     indoorPlants.forEach((name, index) => {
+      const images = imageCollections.plants;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Beautiful ${name.toLowerCase()} perfect for indoor spaces. Easy to care for and air-purifying.`,
+        description: `Beautiful ${name.toLowerCase()} perfect for indoor spaces. Easy to care for and air-purifying. Adds natural beauty to any room.`,
         shortDescription: `Beautiful ${name.toLowerCase()} houseplant`,
-        price: 19.99 + Math.random() * 40,
-        imageUrl: "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80",
+        price: 19.99 + Math.random() * 60,
+        comparePrice: index % 4 === 0 ? 35.99 + Math.random() * 20 : null,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
+        videoUrl: index % 8 === 0 ? videoUrls[index % videoUrls.length] : null,
         categoryId: 2,
-        sku: `PLANT-${index + 20}-001`,
-        stock: 20 + Math.floor(Math.random() * 80),
-        featured: Math.random() > 0.7,
+        sku: `PLANT-${String(index + 1).padStart(3, '0')}`,
+        stock: 10 + Math.floor(Math.random() * 50),
+        featured: index < 8,
         rating: 4.2 + Math.random() * 0.8,
-        reviewCount: Math.floor(Math.random() * 300),
-        tags: ["houseplant", "air-purifying", "indoor"],
+        reviewCount: Math.floor(Math.random() * 400),
+        tags: ["houseplant", "air-purifying", "indoor", "low-maintenance"],
+        botanicalName: "Various species",
         difficulty: "Easy",
         sunRequirement: "Bright Indirect Light",
-        waterRequirement: "Weekly"
+        waterRequirement: "Weekly",
+        dimensions: "12-36 inches",
+        weight: 2 + Math.random() * 8
       });
     });
 
-    // Generate garden tools
+    // Generate garden tools (Category 3) - 20 products
     const gardenTools = [
       "Ergonomic Garden Spade", "Japanese Hori Hori Knife", "Professional Soil Thermometer",
       "Felco F-2 Pruning Shears", "Corona Bypass Pruner", "Stainless Steel Trowel",
-      "Weeding Fork", "Garden Rake", "Watering Can", "Hand Cultivator"
+      "Weeding Fork", "Garden Rake", "Watering Can", "Hand Cultivator",
+      "Garden Hoe", "Pruning Saw", "Soil pH Tester", "Garden Scissors", "Hand Weeder",
+      "Transplanting Trowel", "Garden Fork", "Leaf Rake", "Spray Bottle", "Soil Scoop"
     ];
 
     gardenTools.forEach((name, index) => {
+      const images = imageCollections.tools;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Professional-grade ${name.toLowerCase()} for serious gardeners. Durable construction and ergonomic design.`,
+        description: `Professional-grade ${name.toLowerCase()} for serious gardeners. Durable construction and ergonomic design for comfortable use.`,
         shortDescription: `Professional ${name.toLowerCase()}`,
         price: 15.99 + Math.random() * 50,
-        imageUrl: "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80",
+        comparePrice: index % 5 === 0 ? 25.99 + Math.random() * 30 : null,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
         categoryId: 3,
-        sku: `TOOL-${index + 30}-001`,
-        stock: 50 + Math.floor(Math.random() * 100),
-        featured: Math.random() > 0.8,
+        sku: `TOOL-${String(index + 1).padStart(3, '0')}`,
+        stock: 25 + Math.floor(Math.random() * 75),
+        featured: index < 6,
         rating: 4.3 + Math.random() * 0.7,
         reviewCount: Math.floor(Math.random() * 250),
-        tags: ["tool", "professional", "durable"],
+        tags: ["tool", "professional", "durable", "ergonomic"],
         difficulty: "N/A",
         sunRequirement: "N/A",
-        waterRequirement: "N/A"
+        waterRequirement: "N/A",
+        dimensions: "Various",
+        weight: 0.5 + Math.random() * 2
       });
     });
 
-    // Generate flowers
+    // Continue with other categories...
+    // Generate flowers (Category 8) - 25 products
     const flowers = [
       "Sunflower Mammoth Russian", "Zinnia State Fair Mix", "Cosmos Sensation Mix",
       "Marigold French Petite", "Nasturtium Climbing Mix", "Sweet Pea Fragrant Mix",
-      "Calendula Pacific Beauty", "Bachelor Button Mix", "Celosia Plume Mix", "Dahlia Mix"
+      "Calendula Pacific Beauty", "Bachelor Button Mix", "Celosia Plume Mix", "Dahlia Mix",
+      "Petunia Wave Mix", "Impatiens Busy Lizzie", "Begonia Dragon Wing", "Salvia Splendens",
+      "Verbena Bonariensis", "Cleome Spider Flower", "Nicotiana Flowering Tobacco", "Rudbeckia Cherokee Sunset",
+      "Echinacea Purple Coneflower", "Gaillardia Blanket Flower", "Lupine Russell Mix", "Delphinium Pacific Giant",
+      "Hollyhock Chater's Double", "Foxglove Digitalis", "Larkspur Imperial Mix"
     ];
 
     flowers.forEach((name, index) => {
+      const images = imageCollections.flowers;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      
       this.createProduct({
         name: `${name} Seeds`,
         slug: this.slugify(`${name}-seeds`),
-        description: `Beautiful ${name.toLowerCase()} flowers that attract pollinators and add color to your garden.`,
+        description: `Beautiful ${name.toLowerCase()} flowers that attract pollinators and add stunning color to your garden. Easy to grow annual flowers.`,
         shortDescription: `Colorful ${name.toLowerCase()} flowers`,
-        price: 2.49 + Math.random() * 4,
-        imageUrl: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80",
+        price: 2.49 + Math.random() * 6,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
+        videoUrl: index % 12 === 0 ? videoUrls[index % videoUrls.length] : null,
         categoryId: 8,
-        sku: `FLO-${index + 40}-001`,
-        stock: 150 + Math.floor(Math.random() * 100),
-        featured: Math.random() > 0.9,
+        sku: `FLO-${String(index + 1).padStart(3, '0')}`,
+        stock: 100 + Math.floor(Math.random() * 150),
+        featured: index < 7,
         rating: 4.1 + Math.random() * 0.9,
-        reviewCount: Math.floor(Math.random() * 180),
-        tags: ["flowers", "annual", "pollinator-friendly"],
+        reviewCount: Math.floor(Math.random() * 200),
+        tags: ["flowers", "annual", "pollinator-friendly", "colorful"],
+        botanicalName: "Various species",
         difficulty: "Easy",
         sunRequirement: "Full Sun",
-        waterRequirement: "Regular"
+        waterRequirement: "Regular",
+        dimensions: "6-48 inches",
+        weight: 0.02 + Math.random() * 0.08
       });
     });
 
-    // Generate pots and planters
+    // Generate pots and planters (Category 9) - 20 products
     const planters = [
-      "Terra Cotta Classic Pot", "Self-Watering Planter", "Fabric Grow Bags Set",
-      "Wooden Cedar Planter", "Ceramic Decorative Pot", "Hanging Basket Planter",
-      "Window Box Planter", "Raised Garden Bed Kit", "Vertical Garden Tower", "Stone Effect Planter"
+      "Terra Cotta Classic Pot 6-inch", "Self-Watering Planter Box 24-inch", "Fabric Grow Bags Set of 5",
+      "Wooden Cedar Planter 36-inch", "Ceramic Decorative Pot 8-inch", "Hanging Basket Planter 12-inch",
+      "Window Box Planter 24-inch", "Raised Garden Bed Kit 4x8", "Vertical Garden Tower", "Stone Effect Planter 10-inch",
+      "Terra Cotta Classic Pot 12-inch", "Self-Watering Planter Box 36-inch", "Fabric Grow Bags Set of 10",
+      "Wooden Cedar Planter 48-inch", "Ceramic Decorative Pot 12-inch", "Hanging Basket Planter 16-inch",
+      "Window Box Planter 36-inch", "Raised Garden Bed Kit 4x4", "Stackable Planter System", "Resin Planter 14-inch"
     ];
 
     planters.forEach((name, index) => {
+      const images = imageCollections.planters;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `High-quality ${name.toLowerCase()} for all your gardening needs. Excellent drainage and durability.`,
+        description: `High-quality ${name.toLowerCase()} for all your gardening needs. Excellent drainage and durability for long-lasting use.`,
         shortDescription: `Durable ${name.toLowerCase()}`,
-        price: 12.99 + Math.random() * 60,
-        imageUrl: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80",
+        price: 12.99 + Math.random() * 80,
+        comparePrice: index % 3 === 0 ? 19.99 + Math.random() * 40 : null,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
         categoryId: 9,
-        sku: `POT-${index + 50}-001`,
-        stock: 30 + Math.floor(Math.random() * 70),
-        featured: Math.random() > 0.85,
+        sku: `POT-${String(index + 1).padStart(3, '0')}`,
+        stock: 15 + Math.floor(Math.random() * 50),
+        featured: index < 5,
         rating: 4.0 + Math.random() * 1,
-        reviewCount: Math.floor(Math.random() * 200),
-        tags: ["planter", "drainage", "durable"],
+        reviewCount: Math.floor(Math.random() * 180),
+        tags: ["planter", "drainage", "durable", "container"],
         difficulty: "N/A",
         sunRequirement: "N/A",
-        waterRequirement: "N/A"
+        waterRequirement: "N/A",
+        dimensions: "Various sizes",
+        weight: 1 + Math.random() * 10
       });
     });
 
-    // Generate herbs
+    // Generate herbs (Category 11) - 20 products
     const herbs = [
       "Basil Genovese", "Rosemary Tuscan Blue", "French Thyme", "Oregano Greek",
       "Parsley Italian Flat", "Cilantro Slow Bolt", "Chives Garlic", "Sage Purple",
-      "Lavender English", "Mint Spearmint"
+      "Lavender English", "Mint Spearmint", "Basil Thai", "Rosemary Arp",
+      "Thyme Lemon", "Oregano Hot & Spicy", "Parsley Curled", "Cilantro Leisure",
+      "Chives Common", "Sage Garden", "Lavender Provence", "Mint Chocolate"
     ];
 
     herbs.forEach((name, index) => {
+      const images = imageCollections.herbs;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Aromatic ${name.toLowerCase()} perfect for culinary use and garden fragrance. Easy to grow and harvest.`,
+        description: `Aromatic ${name.toLowerCase()} perfect for culinary use and garden fragrance. Easy to grow and harvest fresh herbs.`,
         shortDescription: `Aromatic ${name.toLowerCase()} herb`,
-        price: 3.99 + Math.random() * 8,
-        imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80",
+        price: 3.99 + Math.random() * 12,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
+        videoUrl: index % 15 === 0 ? videoUrls[index % videoUrls.length] : null,
         categoryId: 11,
-        sku: `HERB-${index + 60}-001`,
-        stock: 80 + Math.floor(Math.random() * 120),
-        featured: Math.random() > 0.8,
+        sku: `HERB-${String(index + 1).padStart(3, '0')}`,
+        stock: 40 + Math.floor(Math.random() * 80),
+        featured: index < 6,
         rating: 4.4 + Math.random() * 0.6,
         reviewCount: Math.floor(Math.random() * 150),
-        tags: ["herb", "culinary", "aromatic"],
+        tags: ["herb", "culinary", "aromatic", "medicinal"],
+        botanicalName: "Various species",
         difficulty: "Easy",
         sunRequirement: "Full Sun",
-        waterRequirement: "Regular"
+        waterRequirement: "Regular",
+        dimensions: "6-24 inches",
+        weight: 0.03 + Math.random() * 0.07
       });
     });
 
-    // Generate succulents
+    // Generate succulents (Category 12) - 25 products
     const succulents = [
       "Echeveria Blue Prince", "Jade Plant", "Aloe Vera", "String of Pearls",
       "Hens and Chicks", "Barrel Cactus", "Christmas Cactus", "Burro's Tail",
-      "Crown of Thorns", "Desert Rose"
+      "Crown of Thorns", "Desert Rose", "Echeveria Lola", "Jade Plant Gollum",
+      "Aloe Aristata", "String of Hearts", "Sempervivum Red Beauty", "Golden Barrel Cactus",
+      "Thanksgiving Cactus", "String of Bananas", "Euphorbia Milii", "Adenium Obesum",
+      "Sedum Morganianum", "Haworthia Zebra", "Crassula Ovata", "Senecio Rowleyanus", "Kalanchoe Blossfeldiana"
     ];
 
     succulents.forEach((name, index) => {
+      const images = imageCollections.succulents;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Low-maintenance ${name.toLowerCase()} perfect for beginners. Drought-tolerant and beautiful.`,
+        description: `Low-maintenance ${name.toLowerCase()} perfect for beginners. Drought-tolerant and beautiful succulent for indoor or outdoor growing.`,
         shortDescription: `Beautiful ${name.toLowerCase()} succulent`,
-        price: 8.99 + Math.random() * 25,
-        imageUrl: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&auto=format&fit=crop&q=80",
+        price: 8.99 + Math.random() * 30,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
         categoryId: 12,
-        sku: `SUC-${index + 70}-001`,
-        stock: 40 + Math.floor(Math.random() * 60),
-        featured: Math.random() > 0.9,
+        sku: `SUC-${String(index + 1).padStart(3, '0')}`,
+        stock: 20 + Math.floor(Math.random() * 40),
+        featured: index < 8,
         rating: 4.2 + Math.random() * 0.8,
         reviewCount: Math.floor(Math.random() * 120),
-        tags: ["succulent", "drought-tolerant", "low-maintenance"],
+        tags: ["succulent", "drought-tolerant", "low-maintenance", "decorative"],
+        botanicalName: "Various species",
         difficulty: "Easy",
         sunRequirement: "Bright Light",
-        waterRequirement: "Low"
+        waterRequirement: "Low",
+        dimensions: "2-12 inches",
+        weight: 0.5 + Math.random() * 2
       });
     });
 
-    // Generate fruit trees
+    // Generate fruit trees (Category 13) - 15 products
     const fruitTrees = [
       "Dwarf Apple Honeycrisp", "Dwarf Lemon Meyer", "Blueberry Patriot",
       "Fig Brown Turkey", "Pomegranate Red Silk", "Cherry Sweet Bing",
-      "Peach Elberta", "Pear Bartlett", "Plum Santa Rosa", "Grapevine Concord"
+      "Peach Elberta", "Pear Bartlett", "Plum Santa Rosa", "Grapevine Concord",
+      "Dwarf Orange Valencia", "Blueberry Bluecrop", "Fig Chicago Hardy",
+      "Cherry Montmorency", "Peach Red Haven"
     ];
 
     fruitTrees.forEach((name, index) => {
+      const images = imageCollections.fruitTrees;
+      const mainImage = images[index % images.length];
+      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Productive ${name.toLowerCase()} perfect for home orchards. Self-pollinating and container-friendly varieties available.`,
+        description: `Productive ${name.toLowerCase()} perfect for home orchards. Self-pollinating and container-friendly varieties available for fresh fruit harvest.`,
         shortDescription: `Productive ${name.toLowerCase()} tree`,
-        price: 39.99 + Math.random() * 80,
-        imageUrl: "https://images.unsplash.com/photo-1572915904405-c13b2eecfac7?w=800&auto=format&fit=crop&q=80",
+        price: 39.99 + Math.random() * 100,
+        comparePrice: index % 3 === 0 ? 59.99 + Math.random() * 40 : null,
+        imageUrl: mainImage,
+        imageUrls: galleryImages,
+        videoUrl: index % 5 === 0 ? videoUrls[index % videoUrls.length] : null,
         categoryId: 13,
-        sku: `FRUIT-${index + 80}-001`,
-        stock: 15 + Math.floor(Math.random() * 35),
-        featured: Math.random() > 0.7,
+        sku: `FRUIT-${String(index + 1).padStart(3, '0')}`,
+        stock: 5 + Math.floor(Math.random() * 25),
+        featured: index < 5,
         rating: 4.5 + Math.random() * 0.5,
         reviewCount: Math.floor(Math.random() * 100),
-        tags: ["fruit tree", "productive", "self-pollinating"],
+        tags: ["fruit tree", "productive", "self-pollinating", "container-friendly"],
+        botanicalName: "Various species",
         difficulty: "Intermediate",
         sunRequirement: "Full Sun",
-        waterRequirement: "Regular"
+        waterRequirement: "Regular",
+        dimensions: "4-8 feet",
+        weight: 5 + Math.random() * 15
       });
     });
 
-    // Generate fertilizers and soil amendments
+    // Generate fertilizers and soil amendments (Category 14/15) - 20 products
     const fertilizers = [
-      "All-Purpose Organic Compost", "Worm Castings", "Kelp Meal Fertilizer",
+      "All-Purpose Organic Compost", "Worm Castings Premium", "Kelp Meal Fertilizer",
       "Bone Meal Organic", "Fish Emulsion Liquid", "Bat Guano Fertilizer",
-      "Rock Phosphate", "Greensand Potassium", "Mycorrhizal Inoculant", "Azomite Trace Minerals"
+      "Rock Phosphate", "Greensand Potassium", "Mycorrhizal Inoculant", "Azomite Trace Minerals",
+      "Organic Potting Mix", "Cactus Soil Mix", "Seed Starting Mix", "Compost Tea Bags",
+      "Organic Plant Food", "Liquid Fertilizer Concentrate", "Slow Release Granules", "Soil Conditioner",
+      "Perlite Soil Amendment", "Vermiculite Growing Medium"
     ];
 
     fertilizers.forEach((name, index) => {
+      const images = imageCollections.fertilizers;
+      const mainImage = images[0]; // Use same image for all fertilizers
+      
       this.createProduct({
         name: name,
         slug: this.slugify(name),
-        description: `Premium ${name.toLowerCase()} for healthy plant growth. Organic and slow-release nutrition.`,
+        description: `Premium ${name.toLowerCase()} for healthy plant growth. Organic and slow-release nutrition for optimal garden performance.`,
         shortDescription: `Premium ${name.toLowerCase()}`,
-        price: 12.99 + Math.random() * 25,
-        imageUrl: "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80",
-        categoryId: 14,
-        sku: `FERT-${index + 90}-001`,
-        stock: 60 + Math.floor(Math.random() * 90),
-        featured: Math.random() > 0.85,
+        price: 12.99 + Math.random() * 35,
+        imageUrl: mainImage,
+        imageUrls: [mainImage],
+        categoryId: index < 10 ? 14 : 15, // Split between organic fertilizers (14) and soil (15)
+        sku: `FERT-${String(index + 1).padStart(3, '0')}`,
+        stock: 30 + Math.floor(Math.random() * 70),
+        featured: index < 4,
         rating: 4.3 + Math.random() * 0.7,
         reviewCount: Math.floor(Math.random() * 180),
-        tags: ["fertilizer", "organic", "slow-release"],
+        tags: ["fertilizer", "organic", "slow-release", "natural"],
         difficulty: "N/A",
         sunRequirement: "N/A",
-        waterRequirement: "N/A"
+        waterRequirement: "N/A",
+        dimensions: "Various sizes",
+        weight: 1 + Math.random() * 5
       });
     });
+
+    console.log(`Generated ${this.products.size} products with images and videos`);
   }
 
   private slugify(str: string): string {

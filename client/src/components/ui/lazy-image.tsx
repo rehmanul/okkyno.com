@@ -32,7 +32,13 @@ export function LazyImage({
     setIsLoading(false);
     setHasError(true);
     onError?.();
-  }, [onError]);
+    
+    // Try to reload the image with different parameters if it's an Unsplash URL
+    if (imgRef.current && src.includes('unsplash.com') && !hasError) {
+      const newSrc = src.includes('?') ? `${src}&retry=1` : `${src}?retry=1`;
+      imgRef.current.src = newSrc;
+    }
+  }, [onError, src, hasError]);
 
   // Intersection Observer for lazy loading
   const observerRef = useCallback((node: HTMLDivElement) => {
@@ -55,7 +61,7 @@ export function LazyImage({
       {isInView && (
         <img
           ref={imgRef}
-          src={hasError ? placeholder : src}
+          src={hasError ? placeholder : (src || placeholder)}
           alt={alt}
           onLoad={handleLoad}
           onError={handleError}
@@ -65,6 +71,7 @@ export function LazyImage({
           )}
           loading="lazy"
           decoding="async"
+          crossOrigin="anonymous"
         />
       )}
       
