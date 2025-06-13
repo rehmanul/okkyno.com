@@ -228,42 +228,76 @@ export class MemStorage implements IStorage {
         "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1543080917-8618c1dc2e85?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1574226516831-e1dff420e562?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=800&auto=format&fit=crop&q=80"
       ],
       plants: [
         "https://images.unsplash.com/photo-1586093021710-3c5dd9bd1e06?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1603436326446-e8beaa0c2956?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1618377531907-42e7e7a54e69?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1586093248106-bbf80d13b57f?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1617575250623-b5c7cce05b58?w=800&auto=format&fit=crop&q=80"
       ],
       tools: [
         "https://images.unsplash.com/photo-1589111118344-fe616859d7a7?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1598521112314-a9addabd2a2a?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1598521112314-a9addabd2a2a?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1558618666-5a006db2c7ad?w=800&auto=format&fit=crop&q=80"
       ],
       flowers: [
         "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1463554050456-f2ed7d3fec09?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1522049007011-a34e2ed7e635?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80"
       ],
       planters: [
         "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1502394202744-021cfbb17454?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1502394202744-021cfbb17454?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1558618666-5a006db2c7ad?w=800&auto=format&fit=crop&q=80"
       ],
       herbs: [
         "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1521944521548-a8ed0caa8f38?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1521944521548-a8ed0caa8f38?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1506142439521-10db0e7b2caa?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1628017725085-7b54b9b5b53a?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1533454947737-5e47f7e6c7b2?w=800&auto=format&fit=crop&q=80"
       ],
       succulents: [
         "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1508022152233-9254631e31d1?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1508022152233-9254631e31d1?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1606305030704-aa9145b2bcb8?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1526136834165-6b4d6ad9b17b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1558647899-de79cfef9448?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1558631047-9d9a4e7a9b11?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1536431311719-398b6704d4cc?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1598192957734-8e6b7c7c1e6a?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1541014741259-de529411b96a?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1551204078-6b3e5d0bb85e?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1494943611983-95c2206ece28?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1462039267831-5346cf7d4985?w=800&auto=format&fit=crop&q=80"
       ],
       fruitTrees: [
         "https://images.unsplash.com/photo-1572915904405-c13b2eecfac7?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1549923818-8d9b7b8b7ebe?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1598632640086-b5293b83b64c?w=800&auto=format&fit=crop&q=80"
       ],
       fertilizers: [
-        "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1524930425341-b2eac4b6e7e4?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1458245914173-7dce38e1edbe?w=800&auto=format&fit=crop&q=80"
       ]
     };
 
@@ -290,7 +324,11 @@ export class MemStorage implements IStorage {
     vegetableProducts.forEach((name, index) => {
       const images = imageCollections.vegetables;
       const mainImage = images[index % images.length];
-      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      const galleryImages = [
+        mainImage, 
+        images[(index + 2) % images.length], 
+        images[(index + 4) % images.length]
+      ];
       
       this.createProduct({
         name: `${name} Seeds`,
@@ -331,7 +369,11 @@ export class MemStorage implements IStorage {
     indoorPlants.forEach((name, index) => {
       const images = imageCollections.plants;
       const mainImage = images[index % images.length];
-      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      const galleryImages = [
+        mainImage, 
+        images[(index + 2) % images.length], 
+        images[(index + 3) % images.length]
+      ];
       
       this.createProduct({
         name: name,
@@ -412,7 +454,11 @@ export class MemStorage implements IStorage {
     flowers.forEach((name, index) => {
       const images = imageCollections.flowers;
       const mainImage = images[index % images.length];
-      const galleryImages = [mainImage, images[(index + 1) % images.length], images[(index + 2) % images.length]];
+      const galleryImages = [
+        mainImage, 
+        images[(index + 2) % images.length], 
+        images[(index + 3) % images.length]
+      ];
       
       this.createProduct({
         name: `${name} Seeds`,
@@ -529,8 +575,10 @@ export class MemStorage implements IStorage {
 
     succulents.forEach((name, index) => {
       const images = imageCollections.succulents;
+      // Ensure each succulent gets a unique image by using index directly
       const mainImage = images[index % images.length];
-      const galleryImages = [mainImage, images[(index + 1) % images.length]];
+      const secondaryImage = images[(index + 3) % images.length]; // Offset to avoid consecutive images
+      const galleryImages = [mainImage, secondaryImage];
       
       this.createProduct({
         name: name,
