@@ -71,9 +71,11 @@ function Router() {
 
       {/* Admin routes - AdminLayout handles access control */}
       <Route path="/admin" component={AdminDashboardPage} />
-      <Route path="/admin/products" component={AdminProductsPage} />
-      <Route path="/admin/blog" component={AdminBlogsPage} />
+      <Route path="/admin/products" component={() => import('./pages/AdminProductsListPage').then(m => m.default)} />
+      <Route path="/admin/products/add" component={() => import('./pages/admin/add-product').then(m => m.default)} />
+      <Route path="/admin/products/edit/:id" component={AdminProductsPage} />
       <Route path="/admin/orders" component={AdminOrdersPage} />
+      <Route path="/admin/blogs" component={AdminBlogsPage} />
 
       {/* Fallback to 404 */}
       <Route component={NotFound} />
