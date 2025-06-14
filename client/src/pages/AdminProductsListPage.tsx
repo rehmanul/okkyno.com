@@ -177,7 +177,7 @@ export default function AdminProductsListPage() {
                   <SelectValue placeholder="All" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All</SelectItem>
+                  <SelectItem value="all">All</SelectItem>
                   <SelectItem value="in-stock">In Stock</SelectItem>
                   <SelectItem value="out-of-stock">Out of Stock</SelectItem>
                 </SelectContent>
