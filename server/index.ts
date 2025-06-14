@@ -1,5 +1,5 @@
-
 import express, { type Request, Response, NextFunction } from "express";
+import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic } from "./vite";
 import { log } from "./log";
@@ -16,6 +16,7 @@ app.use((req, _res, next) => {
   req.cookies = header ? cookie.parse(header) : {};
   next();
 });
+app.use(cookieParser());
 
 // Export a function that creates an Express app for Netlify functions
 export function createRequestHandler() {
@@ -77,7 +78,7 @@ app.get("/api/health", (req, res) => {
     } else {
       serveStatic(app);
     }
-    
+
     // ALWAYS serve the app on port 5000
     // this serves both the API and the client.
     // It is the only port that is not firewalled.
@@ -93,4 +94,3 @@ app.get("/api/health", (req, res) => {
     process.exit(1);
   }
 })();
-                  

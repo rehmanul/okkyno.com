@@ -17,6 +17,23 @@ import {
   insertCartItemSchema
 } from "@shared/schema";
 
+// Simple in-memory session store (in production, use Redis or database)
+const sessions = new Map<string, any>();
+
+function createSession(user: any): string {
+  const sessionId = nanoid();
+  sessions.set(sessionId, user);
+  return sessionId;
+}
+
+function getSessionUser(sessionId: string): any {
+  return sessions.get(sessionId);
+}
+
+function deleteSession(sessionId: string): void {
+  sessions.delete(sessionId);
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Helper function to handle validation errors
   const validateRequest = (schema: any, data: any) => {
@@ -48,6 +65,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     const user = await storage.createUser(data);
     
+    // Create session
+    const sessionId = createSession(user);
+    
+    // Set session cookie
+    res.cookie("sessionId", sessionId, { 
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    });
+    
     // Remove password from response
     const { password, ...userWithoutPassword } = user;
     res.status(201).json(userWithoutPassword);
@@ -65,16 +91,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(401).json({ error: "Invalid username or password" });
     }
 
-    // In a real app, we would use proper authentication with tokens
-    // For this demo, we'll just return the user info without password
+    // Create session
+    const sessionId = createSession(user);
+    
+    // Set session cookie
+    res.cookie("sessionId", sessionId, { 
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    });
+
+    // Return user info without password
     const { password: _, ...userWithoutPassword } = user;
     res.json(userWithoutPassword);
   });
 
+  app.post("/api/users/logout", async (req: Request, res: Response) => {
+    const sessionId = req.cookies?.sessionId;
+    if (sessionId) {
+      deleteSession(sessionId);
+      res.clearCookie("sessionId");
+    }
+    res.json({ message: "Logged out successfully" });
+  });
+
   app.get("/api/users/me", async (req: Request, res: Response) => {
-    // In a real app, you would verify JWT token here
-    // For demo purposes, we'll just return null (not authenticated)
-    res.json(null);
+    // Get session ID from cookies
+    const sessionId = req.cookies?.sessionId;
+    if (!sessionId) {
+      return res.json(null);
+    }
+
+    // In a real app, you would store sessions in a database
+    // For demo purposes, we'll use a simple in-memory store
+    const user = getSessionUser(sessionId);
+    if (!user) {
+      return res.json(null);
+    }
+
+    // Remove password from response
+    const { password, ...userWithoutPassword } = user;
+    res.json(userWithoutPassword);
   });
 
   // ===== Category Routes =====
