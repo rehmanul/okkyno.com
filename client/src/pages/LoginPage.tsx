@@ -82,18 +82,6 @@ export default function LoginPage() {
           title: "Login Successful",
           description: "Welcome back!",
         });
-        
-        // Check user role from login response for immediate redirect
-        // Wait a moment for the login to be processed, then redirect
-        setTimeout(() => {
-          if (userData && userData.role === "admin") {
-            setLocation("/admin");
-          } else {
-            setLocation("/");
-          }
-        }, 100);
-          setTimeout(() => setLocation("/"), 1500);
-        }
       } else {
         toast({
           variant: "destructive",
