@@ -18,6 +18,7 @@ import ShippingPolicyPage from "@/pages/ShippingPolicyPage";
 import ReturnPolicyPage from "@/pages/ReturnPolicyPage";
 import AdminDashboardPage from "@/pages/AdminDashboardPage";
 import AdminProductsPage from "@/pages/AdminProductsPage";
+import AdminProductsListPage from "@/pages/AdminProductsListPage";
 import AdminBlogsPage from "@/pages/AdminBlogsPage";
 import AdminOrdersPage from "@/pages/AdminOrdersPage";
 import Header from "@/components/layout/header";
@@ -45,7 +46,7 @@ function ScrollToTop() {
 
 function Router() {
   const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user && user.role === "admin";
 
   return (
     <>
@@ -71,8 +72,11 @@ function Router() {
 
       {/* Admin routes - AdminLayout handles access control */}
       <Route path="/admin" component={AdminDashboardPage} />
-      <Route path="/admin/products" component={() => import('./pages/AdminProductsListPage').then(m => m.default)} />
-      <Route path="/admin/products/add" component={() => import('./pages/admin/add-product').then(m => m.default)} />
+      <Route path="/admin/products" component={AdminProductsListPage} />
+      <Route path="/admin/products/add" component={() => {
+        const AddProductPage = require('./pages/admin/add-product').default;
+        return AddProductPage;
+      }} />
       <Route path="/admin/products/edit/:id" component={AdminProductsPage} />
       <Route path="/admin/orders" component={AdminOrdersPage} />
       <Route path="/admin/blogs" component={AdminBlogsPage} />
