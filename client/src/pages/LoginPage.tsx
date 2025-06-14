@@ -87,14 +87,20 @@ export default function LoginPage() {
         try {
           const response = await fetch("/api/users/me");
           if (response.ok) {
-            const userData = await response.json();
-            setTimeout(() => {
-              if (userData.role === "admin") {
-                setLocation("/admin");
-              } else {
-                setLocation("/");
-              }
-            }, 1500);
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+              const userData = await response.json();
+              setTimeout(() => {
+                if (userData && userData.role === "admin") {
+                  setLocation("/admin");
+                } else {
+                  setLocation("/");
+                }
+              }, 1500);
+            } else {
+              // Not JSON response, fallback redirect
+              setTimeout(() => setLocation("/"), 1500);
+            }
           }
         } catch {
           // Fallback redirect to home
