@@ -80,10 +80,10 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href={user ? "/account" : "/login"} className="text-sm hover:text-secondary transition">
+            <Link href={user ? (user.role === "admin" ? "/admin" : "/account") : "/login"} className="text-sm hover:text-secondary transition">
               <span className="flex items-center">
                 <User size={16} className="mr-1" />
-                <span className="hidden md:inline">{user ? 'Account' : 'Sign In'}</span>
+                <span className="hidden md:inline">{user ? (user.role === "admin" ? 'Dashboard' : 'Account') : 'Sign In'}</span>
               </span>
             </Link>
             <Link href="/cart" className="text-sm hover:text-secondary transition relative">

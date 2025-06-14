@@ -21,6 +21,7 @@ import AdminProductsPage from "@/pages/AdminProductsPage";
 import AdminProductsListPage from "@/pages/AdminProductsListPage";
 import AdminBlogsPage from "@/pages/AdminBlogsPage";
 import AdminOrdersPage from "@/pages/AdminOrdersPage";
+import AccountPage from "@/pages/AccountPage";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import PromotionalPopup from "@/components/PromotionalPopup";
@@ -62,6 +63,7 @@ function Router() {
       <Route path="/cart" component={CartPage} />
       <Route path="/checkout" component={CheckoutPage} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/account" component={AccountPage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/faq" component={FAQPage} />
