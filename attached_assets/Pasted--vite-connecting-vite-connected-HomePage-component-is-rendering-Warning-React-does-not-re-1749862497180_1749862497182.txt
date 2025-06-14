@@ -1,0 +1,61 @@
+[vite] connecting...
+[vite] connected.
+HomePage component is rendering
+Warning: React does not recognize the &#x60;isCurrentPage&#x60; prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase &#x60;iscurrentpage&#x60; instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at a
+    at _c7 (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/ui/breadcrumb.tsx:71:50)
+    at li
+    at _c5 (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/ui/breadcrumb.tsx:52:12)
+    at nav
+    at _c (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/ui/breadcrumb.tsx:21:48)
+    at main
+    at BlogPage
+    at Route (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:206:16)
+    at Switch (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:262:17)
+    at Router (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/App.tsx?v=ZWI1OXm2hHKEfjxhVyQQj:65:20)
+    at SearchProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/SearchContext.tsx:20:34)
+    at CartProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/CartContext.tsx:21:32)
+    at AuthProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/AuthContext.tsx:20:32)
+    at QueryClientProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=1c7313b6:2932:3)
+    at App
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:220:18
+    at article
+    at BlogCard (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/blog/BlogCard.tsx:20:36)
+    at div
+    at div
+    at BlogGrid (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/blog/BlogGrid.tsx:28:41)
+    at main
+    at BlogPage
+    at Route (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:206:16)
+    at Switch (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:262:17)
+    at Router (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/App.tsx?v=ZWI1OXm2hHKEfjxhVyQQj:65:20)
+    at SearchProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/SearchContext.tsx:20:34)
+    at CartProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/CartContext.tsx:21:32)
+    at AuthProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/AuthContext.tsx:20:32)
+    at QueryClientProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=1c7313b6:2932:3)
+    at App
+at a
+at a
+at https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:220:18
+at article
+at BlogCard (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/blog/BlogCard.tsx:20:36)
+at div
+at div
+at BlogGrid (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/components/blog/BlogGrid.tsx:28:41)
+at main
+at BlogPage
+at Route (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:206:16)
+at Switch (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=1c7313b6:262:17)
+at Router (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/App.tsx?v=ZWI1OXm2hHKEfjxhVyQQj:65:20)
+at SearchProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/SearchContext.tsx:20:34)
+at CartProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/CartContext.tsx:21:32)
+at AuthProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/src/context/AuthContext.tsx:20:32)
+at QueryClientProvider (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=1c7313b6:2932:3)
+at App
+at t.value (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://dad32f14-dd89-44ec-b82d-c3f01e3d1e11-00-1csrn7s7z5g69.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400

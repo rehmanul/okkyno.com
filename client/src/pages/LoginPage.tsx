@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -36,7 +37,8 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<string>("login");
   const { toast } = useToast();
-  const { login, register } = useAuth();
+  const { login, register, user } = useAuth();
+  const [, setLocation] = useLocation();
 
   // Login form
   const loginForm = useForm<LoginFormValues>({
@@ -69,6 +71,24 @@ export default function LoginPage() {
           title: "Login Successful",
           description: "Welcome back!",
         });
+        
+        // Check user role from login response for immediate redirect
+        try {
+          const response = await fetch("/api/users/me");
+          if (response.ok) {
+            const userData = await response.json();
+            setTimeout(() => {
+              if (userData.role === "admin") {
+                setLocation("/admin");
+              } else {
+                setLocation("/");
+              }
+            }, 1500);
+          }
+        } catch {
+          // Fallback redirect to home
+          setTimeout(() => setLocation("/"), 1500);
+        }
       } else {
         toast({
           variant: "destructive",

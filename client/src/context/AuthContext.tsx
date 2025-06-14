@@ -70,15 +70,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (contentType && contentType.includes("application/json")) {
           const userData = await response.json();
           setUser(userData);
+          setIsLoading(false);
           return true;
         }
       }
+      setIsLoading(false);
       return false;
     } catch (error) {
       console.error("Login failed:", error);
-      return false;
-    } finally {
       setIsLoading(false);
+      return false;
     }
   };
 
