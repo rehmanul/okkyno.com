@@ -84,26 +84,14 @@ export default function LoginPage() {
         });
         
         // Check user role from login response for immediate redirect
-        try {
-          const response = await fetch("/api/users/me");
-          if (response.ok) {
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-              const userData = await response.json();
-              setTimeout(() => {
-                if (userData && userData.role === "admin") {
-                  setLocation("/admin");
-                } else {
-                  setLocation("/");
-                }
-              }, 1500);
-            } else {
-              // Not JSON response, fallback redirect
-              setTimeout(() => setLocation("/"), 1500);
-            }
+        // Wait a moment for the login to be processed, then redirect
+        setTimeout(() => {
+          if (userData && userData.role === "admin") {
+            setLocation("/admin");
+          } else {
+            setLocation("/");
           }
-        } catch {
-          // Fallback redirect to home
+        }, 100);
           setTimeout(() => setLocation("/"), 1500);
         }
       } else {

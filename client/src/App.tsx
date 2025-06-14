@@ -69,15 +69,11 @@ function Router() {
       <Route path="/shipping-policy" component={ShippingPolicyPage} />
       <Route path="/return-policy" component={ReturnPolicyPage} />
 
-      {/* Admin routes - only accessible if user is admin */}
-      {isAdmin && (
-        <>
-          <Route path="/admin" component={AdminDashboardPage} />
-          <Route path="/admin/products" component={AdminProductsPage} />
-          <Route path="/admin/blog" component={AdminBlogsPage} />
-          <Route path="/admin/orders" component={AdminOrdersPage} />
-        </>
-      )}
+      {/* Admin routes - AdminLayout handles access control */}
+      <Route path="/admin" component={AdminDashboardPage} />
+      <Route path="/admin/products" component={AdminProductsPage} />
+      <Route path="/admin/blog" component={AdminBlogsPage} />
+      <Route path="/admin/orders" component={AdminOrdersPage} />
 
       {/* Fallback to 404 */}
       <Route component={NotFound} />
