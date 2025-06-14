@@ -3,33 +3,44 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import ProductForm from "@/components/admin/ProductForm";
 
 export default function AdminProductsPage() {
-  // Route matching for edit view
+  // Route matching for different views
+  const [addMatch] = useRoute("/admin/products/add");
   const [editMatch, editParams] = useRoute("/admin/products/edit/:id");
 
-  // If we're on the edit route, render the ProductForm with the product ID
-  if (editMatch && editParams?.id) {
-    const productId = parseInt(editParams.id);
-    if (isNaN(productId)) {
-      return (
-        <AdminLayout title="Error">
-          <div className="p-6">
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-red-600 mb-4">Invalid Product ID</h1>
-              <p>The product ID provided is not valid.</p>
-            </div>
-          </div>
-        </AdminLayout>
-      );
+  // Determine which component to render based on the route
+  const renderContent = () => {
+    if (addMatch) {
+      return <ProductForm />;
     }
-    return (
-      <AdminLayout title="Edit Product">
-        <ProductForm productId={productId} />
-      </AdminLayout>
-    );
-  }
 
-  // Default: redirect to the main products page
-  // This shouldn't happen as we have separate routes, but just in case
-  window.location.href = '/admin/products';
-  return null;
+    if (editMatch && editParams?.id) {
+      const productId = parseInt(editParams.id);
+      if (isNaN(productId)) {
+        return <div>Invalid product ID</div>;
+      }
+      return <ProductForm productId={productId} />;
+    }
+
+    // Fallback
+    return <div>Invalid route</div>;
+  };
+
+  // Determine page title based on the route
+  const getPageTitle = () => {
+    if (addMatch) {
+      return "Add New Product";
+    }
+
+    if (editMatch) {
+      return "Edit Product";
+    }
+
+    return "Product";
+  };
+
+  return (
+    <AdminLayout title={getPageTitle()}>
+      {renderContent()}
+    </AdminLayout>
+  );
 }

@@ -73,13 +73,12 @@ function Router() {
       {/* Admin routes - AdminLayout handles access control */}
       <Route path="/admin" component={AdminDashboardPage} />
       <Route path="/admin/products" component={AdminProductsListPage} />
-      <Route path="/admin/products/add" component={() => {
-        const AddProductPage = require('./pages/admin/add-product').default;
-        return <AddProductPage />;
-      }} />
+      <Route path="/admin/products/add" component={AdminProductsPage} />
       <Route path="/admin/products/edit/:id" component={AdminProductsPage} />
       <Route path="/admin/orders" component={AdminOrdersPage} />
-      <Route path="/admin/blogs" component={AdminBlogsPage} />
+      <Route path="/admin/blog" component={AdminBlogsPage} />
+      <Route path="/admin/blog/new" component={AdminBlogsPage} />
+      <Route path="/admin/blog/edit/:id" component={AdminBlogsPage} />
 
       {/* Fallback to 404 */}
       <Route component={NotFound} />

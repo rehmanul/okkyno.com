@@ -40,17 +40,18 @@ const BreadcrumbItem = React.forwardRef<
 BreadcrumbItem.displayName = "BreadcrumbItem"
 
 const BreadcrumbLink = React.forwardRef<
-  HTMLAnchorElement,
+  React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & {
     asChild?: boolean
+    isCurrentPage?: boolean
   }
->(({ asChild, className, ...props }, ref) => {
+>(({ asChild, isCurrentPage, ...props }, ref) => {
   const Comp = asChild ? Slot : "a"
 
   return (
     <Comp
       ref={ref}
-      className={cn("transition-colors hover:text-foreground", className)}
+      className={cn("transition-colors hover:text-foreground", props.className)}
       {...props}
     />
   )
