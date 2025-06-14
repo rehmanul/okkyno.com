@@ -127,6 +127,13 @@ Okkyno.com is a comprehensive e-commerce platform specializing in gardening supp
 
 ```
 Changelog:
+- June 14, 2025. Migration completed from Replit Agent to Replit environment
+  - 190 products with authentic Unsplash images across 8 categories
+  - Fixed data consistency issues (no more mismatched images)
+  - Admin authentication system working (admin/admin123)
+  - Auto-redirect to /admin dashboard for admin users
+  - Video content integrated for featured products
+  - Complete e-commerce functionality operational
 - June 13, 2025. Initial setup
 ```
 

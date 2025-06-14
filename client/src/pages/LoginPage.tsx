@@ -40,6 +40,17 @@ export default function LoginPage() {
   const { login, register, user } = useAuth();
   const [, setLocation] = useLocation();
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      if (user.role === "admin") {
+        setLocation("/admin");
+      } else {
+        setLocation("/");
+      }
+    }
+  }, [user, setLocation]);
+
   // Login form
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
