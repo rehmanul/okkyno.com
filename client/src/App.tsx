@@ -75,7 +75,7 @@ function Router() {
       <Route path="/admin/products" component={AdminProductsListPage} />
       <Route path="/admin/products/add" component={() => {
         const AddProductPage = require('./pages/admin/add-product').default;
-        return AddProductPage;
+        return <AddProductPage />;
       }} />
       <Route path="/admin/products/edit/:id" component={AdminProductsPage} />
       <Route path="/admin/orders" component={AdminOrdersPage} />

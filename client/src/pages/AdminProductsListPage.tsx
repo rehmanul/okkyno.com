@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/admin/AdminLayout";
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
@@ -44,14 +43,14 @@ export default function AdminProductsListPage() {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
-  
+
   const productsPerPage = 10;
-  
+
   // Set page title
   useEffect(() => {
     document.title = "Manage Products - Okkyno Admin";
   }, []);
-  
+
   // Fetch products
   const { data: allProducts, isLoading } = useQuery({
     queryKey: ['/api/products/admin'],
@@ -59,26 +58,26 @@ export default function AdminProductsListPage() {
       return generateProducts();
     }
   });
-  
+
   // Apply filters and search
   const filteredProducts = allProducts?.filter(product => {
     if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
       return false;
     }
-    
+
     if (categoryFilter && categoryFilter !== "all") {
       if (categoryFilter === "garden-tools" && product.categoryId !== 1) return false;
       if (categoryFilter === "indoor-plants" && product.categoryId !== 2) return false;
       if (categoryFilter === "vegetable-seeds" && product.categoryId !== 3) return false;
       if (categoryFilter === "planters-pots" && product.categoryId !== 4) return false;
     }
-    
+
     if (stockFilter === "in-stock" && !product.inStock) return false;
     if (stockFilter === "out-of-stock" && product.inStock) return false;
-    
+
     return true;
   });
-  
+
   // Apply sorting
   const sortedProducts = filteredProducts?.slice().sort((a, b) => {
     if (sortBy === "name") {
@@ -92,25 +91,25 @@ export default function AdminProductsListPage() {
     }
     return 0;
   });
-  
+
   // Paginate products
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = sortedProducts?.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = sortedProducts ? Math.ceil(sortedProducts.length / productsPerPage) : 0;
-  
+
   const openDeleteDialog = (productId: number) => {
     setSelectedProductId(productId);
     setIsDeleteDialogOpen(true);
   };
-  
+
   const handleDeleteProduct = async () => {
     if (!selectedProductId) return;
-    
+
     try {
       await apiRequest('DELETE', `/api/products/${selectedProductId}`);
       queryClient.invalidateQueries({ queryKey: ['/api/products/admin'] });
-      
+
       toast({
         title: "Product deleted",
         description: "The product has been successfully deleted.",
@@ -122,11 +121,11 @@ export default function AdminProductsListPage() {
         variant: "destructive"
       });
     }
-    
+
     setIsDeleteDialogOpen(false);
     setSelectedProductId(null);
   };
-  
+
   return (
     <AdminLayout title="Products">
       <div className="p-6">
@@ -138,7 +137,7 @@ export default function AdminProductsListPage() {
             </Button>
           </Link>
         </div>
-        
+
         {/* Filters */}
         <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -154,7 +153,7 @@ export default function AdminProductsListPage() {
                 <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               </div>
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-1 block">Category</label>
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
@@ -170,7 +169,7 @@ export default function AdminProductsListPage() {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-1 block">Stock Status</label>
               <Select value={stockFilter} onValueChange={setStockFilter}>
@@ -184,7 +183,7 @@ export default function AdminProductsListPage() {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-1 block">Sort By</label>
               <Select value={sortBy} onValueChange={setSortBy}>
@@ -201,7 +200,7 @@ export default function AdminProductsListPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Products List */}
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           {isLoading ? (
@@ -313,7 +312,7 @@ export default function AdminProductsListPage() {
                   </tbody>
                 </table>
               </div>
-              
+
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex justify-between items-center px-4 py-4 border-t">
@@ -329,7 +328,7 @@ export default function AdminProductsListPage() {
                     >
                       <FaChevronLeft className="text-xs" />
                     </Button>
-                    
+
                     {Array.from({ length: totalPages }).map((_, index) => (
                       <Button
                         key={index}
@@ -340,7 +339,7 @@ export default function AdminProductsListPage() {
                         {index + 1}
                       </Button>
                     ))}
-                    
+
                     <Button
                       variant="outline"
                       size="sm"
@@ -356,7 +355,7 @@ export default function AdminProductsListPage() {
           )}
         </div>
       </div>
-      
+
       {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
