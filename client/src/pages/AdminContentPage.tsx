@@ -26,7 +26,7 @@ export default function AdminContentPage() {
 
   // Start Epic Gardening import
   const startImportMutation = useMutation({
-    mutationFn: () => apiRequest('POST', '/api/scrape/epic-gardening'),
+    mutationFn: () => apiRequest('POST', '/api/scrape/comprehensive-epic'),
     onSuccess: () => {
       setIsImporting(true);
       toast({

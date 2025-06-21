@@ -7,6 +7,9 @@ import { fromZodError } from "zod-validation-error";
 import { EpicGardeningScraper } from "./scraper";
 import { EpicGardeningScraperV2 } from "./epic-scraper-v2";
 import { importEpicGardeningContent } from "./import-epic-content";
+import { ComprehensiveEpicScraper } from "./comprehensive-epic-scraper";
+import { AggressiveEpicScraper } from "./aggressive-epic-scraper";
+import { completeEpicGardeningImport } from "./complete-epic-import";
 
 import {
   insertUserSchema,
@@ -690,6 +693,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to import Epic content:", error);
       res.status(500).json({ error: "Failed to import Epic Gardening content" });
+    }
+  });
+
+  // Comprehensive Epic Gardening scraper
+  app.post("/api/scrape/comprehensive-epic", async (req: Request, res: Response) => {
+    try {
+      res.json({ message: "Comprehensive Epic Gardening scraping started", status: "initiated" });
+      
+      // Run comprehensive scraping in background
+      const comprehensiveScraper = new ComprehensiveEpicScraper();
+      comprehensiveScraper.fullScrapeAndImport().catch(error => {
+        console.error("Comprehensive scraping failed:", error);
+      });
+      
+    } catch (error) {
+      console.error("Failed to start comprehensive scraping:", error);
+      res.status(500).json({ error: "Failed to start comprehensive scraping" });
+    }
+  });
+
+  // Aggressive Epic Gardening content cloner
+  app.post("/api/clone/epic-complete", async (req: Request, res: Response) => {
+    try {
+      res.json({ message: "Complete Epic Gardening clone initiated", status: "started" });
+      
+      // Run aggressive cloning in background
+      const aggressiveScraper = new AggressiveEpicScraper();
+      aggressiveScraper.fullContentClone().catch(error => {
+        console.error("Aggressive cloning failed:", error);
+      });
+      
+    } catch (error) {
+      console.error("Failed to start aggressive cloning:", error);
+      res.status(500).json({ error: "Failed to start complete cloning" });
+    }
+  });
+
+  // Complete Epic Gardening import
+  app.post("/api/import/complete-epic", async (req: Request, res: Response) => {
+    try {
+      const result = await completeEpicGardeningImport();
+      res.json(result);
+    } catch (error) {
+      console.error("Failed to complete Epic import:", error);
+      res.status(500).json({ error: "Failed to complete Epic Gardening import" });
     }
   });
 
