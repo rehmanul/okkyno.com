@@ -22,8 +22,13 @@ import {
   Wand2,
   Eye,
   RefreshCw,
-  Store,
-  Palette
+  Palette,
+  Store, 
+  Users, 
+  Package, 
+  FileText, 
+  Trash2, 
+  EyeOff
 } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
