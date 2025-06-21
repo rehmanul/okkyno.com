@@ -5,6 +5,8 @@ import { nanoid } from "nanoid";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { EpicGardeningScraper } from "./scraper";
+import { EpicGardeningScraperV2 } from "./epic-scraper-v2";
+import { importEpicGardeningContent } from "./import-epic-content";
 
 import {
   insertUserSchema,
@@ -656,6 +658,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to start scraping:", error);
       res.status(500).json({ error: "Failed to start scraping process" });
+    }
+  });
+
+  // Improved Epic Gardening scraper endpoint
+  app.post("/api/scrape/epic-gardening-v2", async (req: Request, res: Response) => {
+    try {
+      res.json({ message: "Enhanced Epic Gardening import started", status: "initiated" });
+      
+      // Run improved scraping in background
+      const scraperV2 = new EpicGardeningScraperV2();
+      scraperV2.fullImport().catch(error => {
+        console.error("Enhanced scraping failed:", error);
+      });
+      
+    } catch (error) {
+      console.error("Failed to start enhanced scraping:", error);
+      res.status(500).json({ error: "Failed to start enhanced scraping process" });
+    }
+  });
+
+  // Direct Epic Gardening content import
+  app.post("/api/import/epic-content", async (req: Request, res: Response) => {
+    try {
+      const result = await importEpicGardeningContent();
+      res.json({ 
+        message: "Epic Gardening content imported successfully", 
+        status: "completed",
+        imported: result
+      });
+    } catch (error) {
+      console.error("Failed to import Epic content:", error);
+      res.status(500).json({ error: "Failed to import Epic Gardening content" });
     }
   });
 
