@@ -7,7 +7,8 @@ import {
   User, 
   Settings, 
   LogOut, 
-  ChevronRight
+  ChevronRight,
+  Globe
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -68,6 +69,11 @@ export default function Sidebar({ className }: SidebarProps) {
       href: "/admin/orders",
       icon: <ShoppingCart className="h-5 w-5" />,
       title: "Orders"
+    },
+    {
+      href: "/admin/content",
+      icon: <Globe className="h-5 w-5" />,
+      title: "Content Management"
     },
     {
       href: "/admin/customers",

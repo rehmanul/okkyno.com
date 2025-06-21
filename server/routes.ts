@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { nanoid } from "nanoid";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { EpicGardeningScraper } from "./scraper";
 
 import {
   insertUserSchema,
@@ -639,6 +640,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     await storage.clearCart(sessionId);
     res.status(204).end();
+  });
+
+  // Epic Gardening scraper endpoint
+  app.post("/api/scrape/epic-gardening", async (req: Request, res: Response) => {
+    try {
+      res.json({ message: "Scraping started in background", status: "initiated" });
+      
+      // Run scraping in background
+      const scraper = new EpicGardeningScraper();
+      scraper.scrapeAndImport().catch(error => {
+        console.error("Background scraping failed:", error);
+      });
+      
+    } catch (error) {
+      console.error("Failed to start scraping:", error);
+      res.status(500).json({ error: "Failed to start scraping process" });
+    }
+  });
+
+  // Get scraping status (simple implementation)
+  let scrapingStatus = { isRunning: false, lastRun: null, itemsImported: 0 };
+  
+  app.get("/api/scrape/status", async (req: Request, res: Response) => {
+    res.json(scrapingStatus);
   });
 
   // Create the server
