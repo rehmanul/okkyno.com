@@ -1,12 +1,11 @@
-
 import { useState, useEffect } from "react";
-import { X, Sparkles, Gift, Timer, Leaf } from "lucide-react";
+import { X, Sparkles, Gift, Timer, Leaf, Check, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export default function PromotionalPopup() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 45 });
 
   useEffect(() => {
@@ -36,6 +35,15 @@ export default function PromotionalPopup() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleClose = () => {
+    setIsVisible(false);
+  };
+
+  const handleShopNow = () => {
+    setIsVisible(false);
+    // Add your shop now logic here
+  };
+
   if (!isVisible) return null;
 
   return (
@@ -45,7 +53,7 @@ export default function PromotionalPopup() {
         <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 opacity-80" />
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-green-100 rounded-full opacity-60" />
         <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-emerald-100 rounded-full opacity-60" />
-        
+
         {/* Close Button */}
         <Button
           variant="ghost"

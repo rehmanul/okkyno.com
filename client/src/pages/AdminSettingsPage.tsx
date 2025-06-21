@@ -21,7 +21,9 @@ import {
   Save,
   Wand2,
   Eye,
-  RefreshCw
+  RefreshCw,
+  Store,
+  Palette
 } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -288,14 +290,15 @@ export default function AdminSettingsPage() {
         </div>
 
         <Tabs defaultValue="general" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="store">Store</TabsTrigger>
             <TabsTrigger value="email">Email</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
             <TabsTrigger value="seo">SEO</TabsTrigger>
+            <TabsTrigger value="appearance">Appearance</TabsTrigger>
             <TabsTrigger value="features">Features</TabsTrigger>
-          <TabsTrigger value="ai">AI & Images</TabsTrigger>
+            <TabsTrigger value="ai">AI & Images</TabsTrigger>
         </TabsList>
 
           {/* General Settings */}

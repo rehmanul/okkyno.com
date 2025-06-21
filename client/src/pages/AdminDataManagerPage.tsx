@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -67,7 +66,7 @@ export default function AdminDataManagerPage() {
 
     try {
       const data = JSON.parse(importData);
-      
+
       // Validate data structure
       if (type === 'products' && !data.products) {
         throw new Error('Invalid format: Expected "products" array');
@@ -78,7 +77,7 @@ export default function AdminDataManagerPage() {
 
       // Import data based on type
       let importPromises: Promise<any>[] = [];
-      
+
       if (type === 'products' && data.products) {
         importPromises = data.products.map((product: any) => 
           apiRequest('POST', '/api/products', product)
