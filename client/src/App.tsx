@@ -21,6 +21,8 @@ import AdminProductsPage from "@/pages/AdminProductsPage";
 import AdminProductsListPage from "@/pages/AdminProductsListPage";
 import AdminBlogsPage from "@/pages/AdminBlogsPage";
 import AdminOrdersPage from "@/pages/AdminOrdersPage";
+import AdminCustomersPage from "@/pages/AdminCustomersPage";
+import AdminSettingsPage from "@/pages/AdminSettingsPage";
 import AdminContentPage from "@/pages/AdminContentPage";
 import AccountPage from "@/pages/AccountPage";
 import Header from "@/components/layout/header";
@@ -79,6 +81,8 @@ function Router() {
       <Route path="/admin/products/add" component={AdminProductsPage} />
       <Route path="/admin/products/edit/:id" component={AdminProductsPage} />
       <Route path="/admin/orders" component={AdminOrdersPage} />
+      <Route path="/admin/customers" component={AdminCustomersPage} />
+      <Route path="/admin/settings" component={AdminSettingsPage} />
       <Route path="/admin/blog" component={AdminBlogsPage} />
       <Route path="/admin/blog/new" component={AdminBlogsPage} />
       <Route path="/admin/blog/edit/:id" component={AdminBlogsPage} />

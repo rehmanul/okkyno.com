@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Product, Order, BlogPost } from "@shared/schema";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, LineChart, Line } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { formatPrice, formatShortDate } from "@/utils/formatters";
 import { 
   Package, 
@@ -18,7 +18,8 @@ import {
   CheckCircle,
   Clock,
   Truck,
-  AlertCircle
+  AlertCircle,
+  Settings
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
@@ -27,23 +28,23 @@ export default function AdminDashboardPage() {
     queryKey: ['/api/orders'],
     select: (data) => data.slice(0, 5),
   });
-  
+
   // Fetch products for stats
   const { data: products } = useQuery<Product[]>({
     queryKey: ['/api/products'],
   });
-  
+
   // Fetch blog posts for stats
   const { data: posts } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog'],
   });
-  
+
   // Count stats
   const totalProducts = products?.length || 0;
   const totalOrders = orders?.length || 0;
   const totalPosts = posts?.length || 0;
   const totalRevenue = orders?.reduce((sum, order) => sum + order.total, 0) || 0;
-  
+
   // Sample sales data (would come from API in a real app)
   const salesData = [
     { name: 'Jan', total: 2300 },
@@ -54,7 +55,7 @@ export default function AdminDashboardPage() {
     { name: 'Jun', total: 5100 },
     { name: 'Jul', total: 4800 },
   ];
-  
+
   // Sample product category data (would come from API in a real app)
   const productCategoryData = [
     { name: 'Vegetables', count: 45 },
@@ -64,7 +65,7 @@ export default function AdminDashboardPage() {
     { name: 'Pots & Planters', count: 18 },
     { name: 'Seeds', count: 15 },
   ];
-  
+
   return (
     <AdminLayout title="Dashboard">
       <div className="space-y-6">
@@ -80,7 +81,7 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-muted-foreground">+12.5% from last month</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Products</CardTitle>
@@ -91,7 +92,7 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-muted-foreground">+5 added this week</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Orders</CardTitle>
@@ -102,7 +103,7 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-muted-foreground">+8 from last week</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Blog Posts</CardTitle>
@@ -114,7 +115,7 @@ export default function AdminDashboardPage() {
             </CardContent>
           </Card>
         </div>
-        
+
         {/* Charts */}
         <Tabs defaultValue="overview">
           <TabsList>
@@ -182,7 +183,7 @@ export default function AdminDashboardPage() {
                   {orders ? (
                     orders.map(order => {
                       let statusIcon;
-                      
+
                       switch(order.status) {
                         case 'delivered':
                           statusIcon = <CheckCircle className="h-4 w-4 text-green-500" />;
@@ -199,7 +200,7 @@ export default function AdminDashboardPage() {
                         default:
                           statusIcon = <Clock className="h-4 w-4 text-gray-500" />;
                       }
-                      
+
                       return (
                         <div key={order.id} className="flex items-center">
                           <Avatar className="h-9 w-9 mr-3">
@@ -224,7 +225,7 @@ export default function AdminDashboardPage() {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="mt-8 text-center">
                   <Link href="/admin/orders">
                     <Button variant="outline" className="gap-1">
@@ -236,7 +237,7 @@ export default function AdminDashboardPage() {
             </Card>
           </TabsContent>
         </Tabs>
-        
+
         {/* Quick Links */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Link href="/admin/products/new">
@@ -250,7 +251,7 @@ export default function AdminDashboardPage() {
               </CardContent>
             </Card>
           </Link>
-          
+
           <Link href="/admin/blog/new">
             <Card className="cursor-pointer hover:bg-muted/50 transition-colors">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
@@ -262,7 +263,7 @@ export default function AdminDashboardPage() {
               </CardContent>
             </Card>
           </Link>
-          
+
           <Link href="/admin/orders">
             <Card className="cursor-pointer hover:bg-muted/50 transition-colors">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
@@ -274,7 +275,7 @@ export default function AdminDashboardPage() {
               </CardContent>
             </Card>
           </Link>
-          
+
           <Link href="/admin/customers">
             <Card className="cursor-pointer hover:bg-muted/50 transition-colors">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
