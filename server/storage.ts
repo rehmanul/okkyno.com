@@ -229,6 +229,448 @@ export class MemStorage implements IStorage {
       published: true
     });
 
+    // Add more Epic Gardening style blog posts
+    this.createBlogPost({
+      title: "Growing Perfect Tomatoes: From Seed to Harvest",
+      slug: "growing-perfect-tomatoes-seed-to-harvest",
+      content: `<h1>Growing Perfect Tomatoes: From Seed to Harvest</h1>
+      <p>Tomatoes are one of the most rewarding crops to grow in your garden. With proper care and attention, you can enjoy fresh, flavorful tomatoes throughout the growing season.</p>
+      
+      <h2>Starting from Seeds</h2>
+      <p>Start tomato seeds indoors 6-8 weeks before your last frost date. Use a quality seed starting mix and maintain temperatures between 70-80°F for optimal germination.</p>
+      
+      <h3>Seed Starting Tips:</h3>
+      <ul>
+      <li>Use a heat mat for consistent soil temperature</li>
+      <li>Provide 14-16 hours of light daily</li>
+      <li>Keep soil moist but not waterlogged</li>
+      <li>Transplant to larger pots when first true leaves appear</li>
+      </ul>
+      
+      <h2>Transplanting Outdoors</h2>
+      <p>Harden off seedlings for 7-10 days before transplanting. Plant after all danger of frost has passed and soil temperature is consistently above 60°F.</p>
+      
+      <h2>Soil Preparation</h2>
+      <p>Tomatoes thrive in well-draining soil with a pH between 6.0-6.8. Amend heavy clay soils with compost and organic matter.</p>
+      
+      <h2>Planting and Spacing</h2>
+      <p>Space plants 18-24 inches apart for determinate varieties and 24-36 inches for indeterminate types. Plant deep, burying 2/3 of the stem to encourage strong root development.</p>
+      
+      <h2>Support Systems</h2>
+      <p>Install cages or stakes at planting time. Indeterminate varieties can grow 6-8 feet tall and need sturdy support.</p>
+      
+      <h2>Watering and Mulching</h2>
+      <p>Provide 1-2 inches of water weekly. Water at soil level to prevent leaf diseases. Apply 2-3 inches of organic mulch around plants.</p>
+      
+      <h2>Common Problems and Solutions</h2>
+      
+      <h3>Blossom End Rot</h3>
+      <p>Caused by calcium deficiency and inconsistent watering. Maintain even soil moisture and ensure adequate calcium in soil.</p>
+      
+      <h3>Cracking</h3>
+      <p>Results from irregular watering. Mulch heavily and water consistently to prevent soil moisture fluctuations.</p>
+      
+      <h3>Disease Prevention</h3>
+      <p>Rotate crops yearly, provide good air circulation, and water at soil level. Remove lower leaves as plants grow.</p>
+      
+      <h2>Harvesting</h2>
+      <p>Harvest when tomatoes are fully colored but still firm. Green tomatoes will ripen off the vine if stored at room temperature.</p>
+      
+      <p>With these techniques, you'll be growing restaurant-quality tomatoes in your own backyard!</p>`,
+      excerpt: "Master the art of growing perfect tomatoes from seed to harvest with our comprehensive guide covering everything from seed starting to pest management.",
+      imageUrl: "https://images.unsplash.com/photo-1546470427-e5380b43d0a4?w=800&auto=format&fit=crop&q=80",
+      authorId: 1,
+      published: true
+    });
+
+    this.createBlogPost({
+      title: "Companion Planting: Nature's Garden Partnerships",
+      slug: "companion-planting-garden-partnerships",
+      content: `<h1>Companion Planting: Nature's Garden Partnerships</h1>
+      <p>Companion planting is an ancient agricultural practice that involves growing different plants together for mutual benefit. This natural approach can improve soil health, deter pests, and increase yields.</p>
+      
+      <h2>The Science Behind Companion Planting</h2>
+      <p>Plants can benefit each other through various mechanisms:</p>
+      <ul>
+      <li><strong>Nutrient sharing:</strong> Legumes fix nitrogen that benefits neighboring plants</li>
+      <li><strong>Pest deterrence:</strong> Strong-scented plants repel harmful insects</li>
+      <li><strong>Beneficial insect attraction:</strong> Flowers attract pollinators and predatory insects</li>
+      <li><strong>Physical support:</strong> Tall plants provide structure for climbing varieties</li>
+      <li><strong>Soil improvement:</strong> Deep-rooted plants bring nutrients to the surface</li>
+      </ul>
+      
+      <h2>Classic Companion Plant Combinations</h2>
+      
+      <h3>The Three Sisters: Corn, Beans, and Squash</h3>
+      <p>This Native American technique creates perfect symbiosis:</p>
+      <ul>
+      <li>Corn provides a natural trellis for beans</li>
+      <li>Beans fix nitrogen in soil for corn and squash</li>
+      <li>Squash leaves shade soil and deter pests with their prickly stems</li>
+      </ul>
+      
+      <h3>Tomatoes and Basil</h3>
+      <p>Plant basil around tomatoes to:</p>
+      <ul>
+      <li>Repel aphids, hornworms, and whiteflies</li>
+      <li>Improve tomato flavor</li>
+      <li>Provide a convenient herb harvest</li>
+      </ul>
+      
+      <h3>Carrots and Chives</h3>
+      <p>Chives planted near carrots help:</p>
+      <ul>
+      <li>Repel carrot flies with their strong scent</li>
+      <li>Improve carrot flavor</li>
+      <li>Provide edible flowers and leaves</li>
+      </ul>
+      
+      <h2>Beneficial Flowers for Vegetable Gardens</h2>
+      
+      <h3>Marigolds</h3>
+      <p>Plant throughout the garden to deter nematodes, aphids, and whiteflies. French marigolds are particularly effective.</p>
+      
+      <h3>Nasturtiums</h3>
+      <p>Act as trap crops for aphids and cucumber beetles. Their flowers and leaves are also edible with a peppery flavor.</p>
+      
+      <h3>Calendula</h3>
+      <p>Attracts beneficial insects while deterring aphids and tomato hornworms. Petals are edible and medicinal.</p>
+      
+      <h2>Herbs as Companion Plants</h2>
+      
+      <h3>Oregano and Rosemary</h3>
+      <p>Plant near brassicas to repel cabbage moths and aphids. Their strong scents confuse pest insects.</p>
+      
+      <h3>Dill</h3>
+      <p>Attracts beneficial wasps and predatory insects. Plant near tomatoes and peppers, but away from carrots.</p>
+      
+      <h2>Plants to Avoid Pairing</h2>
+      <p>Some plants compete for resources or release growth-inhibiting compounds:</p>
+      <ul>
+      <li><strong>Black walnut trees:</strong> Release juglone, toxic to tomatoes, peppers, and potatoes</li>
+      <li><strong>Fennel:</strong> Inhibits growth of most vegetables; plant separately</li>
+      <li><strong>Onions and beans:</strong> Onions can stunt bean and pea growth</li>
+      <li><strong>Tomatoes and brassicas:</strong> Compete for nutrients and may inhibit each other</li>
+      </ul>
+      
+      <h2>Planning Your Companion Garden</h2>
+      
+      <h3>Start Small</h3>
+      <p>Begin with a few proven combinations before expanding to more complex arrangements.</p>
+      
+      <h3>Consider Timing</h3>
+      <p>Plant companions with similar water and sunlight needs together. Stagger plantings for continuous harvest.</p>
+      
+      <h3>Observe and Adapt</h3>
+      <p>Keep garden records to track which combinations work best in your specific conditions.</p>
+      
+      <h2>Benefits Beyond Pest Control</h2>
+      <p>Companion planting creates a more diverse, resilient garden ecosystem that:</p>
+      <ul>
+      <li>Supports beneficial wildlife</li>
+      <li>Improves soil health naturally</li>
+      <li>Reduces need for chemical inputs</li>
+      <li>Maximizes garden space efficiency</li>
+      </ul>
+      
+      <p>By working with nature's partnerships, you can create a thriving garden that produces more food with less effort!</p>`,
+      excerpt: "Discover the ancient art of companion planting and learn which plants work together to create a thriving, pest-resistant garden ecosystem.",
+      imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&auto=format&fit=crop&q=80",
+      authorId: 1,
+      published: true
+    });
+
+    this.createBlogPost({
+      title: "Soil Health: Building the Foundation of Your Garden",
+      slug: "soil-health-building-garden-foundation",
+      content: `<h1>Soil Health: Building the Foundation of Your Garden</h1>
+      <p>Healthy soil is the cornerstone of successful gardening. Understanding and improving your soil will dramatically increase your garden's productivity and plant health.</p>
+      
+      <h2>Understanding Soil Composition</h2>
+      <p>Healthy soil consists of four main components:</p>
+      <ul>
+      <li><strong>45% Mineral particles:</strong> Sand, silt, and clay</li>
+      <li><strong>25% Water:</strong> Available to plant roots</li>
+      <li><strong>25% Air:</strong> Essential for root respiration</li>
+      <li><strong>5% Organic matter:</strong> Decomposed plant and animal material</li>
+      </ul>
+      
+      <h2>Soil Testing: Know Your Starting Point</h2>
+      <p>Before amending soil, test for:</p>
+      
+      <h3>pH Level</h3>
+      <p>Most vegetables prefer slightly acidic to neutral soil (6.0-7.0 pH). Test annually and adjust as needed.</p>
+      
+      <h3>Nutrient Content</h3>
+      <p>Test for nitrogen (N), phosphorus (P), potassium (K), and secondary nutrients like calcium and magnesium.</p>
+      
+      <h3>Organic Matter</h3>
+      <p>Healthy soil contains 3-5% organic matter. This improves soil structure, water retention, and nutrient availability.</p>
+      
+      <h2>DIY Soil Tests</h2>
+      
+      <h3>Jar Test for Soil Texture</h3>
+      <p>Fill a jar 1/3 with soil, add water, shake, and let settle. Layers reveal sand, silt, and clay percentages.</p>
+      
+      <h3>Drainage Test</h3>
+      <p>Dig a hole 12 inches deep, fill with water, and time how long it takes to drain. Good drainage: 1-3 hours.</p>
+      
+      <h3>Earthworm Count</h3>
+      <p>Dig a 1-foot square, 6 inches deep. Healthy soil has 10+ earthworms per square foot.</p>
+      
+      <h2>Improving Soil Structure</h2>
+      
+      <h3>For Clay Soil</h3>
+      <ul>
+      <li>Add coarse organic matter like leaf mold</li>
+      <li>Mix in perlite or coarse sand</li>
+      <li>Create raised beds for better drainage</li>
+      <li>Avoid working wet clay soil</li>
+      </ul>
+      
+      <h3>For Sandy Soil</h3>
+      <ul>
+      <li>Add fine organic matter like compost</li>
+      <li>Incorporate aged manure</li>
+      <li>Use cover crops to add organic matter</li>
+      <li>Apply mulch to retain moisture</li>
+      </ul>
+      
+      <h2>The Power of Compost</h2>
+      <p>Compost is the ultimate soil amendment because it:</p>
+      <ul>
+      <li>Improves soil structure in any soil type</li>
+      <li>Adds slow-release nutrients</li>
+      <li>Increases beneficial microbial activity</li>
+      <li>Helps retain moisture</li>
+      <li>Buffers pH naturally</li>
+      </ul>
+      
+      <h3>Making Quality Compost</h3>
+      <p>Combine "greens" (nitrogen-rich) and "browns" (carbon-rich) in a 1:3 ratio:</p>
+      <ul>
+      <li><strong>Greens:</strong> Kitchen scraps, fresh grass clippings, manure</li>
+      <li><strong>Browns:</strong> Dry leaves, straw, paper, cardboard</li>
+      </ul>
+      
+      <h2>Organic Soil Amendments</h2>
+      
+      <h3>Aged Manure</h3>
+      <p>Adds nutrients and organic matter. Use well-aged manure to avoid burning plants.</p>
+      
+      <h3>Leaf Mold</h3>
+      <p>Decomposed leaves improve soil structure and water retention. Easy to make at home.</p>
+      
+      <h3>Bone Meal</h3>
+      <p>Slow-release phosphorus for root development and flowering.</p>
+      
+      <h3>Kelp Meal</h3>
+      <p>Provides trace minerals and growth hormones. Excellent for overall plant health.</p>
+      
+      <h2>Cover Crops for Soil Health</h2>
+      <p>Plant cover crops in unused garden areas to:</p>
+      <ul>
+      <li>Add organic matter when tilled under</li>
+      <li>Prevent soil erosion</li>
+      <li>Suppress weeds naturally</li>
+      <li>Improve soil structure with deep roots</li>
+      </ul>
+      
+      <h3>Best Cover Crops</h3>
+      <ul>
+      <li><strong>Legumes:</strong> Crimson clover, field peas (fix nitrogen)</li>
+      <li><strong>Grasses:</strong> Annual ryegrass, winter wheat (add carbon)</li>
+      <li><strong>Brassicas:</strong> Radishes, mustard (break up compaction)</li>
+      </ul>
+      
+      <h2>Maintaining Soil Health</h2>
+      
+      <h3>Avoid Compaction</h3>
+      <ul>
+      <li>Never work wet soil</li>
+      <li>Use raised beds or designated paths</li>
+      <li>Add organic matter regularly</li>
+      </ul>
+      
+      <h3>Feed the Soil Ecosystem</h3>
+      <ul>
+      <li>Add compost 2-3 times per year</li>
+      <li>Use organic mulches</li>
+      <li>Minimize tilling</li>
+      <li>Rotate crops annually</li>
+      </ul>
+      
+      <p>Remember: healthy soil equals healthy plants. Invest time in building your soil, and your garden will reward you with abundant harvests for years to come!</p>`,
+      excerpt: "Learn how to test, understand, and improve your garden soil for healthier plants and better harvests using organic methods and amendments.",
+      imageUrl: "https://images.unsplash.com/photo-1595771805070-fdf2e7cd5050?w=800&auto=format&fit=crop&q=80",
+      authorId: 1,
+      published: true
+    });
+
+    this.createBlogPost({
+      title: "Pest Management: Organic Solutions for Common Garden Problems",
+      slug: "organic-pest-management-garden-solutions",
+      content: `<h1>Pest Management: Organic Solutions for Common Garden Problems</h1>
+      <p>Dealing with garden pests doesn't require harsh chemicals. Organic pest management focuses on prevention, beneficial insects, and natural remedies to maintain a healthy garden ecosystem.</p>
+      
+      <h2>Integrated Pest Management (IPM) Principles</h2>
+      <p>IPM is a holistic approach that combines multiple strategies:</p>
+      <ul>
+      <li><strong>Prevention:</strong> Create conditions unfavorable to pests</li>
+      <li><strong>Monitoring:</strong> Regular garden inspection to catch problems early</li>
+      <li><strong>Biological control:</strong> Encourage beneficial insects</li>
+      <li><strong>Cultural practices:</strong> Crop rotation, proper spacing, timing</li>
+      <li><strong>Mechanical control:</strong> Physical barriers and traps</li>
+      <li><strong>Organic treatments:</strong> Natural pesticides as last resort</li>
+      </ul>
+      
+      <h2>Prevention: Your First Line of Defense</h2>
+      
+      <h3>Healthy Soil = Healthy Plants</h3>
+      <p>Strong plants resist pest damage better. Focus on:</p>
+      <ul>
+      <li>Proper soil nutrition and pH</li>
+      <li>Adequate water without overwatering</li>
+      <li>Good air circulation</li>
+      <li>Appropriate plant spacing</li>
+      </ul>
+      
+      <h3>Crop Rotation</h3>
+      <p>Rotate plant families annually to break pest cycles. Avoid planting the same family in the same location for 3-4 years.</p>
+      
+      <h3>Garden Sanitation</h3>
+      <ul>
+      <li>Remove diseased plant material immediately</li>
+      <li>Clean tools between plants</li>
+      <li>Clear garden debris where pests overwinter</li>
+      <li>Quarantine new plants before adding to garden</li>
+      </ul>
+      
+      <h2>Beneficial Insects: Nature's Pest Control</h2>
+      
+      <h3>Attracting Good Bugs</h3>
+      <p>Plant flowers that provide nectar and pollen:</p>
+      <ul>
+      <li><strong>Yarrow:</strong> Attracts ladybugs and lacewings</li>
+      <li><strong>Sweet alyssum:</strong> Brings in beneficial wasps</li>
+      <li><strong>Fennel and dill:</strong> Attract predatory insects</li>
+      <li><strong>Sunflowers:</strong> Provide habitat for beneficial bugs</li>
+      </ul>
+      
+      <h3>Key Beneficial Insects</h3>
+      <ul>
+      <li><strong>Ladybugs:</strong> Eat aphids, mites, and scale insects</li>
+      <li><strong>Lacewings:</strong> Control aphids, thrips, and caterpillars</li>
+      <li><strong>Parasitic wasps:</strong> Attack many pest insects</li>
+      <li><strong>Ground beetles:</strong> Eat cutworms and root maggots</li>
+      <li><strong>Praying mantids:</strong> General predators of garden pests</li>
+      </ul>
+      
+      <h2>Common Garden Pests and Organic Solutions</h2>
+      
+      <h3>Aphids</h3>
+      <p><strong>Identification:</strong> Small, soft-bodied insects in clusters on new growth</p>
+      <p><strong>Organic controls:</strong></p>
+      <ul>
+      <li>Spray off with water</li>
+      <li>Release ladybugs</li>
+      <li>Apply neem oil</li>
+      <li>Plant nasturtiums as trap crops</li>
+      </ul>
+      
+      <h3>Cutworms</h3>
+      <p><strong>Identification:</strong> Seedlings cut off at soil level</p>
+      <p><strong>Organic controls:</strong></p>
+      <ul>
+      <li>Cardboard collars around seedlings</li>
+      <li>Diatomaceous earth around plants</li>
+      <li>Hand-picking at night</li>
+      <li>Beneficial nematodes in soil</li>
+      </ul>
+      
+      <h3>Tomato Hornworms</h3>
+      <p><strong>Identification:</strong> Large green caterpillars with diagonal white stripes</p>
+      <p><strong>Organic controls:</strong></p>
+      <ul>
+      <li>Hand-picking (easiest method)</li>
+      <li>Bt (Bacillus thuringiensis) spray</li>
+      <li>Plant basil and borage as deterrents</li>
+      <li>Encourage parasitic wasps</li>
+      </ul>
+      
+      <h3>Cabbage Worms</h3>
+      <p><strong>Identification:</strong> Small green caterpillars on brassica crops</p>
+      <p><strong>Organic controls:</strong></p>
+      <ul>
+      <li>Row covers during vulnerable stages</li>
+      <li>Bt spray application</li>
+      <li>Hand-picking eggs and larvae</li>
+      <li>Plant aromatic herbs nearby</li>
+      </ul>
+      
+      <h3>Slugs and Snails</h3>
+      <p><strong>Identification:</strong> Slimy trails and holes in leaves</p>
+      <p><strong>Organic controls:</strong></p>
+      <ul>
+      <li>Beer traps</li>
+      <li>Copper tape barriers</li>
+      <li>Diatomaceous earth</li>
+      <li>Hand-picking in evening/morning</li>
+      <li>Eliminate hiding places</li>
+      </ul>
+      
+      <h2>Physical and Mechanical Controls</h2>
+      
+      <h3>Row Covers</h3>
+      <p>Lightweight fabric protects crops from flying insects while allowing light and water through.</p>
+      
+      <h3>Sticky Traps</h3>
+      <p>Yellow traps attract aphids and whiteflies. Blue traps work for thrips.</p>
+      
+      <h3>Mulching</h3>
+      <p>Organic mulches deter some soil-dwelling pests and provide habitat for beneficial insects.</p>
+      
+      <h2>Organic Pesticide Options</h2>
+      
+      <h3>Neem Oil</h3>
+      <p>Systemic pesticide that disrupts insect feeding and reproduction. Effective against aphids, whiteflies, and mites.</p>
+      
+      <h3>Insecticidal Soap</h3>
+      <p>Gentle contact pesticide for soft-bodied insects. Safe for beneficial insects when dry.</p>
+      
+      <h3>Diatomaceous Earth (Food Grade)</h3>
+      <p>Microscopic shells that damage pest exoskeletons. Effective against crawling insects.</p>
+      
+      <h3>Bt (Bacillus thuringiensis)</h3>
+      <p>Biological pesticide specific to caterpillars. Safe for beneficial insects and humans.</p>
+      
+      <h2>Application Tips for Organic Pesticides</h2>
+      <ul>
+      <li>Apply in early morning or evening to protect beneficial insects</li>
+      <li>Follow label instructions carefully</li>
+      <li>Test on small area first</li>
+      <li>Reapply as needed, especially after rain</li>
+      <li>Rotate different products to prevent resistance</li>
+      </ul>
+      
+      <h2>Creating a Balanced Ecosystem</h2>
+      <p>The goal isn't to eliminate all insects, but to maintain balance. A diverse garden with:</p>
+      <ul>
+      <li>Native plants for habitat</li>
+      <li>Water sources for beneficial insects</li>
+      <li>Varied plant heights and textures</li>
+      <li>Minimal disturbance to soil</li>
+      </ul>
+      
+      <p>Will naturally regulate pest populations while supporting pollinators and other beneficial wildlife.</p>
+      
+      <p>Remember: patience and observation are your best tools. Most pest problems resolve themselves when you create the right conditions for a healthy garden ecosystem!</p>`,
+      excerpt: "Master organic pest control with integrated pest management strategies that protect your garden while supporting beneficial insects and natural ecosystems.",
+      imageUrl: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&auto=format&fit=crop&q=80",
+      authorId: 1,
+      published: true
+    });
+
     // Create sample products with consistent, category-appropriate images
     this.initializeProducts();
     console.log(`Generated ${this.products.size} products with images and videos`);

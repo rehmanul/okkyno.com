@@ -10,6 +10,7 @@ import { importEpicGardeningContent } from "./import-epic-content";
 import { ComprehensiveEpicScraper } from "./comprehensive-epic-scraper";
 import { AggressiveEpicScraper } from "./aggressive-epic-scraper";
 import { completeEpicGardeningImport } from "./complete-epic-import";
+import { manualEpicGardeningImport } from "./manual-epic-import";
 
 import {
   insertUserSchema,
@@ -88,17 +89,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/users/login", async (req: Request, res: Response) => {
     const { username, password } = req.body;
     
+    console.log('Login attempt:', { username, password });
+    
     if (!username || !password) {
       return res.status(400).json({ error: "Username and password are required" });
     }
 
     const user = await storage.getUserByUsername(username);
-    if (!user || user.password !== password) {
+    console.log('Found user:', user ? { id: user.id, username: user.username } : 'null');
+    
+    if (!user) {
+      console.log('User not found');
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+    
+    if (user.password !== password) {
+      console.log('Password mismatch:', { provided: password, expected: user.password });
       return res.status(401).json({ error: "Invalid username or password" });
     }
 
     // Create session
     const sessionId = createSession(user);
+    console.log('Created session:', sessionId);
     
     // Set session cookie
     res.cookie("sessionId", sessionId, { 
@@ -108,6 +120,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     // Return user info without password
     const { password: _, ...userWithoutPassword } = user;
+    console.log('Login successful for user:', userWithoutPassword);
     res.json(userWithoutPassword);
   });
 
@@ -738,6 +751,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to complete Epic import:", error);
       res.status(500).json({ error: "Failed to complete Epic Gardening import" });
+    }
+  });
+
+  // Manual Epic Gardening import
+  app.post("/api/import/manual-epic", async (req: Request, res: Response) => {
+    try {
+      const result = await manualEpicGardeningImport();
+      res.json(result);
+    } catch (error) {
+      console.error("Failed to manual Epic import:", error);
+      res.status(500).json({ error: "Failed to manual Epic Gardening import" });
     }
   });
 
