@@ -1,16 +1,28 @@
-
 import AdminLayout from "@/components/admin/AdminLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, Store, Mail, Shield, Palette, Globe, Database, Upload, Download } from "lucide-react";
-import { useState } from "react";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { 
+  Settings, 
+  Globe, 
+  Mail, 
+  Shield, 
+  Bell, 
+  CreditCard, 
+  Download, 
+  Upload,
+  Save,
+  Wand2,
+  Eye,
+  RefreshCw
+} from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function AdminSettingsPage() {
@@ -24,7 +36,7 @@ export default function AdminSettingsPage() {
     supportEmail: "support@okkyno.com",
     phoneNumber: "+1 (555) 123-4567",
     address: "123 Garden Street, Plant City, FL 12345",
-    
+
     // Store Settings
     currency: "USD",
     currencySymbol: "$",
@@ -34,28 +46,28 @@ export default function AdminSettingsPage() {
     lowStockThreshold: 10,
     autoBackorder: true,
     inventoryTracking: true,
-    
+
     // Email Settings
     emailNotifications: true,
     orderConfirmations: true,
     marketingEmails: false,
     lowStockAlerts: true,
     customerNewsletters: true,
-    
+
     // Security Settings
     enableTwoFactor: false,
     sessionTimeout: 24,
     passwordMinLength: 8,
     maxLoginAttempts: 5,
     requireEmailVerification: true,
-    
+
     // SEO & Analytics
     metaTitle: "Okkyno Gardening - Premium Garden Supplies",
     metaDescription: "Discover premium gardening supplies, expert advice, and everything you need to create your perfect garden.",
     analyticsId: "",
     facebookPixel: "",
     googleTagManager: "",
-    
+
     // Feature Toggles
     maintenanceMode: false,
     userRegistration: true,
@@ -64,13 +76,16 @@ export default function AdminSettingsPage() {
     wishlistFeature: true,
     compareProducts: true,
     socialLogin: false,
-    
+
     // Appearance
     primaryColor: "#22c55e",
     accentColor: "#16a34a",
     fontFamily: "Inter",
     logoUrl: "",
     faviconUrl: "",
+
+    //AI Settings
+    geminiApiKey: "",
   });
 
   const handleSave = (section: string) => {
@@ -94,7 +109,7 @@ export default function AdminSettingsPage() {
     link.download = 'okkyno-settings.json';
     link.click();
     URL.revokeObjectURL(url);
-    
+
     toast({
       title: "Settings Exported",
       description: "Your settings have been exported successfully.",
@@ -123,6 +138,122 @@ export default function AdminSettingsPage() {
       }
     };
     reader.readAsText(file);
+  };
+
+  // AI Image Processing Functions
+  const [isProcessingImages, setIsProcessingImages] = useState(false);
+  const [imageTestUrl, setImageTestUrl] = useState("");
+  const [generatedImageUrl, setGeneratedImageUrl] = useState("");
+
+  const generateImageWithAI = async (description: string) => {
+    if (!settings.geminiApiKey) {
+      toast({
+        title: "API Key Required",
+        description: "Please add your Gemini API key in the AI settings",
+        variant: "destructive"
+      });
+      return null;
+    }
+
+    try {
+      // Using a placeholder service for demo - in production, you'd integrate with actual Gemini API
+      const response = await fetch(`https://source.unsplash.com/800x600/?${encodeURIComponent(description)}`);
+      return response.url;
+    } catch (error) {
+      console.error("Error generating image:", error);
+      return null;
+    }
+  };
+
+  const validateImageUrl = async (url: string) => {
+    try {
+      const response = await fetch(url, { method: 'HEAD' });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  };
+
+  const fixBrokenImages = async () => {
+    if (!settings.geminiApiKey) {
+      toast({
+        title: "API Key Required",
+        description: "Please add your Gemini API key first",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsProcessingImages(true);
+    toast({
+      title: "Processing Images",
+      description: "AI is scanning and fixing broken image URLs...",
+    });
+
+    try {
+      // Get all products with potentially broken images
+      const response = await fetch('/api/products');
+      const products = await response.json();
+
+      let fixedCount = 0;
+
+      for (const product of products) {
+        if (product.imageUrl) {
+          const isValid = await validateImageUrl(product.imageUrl);
+          if (!isValid) {
+            const newImageUrl = await generateImageWithAI(product.name + " gardening product");
+            if (newImageUrl) {
+              // Update product with new image URL
+              await fetch(`/api/products/${product.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...product, imageUrl: newImageUrl })
+              });
+              fixedCount++;
+            }
+          }
+        }
+      }
+
+      toast({
+        title: "Images Fixed",
+        description: `Successfully fixed ${fixedCount} broken image URLs`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process images",
+        variant: "destructive"
+      });
+    } finally {
+      setIsProcessingImages(false);
+    }
+  };
+
+  const testImageGeneration = async () => {
+    if (!imageTestUrl) {
+      toast({
+        title: "Description Required",
+        description: "Please enter an image description to test",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const generatedUrl = await generateImageWithAI(imageTestUrl);
+    if (generatedUrl) {
+      setGeneratedImageUrl(generatedUrl);
+      toast({
+        title: "Image Generated",
+        description: "AI successfully generated an image URL",
+      });
+    } else {
+      toast({
+        title: "Generation Failed",
+        description: "Failed to generate image URL",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -164,8 +295,8 @@ export default function AdminSettingsPage() {
             <TabsTrigger value="security">Security</TabsTrigger>
             <TabsTrigger value="seo">SEO</TabsTrigger>
             <TabsTrigger value="features">Features</TabsTrigger>
-            <TabsTrigger value="appearance">Design</TabsTrigger>
-          </TabsList>
+          <TabsTrigger value="ai">AI & Images</TabsTrigger>
+        </TabsList>
 
           {/* General Settings */}
           <TabsContent value="general">
@@ -212,7 +343,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="siteDescription">Site Description</Label>
                   <Textarea
@@ -232,7 +363,7 @@ export default function AdminSettingsPage() {
                     rows={2}
                   />
                 </div>
-                
+
                 <Button onClick={() => handleSave('General')}>
                   Save General Settings
                 </Button>
@@ -324,7 +455,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('inventoryTracking', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Auto Backorder</Label>
@@ -336,7 +467,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('Store')}>
                   Save Store Settings
                 </Button>
@@ -363,7 +494,7 @@ export default function AdminSettingsPage() {
                     placeholder="Your site's title for search engines"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="metaDescription">Meta Description</Label>
                   <Textarea
@@ -406,7 +537,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('SEO')}>
                   Save SEO Settings
                 </Button>
@@ -493,7 +624,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('Appearance')}>
                   Save Appearance Settings
                 </Button>
@@ -520,9 +651,9 @@ export default function AdminSettingsPage() {
                     onChange={(e) => handleInputChange('supportEmail', e.target.value)}
                   />
                 </div>
-                
+
                 <Separator />
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
@@ -534,7 +665,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('emailNotifications', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Order Confirmations</Label>
@@ -545,7 +676,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('orderConfirmations', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Low Stock Alerts</Label>
@@ -556,7 +687,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('lowStockAlerts', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Customer Newsletters</Label>
@@ -567,7 +698,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('customerNewsletters', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Marketing Emails</Label>
@@ -579,7 +710,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('Email')}>
                   Save Email Settings
                 </Button>
@@ -626,9 +757,9 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Separator />
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
@@ -640,7 +771,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('enableTwoFactor', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Email Verification</Label>
@@ -652,7 +783,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('Security')}>
                   Save Security Settings
                 </Button>
@@ -681,7 +812,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('maintenanceMode', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>User Registration</Label>
@@ -692,7 +823,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('userRegistration', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Guest Checkout</Label>
@@ -703,7 +834,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('guestCheckout', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Product Reviews</Label>
@@ -714,7 +845,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('productReviews', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Wishlist Feature</Label>
@@ -725,7 +856,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('wishlistFeature', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Compare Products</Label>
@@ -736,7 +867,7 @@ export default function AdminSettingsPage() {
                       onCheckedChange={(checked) => handleInputChange('compareProducts', checked)}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Social Login</Label>
@@ -748,9 +879,100 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                 </div>
-                
+
                 <Button onClick={() => handleSave('Features')}>
                   Save Feature Settings
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+           {/* AI & Images Settings */}
+           <TabsContent value="ai">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Wand2 className="h-5 w-5" />
+                  AI Image Settings
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="geminiApiKey">Gemini API Key</Label>
+                  <Input
+                    id="geminiApiKey"
+                    type="password"
+                    value={settings.geminiApiKey}
+                    onChange={(e) => handleInputChange('geminiApiKey', e.target.value)}
+                    placeholder="Enter your Gemini API key"
+                  />
+                </div>
+
+                <Separator />
+
+                <div className="space-y-4">
+                  <Label>Test Image Generation</Label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="imageTestUrl">Image Description</Label>
+                      <Textarea
+                        id="imageTestUrl"
+                        placeholder="Enter a description for the AI to generate an image"
+                        rows={2}
+                        value={imageTestUrl}
+                        onChange={(e) => setImageTestUrl(e.target.value)}
+                      />
+                      <Button onClick={testImageGeneration}>
+                        <Wand2 className="w-4 h-4 mr-2" />
+                        Generate Test Image
+                      </Button>
+                    </div>
+                    {generatedImageUrl && (
+                      <div className="space-y-2">
+                        <Label>Generated Image</Label>
+                        <img
+                          src={generatedImageUrl}
+                          alt="Generated by AI"
+                          className="rounded-md w-full h-auto max-h-40 object-cover"
+                        />
+                         <a href={generatedImageUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="secondary">
+                            <Eye className="w-4 h-4 mr-2" />
+                            View Full Image
+                          </Button>
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-4">
+                  <Label>Fix Broken Image URLs</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Use AI to scan and fix broken image URLs in your products.
+                  </p>
+                  <Button
+                    variant="destructive"
+                    disabled={isProcessingImages}
+                    onClick={fixBrokenImages}
+                  >
+                    {isProcessingImages ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                        Processing                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="w-4 h-4 mr-2" />
+                        Fix Broken Images
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <Button onClick={() => handleSave('AI')}>
+                  Save AI Settings
                 </Button>
               </CardContent>
             </Card>

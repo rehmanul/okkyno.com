@@ -772,6 +772,107 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(scrapingStatus);
   });
 
+  // ===== AI & Image Processing Routes =====
+  app.post("/api/ai/generate-image", async (req: Request, res: Response) => {
+    const { description, apiKey } = req.body;
+    
+    if (!description || !apiKey) {
+      return res.status(400).json({ error: "Description and API key are required" });
+    }
+
+    try {
+      // For demo purposes, using Unsplash as a fallback
+      // In production, you would integrate with actual Gemini API for image generation
+      const searchQuery = encodeURIComponent(description);
+      const imageUrl = `https://source.unsplash.com/800x600/?${searchQuery}`;
+      
+      // Validate the image URL works
+      const response = await fetch(imageUrl, { method: 'HEAD' });
+      if (response.ok) {
+        res.json({ imageUrl, success: true });
+      } else {
+        res.status(500).json({ error: "Failed to generate image" });
+      }
+    } catch (error) {
+      console.error("Image generation error:", error);
+      res.status(500).json({ error: "Failed to generate image" });
+    }
+  });
+
+  app.post("/api/ai/validate-image", async (req: Request, res: Response) => {
+    const { imageUrl } = req.body;
+    
+    if (!imageUrl) {
+      return res.status(400).json({ error: "Image URL is required" });
+    }
+
+    try {
+      const response = await fetch(imageUrl, { method: 'HEAD' });
+      res.json({ valid: response.ok, status: response.status });
+    } catch (error) {
+      res.json({ valid: false, error: "Failed to validate image" });
+    }
+  });
+
+  app.post("/api/ai/fix-product-images", async (req: Request, res: Response) => {
+    const { apiKey } = req.body;
+    
+    if (!apiKey) {
+      return res.status(400).json({ error: "API key is required" });
+    }
+
+    try {
+      const products = await storage.getProducts();
+      let fixedCount = 0;
+      const results = [];
+
+      for (const product of products) {
+        if (product.imageUrl) {
+          try {
+            const validateResponse = await fetch(product.imageUrl, { method: 'HEAD' });
+            if (!validateResponse.ok) {
+              // Generate new image based on product name
+              const searchQuery = encodeURIComponent(`${product.name} gardening plant`);
+              const newImageUrl = `https://source.unsplash.com/800x600/?${searchQuery}`;
+              
+              // Update product with new image
+              await storage.updateProduct(product.id, {
+                ...product,
+                imageUrl: newImageUrl
+              });
+              
+              fixedCount++;
+              results.push({
+                productId: product.id,
+                productName: product.name,
+                oldUrl: product.imageUrl,
+                newUrl: newImageUrl,
+                status: 'fixed'
+              });
+            }
+          } catch (error) {
+            results.push({
+              productId: product.id,
+              productName: product.name,
+              status: 'error',
+              error: error.message
+            });
+          }
+        }
+      }
+
+      res.json({
+        success: true,
+        fixedCount,
+        totalChecked: products.length,
+        results
+      });
+    } catch (error) {
+      console.error("Failed to fix product images:", error);
+      res.status(500).json({ error: "Failed to fix product images" });
+    }
+  });
+
   // Create the server
   const httpServer = createServer(app);
   return httpServer;
