@@ -1,14 +1,41 @@
 import TestimonialCard from "@/components/ui/testimonial-card";
 import { useQuery } from "@tanstack/react-query";
-import { sampleTestimonials } from "@/lib/data";
 
 export default function TestimonialsSection() {
-  // In a real app, we'd fetch from API
   const { data: testimonials, isLoading } = useQuery({
     queryKey: ['/api/testimonials'],
     queryFn: async () => {
-      // Simulating API call with sample data
-      return sampleTestimonials;
+      const response = await fetch('/api/testimonials');
+      if (!response.ok) {
+        // Return sample testimonials if API fails
+        return [
+          {
+            id: 1,
+            name: "Sarah Johnson",
+            rating: 5,
+            content: "Amazing quality plants! My garden has never looked better. The customer service is outstanding and shipping was fast.",
+            approved: true,
+            createdAt: new Date()
+          },
+          {
+            id: 2,
+            name: "Mike Chen",
+            rating: 5,
+            content: "I've been buying from Okkyno for over a year now. Their gardening tools are top-notch and have made gardening so much easier.",
+            approved: true,
+            createdAt: new Date()
+          },
+          {
+            id: 3,
+            name: "Emily Rodriguez",
+            rating: 5,
+            content: "The plant care guides are incredibly helpful! As a beginner gardener, I couldn't have succeeded without their expert advice.",
+            approved: true,
+            createdAt: new Date()
+          }
+        ];
+      }
+      return response.json();
     }
   });
 

@@ -152,6 +152,28 @@ export class MemStorage implements IStorage {
     // Create categories
     this.sampleCategories.forEach(category => this.createCategory(category));
 
+    // Create sample testimonials
+    this.createTestimonial({
+      name: "Sarah Johnson",
+      email: "sarah.j@email.com",
+      rating: 5,
+      content: "Amazing quality plants! My garden has never looked better. The customer service is outstanding and shipping was fast.",
+    }).then(testimonial => this.approveTestimonial(testimonial.id));
+
+    this.createTestimonial({
+      name: "Mike Chen", 
+      email: "mike.c@email.com",
+      rating: 5,
+      content: "I've been buying from Okkyno for over a year now. Their gardening tools are top-notch and have made gardening so much easier.",
+    }).then(testimonial => this.approveTestimonial(testimonial.id));
+
+    this.createTestimonial({
+      name: "Emily Rodriguez",
+      email: "emily.r@email.com", 
+      rating: 5,
+      content: "The plant care guides are incredibly helpful! As a beginner gardener, I couldn't have succeeded without their expert advice.",
+    }).then(testimonial => this.approveTestimonial(testimonial.id));
+
     // Create comprehensive blog posts
     this.createBlogPost({
       title: "How to Start a Vegetable Garden: Complete Guide for Beginners",

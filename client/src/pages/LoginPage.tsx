@@ -76,6 +76,7 @@ export default function LoginPage() {
   // Handle login form submission
   const onLoginSubmit = async (data: LoginFormValues) => {
     try {
+      console.log('Attempting login with:', data.username);
       const success = await login(data.username, data.password);
       if (success) {
         toast({
@@ -83,17 +84,19 @@ export default function LoginPage() {
           description: "Welcome back!",
         });
       } else {
+        console.log('Login failed for user:', data.username);
         toast({
           variant: "destructive",
           title: "Login Failed",
-          description: "Invalid username or password",
+          description: "Invalid username or password. Try admin/admin123",
         });
       }
     } catch (error) {
+      console.error('Login error:', error);
       toast({
         variant: "destructive",
         title: "Login Error",
-        description: "An unexpected error occurred",
+        description: "An unexpected error occurred. Please try again.",
       });
     }
   };

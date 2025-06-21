@@ -1,15 +1,16 @@
 import { Link } from "wouter";
 import BlogCard from "@/components/ui/blog-card";
 import { useQuery } from "@tanstack/react-query";
-import { sampleBlogPosts } from "@/lib/data";
 
 export default function PopularGuides() {
-  // In a real app, we'd fetch from API
   const { data: blogPosts, isLoading } = useQuery({
-    queryKey: ['/api/blog/featured'],
+    queryKey: ['/api/blog'],
     queryFn: async () => {
-      // Simulating API call with sample data
-      return sampleBlogPosts;
+      const response = await fetch('/api/blog?limit=6');
+      if (!response.ok) {
+        throw new Error('Failed to fetch blog posts');
+      }
+      return response.json();
     }
   });
 
