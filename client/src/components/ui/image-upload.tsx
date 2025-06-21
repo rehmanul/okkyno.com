@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useCallback } from 'react';
 import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -54,10 +53,10 @@ export function ImageUpload({
 
   const handleFiles = useCallback(async (files: FileList) => {
     if (disabled) return;
-    
+
     setError(null);
     const fileArray = Array.from(files);
-    
+
     // Validate files
     for (const file of fileArray) {
       const error = validateFile(file);
@@ -99,9 +98,9 @@ export function ImageUpload({
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     if (disabled) return;
-    
+
     const files = e.dataTransfer.files;
     if (files.length > 0) {
       handleFiles(files);
@@ -135,7 +134,7 @@ export function ImageUpload({
 
   const removeFile = (index: number) => {
     if (disabled) return;
-    
+
     if (multiple) {
       const newFiles = currentFiles.filter((_, i) => i !== index);
       onChange(newFiles);
@@ -165,11 +164,11 @@ export function ImageUpload({
           ) : (
             <Upload className="h-8 w-8 text-muted-foreground mb-2" />
           )}
-          
+
           <p className="text-sm text-muted-foreground mb-2">
             {isUploading ? 'Uploading...' : placeholder}
           </p>
-          
+
           <p className="text-xs text-muted-foreground">
             Max {maxSize}MB • {multiple ? `Up to ${maxFiles} files` : 'Single file only'}
           </p>
@@ -202,7 +201,7 @@ export function ImageUpload({
                   alt={`Upload ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {!disabled && (
                   <Button
                     type="button"
