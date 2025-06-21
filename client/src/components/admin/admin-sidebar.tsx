@@ -16,7 +16,8 @@ import {
   LogOut,
   ChevronRight,
   Menu,
-  X
+  X,
+  Database
 } from "lucide-react";
 
 interface AdminSidebarProps {
@@ -27,7 +28,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
   const [location] = useLocation();
   const { logout } = useAuth();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  
+
   const navItems = [
     { label: "Dashboard", icon: LayoutDashboard, href: "/admin" },
     { label: "Products", icon: Package, href: "/admin/products" },
@@ -35,18 +36,19 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
     { label: "Customers", icon: Users, href: "/admin/customers" },
     { label: "Orders", icon: ShoppingCart, href: "/admin/orders" },
     { label: "Reviews", icon: MessageSquare, href: "/admin/reviews" },
+    { label: "Data Manager", icon: Database, href: "/admin/data-manager" },
     { label: "Settings", icon: Settings, href: "/admin/settings" },
   ];
-  
+
   const toggleMobileMenu = () => {
     setIsMobileOpen(!isMobileOpen);
   };
-  
+
   const handleLogout = () => {
     logout();
     window.location.href = "/login";
   };
-  
+
   // Mobile menu button
   const mobileMenuButton = (
     <Button
@@ -58,7 +60,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
       {isMobileOpen ? <X /> : <Menu />}
     </Button>
   );
-  
+
   const sidebarContent = (
     <>
       <div className="px-4 py-6">
@@ -67,7 +69,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
           <span className="ml-2 bg-primary text-white px-2 py-1 rounded text-xs">Admin</span>
         </Link>
       </div>
-      
+
       <ScrollArea className="flex-1 px-2">
         <nav className="space-y-1">
           {navItems.map((item) => {
@@ -91,9 +93,9 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
             );
           })}
         </nav>
-        
+
         <Separator className="my-4" />
-        
+
         <div className="px-3">
           <Button
             variant="outline"
@@ -105,7 +107,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
           </Button>
         </div>
       </ScrollArea>
-      
+
       <div className="p-4 border-t">
         <div className="flex items-center">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-semibold">
@@ -119,11 +121,11 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
       </div>
     </>
   );
-  
+
   return (
     <>
       {mobileMenuButton}
-      
+
       {/* Mobile Sidebar */}
       <div
         className={cn(
@@ -132,7 +134,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
         )}
         onClick={toggleMobileMenu}
       />
-      
+
       <aside
         className={cn(
           "fixed top-0 left-0 z-40 h-full w-64 bg-white shadow-lg border-r transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:h-screen flex flex-col",

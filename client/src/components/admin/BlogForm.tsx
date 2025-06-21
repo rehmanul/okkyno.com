@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { slugify } from '@/utils/formatters';
 import { useAuth } from '@/context/AuthContext';
 
@@ -234,15 +235,20 @@ export default function BlogForm({ postId }: BlogFormProps) {
             )}
           />
           
-          {/* Image URL */}
+          {/* Featured Image Upload */}
           <FormField
             control={form.control}
             name="imageUrl"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Featured Image URL</FormLabel>
+              <FormItem className="md:col-span-2">
+                <FormLabel>Featured Image</FormLabel>
                 <FormControl>
-                  <Input placeholder="https://example.com/image.jpg" {...field} />
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    multiple={false}
+                    placeholder="Upload featured image for your blog post"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -8,9 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, Store, Mail, Shield, Palette, Globe } from "lucide-react";
+import { Settings, Store, Mail, Shield, Palette, Globe, Database, Upload, Download } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function AdminSettingsPage() {
   const { toast } = useToast();
@@ -18,30 +19,58 @@ export default function AdminSettingsPage() {
     // General Settings
     siteName: "Okkyno Gardening",
     siteDescription: "Your trusted partner in gardening success",
+    siteTagline: "Grow your garden, grow your life",
     contactEmail: "admin@okkyno.com",
     supportEmail: "support@okkyno.com",
+    phoneNumber: "+1 (555) 123-4567",
+    address: "123 Garden Street, Plant City, FL 12345",
     
     // Store Settings
     currency: "USD",
+    currencySymbol: "$",
     taxRate: 8.5,
     shippingFee: 5.99,
     freeShippingThreshold: 75,
+    lowStockThreshold: 10,
+    autoBackorder: true,
+    inventoryTracking: true,
     
     // Email Settings
     emailNotifications: true,
     orderConfirmations: true,
     marketingEmails: false,
+    lowStockAlerts: true,
+    customerNewsletters: true,
     
     // Security Settings
     enableTwoFactor: false,
     sessionTimeout: 24,
     passwordMinLength: 8,
+    maxLoginAttempts: 5,
+    requireEmailVerification: true,
+    
+    // SEO & Analytics
+    metaTitle: "Okkyno Gardening - Premium Garden Supplies",
+    metaDescription: "Discover premium gardening supplies, expert advice, and everything you need to create your perfect garden.",
+    analyticsId: "",
+    facebookPixel: "",
+    googleTagManager: "",
     
     // Feature Toggles
     maintenanceMode: false,
     userRegistration: true,
     guestCheckout: true,
     productReviews: true,
+    wishlistFeature: true,
+    compareProducts: true,
+    socialLogin: false,
+    
+    // Appearance
+    primaryColor: "#22c55e",
+    accentColor: "#16a34a",
+    fontFamily: "Inter",
+    logoUrl: "",
+    faviconUrl: "",
   });
 
   const handleSave = (section: string) => {
@@ -56,16 +85,86 @@ export default function AdminSettingsPage() {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
+  const exportSettings = () => {
+    const dataStr = JSON.stringify(settings, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'okkyno-settings.json';
+    link.click();
+    URL.revokeObjectURL(url);
+    
+    toast({
+      title: "Settings Exported",
+      description: "Your settings have been exported successfully.",
+    });
+  };
+
+  const importSettings = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedSettings = JSON.parse(e.target?.result as string);
+        setSettings({ ...settings, ...importedSettings });
+        toast({
+          title: "Settings Imported",
+          description: "Your settings have been imported successfully.",
+        });
+      } catch (error) {
+        toast({
+          title: "Import Error",
+          description: "Invalid settings file format.",
+          variant: "destructive",
+        });
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <AdminLayout title="Settings">
       <div className="space-y-6">
+        {/* Header with Export/Import */}
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold">Settings</h1>
+            <p className="text-muted-foreground">Manage your store configuration and preferences</p>
+          </div>
+          <div className="flex gap-2">
+            <input
+              type="file"
+              accept=".json"
+              onChange={importSettings}
+              className="hidden"
+              id="import-settings"
+            />
+            <Button
+              variant="outline"
+              onClick={() => document.getElementById('import-settings')?.click()}
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              Import
+            </Button>
+            <Button variant="outline" onClick={exportSettings}>
+              <Download className="w-4 h-4 mr-2" />
+              Export
+            </Button>
+          </div>
+        </div>
+
         <Tabs defaultValue="general" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="store">Store</TabsTrigger>
             <TabsTrigger value="email">Email</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
+            <TabsTrigger value="seo">SEO</TabsTrigger>
             <TabsTrigger value="features">Features</TabsTrigger>
+            <TabsTrigger value="appearance">Design</TabsTrigger>
           </TabsList>
 
           {/* General Settings */}
@@ -77,7 +176,7 @@ export default function AdminSettingsPage() {
                   General Settings
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="siteName">Site Name</Label>
@@ -85,6 +184,14 @@ export default function AdminSettingsPage() {
                       id="siteName"
                       value={settings.siteName}
                       onChange={(e) => handleInputChange('siteName', e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="siteTagline">Site Tagline</Label>
+                    <Input
+                      id="siteTagline"
+                      value={settings.siteTagline}
+                      onChange={(e) => handleInputChange('siteTagline', e.target.value)}
                     />
                   </div>
                   <div className="space-y-2">
@@ -96,6 +203,14 @@ export default function AdminSettingsPage() {
                       onChange={(e) => handleInputChange('contactEmail', e.target.value)}
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phoneNumber">Phone Number</Label>
+                    <Input
+                      id="phoneNumber"
+                      value={settings.phoneNumber}
+                      onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                    />
+                  </div>
                 </div>
                 
                 <div className="space-y-2">
@@ -105,6 +220,16 @@ export default function AdminSettingsPage() {
                     value={settings.siteDescription}
                     onChange={(e) => handleInputChange('siteDescription', e.target.value)}
                     rows={3}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="address">Business Address</Label>
+                  <Textarea
+                    id="address"
+                    value={settings.address}
+                    onChange={(e) => handleInputChange('address', e.target.value)}
+                    rows={2}
                   />
                 </div>
                 
@@ -124,14 +249,28 @@ export default function AdminSettingsPage() {
                   Store Settings
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="currency">Currency</Label>
+                    <Select value={settings.currency} onValueChange={(value) => handleInputChange('currency', value)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="USD">USD - US Dollar</SelectItem>
+                        <SelectItem value="EUR">EUR - Euro</SelectItem>
+                        <SelectItem value="GBP">GBP - British Pound</SelectItem>
+                        <SelectItem value="CAD">CAD - Canadian Dollar</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="currencySymbol">Currency Symbol</Label>
                     <Input
-                      id="currency"
-                      value={settings.currency}
-                      onChange={(e) => handleInputChange('currency', e.target.value)}
+                      id="currencySymbol"
+                      value={settings.currencySymbol}
+                      onChange={(e) => handleInputChange('currencySymbol', e.target.value)}
                     />
                   </div>
                   <div className="space-y-2">
@@ -144,7 +283,7 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="shippingFee">Shipping Fee ($)</Label>
+                    <Label htmlFor="shippingFee">Default Shipping Fee ($)</Label>
                     <Input
                       id="shippingFee"
                       type="number"
@@ -161,10 +300,202 @@ export default function AdminSettingsPage() {
                       onChange={(e) => handleInputChange('freeShippingThreshold', parseFloat(e.target.value))}
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lowStockThreshold">Low Stock Alert Threshold</Label>
+                    <Input
+                      id="lowStockThreshold"
+                      type="number"
+                      value={settings.lowStockThreshold}
+                      onChange={(e) => handleInputChange('lowStockThreshold', parseInt(e.target.value))}
+                    />
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Inventory Tracking</Label>
+                      <p className="text-sm text-muted-foreground">Track product stock levels</p>
+                    </div>
+                    <Switch
+                      checked={settings.inventoryTracking}
+                      onCheckedChange={(checked) => handleInputChange('inventoryTracking', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Auto Backorder</Label>
+                      <p className="text-sm text-muted-foreground">Allow orders when out of stock</p>
+                    </div>
+                    <Switch
+                      checked={settings.autoBackorder}
+                      onCheckedChange={(checked) => handleInputChange('autoBackorder', checked)}
+                    />
+                  </div>
                 </div>
                 
                 <Button onClick={() => handleSave('Store')}>
                   Save Store Settings
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* SEO Settings */}
+          <TabsContent value="seo">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Globe className="h-5 w-5" />
+                  SEO & Analytics
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="metaTitle">Meta Title</Label>
+                  <Input
+                    id="metaTitle"
+                    value={settings.metaTitle}
+                    onChange={(e) => handleInputChange('metaTitle', e.target.value)}
+                    placeholder="Your site's title for search engines"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="metaDescription">Meta Description</Label>
+                  <Textarea
+                    id="metaDescription"
+                    value={settings.metaDescription}
+                    onChange={(e) => handleInputChange('metaDescription', e.target.value)}
+                    placeholder="Description for search engines (150-160 characters)"
+                    rows={3}
+                  />
+                </div>
+
+                <Separator />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="analyticsId">Google Analytics ID</Label>
+                    <Input
+                      id="analyticsId"
+                      value={settings.analyticsId}
+                      onChange={(e) => handleInputChange('analyticsId', e.target.value)}
+                      placeholder="GA4-XXXXXXXXXX"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="googleTagManager">Google Tag Manager ID</Label>
+                    <Input
+                      id="googleTagManager"
+                      value={settings.googleTagManager}
+                      onChange={(e) => handleInputChange('googleTagManager', e.target.value)}
+                      placeholder="GTM-XXXXXXX"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="facebookPixel">Facebook Pixel ID</Label>
+                    <Input
+                      id="facebookPixel"
+                      value={settings.facebookPixel}
+                      onChange={(e) => handleInputChange('facebookPixel', e.target.value)}
+                      placeholder="123456789012345"
+                    />
+                  </div>
+                </div>
+                
+                <Button onClick={() => handleSave('SEO')}>
+                  Save SEO Settings
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Appearance Settings */}
+          <TabsContent value="appearance">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Palette className="h-5 w-5" />
+                  Design & Appearance
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="primaryColor">Primary Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="primaryColor"
+                        type="color"
+                        value={settings.primaryColor}
+                        onChange={(e) => handleInputChange('primaryColor', e.target.value)}
+                        className="w-16 h-10"
+                      />
+                      <Input
+                        value={settings.primaryColor}
+                        onChange={(e) => handleInputChange('primaryColor', e.target.value)}
+                        placeholder="#22c55e"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="accentColor">Accent Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="accentColor"
+                        type="color"
+                        value={settings.accentColor}
+                        onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                        className="w-16 h-10"
+                      />
+                      <Input
+                        value={settings.accentColor}
+                        onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                        placeholder="#16a34a"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="fontFamily">Font Family</Label>
+                    <Select value={settings.fontFamily} onValueChange={(value) => handleInputChange('fontFamily', value)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Inter">Inter</SelectItem>
+                        <SelectItem value="Roboto">Roboto</SelectItem>
+                        <SelectItem value="Open Sans">Open Sans</SelectItem>
+                        <SelectItem value="Lato">Lato</SelectItem>
+                        <SelectItem value="Poppins">Poppins</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="logoUrl">Logo URL</Label>
+                    <Input
+                      id="logoUrl"
+                      value={settings.logoUrl}
+                      onChange={(e) => handleInputChange('logoUrl', e.target.value)}
+                      placeholder="https://example.com/logo.png"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="faviconUrl">Favicon URL</Label>
+                    <Input
+                      id="faviconUrl"
+                      value={settings.faviconUrl}
+                      onChange={(e) => handleInputChange('faviconUrl', e.target.value)}
+                      placeholder="https://example.com/favicon.ico"
+                    />
+                  </div>
+                </div>
+                
+                <Button onClick={() => handleSave('Appearance')}>
+                  Save Appearance Settings
                 </Button>
               </CardContent>
             </Card>
@@ -196,9 +527,7 @@ export default function AdminSettingsPage() {
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Email Notifications</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Receive notifications about important events
-                      </p>
+                      <p className="text-sm text-muted-foreground">Receive admin notifications</p>
                     </div>
                     <Switch
                       checked={settings.emailNotifications}
@@ -209,9 +538,7 @@ export default function AdminSettingsPage() {
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Order Confirmations</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Send order confirmation emails to customers
-                      </p>
+                      <p className="text-sm text-muted-foreground">Send order confirmations to customers</p>
                     </div>
                     <Switch
                       checked={settings.orderConfirmations}
@@ -221,10 +548,30 @@ export default function AdminSettingsPage() {
                   
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
+                      <Label>Low Stock Alerts</Label>
+                      <p className="text-sm text-muted-foreground">Get notified when products are low in stock</p>
+                    </div>
+                    <Switch
+                      checked={settings.lowStockAlerts}
+                      onCheckedChange={(checked) => handleInputChange('lowStockAlerts', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Customer Newsletters</Label>
+                      <p className="text-sm text-muted-foreground">Send newsletters to subscribers</p>
+                    </div>
+                    <Switch
+                      checked={settings.customerNewsletters}
+                      onCheckedChange={(checked) => handleInputChange('customerNewsletters', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
                       <Label>Marketing Emails</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Send promotional emails to subscribers
-                      </p>
+                      <p className="text-sm text-muted-foreground">Send promotional emails</p>
                     </div>
                     <Switch
                       checked={settings.marketingEmails}
@@ -269,21 +616,41 @@ export default function AdminSettingsPage() {
                       onChange={(e) => handleInputChange('passwordMinLength', parseInt(e.target.value))}
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="maxLoginAttempts">Max Login Attempts</Label>
+                    <Input
+                      id="maxLoginAttempts"
+                      type="number"
+                      value={settings.maxLoginAttempts}
+                      onChange={(e) => handleInputChange('maxLoginAttempts', parseInt(e.target.value))}
+                    />
+                  </div>
                 </div>
                 
                 <Separator />
                 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label>Two-Factor Authentication</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Require 2FA for admin accounts
-                    </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Two-Factor Authentication</Label>
+                      <p className="text-sm text-muted-foreground">Require 2FA for admin accounts</p>
+                    </div>
+                    <Switch
+                      checked={settings.enableTwoFactor}
+                      onCheckedChange={(checked) => handleInputChange('enableTwoFactor', checked)}
+                    />
                   </div>
-                  <Switch
-                    checked={settings.enableTwoFactor}
-                    onCheckedChange={(checked) => handleInputChange('enableTwoFactor', checked)}
-                  />
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Email Verification</Label>
+                      <p className="text-sm text-muted-foreground">Require email verification for new accounts</p>
+                    </div>
+                    <Switch
+                      checked={settings.requireEmailVerification}
+                      onCheckedChange={(checked) => handleInputChange('requireEmailVerification', checked)}
+                    />
+                  </div>
                 </div>
                 
                 <Button onClick={() => handleSave('Security')}>
@@ -303,13 +670,11 @@ export default function AdminSettingsPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Maintenance Mode</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Put the site in maintenance mode
-                      </p>
+                      <p className="text-sm text-muted-foreground">Put site in maintenance mode</p>
                     </div>
                     <Switch
                       checked={settings.maintenanceMode}
@@ -317,12 +682,10 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>User Registration</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Allow new users to register
-                      </p>
+                      <p className="text-sm text-muted-foreground">Allow new user registration</p>
                     </div>
                     <Switch
                       checked={settings.userRegistration}
@@ -330,12 +693,10 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Guest Checkout</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Allow checkout without account
-                      </p>
+                      <p className="text-sm text-muted-foreground">Allow checkout without account</p>
                     </div>
                     <Switch
                       checked={settings.guestCheckout}
@@ -343,16 +704,47 @@ export default function AdminSettingsPage() {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="space-y-0.5">
                       <Label>Product Reviews</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Enable customer product reviews
-                      </p>
+                      <p className="text-sm text-muted-foreground">Enable customer reviews</p>
                     </div>
                     <Switch
                       checked={settings.productReviews}
                       onCheckedChange={(checked) => handleInputChange('productReviews', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="space-y-0.5">
+                      <Label>Wishlist Feature</Label>
+                      <p className="text-sm text-muted-foreground">Allow users to save favorites</p>
+                    </div>
+                    <Switch
+                      checked={settings.wishlistFeature}
+                      onCheckedChange={(checked) => handleInputChange('wishlistFeature', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="space-y-0.5">
+                      <Label>Compare Products</Label>
+                      <p className="text-sm text-muted-foreground">Enable product comparison</p>
+                    </div>
+                    <Switch
+                      checked={settings.compareProducts}
+                      onCheckedChange={(checked) => handleInputChange('compareProducts', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="space-y-0.5">
+                      <Label>Social Login</Label>
+                      <p className="text-sm text-muted-foreground">Enable social media login</p>
+                    </div>
+                    <Switch
+                      checked={settings.socialLogin}
+                      onCheckedChange={(checked) => handleInputChange('socialLogin', checked)}
                     />
                   </div>
                 </div>

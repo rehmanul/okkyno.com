@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { slugify } from '@/utils/formatters';
 
 // Extend the insert schema with validation rules
@@ -369,15 +370,41 @@ export default function ProductForm({ productId }: ProductFormProps) {
             )}
           />
           
-          {/* Image URL */}
+          {/* Main Image Upload */}
           <FormField
             control={form.control}
             name="imageUrl"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Main Image URL</FormLabel>
+              <FormItem className="md:col-span-2">
+                <FormLabel>Main Product Image</FormLabel>
                 <FormControl>
-                  <Input placeholder="https://example.com/image.jpg" {...field} />
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    multiple={false}
+                    placeholder="Upload main product image"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Additional Images */}
+          <FormField
+            control={form.control}
+            name="imageUrls"
+            render={({ field }) => (
+              <FormItem className="md:col-span-2">
+                <FormLabel>Additional Images (Optional)</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    multiple={true}
+                    maxFiles={5}
+                    placeholder="Upload additional product images"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
